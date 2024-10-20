@@ -13,4 +13,4 @@ default => 'bg-gray-300 hover:bg-gray-400 text-black',
     @if($disabled) disabled @endif
     {{ $attributes }}>
     {{ $slot }}
-</button>
+</button> 
