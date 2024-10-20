@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('counter', Counter::class);
+Route::get('/counter', Counter::class);

@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\ResponseHelper;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,5 +28,18 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($_request, Throwable $exception)
+    {
+        if ($exception instanceof ValidationException) {
+            $message = $exception->getMessage();  // Use the default validation message
+            return ResponseHelper::error($message, 422);
+        }
+
+        $message = $exception->getMessage() ?: 'An unexpected error occurred';
+        $statusCode = $exception->getCode() ?: 500;
+
+        return ResponseHelper::error($message, $statusCode);
     }
 }
