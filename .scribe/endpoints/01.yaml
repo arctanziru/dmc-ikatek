@@ -1,20 +1,20 @@
-name: 'News Management'
+name: 'News Categories'
 description: |-
 
-  APIs for managing news
+  APIs for managing news categories
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/news
+    uri: api/v1/news-category
     metadata:
-      groupName: 'News Management'
+      groupName: 'News Categories'
       groupDescription: |-
 
-        APIs for managing news
+        APIs for managing news categories
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get a list of news articles.'
+      title: 'Get a list of news categories.'
       description: ''
       authenticated: false
       custom: []
@@ -24,9 +24,19 @@ endpoints:
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
+      search:
+        name: search
+        description: 'Search term.'
+        required: false
+        example: technology
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
       page:
         name: page
-        description: 'Optional. The page number.'
+        description: 'Page number.'
         required: false
         example: 1
         type: integer
@@ -36,7 +46,7 @@ endpoints:
         custom: []
       per_page:
         name: per_page
-        description: 'Optional. Items per page.'
+        description: 'Items per page.'
         required: false
         example: 10
         type: integer
@@ -44,31 +54,10 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         custom: []
-      news_category_id:
-        name: news_category_id
-        description: 'Optional. Filter by category ID.'
-        required: false
-        example: 2
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      search:
-        name: search
-        description: 'Optional. Search by title or content.'
-        required: false
-        example: '"climate"'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
     cleanQueryParameters:
+      search: technology
       page: 1
       per_page: 10
-      news_category_id: 2
-      search: '"climate"'
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -77,32 +66,32 @@ endpoints:
         status: 200
         content: |-
           {
-            "status": "success",
-            "message": "News retrieved successfully.",
-            "data": {
-              "items": [
-                {
-                  "id": 1,
-                  "title": "Climate News",
-                  "description": "Short description",
-                  "content": "This is the content.",
-                  "author": "John Doe",
-                  "news_category_id": 2,
-                  "created_at": "2024-10-20T10:00:00Z",
-                  "updated_at": "2024-10-20T10:00:00Z"
-                }
-              ],
-              "pagination": {
-                "total": 50,
-                "count": 10,
-                "per_page": 10,
-                "current_page": 1,
-                "total_pages": 5
+            "data": [
+              {
+                "id": 1,
+                "name": "Technology",
+                "created_at": "2023-01-01T00:00:00.000000Z",
+                "updated_at": "2023-01-01T00:00:00.000000Z"
               }
+            ],
+            "links": {
+              "first": "http://example.com/news-categories?page=1",
+              "last": "http://example.com/news-categories?page=1",
+              "prev": null,
+              "next": null
+            },
+            "meta": {
+              "current_page": 1,
+              "from": 1,
+              "last_page": 1,
+              "path": "http://example.com/news-categories",
+              "per_page": 10,
+              "to": 1,
+              "total": 1
             }
           }
         headers: []
-        description: Success
+        description: ''
         custom: []
     responseFields: []
     auth: []
@@ -113,15 +102,15 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/news
+    uri: api/v1/news-category
     metadata:
-      groupName: 'News Management'
+      groupName: 'News Categories'
       groupDescription: |-
 
-        APIs for managing news
+        APIs for managing news categories
       subgroup: ''
       subgroupDescription: ''
-      title: 'Store a newly created news article in storage.'
+      title: 'Create a new news category.'
       description: ''
       authenticated: false
       custom: []
@@ -133,73 +122,18 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      title:
-        name: title
-        description: 'The title of the news article.'
+      name:
+        name: name
+        description: 'The name of the news category.'
         required: true
-        example: '"New Climate Policy"'
+        example: Technology
         type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      image:
-        name: image
-        description: 'The URL of the image.'
-        required: false
-        example: '"http://example.com/image.jpg"'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      description:
-        name: description
-        description: 'A short description of the news article.'
-        required: false
-        example: '"This is a short description."'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      content:
-        name: content
-        description: 'The content of the news article.'
-        required: true
-        example: '"This is the content of the news article."'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      author:
-        name: author
-        description: 'The author of the news article.'
-        required: false
-        example: '"Jane Doe"'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      news_category_id:
-        name: news_category_id
-        description: 'The ID of the category.'
-        required: true
-        example: 2
-        type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
     cleanBodyParameters:
-      title: '"New Climate Policy"'
-      image: '"http://example.com/image.jpg"'
-      description: '"This is a short description."'
-      content: '"This is the content of the news article."'
-      author: '"Jane Doe"'
-      news_category_id: 2
+      name: Technology
     fileParameters: []
     responses:
       -
@@ -207,21 +141,10 @@ endpoints:
         content: |-
           {
             "status": "success",
-            "message": "News created successfully.",
-            "data": {
-              "id": 1,
-              "title": "New Climate Policy",
-              "image": "http://example.com/image.jpg",
-              "description": "This is a short description.",
-              "content": "This is the content of the news article.",
-              "author": "Jane Doe",
-              "news_category_id": 2,
-              "created_at": "2024-10-20T10:00:00Z",
-              "updated_at": "2024-10-20T10:00:00Z"
-            }
+            "message": "News Category created successfully."
           }
         headers: []
-        description: Success
+        description: ''
         custom: []
     responseFields: []
     auth: []
@@ -232,15 +155,15 @@ endpoints:
   -
     httpMethods:
       - GET
-    uri: 'api/v1/news/{id}'
+    uri: 'api/v1/news-category/{id}'
     metadata:
-      groupName: 'News Management'
+      groupName: 'News Categories'
       groupDescription: |-
 
-        APIs for managing news
+        APIs for managing news categories
       subgroup: ''
       subgroupDescription: ''
-      title: 'Show the specified news article.'
+      title: 'Get a specific news category.'
       description: ''
       authenticated: false
       custom: []
@@ -250,7 +173,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the news article.'
+        description: 'The ID of the news category.'
         required: true
         example: 1
         type: integer
@@ -271,30 +194,26 @@ endpoints:
         content: |-
           {
             "status": "success",
-            "message": "News retrieved successfully.",
+            "message": "News Category retrieved successfully.",
             "data": {
               "id": 1,
-              "title": "Climate News",
-              "description": "Short description",
-              "content": "This is the content.",
-              "author": "John Doe",
-              "news_category_id": 2,
-              "created_at": "2024-10-20T10:00:00Z",
-              "updated_at": "2024-10-20T10:00:00Z"
+              "name": "Technology",
+              "created_at": "2023-01-01T00:00:00.000000Z",
+              "updated_at": "2023-01-01T00:00:00.000000Z"
             }
           }
         headers: []
-        description: Success
+        description: ''
         custom: []
       -
         status: 404
         content: |-
           {
             "status": "error",
-            "message": "News not found"
+            "message": "News Category not found."
           }
         headers: []
-        description: 'Not Found'
+        description: ''
         custom: []
     responseFields: []
     auth: []
@@ -306,15 +225,15 @@ endpoints:
     httpMethods:
       - PUT
       - PATCH
-    uri: 'api/v1/news/{id}'
+    uri: 'api/v1/news-category/{id}'
     metadata:
-      groupName: 'News Management'
+      groupName: 'News Categories'
       groupDescription: |-
 
-        APIs for managing news
+        APIs for managing news categories
       subgroup: ''
       subgroupDescription: ''
-      title: 'Update the specified news article in storage.'
+      title: 'Update a specific news category.'
       description: ''
       authenticated: false
       custom: []
@@ -324,7 +243,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the news article.'
+        description: 'The ID of the news category.'
         required: true
         example: 1
         type: integer
@@ -337,73 +256,18 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      title:
-        name: title
-        description: 'The title of the news article.'
-        required: false
-        example: '"Updated Climate Policy"'
+      name:
+        name: name
+        description: 'The name of the news category.'
+        required: true
+        example: Technology
         type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      image:
-        name: image
-        description: 'The URL of the image.'
-        required: false
-        example: '"http://example.com/image.jpg"'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      description:
-        name: description
-        description: 'A short description of the news article.'
-        required: false
-        example: '"This is an updated short description."'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      content:
-        name: content
-        description: 'The content of the news article.'
-        required: false
-        example: '"This is the updated content of the news article."'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        custom: []
-      author:
-        name: author
-        description: 'The author of the news article.'
-        required: false
-        example: '"Jane Doe"'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        custom: []
-      news_category_id:
-        name: news_category_id
-        description: 'The ID of the category.'
-        required: false
-        example: 2
-        type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         custom: []
     cleanBodyParameters:
-      title: '"Updated Climate Policy"'
-      image: '"http://example.com/image.jpg"'
-      description: '"This is an updated short description."'
-      content: '"This is the updated content of the news article."'
-      author: '"Jane Doe"'
-      news_category_id: 2
+      name: Technology
     fileParameters: []
     responses:
       -
@@ -411,31 +275,20 @@ endpoints:
         content: |-
           {
             "status": "success",
-            "message": "News updated successfully.",
-            "data": {
-              "id": 1,
-              "title": "Updated Climate Policy",
-              "image": "http://example.com/image.jpg",
-              "description": "This is an updated short description.",
-              "content": "This is the updated content of the news article.",
-              "author": "Jane Doe",
-              "news_category_id": 2,
-              "created_at": "2024-10-20T10:00:00Z",
-              "updated_at": "2024-10-20T10:00:00Z"
-            }
+            "message": "News Category updated successfully."
           }
         headers: []
-        description: Success
+        description: ''
         custom: []
       -
         status: 404
         content: |-
           {
             "status": "error",
-            "message": "News not found"
+            "message": "News Category not found."
           }
         headers: []
-        description: 'Not Found'
+        description: ''
         custom: []
     responseFields: []
     auth: []
@@ -446,15 +299,15 @@ endpoints:
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/news/{id}'
+    uri: 'api/v1/news-category/{id}'
     metadata:
-      groupName: 'News Management'
+      groupName: 'News Categories'
       groupDescription: |-
 
-        APIs for managing news
+        APIs for managing news categories
       subgroup: ''
       subgroupDescription: ''
-      title: 'Remove the specified news article from storage.'
+      title: 'Remove the specified news category from storage.'
       description: ''
       authenticated: false
       custom: []
@@ -464,7 +317,7 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the news article.'
+        description: 'The ID of the news category.'
         required: true
         example: 1
         type: integer
@@ -485,20 +338,20 @@ endpoints:
         content: |-
           {
             "status": "success",
-            "message": "News deleted successfully."
+            "message": "News Category deleted successfully."
           }
         headers: []
-        description: Success
+        description: ''
         custom: []
       -
         status: 404
         content: |-
           {
             "status": "error",
-            "message": "News not found"
+            "message": "News Category not found."
           }
         headers: []
-        description: 'Not Found'
+        description: ''
         custom: []
     responseFields: []
     auth: []

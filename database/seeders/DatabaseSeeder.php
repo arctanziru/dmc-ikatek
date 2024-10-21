@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call([
+            UserSeeder::class,
+        ]);
         NewsCategory::factory(10)->create();
         News::factory(10)->create();
     }

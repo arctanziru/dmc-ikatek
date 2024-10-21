@@ -29,17 +29,4 @@ class Handler extends ExceptionHandler
             //
         });
     }
-
-    public function render($_request, Throwable $exception)
-    {
-        if ($exception instanceof ValidationException) {
-            $message = $exception->getMessage();  // Use the default validation message
-            return ResponseHelper::error($message, 422);
-        }
-
-        $message = $exception->getMessage() ?: 'An unexpected error occurred';
-        $statusCode = $exception->getCode() ?: 500;
-
-        return ResponseHelper::error($message, $statusCode);
-    }
 }

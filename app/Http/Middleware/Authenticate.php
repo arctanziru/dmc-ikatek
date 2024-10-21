@@ -12,6 +12,23 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
+        // Return null if the request expects JSON (for API requests)
         return $request->expectsJson() ? null : route('login');
+    }
+
+    /**
+     * Handle an unauthenticated user.
+     */
+    protected function unauthenticated($request, array $guards)
+    {
+        if ($request->expectsJson()) {
+            // Return JSON response for unauthenticated API requests
+            abort(response()->json([
+                'status' => 'error',
+                'message' => 'Unauthenticated'
+            ], 401));
+        }
+
+        parent::unauthenticated($request, $guards);
     }
 }

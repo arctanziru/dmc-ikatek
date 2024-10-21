@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('news', NewsController::class)->names([
@@ -36,4 +33,18 @@ Route::prefix('v1')->group(function () {
         'update' => 'news-category.update',
         'destroy' => 'news-category.destroy',
     ]);
+
+    Route::apiResource('user', UserController::class)->names([
+        'index' => 'user.index',
+        'store' => 'user.store',
+        'show' => 'user.show',
+        'update' => 'user.update',
+        'destroy' => 'user.destroy',
+    ]);
+
+    Route::group(['prefix' => 'auth'], function () {
+        Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+        Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
+    });
 });

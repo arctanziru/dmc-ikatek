@@ -5,16 +5,64 @@ info:
   version: 1.0.0
 servers:
   -
-    url: 'http://localhost'
+    url: 'http://dmc-ikatek.test'
 paths:
-  /api/user:
-    get:
-      summary: ''
-      operationId: getApiUser
-      description: ''
+  /api/v1/auth/login:
+    post:
+      summary: 'Login User'
+      operationId: loginUser
+      description: 'Authenticate the user and return an access token.'
       parameters: []
       responses:
-        500:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Login success'
+                  data:
+                    user:
+                      id: 1
+                      name: 'John Doe'
+                      email: john@example.com
+                      username: johndoe
+                      role: user
+                    token: your_generated_token_here
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Login success'
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 1
+                          name:
+                            type: string
+                            example: 'John Doe'
+                          email:
+                            type: string
+                            example: john@example.com
+                          username:
+                            type: string
+                            example: johndoe
+                          role:
+                            type: string
+                            example: user
+                      token:
+                        type: string
+                        example: your_generated_token_here
+        401:
           description: ''
           content:
             application/json:
@@ -22,17 +70,123 @@ paths:
                 type: object
                 example:
                   status: error
-                  message: Unauthenticated.
+                  message: 'Invalid credentials'
                 properties:
                   status:
                     type: string
                     example: error
                   message:
                     type: string
-                    example: Unauthenticated.
+                    example: 'Invalid credentials'
       tags:
-        - Endpoints
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: "The user's email."
+                  example: john@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: "The user's password."
+                  example: password123
+                  nullable: false
+              required:
+                - email
+                - password
       security: []
+  /api/v1/auth/logout:
+    post:
+      summary: 'Logout User'
+      operationId: logoutUser
+      description: "Revoke the user's access token and log them out."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Logout success'
+                  data: []
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Logout success'
+                  data:
+                    type: array
+                    example: []
+      tags:
+        - Authentication
+  /api/v1/auth/me:
+    get:
+      summary: 'Get Authenticated User'
+      operationId: getAuthenticatedUser
+      description: "Retrieve the authenticated user's details."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'User retrieved successfully'
+                  data:
+                    user:
+                      id: 1
+                      name: 'John Doe'
+                      email: john@example.com
+                      username: johndoe
+                      role: user
+                    token: your_generated_token_here
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'User retrieved successfully'
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 1
+                          name:
+                            type: string
+                            example: 'John Doe'
+                          email:
+                            type: string
+                            example: john@example.com
+                          username:
+                            type: string
+                            example: johndoe
+                          role:
+                            type: string
+                            example: user
+                      token:
+                        type: string
+                        example: your_generated_token_here
+      tags:
+        - Authentication
   /api/v1/news-category:
     get:
       summary: 'Get a list of news categories.'
@@ -401,7 +555,7 @@ paths:
             nullable: false
         -
           in: query
-          name: news_category_id
+          name: category_id
           description: 'Optional. Filter by category ID.'
           example: 2
           required: false
@@ -540,7 +694,7 @@ paths:
                     description: 'This is a short description.'
                     content: 'This is the content of the news article.'
                     author: 'Jane Doe'
-                    news_category_id: 2
+                    category_id: 2
                     created_at: '2024-10-20T10:00:00Z'
                     updated_at: '2024-10-20T10:00:00Z'
                 properties:
@@ -571,7 +725,7 @@ paths:
                       author:
                         type: string
                         example: 'Jane Doe'
-                      news_category_id:
+                      category_id:
                         type: integer
                         example: 2
                       created_at:
@@ -614,7 +768,7 @@ paths:
                   description: 'The author of the news article.'
                   example: '"Jane Doe"'
                   nullable: true
-                news_category_id:
+                category_id:
                   type: integer
                   description: 'The ID of the category.'
                   example: 2
@@ -622,7 +776,7 @@ paths:
               required:
                 - title
                 - content
-                - news_category_id
+                - category_id
       security: []
   '/api/v1/news/{id}':
     get:
@@ -724,7 +878,7 @@ paths:
                     description: 'This is an updated short description.'
                     content: 'This is the updated content of the news article.'
                     author: 'Jane Doe'
-                    news_category_id: 2
+                    category_id: 2
                     created_at: '2024-10-20T10:00:00Z'
                     updated_at: '2024-10-20T10:00:00Z'
                 properties:
@@ -755,7 +909,7 @@ paths:
                       author:
                         type: string
                         example: 'Jane Doe'
-                      news_category_id:
+                      category_id:
                         type: integer
                         example: 2
                       created_at:
@@ -814,7 +968,7 @@ paths:
                   description: 'The author of the news article.'
                   example: '"Jane Doe"'
                   nullable: true
-                news_category_id:
+                category_id:
                   type: integer
                   description: 'The ID of the category.'
                   example: 2
@@ -870,13 +1024,571 @@ paths:
         required: true
         schema:
           type: integer
+  /api/v1/user:
+    get:
+      summary: 'Display a listing of users.'
+      operationId: displayAListingOfUsers
+      description: ''
+      parameters:
+        -
+          in: query
+          name: page
+          description: 'The page number. Defaults to 1.'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'The page number. Defaults to 1.'
+            example: 1
+            nullable: false
+        -
+          in: query
+          name: per_page
+          description: 'The number of items per page. Defaults to 10.'
+          example: 10
+          required: false
+          schema:
+            type: integer
+            description: 'The number of items per page. Defaults to 10.'
+            example: 10
+            nullable: false
+        -
+          in: query
+          name: search
+          description: 'Search term to filter users by name or email.'
+          example: john
+          required: false
+          schema:
+            type: string
+            description: 'Search term to filter users by name or email.'
+            example: john
+            nullable: false
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Users retrieved successfully.'
+                  data:
+                    items:
+                      -
+                        id: 1
+                        name: 'John Doe'
+                        email: john@example.com
+                        created_at: '2023-01-01T00:00:00.000000Z'
+                        updated_at: '2023-01-01T00:00:00.000000Z'
+                    pagination:
+                      first: 'http://example.com?page=1'
+                      last: 'http://example.com?page=10'
+                      prev: null
+                      next: 'http://example.com?page=2'
+                      current_page: 1
+                      from: 1
+                      last_page: 10
+                      path: 'http://example.com'
+                      per_page: 10
+                      to: 10
+                      total: 100
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Users retrieved successfully.'
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        example:
+                          -
+                            id: 1
+                            name: 'John Doe'
+                            email: john@example.com
+                            created_at: '2023-01-01T00:00:00.000000Z'
+                            updated_at: '2023-01-01T00:00:00.000000Z'
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            name:
+                              type: string
+                              example: 'John Doe'
+                            email:
+                              type: string
+                              example: john@example.com
+                            created_at:
+                              type: string
+                              example: '2023-01-01T00:00:00.000000Z'
+                            updated_at:
+                              type: string
+                              example: '2023-01-01T00:00:00.000000Z'
+                      pagination:
+                        type: object
+                        properties:
+                          first:
+                            type: string
+                            example: 'http://example.com?page=1'
+                          last:
+                            type: string
+                            example: 'http://example.com?page=10'
+                          prev:
+                            type: string
+                            example: null
+                          next:
+                            type: string
+                            example: 'http://example.com?page=2'
+                          current_page:
+                            type: integer
+                            example: 1
+                          from:
+                            type: integer
+                            example: 1
+                          last_page:
+                            type: integer
+                            example: 10
+                          path:
+                            type: string
+                            example: 'http://example.com'
+                          per_page:
+                            type: integer
+                            example: 10
+                          to:
+                            type: integer
+                            example: 10
+                          total:
+                            type: integer
+                            example: 100
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Bad request.'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Bad request.'
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Internal server error.'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Internal server error.'
+      tags:
+        - 'User management'
+      security: []
+    post:
+      summary: 'Store a newly created user in storage.'
+      operationId: storeANewlyCreatedUserInStorage
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'User created successfully.'
+                  data:
+                    id: 1
+                    name: 'John Doe'
+                    username: johndoe
+                    email: john@example.com
+                    role: user
+                    created_at: '2023-01-01T00:00:00.000000Z'
+                    updated_at: '2023-01-01T00:00:00.000000Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'User created successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      username:
+                        type: string
+                        example: johndoe
+                      email:
+                        type: string
+                        example: john@example.com
+                      role:
+                        type: string
+                        example: user
+                      created_at:
+                        type: string
+                        example: '2023-01-01T00:00:00.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-01-01T00:00:00.000000Z'
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Validation error.'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Validation error.'
+        500:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"error\",\n  \"message\": \"Internal server error.\""
+      tags:
+        - 'User management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: 'John Doe'
+                  nullable: false
+                username:
+                  type: string
+                  description: 'The username of the user.'
+                  example: johndoe
+                  nullable: false
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: john@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: 'The password of the user. Minimum 6 characters.'
+                  example: secret
+                  nullable: false
+                role:
+                  type: string
+                  description: "The role of the user. Must be one of 'user', 'admin', 'reporter'."
+                  example: user
+                  nullable: false
+              required:
+                - name
+                - username
+                - email
+                - password
+      security: []
+  '/api/v1/user/{id}':
+    get:
+      summary: 'Display the specified user.'
+      operationId: displayTheSpecifiedUser
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'User retrieved successfully.'
+                  data:
+                    id: 1
+                    name: 'John Doe'
+                    username: johndoe
+                    email: john@example.com
+                    role: user
+                    created_at: '2023-01-01T00:00:00.000000Z'
+                    updated_at: '2023-01-01T00:00:00.000000Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'User retrieved successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      username:
+                        type: string
+                        example: johndoe
+                      email:
+                        type: string
+                        example: john@example.com
+                      role:
+                        type: string
+                        example: user
+                      created_at:
+                        type: string
+                        example: '2023-01-01T00:00:00.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-01-01T00:00:00.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'User not found.'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'User not found.'
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Internal server error.'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Internal server error.'
+      tags:
+        - 'User management'
+      security: []
+    put:
+      summary: 'Update the specified user in storage.'
+      operationId: updateTheSpecifiedUserInStorage
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'User updated successfully.'
+                  data:
+                    id: 1
+                    name: 'John Doe'
+                    username: johndoe
+                    email: john@example.com
+                    role: user
+                    created_at: '2023-01-01T00:00:00.000000Z'
+                    updated_at: '2023-01-01T00:00:00.000000Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'User updated successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      username:
+                        type: string
+                        example: johndoe
+                      email:
+                        type: string
+                        example: john@example.com
+                      role:
+                        type: string
+                        example: user
+                      created_at:
+                        type: string
+                        example: '2023-01-01T00:00:00.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-01-01T00:00:00.000000Z'
+        400:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Validation error.'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Validation error.'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'User not found.'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'User not found.'
+        500:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"error\",\n  \"message\": \"Internal server error.\""
+      tags:
+        - 'User management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the user.'
+                  example: 'John Doe'
+                  nullable: false
+                username:
+                  type: string
+                  description: 'The username of the user.'
+                  example: johndoe
+                  nullable: false
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: john@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: 'The password of the user. Minimum 6 characters.'
+                  example: secret
+                  nullable: false
+                role:
+                  type: string
+                  description: "The role of the user. Must be one of 'user', 'admin', 'reporter'."
+                  example: user
+                  nullable: false
+      security: []
+    delete:
+      summary: 'Remove the specified user from storage.'
+      operationId: removeTheSpecifiedUserFromStorage
+      description: ''
+      parameters: []
+      responses:
+        204:
+          description: ''
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'User not found.'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'User not found.'
+        500:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"error\",\n  \"message\": \"Internal server error.\""
+      tags:
+        - 'User management'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the user.'
+        example: 1
+        required: true
+        schema:
+          type: integer
 tags:
   -
-    name: Endpoints
-    description: ''
+    name: Authentication
+    description: "\nAPIs for managing authentication"
   -
     name: 'News Categories'
     description: "\nAPIs for managing news categories"
   -
     name: 'News Management'
     description: "\nAPIs for managing news"
+  -
+    name: 'User management'
+    description: "\nAPIs for managing users"
