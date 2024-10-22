@@ -2,6 +2,7 @@
 
 use App\Livewire\Auth\Login;
 use App\Livewire\Counter;
+use App\Livewire\NewsPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +22,4 @@ Route::get('/', function () {
 
 Route::get('/counter', Counter::class);
 Route::get('/login', Login::class);
+Route::get('/news', NewsPage::class)->name('news');
