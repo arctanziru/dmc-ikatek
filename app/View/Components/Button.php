@@ -10,17 +10,26 @@ class Button extends Component
     public $class;
     public $disabled;
     public $variant;
+    public $size;
+    public $rounded;
+    public $color;
 
     public function __construct(
         $type = 'button',
         $class = '',
         $disabled = false,
-        $variant = 'primary'
+        $variant = 'primary',
+        $size = 'medium',
+        $rounded = 'md',
+        $color = 'primary',
     ) {
         $this->type = $type;
         $this->class = $class;
         $this->disabled = $disabled;
         $this->variant = $variant;
+        $this->size = $size;
+        $this->rounded = $rounded;
+        $this->color = $color;
     }
 
     public function render()
