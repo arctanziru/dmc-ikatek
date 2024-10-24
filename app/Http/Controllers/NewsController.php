@@ -49,31 +49,34 @@ class NewsController extends Controller
    */
   public function index(Request $request)
   {
-    $page = $request->query('page', 1);
-    $perPage = $request->query('per_page', 10);
-    $search = $request->query('search');
-    $categoryId = $request->query('category_id');
-
+    // Fetch news articles, filter by category and search, and paginate
     $query = News::query();
 
-    if ($search) {
-      $query->where(function ($q) use ($search) {
-        $q->where('title', 'like', "%$search%")
-          ->orWhere('content', 'like', "%$search%");
-      });
+    if ($request->has('category_id') && $request->input('category_id')) {
+      $query->where('news_category_id', $request->input('category_id'));
     }
 
-    if ($categoryId) {
-      $query->where('category_id', $categoryId);
+    if ($request->has('search') && $request->input('search')) {
+      $query->where('title', 'LIKE', '%' . $request->input('search') . '%');
     }
 
-    $news = $query->paginate($perPage, ['*'], 'page', $page);
+    // Get the current page from the request, default to 1
+    $currentPage = $request->input('page', 1);
+    $perPage = $request->input('per_page', 5);
 
-    if ($news->isEmpty() && $page > 1) {
-      return ResponseHelper::error('Page not found.', 404);
-    }
+    // Paginate the results
+    $news = $query->paginate($perPage, ['*'], 'page', $currentPage);
 
-    return ResponseHelper::paginated($news, 'News retrieved successfully.');
+    return response()->json([
+      'data' => [
+        'items' => $news->items(),
+        'pagination' => [
+          'total_pages' => $news->lastPage(),
+          'current_page' => $news->currentPage(),
+          'total' => $news->total(),
+        ],
+      ],
+    ]);
   }
 
   /**
