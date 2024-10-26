@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\ResponseHelper;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @group News Management
@@ -132,12 +133,17 @@ class NewsController extends Controller
   {
     $validated = $request->validate([
       'title' => 'required|string|max:255',
-      'image' => 'nullable|string',
+      'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
       'description' => 'nullable|string',
       'content' => 'required|string',
       'author' => 'nullable|string|max:255',
       'category_id' => 'required|integer|exists:categories,id',
     ]);
+
+    if ($request->hasFile('image')) {
+      $path = $request->file('image')->store('images/news', 'public');
+      $validated['image'] = '/storage/' . $path;
+    }
 
     $news = News::create($validated);
 
@@ -185,12 +191,21 @@ class NewsController extends Controller
 
     $validated = $request->validate([
       'title' => 'sometimes|required|string|max:255',
-      'image' => 'nullable|string',
+      'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
       'description' => 'nullable|string',
       'content' => 'sometimes|required|string',
       'author' => 'nullable|string|max:255',
-      'category_id' => 'sometimes|required|integer|exists:categories,id',
+      'category_id' => 'sometimes|required|integer|exists:news_categories,id',
     ]);
+
+    if ($request->hasFile('image')) {
+      if ($news->image) {
+        Storage::disk('public')->delete(str_replace('/storage/', '', $news->image));
+      }
+
+      $path = $request->file('image')->store('images/news', 'public');
+      $validated['image'] = '/storage/' . $path;
+    }
 
     $news->update($validated);
 
