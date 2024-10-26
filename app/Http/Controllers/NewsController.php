@@ -49,7 +49,6 @@ class NewsController extends Controller
    */
   public function index(Request $request)
   {
-    // Fetch news articles, filter by category and search, and paginate
     $query = News::query();
 
     if ($request->has('category_id') && $request->input('category_id')) {
@@ -60,23 +59,12 @@ class NewsController extends Controller
       $query->where('title', 'LIKE', '%' . $request->input('search') . '%');
     }
 
-    // Get the current page from the request, default to 1
     $currentPage = $request->input('page', 1);
     $perPage = $request->input('per_page', 5);
 
-    // Paginate the results
     $news = $query->paginate($perPage, ['*'], 'page', $currentPage);
 
-    return response()->json([
-      'data' => [
-        'items' => $news->items(),
-        'pagination' => [
-          'total_pages' => $news->lastPage(),
-          'current_page' => $news->currentPage(),
-          'total' => $news->total(),
-        ],
-      ],
-    ]);
+    return ResponseHelper::paginated($news, 'News retrieved successfully.');
   }
 
   /**
