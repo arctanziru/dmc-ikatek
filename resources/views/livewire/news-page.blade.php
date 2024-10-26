@@ -1,11 +1,10 @@
 @php
-    // Convert categories collection to an array of ['label' => 'Category Name', 'value' => 'Category ID']
-    $categoryOptions = $categories->map(function ($category) {
-        return [
-            'label' => $category->name,
-            'value' => $category->id,
-        ];
-    })->toArray();
+$categoryOptions = $categories->map(function ($category) {
+return [
+'label' => $category->name,
+'value' => $category->id,
+];
+})->toArray();
 @endphp
 <main class="flex flex-col justify-center items-center">
     <div class="flex flex-col p-16 gap-8">
@@ -22,10 +21,10 @@
 
                 {{-- Category Filter --}}
                 <div class="flex max-w-[180px]">
-                    <select wire:model.defer="category_id" class="border rounded p-2 w-full text-[12px]">
+                    <select wire:model.defer="category_id" wire:change="updateCategoryAndFetchNews" class="border rounded p-2 w-full text-[12px]">
                         <option value="">All Categories</option>
                         @foreach($categoryOptions as $option)
-                            <option value="{{ $option['value'] }}">{{ $option['label'] }}</option>
+                        <option value="{{ $option['value'] }}">{{ $option['label'] }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -38,86 +37,86 @@
 
                 {{-- Cancel Button (Resets Filters) --}}
                 @if($search || $category_id)
-                    {{-- Cancel Button (Redirects to /news) --}}
-                    <x-button onclick="window.location='/news'" color="dark" class="h-max" size="medium" variant="outlined"
-                        rounded="none">
-                        <p class="text-[12px]">Cancel</p>
-                    </x-button>
+                {{-- Cancel Button (Redirects to /news) --}}
+                <x-button onclick="window.location='/news'" color="dark" class="h-max" size="medium" variant="outlined"
+                    rounded="none">
+                    <p class="text-[12px]">Clear </p>
+                </x-button>
                 @endif
             </div>
         </div>
 
 
         {{-- News Items --}}
-        <div class=" grid grid-cols-4 gap-4 max-w-[1440px]  ">
+        <div class=" grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-[1440px]  ">
             @forelse ($news as $item)
-                <div
-                    class="flex shadow-sm overflow-hidden shadow-dark/20 cursor-pointer flex-col hover:bg-white-light transition-[200ms] hover:transition-[200ms]">
-                    <div class="min-w-full  h-[140px] rounded-lg bg-white-light">
+            <div
+                class="flex shadow-sm overflow-hidden shadow-dark/20 cursor-pointer flex-col hover:bg-white-light transition-[200ms] hover:transition-[200ms]">
+                <div class="min-w-full  h-[140px] rounded-lg bg-white-light">
 
-                        <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="w-full h-[140px] object-cover ">
-                    </div>
+                    <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="w-full h-[140px] object-cover ">
+                </div>
 
-                    <div class="flex flex-col justify-between p-3 gap-2">
-                        <div class="flex justify-between w-full">
-                            <div class="flex gap-2 items-center flex-1 min-w-max justify-start text-right">
-                                <img src="icons/authors.svg" class="h-3" alt="Author Icon" />
-                                <p class="text-dark font-light text-[12px]">{{ $item['author'] }}</p>
-                            </div>
-                            <div class="flex gap-2 items-center flex-1 min-w-max justify-end text-right">
-                                <img src="icons/date.svg" class="h-3" alt="Author Icon" />
-                                <p class="text-dark font-light text-[12px]">
-                                    {{ (new DateTime($item['created_at']))->format(format: 'd M Y') }}
-                                </p>
-                            </div>
+                <div class="flex flex-col justify-between p-3 gap-2">
+                    <div class="flex justify-between w-full">
+                        <div class="flex gap-2 items-center flex-1 min-w-max justify-start text-right">
+                            <img src="icons/authors.svg" class="h-3" alt="Author Icon" />
+                            <p class="text-dark font-light text-[12px]">{{ $item['author'] }}</p>
                         </div>
-                        <div class="flex gap-2 items-center">
-                            <img src="icons/label.svg" class="h-3" alt="Author Icon" />
-                            <p class="text-dark font-semibold capitalize text-ellipsis line-clamp-1 text-[12px]">
-                                {{ collect($categoryOptions)->firstWhere('value', $item['news_category_id'])['label'] ?? 'Unknown Category' }}
+                        <div class="flex gap-2 items-center flex-1 min-w-max justify-end text-right">
+                            <img src="icons/date.svg" class="h-3" alt="Author Icon" />
+                            <p class="text-dark font-light text-[12px]">
+                                {{ (new DateTime($item['created_at']))->format(format: 'd M Y') }}
                             </p>
                         </div>
-                        <p class="text-[20px] leading-6 text-ellipsis line-clamp-2 font-semibold">{{ $item['title'] }}</p>
-
-                        <p class="text-dark text-[12px] line-clamp-2">{{ $item['description'] }}</p>
-
                     </div>
+                    <div class="flex gap-2 items-center">
+                        <img src="icons/label.svg" class="h-3" alt="Author Icon" />
+                        <p class="text-dark font-semibold capitalize text-ellipsis line-clamp-1 text-[12px]">
+                            {{ collect($categoryOptions)->firstWhere('value', $item['news_category_id'])['label'] ?? 'Unknown Category' }}
+                        </p>
+                    </div>
+                    <p class="text-[20px] leading-6 text-ellipsis line-clamp-2 font-semibold">{{ $item['title'] }}</p>
+
+                    <p class="text-dark text-[12px] line-clamp-2">{{ $item['description'] }}</p>
+
                 </div>
+            </div>
             @empty
-                <p class="text-gray-500 w-screen">No news articles found.</p>
+            <p class="text-gray-500 w-screen">No news articles found.</p>
             @endforelse
         </div>
 
         {{-- Pagination --}}
         <div class="w-full flex justify-center">
             @if ($pagination['total_pages'] > 1)
-                <div class="flex gap-2">
-                    {{-- Previous Page Link --}}
-                    @if ($pagination['current_page'] > 1)
+            <div class="flex gap-2">
+                {{-- Previous Page Link --}}
+                @if ($pagination['current_page'] > 1)
 
-                        <x-button rounded="none" variant="fill" color="dark" size="small"
-                            class="flex justify-center items-center"
-                            wire:click="$set('page', {{ $pagination['current_page'] - 1 }})">
-                            Previous
-                        </x-button>
+                <x-button rounded="none" variant="fill" color="dark" size="small"
+                    class="flex justify-center items-center"
+                    wire:click="$set('page', {{ $pagination['current_page'] - 1 }})">
+                    Previous
+                </x-button>
 
-                    @else
+                @else
 
-                        <x-button rounded="none" variant="fill" color="dark" disabled size="small"
-                            class=" flex justify-center items-center">
-                            Previous
-                        </x-button>
+                <x-button rounded="none" variant="fill" color="dark" disabled size="small"
+                    class=" flex justify-center items-center">
+                    Previous
+                </x-button>
 
-                    @endif
+                @endif
 
-                    {{-- Page Number Links --}}
-                    @for ($i = 1; $i <= $pagination['total_pages']; $i++)
+                {{-- Page Number Links --}}
+                @for ($i = 1; $i <= $pagination['total_pages']; $i++)
 
-                        <x-button rounded="none" variant="{{ $pagination['current_page'] == $i ? 'fill' : 'outlined' }}"
-                            color="primary" wire:click="$set('page', {{ $i }})" size="small"
-                            class="h-8 w-8 font-bold flex justify-center items-center">
-                            {{ $i }}
-                        </x-button>
+                    <x-button rounded="none" variant="{{ $pagination['current_page'] == $i ? 'fill' : 'outlined' }}"
+                    color="primary" wire:click="$set('page', {{ $i }})" size="small"
+                    class="h-8 w-8 font-bold flex justify-center items-center">
+                    {{ $i }}
+                    </x-button>
 
                     @endfor
 
@@ -125,23 +124,23 @@
                     @if ($pagination['current_page'] < $pagination['total_pages'])
 
                         <x-button rounded="none" variant="fill" color="dark"
-                            wire:click="$set('page', {{ $pagination['current_page'] + 1 }})" size="small"
-                            class=" flex justify-center items-center">
-                            Next
+                        wire:click="$set('page', {{ $pagination['current_page'] + 1 }})" size="small"
+                        class=" flex justify-center items-center">
+                        Next
                         </x-button>
 
-                    @else
+                        @else
 
                         <x-button rounded="none" variant="fill" color="dark" size="small"
                             class=" flex justify-center items-center" disabled>
                             Next
                         </x-button>
 
-                    @endif
+                        @endif
 
 
-                    </di>
-            @endif
+                        </di>
+                        @endif
             </div>
 
 

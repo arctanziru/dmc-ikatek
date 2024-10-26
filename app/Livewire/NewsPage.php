@@ -23,26 +23,30 @@ class NewsPage extends Component
 
     protected $queryString = ['search', 'category_id', 'page'];
 
-    // Perform search when "Search" button is clicked
     public function performSearch()
     {
-        $this->resetPage(); // Reset to the first page
+        $this->resetPage();
     }
 
-    // Reset filters (search and category)
+
+
+    public function updateCategoryAndFetchNews()
+    {
+        $this->resetPage();
+    }
+
     public function resetFilters()
     {
         $this->search = '';
         $this->category_id = null;
-        $this->resetPage(); // Reset to the first page
+        $this->resetPage();
     }
 
     public function render()
     {
-        // Fetch news articles
         $request = new Request([
             'page' => $this->page,
-            'per_page' => 5,
+            'per_page' => 20,
             'search' => $this->search,
             'category_id' => $this->category_id,
         ]);
@@ -54,10 +58,8 @@ class NewsPage extends Component
         $news = collect($data['data']['items']);
         $pagination = $data['data']['pagination'];
 
-        // Fetch all categories
-        $categories = NewsCategory::all();
+        $categories = app(NewsCategory::class)->all();
 
-        // Pass news and categories to the view
         return view('livewire.news-page', compact('news', 'pagination', 'categories'));
     }
 }
