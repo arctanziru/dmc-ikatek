@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DisasterController;
 use App\Http\Controllers\DisasterProgramCategoryController;
 use App\Http\Controllers\DisasterProgramController;
+use App\Http\Controllers\DonationController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
@@ -67,6 +68,12 @@ Route::prefix('v1')->group(function () {
         'show' => 'disaster-program-categories.show',
         'update' => 'disaster-program-categories.update',
         'destroy' => 'disaster-program-categories.destroy',
+    ]);
+
+    Route::apiResource('donations', DonationController::class)->only(['index', 'store', 'show'])->names([
+        'index' => 'donations.index',
+        'store' => 'donations.store',
+        'show' => 'donations.show',
     ]);
 
     Route::group(['prefix' => 'auth'], function () {

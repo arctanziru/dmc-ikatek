@@ -20,4 +20,9 @@ class DisasterProgram extends Model
     {
         return $this->belongsTo(Disaster::class);
     }
+
+    public function donations()
+    {
+        return $this->hasMany(Donation::class);
+    }
 }

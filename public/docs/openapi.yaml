@@ -1299,6 +1299,298 @@ paths:
         required: true
         schema:
           type: integer
+  /api/v1/donations:
+    get:
+      summary: 'Get a list of donations for a specific disaster program.'
+      operationId: getAListOfDonationsForASpecificDisasterProgram
+      description: 'Retrieve all donations related to a particular disaster program, with optional filtering by `status` and `donation_date`.'
+      parameters:
+        -
+          in: query
+          name: disaster_program_id
+          description: 'The ID of the disaster program.'
+          example: 1
+          required: true
+          schema:
+            type: integer
+            description: 'The ID of the disaster program.'
+            example: 1
+            nullable: false
+        -
+          in: query
+          name: status
+          description: 'Optional. The status of donations to retrieve. One of "pending", "verified", or "rejected".'
+          example: '"verified"'
+          required: false
+          schema:
+            type: string
+            description: 'Optional. The status of donations to retrieve. One of "pending", "verified", or "rejected".'
+            example: '"verified"'
+            nullable: false
+        -
+          in: query
+          name: donation_date
+          description: 'date Optional. The specific donation date to filter. Format: Y-m-d.'
+          example: '"2024-10-20"'
+          required: false
+          schema:
+            type: string
+            description: 'date Optional. The specific donation date to filter. Format: Y-m-d.'
+            example: '"2024-10-20"'
+            nullable: false
+      responses:
+        200:
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Donations retrieved successfully.\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"donor_name\": \"Jane Doe\",\n      \"donor_organization\": \"Helping Hands\",\n      \"donor_email\": \"jane@example.com\",\n      \"amount\": 100.00,\n      \"message\": \"Hope this helps!\",\n      \"transfer_evidence\": \"/storage/evidence/evidence.jpg\",\n      \"status\": \"verified\",\n      \"donation_date\": \"2024-10-20\",\n      \"disaster_program_id\": 1,\n      \"created_at\": \"2024-10-20T10:00:00Z\"\n    },\n    ...\n  ]\n}"
+      tags:
+        - 'Donation Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                disaster_program_id:
+                  type: string
+                  description: 'The <code>id</code> of an existing record in the disaster_programs table.'
+                  example: consequuntur
+                  nullable: false
+              required:
+                - disaster_program_id
+      security: []
+    post:
+      summary: 'Store a new donation.'
+      operationId: storeANewDonation
+      description: 'Create a new donation entry for a specific disaster program, with optional details such as `donor_organization`, `donor_email`, `message`, and `transfer_evidence`.'
+      parameters: []
+      responses:
+        201:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Donation created successfully.'
+                  data:
+                    id: 1
+                    donor_name: 'Jane Doe'
+                    donor_organization: 'Helping Hands'
+                    donor_email: jane@example.com
+                    amount: 100.0
+                    message: 'Hope this helps!'
+                    transfer_evidence: 'http://example.com/image.jpg'
+                    status: pending
+                    donation_date: '2024-10-20'
+                    disaster_program_id: 1
+                    created_at: '2024-10-20T10:00:00Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Donation created successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      donor_name:
+                        type: string
+                        example: 'Jane Doe'
+                      donor_organization:
+                        type: string
+                        example: 'Helping Hands'
+                      donor_email:
+                        type: string
+                        example: jane@example.com
+                      amount:
+                        type: number
+                        example: 100.0
+                      message:
+                        type: string
+                        example: 'Hope this helps!'
+                      transfer_evidence:
+                        type: string
+                        example: 'http://example.com/image.jpg'
+                      status:
+                        type: string
+                        example: pending
+                      donation_date:
+                        type: string
+                        example: '2024-10-20'
+                      disaster_program_id:
+                        type: integer
+                        example: 1
+                      created_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+      tags:
+        - 'Donation Management'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                donor_name:
+                  type: string
+                  description: 'The name of the donor.'
+                  example: '"Jane Doe"'
+                  nullable: false
+                donor_organization:
+                  type: string
+                  description: 'The organization name if applicable.'
+                  example: '"Helping Hands"'
+                  nullable: true
+                donor_email:
+                  type: string
+                  description: 'The email of the donor.'
+                  example: '"jane@example.com"'
+                  nullable: true
+                amount:
+                  type: number
+                  description: 'The amount of the donation.'
+                  example: 100.0
+                  nullable: false
+                message:
+                  type: string
+                  description: 'The message from the donor.'
+                  example: '"Hope this helps!"'
+                  nullable: true
+                transfer_evidence:
+                  type: string
+                  format: binary
+                  description: 'The transfer evidence (JPEG, PNG, JPG, PDF).'
+                  nullable: true
+                status:
+                  type: string
+                  description: 'The donation status. One of "pending", "verified", or "rejected".'
+                  example: '"pending"'
+                  nullable: true
+                donation_date:
+                  type: date
+                  description: 'The date of the donation.'
+                  example: '"2024-10-20"'
+                  nullable: true
+                disaster_program_id:
+                  type: integer
+                  description: 'The ID of the disaster program.'
+                  example: 1
+                  nullable: false
+              required:
+                - donor_name
+                - amount
+                - disaster_program_id
+      security: []
+  '/api/v1/donations/{id}':
+    get:
+      summary: 'Show a specific donation.'
+      operationId: showASpecificDonation
+      description: 'Retrieve details of a specific donation by its ID.'
+      parameters: []
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Donation retrieved successfully.'
+                  data:
+                    id: 1
+                    donor_name: 'Jane Doe'
+                    donor_organization: 'Helping Hands'
+                    donor_email: jane@example.com
+                    amount: 100.0
+                    message: 'Hope this helps!'
+                    transfer_evidence: /storage/evidence/evidence.jpg
+                    status: verified
+                    donation_date: '2024-10-20'
+                    disaster_program_id: 1
+                    created_at: '2024-10-20T10:00:00Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Donation retrieved successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      donor_name:
+                        type: string
+                        example: 'Jane Doe'
+                      donor_organization:
+                        type: string
+                        example: 'Helping Hands'
+                      donor_email:
+                        type: string
+                        example: jane@example.com
+                      amount:
+                        type: number
+                        example: 100.0
+                      message:
+                        type: string
+                        example: 'Hope this helps!'
+                      transfer_evidence:
+                        type: string
+                        example: /storage/evidence/evidence.jpg
+                      status:
+                        type: string
+                        example: verified
+                      donation_date:
+                        type: string
+                        example: '2024-10-20'
+                      disaster_program_id:
+                        type: integer
+                        example: 1
+                      created_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Donation not found'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Donation not found'
+      tags:
+        - 'Donation Management'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the donation.'
+        example: 1
+        required: true
+        schema:
+          type: integer
   /api/v1/news-category:
     get:
       summary: 'Get a list of news categories.'
@@ -2704,6 +2996,9 @@ tags:
   -
     name: 'Disaster Program Management'
     description: "\nAPIs for managing disaster programs"
+  -
+    name: 'Donation Management'
+    description: "\nAPIs for managing donations"
   -
     name: 'News Categories'
     description: "\nAPIs for managing news categories"

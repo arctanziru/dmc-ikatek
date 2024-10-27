@@ -148,6 +148,22 @@
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-donation-management" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="donation-management">
+                    <a href="#donation-management">Donation Management</a>
+                </li>
+                                    <ul id="tocify-subheader-donation-management" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="donation-management-GETapi-v1-donations">
+                                <a href="#donation-management-GETapi-v1-donations">Get a list of donations for a specific disaster program.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="donation-management-POSTapi-v1-donations">
+                                <a href="#donation-management-POSTapi-v1-donations">Store a new donation.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="donation-management-GETapi-v1-donations--id-">
+                                <a href="#donation-management-GETapi-v1-donations--id-">Show a specific donation.</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-news-categories" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="news-categories">
                     <a href="#news-categories">News Categories</a>
@@ -3236,6 +3252,612 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="url">
     <br>
 <p>The ID of the program. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                <h1 id="donation-management">Donation Management</h1>
+
+    <p>APIs for managing donations</p>
+
+                                <h2 id="donation-management-GETapi-v1-donations">Get a list of donations for a specific disaster program.</h2>
+
+<p>
+</p>
+
+<p>Retrieve all donations related to a particular disaster program, with optional filtering by <code>status</code> and <code>donation_date</code>.</p>
+
+<span id="example-requests-GETapi-v1-donations">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://dmc-ikatek.test/api/v1/donations?disaster_program_id=1&amp;status=%22verified%22&amp;donation_date=%222024-10-20%22" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"disaster_program_id\": \"consequuntur\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://dmc-ikatek.test/api/v1/donations"
+);
+
+const params = {
+    "disaster_program_id": "1",
+    "status": ""verified"",
+    "donation_date": ""2024-10-20"",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "disaster_program_id": "consequuntur"
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-donations">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+  &quot;status&quot;: &quot;success&quot;,
+  &quot;message&quot;: &quot;Donations retrieved successfully.&quot;,
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;donor_name&quot;: &quot;Jane Doe&quot;,
+      &quot;donor_organization&quot;: &quot;Helping Hands&quot;,
+      &quot;donor_email&quot;: &quot;jane@example.com&quot;,
+      &quot;amount&quot;: 100.00,
+      &quot;message&quot;: &quot;Hope this helps!&quot;,
+      &quot;transfer_evidence&quot;: &quot;/storage/evidence/evidence.jpg&quot;,
+      &quot;status&quot;: &quot;verified&quot;,
+      &quot;donation_date&quot;: &quot;2024-10-20&quot;,
+      &quot;disaster_program_id&quot;: 1,
+      &quot;created_at&quot;: &quot;2024-10-20T10:00:00Z&quot;
+    },
+    ...
+  ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-donations" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-donations"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-donations"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-donations" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-donations">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-donations" data-method="GET"
+      data-path="api/v1/donations"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-donations', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-donations"
+                    onclick="tryItOut('GETapi-v1-donations');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-donations"
+                    onclick="cancelTryOut('GETapi-v1-donations');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-donations"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/donations</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-donations"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-donations"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>disaster_program_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="disaster_program_id"                data-endpoint="GETapi-v1-donations"
+               value="1"
+               data-component="query">
+    <br>
+<p>The ID of the disaster program. Example: <code>1</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="GETapi-v1-donations"
+               value=""verified""
+               data-component="query">
+    <br>
+<p>Optional. The status of donations to retrieve. One of &quot;pending&quot;, &quot;verified&quot;, or &quot;rejected&quot;. Example: <code>"verified"</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>donation_date</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="donation_date"                data-endpoint="GETapi-v1-donations"
+               value=""2024-10-20""
+               data-component="query">
+    <br>
+<p>date Optional. The specific donation date to filter. Format: Y-m-d. Example: <code>"2024-10-20"</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>disaster_program_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="disaster_program_id"                data-endpoint="GETapi-v1-donations"
+               value="consequuntur"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the disaster_programs table. Example: <code>consequuntur</code></p>
+        </div>
+        </form>
+
+                    <h2 id="donation-management-POSTapi-v1-donations">Store a new donation.</h2>
+
+<p>
+</p>
+
+<p>Create a new donation entry for a specific disaster program, with optional details such as <code>donor_organization</code>, <code>donor_email</code>, <code>message</code>, and <code>transfer_evidence</code>.</p>
+
+<span id="example-requests-POSTapi-v1-donations">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://dmc-ikatek.test/api/v1/donations" \
+    --header "Content-Type: multipart/form-data" \
+    --header "Accept: application/json" \
+    --form "donor_name="Jane Doe""\
+    --form "donor_organization="Helping Hands""\
+    --form "donor_email="jane@example.com""\
+    --form "amount=100"\
+    --form "message="Hope this helps!""\
+    --form "status="pending""\
+    --form "donation_date="2024-10-20""\
+    --form "disaster_program_id=1"\
+    --form "transfer_evidence=@C:\Users\ahmad\AppData\Local\Temp\php1857.tmp" </code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://dmc-ikatek.test/api/v1/donations"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+const body = new FormData();
+body.append('donor_name', '"Jane Doe"');
+body.append('donor_organization', '"Helping Hands"');
+body.append('donor_email', '"jane@example.com"');
+body.append('amount', '100');
+body.append('message', '"Hope this helps!"');
+body.append('status', '"pending"');
+body.append('donation_date', '"2024-10-20"');
+body.append('disaster_program_id', '1');
+body.append('transfer_evidence', document.querySelector('input[name="transfer_evidence"]').files[0]);
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-v1-donations">
+            <blockquote>
+            <p>Example response (201, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: &quot;success&quot;,
+    &quot;message&quot;: &quot;Donation created successfully.&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;donor_name&quot;: &quot;Jane Doe&quot;,
+        &quot;donor_organization&quot;: &quot;Helping Hands&quot;,
+        &quot;donor_email&quot;: &quot;jane@example.com&quot;,
+        &quot;amount&quot;: 100,
+        &quot;message&quot;: &quot;Hope this helps!&quot;,
+        &quot;transfer_evidence&quot;: &quot;http://example.com/image.jpg&quot;,
+        &quot;status&quot;: &quot;pending&quot;,
+        &quot;donation_date&quot;: &quot;2024-10-20&quot;,
+        &quot;disaster_program_id&quot;: 1,
+        &quot;created_at&quot;: &quot;2024-10-20T10:00:00Z&quot;
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-v1-donations" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-donations"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-donations"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-donations" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-donations">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-v1-donations" data-method="POST"
+      data-path="api/v1/donations"
+      data-authed="0"
+      data-hasfiles="1"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-donations', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-donations"
+                    onclick="tryItOut('POSTapi-v1-donations');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-donations"
+                    onclick="cancelTryOut('POSTapi-v1-donations');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-donations"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/donations</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-v1-donations"
+               value="multipart/form-data"
+               data-component="header">
+    <br>
+<p>Example: <code>multipart/form-data</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-v1-donations"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>donor_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="donor_name"                data-endpoint="POSTapi-v1-donations"
+               value=""Jane Doe""
+               data-component="body">
+    <br>
+<p>The name of the donor. Example: <code>"Jane Doe"</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>donor_organization</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="donor_organization"                data-endpoint="POSTapi-v1-donations"
+               value=""Helping Hands""
+               data-component="body">
+    <br>
+<p>The organization name if applicable. Example: <code>"Helping Hands"</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>donor_email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="donor_email"                data-endpoint="POSTapi-v1-donations"
+               value=""jane@example.com""
+               data-component="body">
+    <br>
+<p>The email of the donor. Example: <code>"jane@example.com"</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>amount</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="amount"                data-endpoint="POSTapi-v1-donations"
+               value="100"
+               data-component="body">
+    <br>
+<p>The amount of the donation. Example: <code>100</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="message"                data-endpoint="POSTapi-v1-donations"
+               value=""Hope this helps!""
+               data-component="body">
+    <br>
+<p>The message from the donor. Example: <code>"Hope this helps!"</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>transfer_evidence</code></b>&nbsp;&nbsp;
+<small>file</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="file" style="display: none"
+                              name="transfer_evidence"                data-endpoint="POSTapi-v1-donations"
+               value=""
+               data-component="body">
+    <br>
+<p>The transfer evidence (JPEG, PNG, JPG, PDF). Example: <code>C:\Users\ahmad\AppData\Local\Temp\php1857.tmp</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="POSTapi-v1-donations"
+               value=""pending""
+               data-component="body">
+    <br>
+<p>The donation status. One of &quot;pending&quot;, &quot;verified&quot;, or &quot;rejected&quot;. Example: <code>"pending"</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>donation_date</code></b>&nbsp;&nbsp;
+<small>date</small>&nbsp;
+<i>optional</i> &nbsp;
+                <input type="text" style="display: none"
+                              name="donation_date"                data-endpoint="POSTapi-v1-donations"
+               value=""2024-10-20""
+               data-component="body">
+    <br>
+<p>The date of the donation. Example: <code>"2024-10-20"</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>disaster_program_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="disaster_program_id"                data-endpoint="POSTapi-v1-donations"
+               value="1"
+               data-component="body">
+    <br>
+<p>The ID of the disaster program. Example: <code>1</code></p>
+        </div>
+        </form>
+
+                    <h2 id="donation-management-GETapi-v1-donations--id-">Show a specific donation.</h2>
+
+<p>
+</p>
+
+<p>Retrieve details of a specific donation by its ID.</p>
+
+<span id="example-requests-GETapi-v1-donations--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://dmc-ikatek.test/api/v1/donations/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://dmc-ikatek.test/api/v1/donations/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-donations--id-">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: &quot;success&quot;,
+    &quot;message&quot;: &quot;Donation retrieved successfully.&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;donor_name&quot;: &quot;Jane Doe&quot;,
+        &quot;donor_organization&quot;: &quot;Helping Hands&quot;,
+        &quot;donor_email&quot;: &quot;jane@example.com&quot;,
+        &quot;amount&quot;: 100,
+        &quot;message&quot;: &quot;Hope this helps!&quot;,
+        &quot;transfer_evidence&quot;: &quot;/storage/evidence/evidence.jpg&quot;,
+        &quot;status&quot;: &quot;verified&quot;,
+        &quot;donation_date&quot;: &quot;2024-10-20&quot;,
+        &quot;disaster_program_id&quot;: 1,
+        &quot;created_at&quot;: &quot;2024-10-20T10:00:00Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;status&quot;: &quot;error&quot;,
+    &quot;message&quot;: &quot;Donation not found&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-donations--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-donations--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-donations--id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-donations--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-donations--id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-donations--id-" data-method="GET"
+      data-path="api/v1/donations/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-donations--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-donations--id-"
+                    onclick="tryItOut('GETapi-v1-donations--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-donations--id-"
+                    onclick="cancelTryOut('GETapi-v1-donations--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-donations--id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/donations/{id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-donations--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-donations--id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="id"                data-endpoint="GETapi-v1-donations--id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the donation. Example: <code>1</code></p>
             </div>
                     </form>
 
