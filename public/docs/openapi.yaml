@@ -187,6 +187,1118 @@ paths:
                         example: your_generated_token_here
       tags:
         - Authentication
+  /api/v1/disasters:
+    get:
+      summary: 'Get a list of disasters.'
+      operationId: getAListOfDisasters
+      description: ''
+      parameters:
+        -
+          in: query
+          name: page
+          description: 'Optional. The page number.'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'Optional. The page number.'
+            example: 1
+            nullable: false
+        -
+          in: query
+          name: per_page
+          description: 'Optional. Items per page.'
+          example: 10
+          required: false
+          schema:
+            type: integer
+            description: 'Optional. Items per page.'
+            example: 10
+            nullable: false
+        -
+          in: query
+          name: district_id
+          description: 'Optional. Filter by district ID.'
+          example: 2
+          required: false
+          schema:
+            type: integer
+            description: 'Optional. Filter by district ID.'
+            example: 2
+            nullable: false
+        -
+          in: query
+          name: city_id
+          description: 'Optional. Filter by city ID.'
+          example: 3
+          required: false
+          schema:
+            type: integer
+            description: 'Optional. Filter by city ID.'
+            example: 3
+            nullable: false
+        -
+          in: query
+          name: province_id
+          description: 'Optional. Filter by province ID.'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'Optional. Filter by province ID.'
+            example: 1
+            nullable: false
+        -
+          in: query
+          name: search
+          description: 'Optional. Search by name or description.'
+          example: '"earthquake"'
+          required: false
+          schema:
+            type: string
+            description: 'Optional. Search by name or description.'
+            example: '"earthquake"'
+            nullable: false
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Disasters retrieved successfully.'
+                  data:
+                    items:
+                      -
+                        id: 1
+                        name: Earthquake
+                        description: 'A major earthquake'
+                        latitude: -6.2088
+                        longitude: 106.8456
+                        district_id: 2
+                        created_at: '2024-10-20T10:00:00Z'
+                        updated_at: '2024-10-20T10:00:00Z'
+                    pagination:
+                      total: 50
+                      count: 10
+                      per_page: 10
+                      current_page: 1
+                      total_pages: 5
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Disasters retrieved successfully.'
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        example:
+                          -
+                            id: 1
+                            name: Earthquake
+                            description: 'A major earthquake'
+                            latitude: -6.2088
+                            longitude: 106.8456
+                            district_id: 2
+                            created_at: '2024-10-20T10:00:00Z'
+                            updated_at: '2024-10-20T10:00:00Z'
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            name:
+                              type: string
+                              example: Earthquake
+                            description:
+                              type: string
+                              example: 'A major earthquake'
+                            latitude:
+                              type: number
+                              example: -6.2088
+                            longitude:
+                              type: number
+                              example: 106.8456
+                            district_id:
+                              type: integer
+                              example: 2
+                            created_at:
+                              type: string
+                              example: '2024-10-20T10:00:00Z'
+                            updated_at:
+                              type: string
+                              example: '2024-10-20T10:00:00Z'
+                      pagination:
+                        type: object
+                        properties:
+                          total:
+                            type: integer
+                            example: 50
+                          count:
+                            type: integer
+                            example: 10
+                          per_page:
+                            type: integer
+                            example: 10
+                          current_page:
+                            type: integer
+                            example: 1
+                          total_pages:
+                            type: integer
+                            example: 5
+      tags:
+        - 'Disaster Management'
+      security: []
+    post:
+      summary: 'Store a newly created disaster.'
+      operationId: storeANewlyCreatedDisaster
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Disaster created successfully.'
+                  data:
+                    id: 1
+                    name: Earthquake
+                    description: 'A severe earthquake'
+                    latitude: -6.2088
+                    longitude: 106.8456
+                    district_id: 2
+                    created_at: '2024-10-20T10:00:00Z'
+                    updated_at: '2024-10-20T10:00:00Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Disaster created successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: Earthquake
+                      description:
+                        type: string
+                        example: 'A severe earthquake'
+                      latitude:
+                        type: number
+                        example: -6.2088
+                      longitude:
+                        type: number
+                        example: 106.8456
+                      district_id:
+                        type: integer
+                        example: 2
+                      created_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+                      updated_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+      tags:
+        - 'Disaster Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the disaster.'
+                  example: '"Earthquake"'
+                  nullable: false
+                description:
+                  type: string
+                  description: 'The description of the disaster.'
+                  example: '"A severe earthquake"'
+                  nullable: true
+                latitude:
+                  type: numeric
+                  description: 'The latitude of the disaster location.'
+                  example: '-6.2088'
+                  nullable: true
+                longitude:
+                  type: numeric
+                  description: 'The longitude of the disaster location.'
+                  example: '106.8456'
+                  nullable: true
+                district_id:
+                  type: integer
+                  description: 'The ID of the district.'
+                  example: 2
+                  nullable: false
+              required:
+                - name
+                - district_id
+      security: []
+  '/api/v1/disasters/{id}':
+    get:
+      summary: 'Show a specific disaster.'
+      operationId: showASpecificDisaster
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Disaster retrieved successfully.'
+                  data:
+                    id: 1
+                    name: Earthquake
+                    description: 'A major earthquake'
+                    latitude: -6.2088
+                    longitude: 106.8456
+                    district_id: 2
+                    created_at: '2024-10-20T10:00:00Z'
+                    updated_at: '2024-10-20T10:00:00Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Disaster retrieved successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: Earthquake
+                      description:
+                        type: string
+                        example: 'A major earthquake'
+                      latitude:
+                        type: number
+                        example: -6.2088
+                      longitude:
+                        type: number
+                        example: 106.8456
+                      district_id:
+                        type: integer
+                        example: 2
+                      created_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+                      updated_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Disaster not found'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Disaster not found'
+      tags:
+        - 'Disaster Management'
+      security: []
+    put:
+      summary: 'Update a specific disaster.'
+      operationId: updateASpecificDisaster
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Disaster updated successfully.'
+                  data:
+                    id: 1
+                    name: 'Updated Earthquake'
+                    description: 'An updated description'
+                    latitude: -6.2088
+                    longitude: 106.8456
+                    district_id: 2
+                    created_at: '2024-10-20T10:00:00Z'
+                    updated_at: '2024-10-20T10:00:00Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Disaster updated successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Updated Earthquake'
+                      description:
+                        type: string
+                        example: 'An updated description'
+                      latitude:
+                        type: number
+                        example: -6.2088
+                      longitude:
+                        type: number
+                        example: 106.8456
+                      district_id:
+                        type: integer
+                        example: 2
+                      created_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+                      updated_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Disaster not found'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Disaster not found'
+      tags:
+        - 'Disaster Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the disaster.'
+                  example: '"Updated Earthquake"'
+                  nullable: false
+                description:
+                  type: string
+                  description: 'The description of the disaster.'
+                  example: '"An updated description"'
+                  nullable: true
+                latitude:
+                  type: numeric
+                  description: 'The latitude of the disaster location.'
+                  example: '-6.2088'
+                  nullable: true
+                longitude:
+                  type: numeric
+                  description: 'The longitude of the disaster location.'
+                  example: '106.8456'
+                  nullable: true
+                district_id:
+                  type: integer
+                  description: 'The ID of the district.'
+                  example: 2
+                  nullable: false
+      security: []
+    delete:
+      summary: 'Delete a specific disaster.'
+      operationId: deleteASpecificDisaster
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Disaster deleted successfully.'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Disaster deleted successfully.'
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Disaster not found'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Disaster not found'
+      tags:
+        - 'Disaster Management'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the disaster.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/v1/disaster-program-categories:
+    get:
+      summary: 'Get a list of disaster program categories.'
+      operationId: getAListOfDisasterProgramCategories
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Categories retrieved successfully.\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Disaster Risk Reduction\",\n      \"description\": \"Programs aimed at reducing disaster risk.\"\n    },\n    ...\n  ]\n}"
+      tags:
+        - 'Disaster Program Category Management'
+      security: []
+    post:
+      summary: 'Store a new disaster program category.'
+      operationId: storeANewDisasterProgramCategory
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Category created successfully.'
+                  data:
+                    id: 1
+                    name: 'Health and Safety'
+                    description: 'Programs focused on health and safety.'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Category created successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Health and Safety'
+                      description:
+                        type: string
+                        example: 'Programs focused on health and safety.'
+      tags:
+        - 'Disaster Program Category Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the category.'
+                  example: '"Health and Safety"'
+                  nullable: false
+                description:
+                  type: string
+                  description: 'The description of the category.'
+                  example: '"Programs focused on health and safety."'
+                  nullable: true
+              required:
+                - name
+      security: []
+  '/api/v1/disaster-program-categories/{id}':
+    get:
+      summary: 'Show a specific disaster program category.'
+      operationId: showASpecificDisasterProgramCategory
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Category retrieved successfully.'
+                  data:
+                    id: 1
+                    name: 'Disaster Risk Reduction'
+                    description: 'Programs aimed at reducing disaster risk.'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Category retrieved successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Disaster Risk Reduction'
+                      description:
+                        type: string
+                        example: 'Programs aimed at reducing disaster risk.'
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Category not found'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Category not found'
+      tags:
+        - 'Disaster Program Category Management'
+      security: []
+    put:
+      summary: 'Update a specific disaster program category.'
+      operationId: updateASpecificDisasterProgramCategory
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Category updated successfully.'
+                  data:
+                    id: 1
+                    name: 'Updated Category'
+                    description: 'Updated description.'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Category updated successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Updated Category'
+                      description:
+                        type: string
+                        example: 'Updated description.'
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Category not found'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Category not found'
+      tags:
+        - 'Disaster Program Category Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the category.'
+                  example: '"Updated Category"'
+                  nullable: false
+                description:
+                  type: string
+                  description: 'The description of the category.'
+                  example: '"Updated description."'
+                  nullable: true
+      security: []
+    delete:
+      summary: 'Delete a specific disaster program category.'
+      operationId: deleteASpecificDisasterProgramCategory
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Category deleted successfully.'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Category deleted successfully.'
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Category not found'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Category not found'
+      tags:
+        - 'Disaster Program Category Management'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the category.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/v1/disaster-programs:
+    get:
+      summary: 'Get a list of disaster programs.'
+      operationId: getAListOfDisasterPrograms
+      description: ''
+      parameters:
+        -
+          in: query
+          name: page
+          description: 'Optional. The page number.'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'Optional. The page number.'
+            example: 1
+            nullable: false
+        -
+          in: query
+          name: per_page
+          description: 'Optional. Items per page.'
+          example: 10
+          required: false
+          schema:
+            type: integer
+            description: 'Optional. Items per page.'
+            example: 10
+            nullable: false
+      responses:
+        200:
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n  \"status\": \"success\",\n  \"message\": \"Programs retrieved successfully.\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Emergency Training\",\n      \"description\": \"Training program for emergency response.\",\n      \"category_id\": 2,\n      \"disaster_id\": 3,\n      \"created_at\": \"2024-10-20T10:00:00Z\",\n      \"updated_at\": \"2024-10-20T10:00:00Z\"\n    },\n    ...\n  ]\n}"
+      tags:
+        - 'Disaster Program Management'
+      security: []
+    post:
+      summary: 'Store a new disaster program.'
+      operationId: storeANewDisasterProgram
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Program created successfully.'
+                  data:
+                    id: 1
+                    name: 'Health and Safety Training'
+                    description: 'Safety training for first responders.'
+                    category_id: 1
+                    disaster_id: 3
+                    created_at: '2024-10-20T10:00:00Z'
+                    updated_at: '2024-10-20T10:00:00Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Program created successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Health and Safety Training'
+                      description:
+                        type: string
+                        example: 'Safety training for first responders.'
+                      category_id:
+                        type: integer
+                        example: 1
+                      disaster_id:
+                        type: integer
+                        example: 3
+                      created_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+                      updated_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+      tags:
+        - 'Disaster Program Management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the program.'
+                  example: '"Health and Safety Training"'
+                  nullable: false
+                description:
+                  type: string
+                  description: 'The description of the program.'
+                  example: '"Safety training for first responders."'
+                  nullable: true
+                category_id:
+                  type: integer
+                  description: 'The ID of the program category.'
+                  example: 1
+                  nullable: false
+                disaster_id:
+                  type: integer
+                  description: 'The ID of the disaster.'
+                  example: 3
+                  nullable: false
+              required:
+                - name
+                - category_id
+                - disaster_id
+      security: []
+  '/api/v1/disaster-programs/{id}':
+    get:
+      summary: 'Show a specific disaster program.'
+      operationId: showASpecificDisasterProgram
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Program retrieved successfully.'
+                  data:
+                    id: 1
+                    name: 'Health and Safety Training'
+                    description: 'Safety training for first responders.'
+                    category_id: 1
+                    disaster_id: 3
+                    created_at: '2024-10-20T10:00:00Z'
+                    updated_at: '2024-10-20T10:00:00Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Program retrieved successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Health and Safety Training'
+                      description:
+                        type: string
+                        example: 'Safety training for first responders.'
+                      category_id:
+                        type: integer
+                        example: 1
+                      disaster_id:
+                        type: integer
+                        example: 3
+                      created_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+                      updated_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Program not found'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Program not found'
+      tags:
+        - 'Disaster Program Management'
+      security: []
+    put:
+      summary: 'Update a specific disaster program.'
+      operationId: updateASpecificDisasterProgram
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Program updated successfully.'
+                  data:
+                    id: 1
+                    name: 'Updated Program Name'
+                    description: 'Updated program description.'
+                    category_id: 1
+                    disaster_id: 3
+                    created_at: '2024-10-20T10:00:00Z'
+                    updated_at: '2024-10-20T10:00:00Z'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Program updated successfully.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'Updated Program Name'
+                      description:
+                        type: string
+                        example: 'Updated program description.'
+                      category_id:
+                        type: integer
+                        example: 1
+                      disaster_id:
+                        type: integer
+                        example: 3
+                      created_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+                      updated_at:
+                        type: string
+                        example: '2024-10-20T10:00:00Z'
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Program not found'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Program not found'
+      tags:
+        - 'Disaster Program Management'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'The name of the program.'
+                  example: '"Updated Program Name"'
+                  nullable: false
+                description:
+                  type: string
+                  description: 'The description of the program.'
+                  example: '"Updated program description."'
+                  nullable: true
+                category_id:
+                  type: integer
+                  description: 'The ID of the program category.'
+                  example: 1
+                  nullable: false
+                disaster_id:
+                  type: integer
+                  description: 'The ID of the disaster.'
+                  example: 3
+                  nullable: false
+      security: []
+    delete:
+      summary: 'Delete a specific disaster program.'
+      operationId: deleteASpecificDisasterProgram
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: success
+                  message: 'Program deleted successfully.'
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Program deleted successfully.'
+        404:
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: error
+                  message: 'Program not found'
+                properties:
+                  status:
+                    type: string
+                    example: error
+                  message:
+                    type: string
+                    example: 'Program not found'
+      tags:
+        - 'Disaster Program Management'
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the program.'
+        example: 1
+        required: true
+        schema:
+          type: integer
   /api/v1/news-category:
     get:
       summary: 'Get a list of news categories.'
@@ -1583,6 +2695,15 @@ tags:
   -
     name: Authentication
     description: "\nAPIs for managing authentication"
+  -
+    name: 'Disaster Management'
+    description: "\nAPIs for managing disasters"
+  -
+    name: 'Disaster Program Category Management'
+    description: "\nAPIs for managing disaster program categories"
+  -
+    name: 'Disaster Program Management'
+    description: "\nAPIs for managing disaster programs"
   -
     name: 'News Categories'
     description: "\nAPIs for managing news categories"

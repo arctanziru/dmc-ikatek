@@ -1,0 +1,346 @@
+name: 'Disaster Program Category Management'
+description: |-
+
+  APIs for managing disaster program categories
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/disaster-program-categories
+    metadata:
+      groupName: 'Disaster Program Category Management'
+      groupDescription: |-
+
+        APIs for managing disaster program categories
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get a list of disaster program categories.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "message": "Categories retrieved successfully.",
+            "data": [
+              {
+                "id": 1,
+                "name": "Disaster Risk Reduction",
+                "description": "Programs aimed at reducing disaster risk."
+              },
+              ...
+            ]
+          }
+        headers: []
+        description: Success
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/disaster-program-categories
+    metadata:
+      groupName: 'Disaster Program Category Management'
+      groupDescription: |-
+
+        APIs for managing disaster program categories
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store a new disaster program category.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the category.'
+        required: true
+        example: '"Health and Safety"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: 'The description of the category.'
+        required: false
+        example: '"Programs focused on health and safety."'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: '"Health and Safety"'
+      description: '"Programs focused on health and safety."'
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "status": "success",
+            "message": "Category created successfully.",
+            "data": {
+              "id": 1,
+              "name": "Health and Safety",
+              "description": "Programs focused on health and safety."
+            }
+          }
+        headers: []
+        description: Success
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/disaster-program-categories/{id}'
+    metadata:
+      groupName: 'Disaster Program Category Management'
+      groupDescription: |-
+
+        APIs for managing disaster program categories
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Show a specific disaster program category.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "message": "Category retrieved successfully.",
+            "data": {
+              "id": 1,
+              "name": "Disaster Risk Reduction",
+              "description": "Programs aimed at reducing disaster risk."
+            }
+          }
+        headers: []
+        description: Success
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "status": "error",
+            "message": "Category not found"
+          }
+        headers: []
+        description: 'Not Found'
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/disaster-program-categories/{id}'
+    metadata:
+      groupName: 'Disaster Program Category Management'
+      groupDescription: |-
+
+        APIs for managing disaster program categories
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update a specific disaster program category.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the category.'
+        required: false
+        example: '"Updated Category"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: 'The description of the category.'
+        required: false
+        example: '"Updated description."'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: '"Updated Category"'
+      description: '"Updated description."'
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "message": "Category updated successfully.",
+            "data": {
+              "id": 1,
+              "name": "Updated Category",
+              "description": "Updated description."
+            }
+          }
+        headers: []
+        description: Success
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "status": "error",
+            "message": "Category not found"
+          }
+        headers: []
+        description: 'Not Found'
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/disaster-program-categories/{id}'
+    metadata:
+      groupName: 'Disaster Program Category Management'
+      groupDescription: |-
+
+        APIs for managing disaster program categories
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete a specific disaster program category.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "status": "success",
+            "message": "Category deleted successfully."
+          }
+        headers: []
+        description: Success
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "status": "error",
+            "message": "Category not found"
+          }
+        headers: []
+        description: 'Not Found'
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
