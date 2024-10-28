@@ -17,7 +17,7 @@
 
     // Size class logic
     $sizeClass = match ($size) {
-        'small' => 'px-2 py-1 text-xs',
+        'small' => 'px-2 py-1',
         'medium' => 'px-4 py-2',
         'large' => 'px-6 py-3',
         default => 'px-4 py-2'

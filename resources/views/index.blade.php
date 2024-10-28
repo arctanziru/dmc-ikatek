@@ -331,34 +331,28 @@
                 <p class="text-[20px] font-medium">Check Our News</p>
             </div>
 
-            <section class="flex gap-4 w-full justify-center h-[436px] ">
+            <section class="flex gap-4 w-full justify-center h-[436px]">
                 <!-- Left Section (Featured News) -->
-                <section class="flex-1 flex justify-start ">
+                <section class="flex-1 flex justify-start">
                     <div class="w-[32px] relative flex justify-center items-center">
                         <div
                             class="bg-white/95 shadow-sm gap-2 shadow-dark/40 w-[360px] flex flex-col p-8 absolute z-50 left-0">
-                            <p class="text-[18px] font-medium text-primary">
-                                {{ $news->first()->author ?? 'N/A' }}
-                            </p>
+                            <p class="text-[18px] font-medium text-primary">{{ $news->first()->author ?? 'N/A' }}</p>
                             <p class="text-ellipsis line-clamp-2 text-[24px] font-semibold">
-                                {{ $news->first()->title ?? 'N/A' }}
-                            </p>
-                            <p class="text-ellipsis text-[14px] line-clamp-3">
-                                {{ $news->first()->description ?? 'N/A' }}
+                                {{ $news->first()->title ?? 'N/A' }}</p>
+                            <p class="text-ellipsis text-[14px] line-clamp-3">{{ $news->first()->description ?? 'N/A' }}
                             </p>
                             <p class="w-full text-right text-[12px]">
-                                {{ optional(value: $news->first())->created_at->format('d M Y') }}
-                            </p>
-
-                            </p>
-                            <x-button href="/news" rounded="none" variant="outlined" color="dark">Read
-                                More</x-button>
+                                {{ optional(value: $news->first())->created_at->format('d M Y') }}</p>
+                            <x-button href="/news" rounded="none" variant="outlined" color="dark">Read More</x-button>
                         </div>
                     </div>
 
-                    <div class="flex-1 relative flex w-full h-full">
-                        <img src="{{ asset($news->first()->image) }}" class="rounded-lg w-full object-cover"
-                            alt="Featured News Image" />
+                    <div class="flex-1 relative flex w-full h-full bg-gray-200">
+                        <img src="{{ asset($news->first()->image ?? 'images/placeholder.webp') }}"
+                            class="rounded-lg h-[436px] w-full object-cover" alt="Featured News Image"
+                            onload="this.parentNode.classList.remove('bg-gray-200');"
+                            onerror="this.src='{{ asset('images/placeholder.webp') }}';" />
                     </div>
                 </section>
 
@@ -367,8 +361,12 @@
                     @foreach ($newsItems as $newsItem)
                         <div id="news-card"
                             class="flex gap-4 bg-white cursor-pointer items-center justify-start hover:bg-white-light p-2 rounded-md w-[360px]">
-                            <img src="{{ asset($newsItem->image) }}" class="h-[80px] w-[80px] object-cover rounded-lg"
-                                alt="News Image" />
+                            <div class="h-[80px] w-[80px] bg-gray-200 rounded-lg overflow-hidden">
+                                <img src="{{ asset($newsItem->image ?? 'images/placeholder.webp') }}"
+                                    class="h-[80px] w-[80px] object-cover" alt="News Image"
+                                    onload="this.parentNode.classList.remove('bg-gray-200');"
+                                    onerror="this.src='{{ asset('images/placeholder.webp') }}';" />
+                            </div>
                             <div class="flex flex-col justify-between">
                                 <div class="flex flex-col">
                                     <p class="font-light">{{ $newsItem->author }}</p>
@@ -385,7 +383,9 @@
                     @endforeach
                 </section>
             </section>
+
         </main>
+
 
 
     </main>

@@ -2,6 +2,7 @@
 
 use App\Livewire\Auth\Login;
 use App\Livewire\Counter;
+use App\Livewire\OurWorksPage;
 use App\Livewire\NewsPage;
 use App\Http\Controllers\HomeController; // Import the HomeController
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,4 @@ Route::get('/', [HomeController::class, 'index'])->name('home'); // Update to us
 Route::get('/counter', Counter::class);
 Route::get('/login', Login::class);
 Route::get('/news', NewsPage::class)->name('news');
+Route::get('/our-works', OurWorksPage::class);
