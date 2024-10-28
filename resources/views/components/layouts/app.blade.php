@@ -60,7 +60,9 @@
                 }
             }
         }
+        localStorage.theme = 'light'
     </script>
+</head>
 
 <body class="m-0 p-0 w-screen overflow-x-hidden">
 

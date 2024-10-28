@@ -45,6 +45,10 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+        ], [
+            'email.required' => 'Email is required.',
+            'email.email' => 'Email must be a valid email address.',
+            'password.required' => 'Password is required.',
         ]);
 
         if (!Auth::attempt($credentials)) {
@@ -52,7 +56,7 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken('auth_token', ['*'])->plainTextToken;
 
         $data = [
             'user' => $user,
@@ -78,7 +82,16 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        $request->user()->tokens()->delete();
+
+        // For session-based authentication, log the user out
+        Auth::logout();
+
+        // Invalidate the session to clear all session data
+        $request->session()->invalidate();
+
+        // Regenerate the CSRF token for security
+        $request->session()->regenerateToken();
 
         return ResponseHelper::success([], 'Logout successful');
     }
@@ -99,7 +112,7 @@ class AuthController extends Controller
      *       "id": 1,
      *       "name": "John Doe",
      *       "email": "john@example.com",
-     *       "username": "johndoe",
+     *       "username": "johndoe", 
      *       "role": "user"
      *     },
      *     "token": "your_generated_token_here"

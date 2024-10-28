@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Laravel",
-        "_postman_id": "6b932b20-51bf-4a42-aab6-bcced776b85c",
+        "_postman_id": "8205a21e-2152-4a0d-986a-ea6c283b6853",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -132,6 +132,947 @@
                             "code": 200,
                             "body": "{\n  \"status\": \"success\",\n  \"message\": \"User retrieved successfully\",\n  \"data\": {\n    \"user\": {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"john@example.com\",\n      \"username\": \"johndoe\",\n      \"role\": \"user\"\n    },\n    \"token\": \"your_generated_token_here\"\n  }\n}",
                             "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Disaster Management",
+            "description": "\nAPIs for managing disasters",
+            "item": [
+                {
+                    "name": "Get a list of disasters.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disasters",
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "Optional. The page number.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10",
+                                    "description": "Optional. Items per page.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "district_id",
+                                    "value": "2",
+                                    "description": "Optional. Filter by district ID.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "city_id",
+                                    "value": "3",
+                                    "description": "Optional. Filter by city ID.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "province_id",
+                                    "value": "1",
+                                    "description": "Optional. Filter by province ID.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "search",
+                                    "value": "%22earthquake%22",
+                                    "description": "Optional. Search by name or description.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/v1\/disasters?page=1&per_page=10&district_id=2&city_id=3&province_id=1&search=%22earthquake%22"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Disasters retrieved successfully.\",\n  \"data\": {\n    \"items\": [\n      {\n        \"id\": 1,\n        \"name\": \"Earthquake\",\n        \"description\": \"A major earthquake\",\n        \"latitude\": -6.2088,\n        \"longitude\": 106.8456,\n        \"district_id\": 2,\n        \"created_at\": \"2024-10-20T10:00:00Z\",\n        \"updated_at\": \"2024-10-20T10:00:00Z\"\n      }\n    ],\n    \"pagination\": {\n      \"total\": 50,\n      \"count\": 10,\n      \"per_page\": 10,\n      \"current_page\": 1,\n      \"total_pages\": 5\n    }\n  }\n}",
+                            "name": "Success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Store a newly created disaster.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disasters",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/disasters"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"\\\"Earthquake\\\"\",\"description\":\"\\\"A severe earthquake\\\"\",\"latitude\":\"-6.2088\",\"longitude\":\"106.8456\",\"district_id\":2}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Disaster created successfully.\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Earthquake\",\n    \"description\": \"A severe earthquake\",\n    \"latitude\": -6.2088,\n    \"longitude\": 106.8456,\n    \"district_id\": 2,\n    \"created_at\": \"2024-10-20T10:00:00Z\",\n    \"updated_at\": \"2024-10-20T10:00:00Z\"\n  }\n}",
+                            "name": "Success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Show a specific disaster.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disasters\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/disasters\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the disaster."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Disaster retrieved successfully.\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Earthquake\",\n    \"description\": \"A major earthquake\",\n    \"latitude\": -6.2088,\n    \"longitude\": 106.8456,\n    \"district_id\": 2,\n    \"created_at\": \"2024-10-20T10:00:00Z\",\n    \"updated_at\": \"2024-10-20T10:00:00Z\"\n  }\n}",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"status\": \"error\",\n  \"message\": \"Disaster not found\"\n}",
+                            "name": "Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update a specific disaster.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disasters\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/disasters\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the disaster."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"\\\"Updated Earthquake\\\"\",\"description\":\"\\\"An updated description\\\"\",\"latitude\":\"-6.2088\",\"longitude\":\"106.8456\",\"district_id\":2}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Disaster updated successfully.\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Updated Earthquake\",\n    \"description\": \"An updated description\",\n    \"latitude\": -6.2088,\n    \"longitude\": 106.8456,\n    \"district_id\": 2,\n    \"created_at\": \"2024-10-20T10:00:00Z\",\n    \"updated_at\": \"2024-10-20T10:00:00Z\"\n  }\n}",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"status\": \"error\",\n  \"message\": \"Disaster not found\"\n}",
+                            "name": "Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete a specific disaster.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disasters\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/disasters\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the disaster."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Disaster deleted successfully.\"\n}",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"status\": \"error\",\n  \"message\": \"Disaster not found\"\n}",
+                            "name": "Not Found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Disaster Program Category Management",
+            "description": "\nAPIs for managing disaster program categories",
+            "item": [
+                {
+                    "name": "Get a list of disaster program categories.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disaster-program-categories",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/disaster-program-categories"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Categories retrieved successfully.\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Disaster Risk Reduction\",\n      \"description\": \"Programs aimed at reducing disaster risk.\"\n    },\n    ...\n  ]\n}",
+                            "name": "Success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Store a new disaster program category.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disaster-program-categories",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/disaster-program-categories"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"\\\"Health and Safety\\\"\",\"description\":\"\\\"Programs focused on health and safety.\\\"\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Category created successfully.\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Health and Safety\",\n    \"description\": \"Programs focused on health and safety.\"\n  }\n}",
+                            "name": "Success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Show a specific disaster program category.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disaster-program-categories\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/disaster-program-categories\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the category."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Category retrieved successfully.\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Disaster Risk Reduction\",\n    \"description\": \"Programs aimed at reducing disaster risk.\"\n  }\n}",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"status\": \"error\",\n  \"message\": \"Category not found\"\n}",
+                            "name": "Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update a specific disaster program category.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disaster-program-categories\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/disaster-program-categories\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the category."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"\\\"Updated Category\\\"\",\"description\":\"\\\"Updated description.\\\"\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Category updated successfully.\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Updated Category\",\n    \"description\": \"Updated description.\"\n  }\n}",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"status\": \"error\",\n  \"message\": \"Category not found\"\n}",
+                            "name": "Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete a specific disaster program category.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disaster-program-categories\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/disaster-program-categories\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the category."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Category deleted successfully.\"\n}",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"status\": \"error\",\n  \"message\": \"Category not found\"\n}",
+                            "name": "Not Found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Disaster Program Management",
+            "description": "\nAPIs for managing disaster programs",
+            "item": [
+                {
+                    "name": "Get a list of disaster programs.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disaster-programs",
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1",
+                                    "description": "Optional. The page number.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "per_page",
+                                    "value": "10",
+                                    "description": "Optional. Items per page.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/v1\/disaster-programs?page=1&per_page=10"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Programs retrieved successfully.\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Emergency Training\",\n      \"description\": \"Training program for emergency response.\",\n      \"category_id\": 2,\n      \"disaster_id\": 3,\n      \"created_at\": \"2024-10-20T10:00:00Z\",\n      \"updated_at\": \"2024-10-20T10:00:00Z\"\n    },\n    ...\n  ]\n}",
+                            "name": "Success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Store a new disaster program.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disaster-programs",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/disaster-programs"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"\\\"Health and Safety Training\\\"\",\"description\":\"\\\"Safety training for first responders.\\\"\",\"category_id\":1,\"disaster_id\":3}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Program created successfully.\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Health and Safety Training\",\n    \"description\": \"Safety training for first responders.\",\n    \"category_id\": 1,\n    \"disaster_id\": 3,\n    \"created_at\": \"2024-10-20T10:00:00Z\",\n    \"updated_at\": \"2024-10-20T10:00:00Z\"\n  }\n}",
+                            "name": "Success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Show a specific disaster program.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disaster-programs\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/disaster-programs\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the program."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Program retrieved successfully.\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Health and Safety Training\",\n    \"description\": \"Safety training for first responders.\",\n    \"category_id\": 1,\n    \"disaster_id\": 3,\n    \"created_at\": \"2024-10-20T10:00:00Z\",\n    \"updated_at\": \"2024-10-20T10:00:00Z\"\n  }\n}",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"status\": \"error\",\n  \"message\": \"Program not found\"\n}",
+                            "name": "Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update a specific disaster program.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disaster-programs\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/disaster-programs\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the program."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"\\\"Updated Program Name\\\"\",\"description\":\"\\\"Updated program description.\\\"\",\"category_id\":1,\"disaster_id\":3}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Program updated successfully.\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Updated Program Name\",\n    \"description\": \"Updated program description.\",\n    \"category_id\": 1,\n    \"disaster_id\": 3,\n    \"created_at\": \"2024-10-20T10:00:00Z\",\n    \"updated_at\": \"2024-10-20T10:00:00Z\"\n  }\n}",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"status\": \"error\",\n  \"message\": \"Program not found\"\n}",
+                            "name": "Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete a specific disaster program.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/disaster-programs\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/disaster-programs\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the program."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Program deleted successfully.\"\n}",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"status\": \"error\",\n  \"message\": \"Program not found\"\n}",
+                            "name": "Not Found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Donation Management",
+            "description": "\nAPIs for managing donations",
+            "item": [
+                {
+                    "name": "Get a list of donations for a specific disaster program.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/donations",
+                            "query": [
+                                {
+                                    "key": "disaster_program_id",
+                                    "value": "1",
+                                    "description": "The ID of the disaster program.",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "%22verified%22",
+                                    "description": "Optional. The status of donations to retrieve. One of \"pending\", \"verified\", or \"rejected\".",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "donation_date",
+                                    "value": "%222024-10-20%22",
+                                    "description": "date Optional. The specific donation date to filter. Format: Y-m-d.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/v1\/donations?disaster_program_id=1&status=%22verified%22&donation_date=%222024-10-20%22"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"disaster_program_id\":\"consequuntur\"}"
+                        },
+                        "description": "Retrieve all donations related to a particular disaster program, with optional filtering by `status` and `donation_date`.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Donations retrieved successfully.\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"donor_name\": \"Jane Doe\",\n      \"donor_organization\": \"Helping Hands\",\n      \"donor_email\": \"jane@example.com\",\n      \"amount\": 100.00,\n      \"message\": \"Hope this helps!\",\n      \"transfer_evidence\": \"\/storage\/evidence\/evidence.jpg\",\n      \"status\": \"verified\",\n      \"donation_date\": \"2024-10-20\",\n      \"disaster_program_id\": 1,\n      \"created_at\": \"2024-10-20T10:00:00Z\"\n    },\n    ...\n  ]\n}",
+                            "name": "Success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Store a new donation.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/donations",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/donations"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "donor_name",
+                                    "value": "\"Jane Doe\"",
+                                    "type": "text",
+                                    "description": "The name of the donor."
+                                },
+                                {
+                                    "key": "donor_organization",
+                                    "value": "\"Helping Hands\"",
+                                    "type": "text",
+                                    "description": "The organization name if applicable."
+                                },
+                                {
+                                    "key": "donor_email",
+                                    "value": "\"jane@example.com\"",
+                                    "type": "text",
+                                    "description": "The email of the donor."
+                                },
+                                {
+                                    "key": "amount",
+                                    "value": 100,
+                                    "type": "text",
+                                    "description": "The amount of the donation."
+                                },
+                                {
+                                    "key": "message",
+                                    "value": "\"Hope this helps!\"",
+                                    "type": "text",
+                                    "description": "The message from the donor."
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "\"pending\"",
+                                    "type": "text",
+                                    "description": "The donation status. One of \"pending\", \"verified\", or \"rejected\"."
+                                },
+                                {
+                                    "key": "donation_date",
+                                    "value": "\"2024-10-20\"",
+                                    "type": "text",
+                                    "description": "The date of the donation."
+                                },
+                                {
+                                    "key": "disaster_program_id",
+                                    "value": 1,
+                                    "type": "text",
+                                    "description": "The ID of the disaster program."
+                                },
+                                {
+                                    "key": "transfer_evidence",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "description": "Create a new donation entry for a specific disaster program, with optional details such as `donor_organization`, `donor_email`, `message`, and `transfer_evidence`.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Donation created successfully.\",\n  \"data\": {\n    \"id\": 1,\n    \"donor_name\": \"Jane Doe\",\n    \"donor_organization\": \"Helping Hands\",\n    \"donor_email\": \"jane@example.com\",\n    \"amount\": 100.00,\n    \"message\": \"Hope this helps!\",\n    \"transfer_evidence\": \"http:\/\/example.com\/image.jpg\",\n    \"status\": \"pending\",\n    \"donation_date\": \"2024-10-20\",\n    \"disaster_program_id\": 1,\n    \"created_at\": \"2024-10-20T10:00:00Z\"\n  }\n}",
+                            "name": "Success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Show a specific donation.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/donations\/:id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/donations\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "The ID of the donation."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve details of a specific donation by its ID.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n  \"status\": \"success\",\n  \"message\": \"Donation retrieved successfully.\",\n  \"data\": {\n    \"id\": 1,\n    \"donor_name\": \"Jane Doe\",\n    \"donor_organization\": \"Helping Hands\",\n    \"donor_email\": \"jane@example.com\",\n    \"amount\": 100.00,\n    \"message\": \"Hope this helps!\",\n    \"transfer_evidence\": \"\/storage\/evidence\/evidence.jpg\",\n    \"status\": \"verified\",\n    \"donation_date\": \"2024-10-20\",\n    \"disaster_program_id\": 1,\n    \"created_at\": \"2024-10-20T10:00:00Z\"\n  }\n}",
+                            "name": "Success"
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\n  \"status\": \"error\",\n  \"message\": \"Donation not found\"\n}",
+                            "name": "Not Found"
                         }
                     ]
                 }
