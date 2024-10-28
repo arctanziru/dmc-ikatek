@@ -330,7 +330,6 @@
             <div class="flex w-full p-2 border-l-4 border-l-primary">
                 <p class="text-[20px] font-medium">Check Our News</p>
             </div>
-
             <section class="flex gap-4 w-full justify-center h-[436px] ">
                 <!-- Left Section (Featured News) -->
                 <section class="flex-1 flex justify-start ">
@@ -385,9 +384,8 @@
                     @endforeach
                 </section>
             </section>
+
         </main>
-
-
     </main>
 
     <!-- <div class="p-8">

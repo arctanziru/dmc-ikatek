@@ -1,14 +1,14 @@
 @php
     $links = [
         ['name' => 'About Us', 'url' => '/about-us'],
-        ['name' => 'Our Works', 'url' => '#our-works'],
-        ['name' => 'Our Reach', 'url' => '#our-reach'],
-        ['name' => 'Get Involved', 'url' => '#get-involved']
+        ['name' => 'Our Works', 'url' => '/our-works'],
+        ['name' => 'Our Reach', 'url' => '/our-reach'],
+        ['name' => 'Get Involved', 'url' => '/get-involved']
     ];
 
     // Set classes for navbar variant
     $navbarVariantClass = match ($variant) {
-        'default' => 'bg-black text-white sticky',
+        'default' => 'bg-dark text-white sticky',
         'transparent' => 'bg-transparent text-white fixed transition-[200ms]',
         default => 'bg-blue-600 text-black', // Fallback for any undefined variant
     };
