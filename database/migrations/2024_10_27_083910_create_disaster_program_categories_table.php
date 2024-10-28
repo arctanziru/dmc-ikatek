@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('disaster_program_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique(); // E.g., "Risk Reduction", "Emergency Response"
+            $table->string('name')->unique();
             $table->string('description')->nullable();
             $table->timestamps();
         });

@@ -57,8 +57,8 @@ class BladewindNotification {
                 bg-white dark:bg-dark-800/95 shadow dark:shadow-slate-800/50 p-4 rounded-lg mb-3">
             <div class="pr-4 grow-0">${this.modalIcon()}</div>
             <div class="pb-1 pr-4 relative grow">
-                <h1 class="font-semibold text-gray-700 dark:text-slate-300">${this.title}</h1>
-                <div class="pt-1 text-sm !text-gray-600 dark:!text-slate-400 message">${this.message}</div>
+                <h1 class="font-semibold text-gray-700">${this.title}</h1>
+                <div class="pt-1 text-sm !text-gray-600 message">${this.message}</div>
                 ${this.closeIcon()}
             </div>
         </div>`;
@@ -68,7 +68,7 @@ class BladewindNotification {
         return `<svg xmlns="http://www.w3.org/2000/svg" class="close size-5 absolute -right-1 cursor-pointer 
                     -top-1 text-gray-400 hover:bg-gray-200 hover:rounded-full dark:hover:bg-slate-900 p-1" fill="none" 
                     viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" 
-                    stroke-width="3" d="M6 18L18 6M6 6l12 12" /></svg>`;
+                    stroke-width="3" d="M6 18L18 6M6 6l12 12" />< /svg>`;
     }
 
     typeColour = (type) => {

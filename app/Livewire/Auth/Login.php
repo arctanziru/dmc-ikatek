@@ -2,10 +2,8 @@
 
 namespace App\Livewire\Auth;
 
-use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -18,30 +16,33 @@ class Login extends Component
     public function login()
     {
         try {
-            $request = Request::create('/', 'POST', [
-                'email' => $this->email,
-                'password' => $this->password,
+            $this->validate([
+                'email' => 'required|email',
+                'password' => 'required|min:6',
+            ], [
+                'email.required' => 'Email is required.',
+                'email.email' => 'Email must be a valid email address.',
+                'password.required' => 'Password is required.',
+                'password.min' => 'Password must be at least 6 characters.',
             ]);
-            $controller = app(AuthController::class);
-            $response = $controller->login($request);
-            $json = $response->getData(true);
-
-            if ($json['status'] !== 'success') {
-                return $this->addError('error', $json['message']);
-            }
-
-            $name = $json['data']['user']['name'];
-            session()->flash('success_login', "Glad to see you back, $name!");
-            return $this->redirect("/");
-        } catch (\Exception $e) {
+        } catch (ValidationException $e) {
             $this->addError('error', $e->getMessage());
         }
+
+        if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
+            session()->regenerate();
+            session()->flash('success_login', "Glad to see you back, " . Auth::user()->name);
+
+            return redirect()->intended('/dashboard');
+        }
+
+        $this->addError('error', 'Invalid credentials. Please try again.');
     }
 
     public function mount()
     {
-        if (auth()->check()) {
-            return redirect('/');
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
         }
     }
 

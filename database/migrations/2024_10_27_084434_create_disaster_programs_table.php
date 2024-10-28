@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->foreignId('category_id')->constrained('disaster_program_categories')->onDelete('cascade');
             $table->foreignId('disaster_id')->constrained('disasters')->onDelete('cascade');
             $table->timestamps();

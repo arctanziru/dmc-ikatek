@@ -5,6 +5,7 @@ module.exports = {
         "./vendor/bladewind//*.blade.php", // Include Bladewind components
         "./vendor/mkocansey/bladewind/resources/views/**/*.blade.php",
     ],
+    darkMode: 'false',
     theme: {
         extend: {
             fontFamily: {

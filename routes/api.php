@@ -44,7 +44,7 @@ Route::prefix('v1')->group(function () {
         'show' => 'user.show',
         'update' => 'user.update',
         'destroy' => 'user.destroy',
-    ]);
+    ])->middleware(['auth:sanctum', 'role:admin']);
 
     Route::apiResource('disasters', DisasterController::class)->names([
         'index' => 'disasters.index',
@@ -60,7 +60,7 @@ Route::prefix('v1')->group(function () {
         'show' => 'disaster-programs.show',
         'update' => 'disaster-programs.update',
         'destroy' => 'disaster-programs.destroy',
-    ]);
+    ])->middleware(['auth:sanctum', 'role:admin']);
 
     Route::apiResource('disaster-program-categories', DisasterProgramCategoryController::class)->names([
         'index' => 'disaster-program-categories.index',
@@ -68,7 +68,7 @@ Route::prefix('v1')->group(function () {
         'show' => 'disaster-program-categories.show',
         'update' => 'disaster-program-categories.update',
         'destroy' => 'disaster-program-categories.destroy',
-    ]);
+    ])->middleware(['auth:sanctum', 'role:admin']);
 
     Route::apiResource('donations', DonationController::class)->only(['index', 'store', 'show'])->names([
         'index' => 'donations.index',
@@ -79,8 +79,8 @@ Route::prefix('v1')->group(function () {
     Route::group(['prefix' => 'auth'], function () {
         Route::post('/login', [AuthController::class, 'login']);
         Route::middleware('auth:sanctum')->group(function () {
-            Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-            Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
+            Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+            Route::get('/me', [AuthController::class, 'me'])->name('auth.me');
         });
     });
 });
