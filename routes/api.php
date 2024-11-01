@@ -60,7 +60,7 @@ Route::prefix('v1')->group(function () {
         'show' => 'disaster-programs.show',
         'update' => 'disaster-programs.update',
         'destroy' => 'disaster-programs.destroy',
-    ])->middleware(['auth:sanctum', 'role:admin']);
+    ]);
 
     Route::apiResource('disaster-program-categories', DisasterProgramCategoryController::class)->names([
         'index' => 'disaster-program-categories.index',
@@ -68,7 +68,7 @@ Route::prefix('v1')->group(function () {
         'show' => 'disaster-program-categories.show',
         'update' => 'disaster-program-categories.update',
         'destroy' => 'disaster-program-categories.destroy',
-    ])->middleware(['auth:sanctum', 'role:admin']);
+    ]);
 
     Route::apiResource('donations', DonationController::class)->only(['index', 'store', 'show'])->names([
         'index' => 'donations.index',

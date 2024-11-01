@@ -60,7 +60,7 @@
     <main class=" max-w-[1440px] gap-6 md:gap-7 lg:gap-8 w-full flex flex-col lg:flex-row items-start justify-center">
         <section class="flex flex-col gap-6 lg:max-w-[320px]">
             <div class="text-primary text-[24px] md:text-[28px] lg:text-[32px] flex gap-3 items-center">
-                <img src="{{ asset('images/Logo.png') }}" alt="Site Logo" class="h-[30px] md:h-[36px] lg:h-[42px]">
+                <img src="{{ asset(path: 'images/Logo.png') }}" alt="Site Logo" class="h-[30px] md:h-[36px] lg:h-[42px]">
                 DMC IKATEK-UH
             </div>
             <p class="text-white text-[10px] md:text-[12px] font-[500]">

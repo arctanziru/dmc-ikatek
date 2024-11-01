@@ -12,6 +12,7 @@ class Button extends Component
     public $variant;
     public $size;
     public $rounded;
+    public $allignment;
     public $color;
 
     public function __construct(
@@ -21,6 +22,7 @@ class Button extends Component
         $variant = 'primary',
         $size = 'medium',
         $rounded = 'md',
+        $allignment = 'center',
         $color = 'primary',
     ) {
         $this->type = $type;
@@ -29,6 +31,7 @@ class Button extends Component
         $this->variant = $variant;
         $this->size = $size;
         $this->rounded = $rounded;
+        $this->allignment = $allignment;
         $this->color = $color;
     }
 

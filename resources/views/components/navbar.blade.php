@@ -3,7 +3,7 @@
         ['name' => 'About Us', 'url' => '/about-us'],
         ['name' => 'Our Works', 'url' => '/our-works'],
         ['name' => 'Our Reach', 'url' => '/our-reach'],
-        ['name' => 'Get Involved', 'url' => '/get-involved']
+        ['name' => 'Get Involved', 'url' => '/#get-involved']
     ];
 
     // Set classes for navbar variant
@@ -15,30 +15,82 @@
 @endphp
 
 <nav id="navbar"
-    class="w-screen p-[12px_48px] items-center flex justify-between z-[100] top-0 margin-0 {{ $navbarVariantClass }} {{ $class }}">
+    class="w-screen p-[12px_16px] md:p-[12px_32px] lg:p-[12px_48px] items-center flex justify-between z-[100] top-0 m-0 {{ $navbarVariantClass }} {{ $class }}">
 
-    <a href="/">
-        <div class="flex gap-2 items-center select-none cursor-pointer">
-            <img draggable="false" src="{{ asset('images/Logo.png') }}" alt="Site Logo" class="h-[42px]">
-            <div class="font-semibold text-[14px]">
-                DMC-Ikatek UH
+    <!-- Logo centered on small screens -->
+    <div class="flex-grow flex justify-start">
+        <a href="/">
+            <div class="flex gap-2 items-center select-none cursor-pointer">
+                <img src="{{ asset(path: 'images/Logo.png') }}" alt="Site Logo"
+                    class="h-[30px] md:h-[36px] lg:h-[42px]">
+                <div class="font-semibold text-[14px]">
+                    DMC-Ikatek UH
+                </div>
             </div>
-        </div>
-    </a>
+        </a>
+    </div>
 
-    <!-- right menu -->
-    <div class="flex gap-5 items-center justify-center">
+    <!-- Right menu for desktop -->
+    <div class="hidden gap-5 items-center justify-center md:flex">
         <div class="flex gap-6">
             @foreach ($links as $link)
                 <a href="{{ $link['url'] }}"
                     class="text-[12px] transition-[200ms] hover:transition-[200ms] hover:text-primary">{{ $link['name'] }}</a>
             @endforeach
         </div>
-        <x-button size="medium">
-            <p class="text-[12px]">
-                Donate
-            </p>
+        <a href="/donate">
+            <x-button size="medium">
+                <p class="text-[12px]">Donate</p>
+            </a>
         </x-button>
+    </div>
+
+    <!-- Mobile menu button aligned to right -->
+    <!-- Mobile menu button aligned to right -->
+    <div class="flex md:hidden relative">
+        <!-- Button to toggle the dropdown menu with overlay -->
+        <x-button onclick="toggleDropdown()" variant="ghost" rounded="[50%]" size="square-sm">
+            <x-bladewind::icon name="bars-3" class="text-primary" />
+        </x-button>
+
+        <!-- Overlay to close when clicked -->
+        <div id="menuOverlay" class="fixed inset-0 bg-black/50 hidden opacity-0 transition-opacity duration-100 z-30"
+            onclick="closeDropdown()">
+            <!-- Dropdown Menu (Accordion Style) with stopPropagation -->
+            <div id="mobileDropdown"
+                class="absolute top-0 left-0 w-full bg-dark text-white shadow-lg max-h-0 overflow-hidden transition-[max-height] duration-200 ease-in-out"
+                onclick="event.stopPropagation()">
+                <div class="flex flex-col gap-2 ">
+                    <div class="flex justify-end w-full px-1 py-3 bg-dark-dark">
+                        <x-button color="primary" variant="ghost" rounded="[120px]" size="square-sm"
+                            onclick="closeDropdown()">
+                            <x-bladewind::icon name="x-mark" class="text-primary" />
+                        </x-button>
+                    </div>
+                    <section class="p-4 gap-2 flex flex-col">
+
+                        <!-- Menu Links -->
+                        @foreach ($links as $link)
+                            <a href="{{ $link['url'] }}">
+                                <x-button variant="ghost" color="white" class="w-full" allignment="center">
+                                    <p class="text-[14px]">
+                                        {{ $link['name'] }}
+                                    </p>
+                                </x-button>
+                            </a>
+                        @endforeach
+                        <!-- Donate Button at Bottom -->
+                        <a href="/donate">
+
+                            <x-button variant="fill" color="primary" class="w-full" allignment="center">
+                                <p class="text-[14px]">Donate</p>
+                            </x-button>
+                        </a>
+
+                    </section>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>
 
@@ -82,3 +134,37 @@
         handleScroll();
     });
 </script>
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('mobileDropdown');
+        const overlay = document.getElementById('menuOverlay');
+
+        // Toggle the dropdown menu and overlay with animations
+        if (dropdown.classList.contains("max-h-0")) {
+            dropdown.classList.remove("max-h-0");
+            dropdown.classList.add("max-h-[500px]"); // Adjust height as needed
+            overlay.classList.remove("hidden");
+            setTimeout(() => overlay.classList.add("opacity-100"), 10); // Smoothly fade in overlay
+        } else {
+            closeDropdown();
+        }
+    }
+
+    function closeDropdown() {
+        const dropdown = document.getElementById('mobileDropdown');
+        const overlay = document.getElementById('menuOverlay');
+
+        // Smoothly collapse the dropdown and fade out overlay
+        dropdown.classList.add("max-h-0");
+        dropdown.classList.remove("max-h-[500px]");
+        overlay.classList.remove("opacity-100");
+        setTimeout(() => overlay.classList.add("hidden"), 300); // Delay hiding overlay to allow fade out
+    }
+</script>
+
+<style>
+    /* CSS for the overlay fade effect */
+    #menuOverlay {
+        transition: opacity 0.3s ease-in-out;
+    }
+</style>

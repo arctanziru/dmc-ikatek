@@ -66,12 +66,11 @@
                 <div class="flex flex-col gap-2 p-[0_24px] flex-1">
                     <!-- <img src="images/img.jpeg" class="w-full max-w-[480px] h-[280px]" /> -->
                     <p class="text-primary text-[14px] font-medium">ABOUT DMC IKATEK-UH</p>
-                    <p class="text-dark text-[38px] font-bold">Prepared for Today Ready for Tomorrow</p>
-                    <p class="text-dark text-[16px]  font-light">Help those at the frontlines of disaster
-                        response
-                        by donating today. Your contribution will go towards disaster preparedness, risk reduction,
-                        and
-                        innovative solutions that protect lives and livelihoods in crisis-affected regions.</p>
+                    <p class="text-dark text-[38px] font-bold">Creating Lasting Impact, One Community at a Time</p>
+                    <p class="text-dark text-[16px]  font-light">Through your support, we're not only providing
+                        life-saving aid in times of crisis but also fostering long-term resilience. Our initiatives
+                        include emergency relief, education on preparedness, community rebuilding, and support for
+                        sustainable recovery across affected regions.</p>
 
                     <div class="grid grid-cols-2 gap-3">
                         <div class="flex gap-2 items-center ">
@@ -194,7 +193,7 @@
             </section>
 
 
-            <section
+            <section id="get-involved"
                 class="relative z-0 p-[40px_0px] -mt-16 w-full flex flex-col justify-center items-center overflow-hidden">
                 <!-- Background image -->
                 <img src="images/Our Reach.jpeg" class="absolute top-0 left-0 w-full h-full object-cover -z-10" />
@@ -211,13 +210,13 @@
                                 to help with
                                 disaster relief
                                 efforts. <br />Your time and skills can make a difference.</p>
-                            <x-button rounded="none" size="large" variant="fill" color="white"
-                                class="absolute -bottom-[20.5px] left-auto right-auto">
-                                <p class="text-[14px] font-light">
-
-                                    Donate Now
-                                </p>
-                            </x-button>
+                            <a href="/donate" class="absolute -bottom-[20.5px] left-auto right-auto">
+                                <x-button rounded="none" size="large" variant="fill" color="white">
+                                    <p class="text-[14px] font-light">
+                                        Donate Now
+                                    </p>
+                                </x-button>
+                            </a>
                         </div>
                         <div
                             class="bg-white/70 h-max mt-[60px] p-[48px_64px] justify-center flex flex-col relative items-center">
@@ -227,13 +226,13 @@
                                 using the Share The Meal app. Every meal
                                 <br /> helps save a life.
                             </p>
-                            <x-button rounded="none" variant="fill" color="dark" size="large"
-                                class="absolute -bottom-[20.5px] left-auto right-auto">
-                                <p class="text-[14px] font-light">
-
-                                    Download App
-                                </p>
-                            </x-button>
+                            <a href="https://sharethemeal.org" class="absolute -bottom-[20.5px] left-auto right-auto">
+                                <x-button rounded="none" size="large" variant="fill" color="dark">
+                                    <p class="text-[14px] font-light">
+                                        Download App
+                                    </p>
+                                </x-button>
+                            </a>
                         </div>
                     </section>
                     <section id="statistics" class="flex gap-3 w-full">
@@ -326,16 +325,16 @@
 
             </section>
         </main>
-        <main class="max-w-[1980px] flex flex-col items-center p-16 gap-4">
+        <main class="max-w-[1980px] w-full flex flex-col items-center p-16 gap-4">
             <div class="flex w-full p-2 border-l-4 border-l-primary">
-                <p class="text-[20px] font-medium">Check Our News</p>
+                <p class="text-[24px] font-medium">Check Our News</p>
             </div>
-            <section class="flex gap-4 w-full justify-center h-[436px] ">
+            <section class="flex gap-4 w-full justify-start h-[436px] ">
                 <!-- Left Section (Featured News) -->
-                <section class="flex-1 flex justify-start ">
-                    <div class="w-[32px] relative flex justify-center items-center">
+                <section class="flex-1 flex justify-start relative bg-white/20 max-w-[940px] ">
+                    <div class=" relative flex justify-start items-center w-[80px] ">
                         <div
-                            class="bg-white/95 shadow-sm gap-2 shadow-dark/40 w-[360px] flex flex-col p-8 absolute z-50 left-0">
+                            class="bg-white/90 shadow-sm gap-2 shadow-dark/40 w-[360px] flex flex-col p-8 absolute z-50 left-0">
                             <p class="text-[18px] font-medium text-primary">
                                 {{ $news->first()->author ?? 'N/A' }}
                             </p>
@@ -355,7 +354,7 @@
                         </div>
                     </div>
 
-                    <div class="flex-1 relative flex w-full h-full">
+                    <div class="relative flex h-full rounded-lg overflow-hidden bg-dark-light/20 flex-1">
                         <img src="{{ asset($news->first()->image) }}" class="rounded-lg w-full object-cover"
                             alt="Featured News Image" />
                     </div>
@@ -366,8 +365,11 @@
                     @foreach ($newsItems as $newsItem)
                         <div id="news-card"
                             class="flex gap-4 bg-white cursor-pointer items-center justify-start hover:bg-white-light p-2 rounded-md w-[360px]">
-                            <img src="{{ asset($newsItem->image) }}" class="h-[80px] w-[80px] object-cover rounded-lg"
-                                alt="News Image" />
+                            <div class="rounded-lg min-h-20 min-w-20 bg-dark">
+                                <img src="{{ asset($newsItem->image) }}" class="h-[80px] w-[80px] object-cover rounded-lg"
+                                    alt="News Image" />
+                            </div>
+
                             <div class="flex flex-col justify-between">
                                 <div class="flex flex-col">
                                     <p class="font-light">{{ $newsItem->author }}</p>

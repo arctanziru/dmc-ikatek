@@ -20,12 +20,21 @@
         'small' => 'px-2 py-1',
         'medium' => 'px-4 py-2',
         'large' => 'px-6 py-3',
+        'square-sm' => 'p-2',
+        'square-md' => 'p-4',
+        'square-lg' => 'p-6',
         default => 'px-4 py-2'
+    };
+    $allignmentClass = match ($allignment) {
+        'start' => '',
+        'end' => 'end',
+        'center' => 'center',
+        default => 'center'
     };
 @endphp
 
 <button type="{{ $type }}"
-    class="{{ $sizeClass }} flex justify-center transition-[200ms] hover:transition-[200ms] rounded-{{ $rounded }} {{ $variantClass }} {{ $class }}"
+    class="{{ $sizeClass }} flex justify-{{ $allignmentClass }} transition-[200ms] hover:transition-[200ms] rounded-{{ $rounded }} {{ $variantClass }} {{ $class }}"
     @if($disabled) disabled @endif {{ $attributes }}>
     {{ $slot }}
 </button>
