@@ -3,6 +3,8 @@
 use App\Livewire\Auth\Login;
 use App\Livewire\Counter;
 use App\Livewire\NewsPage;
+use App\Livewire\OurWorksPage;
+use App\Livewire\DonatePage;
 use App\Http\Controllers\HomeController; // Import the HomeController
 use App\Livewire\Dashboard\News\NewsCreate;
 use App\Livewire\Dashboard\News\NewsEdit;
@@ -10,9 +12,6 @@ use App\Livewire\Dashboard\News\NewsManagement;
 use App\Livewire\Dashboard\User\UserCreate;
 use App\Livewire\Dashboard\User\UserEdit;
 use App\Livewire\Dashboard\User\UserManagement;
-use App\Livewire\NewsPage;
-use App\Livewire\OurWorksPage;
-use App\Http\Controllers\HomeController; // Import the HomeController
 use App\Livewire\Dashboard\Dashboard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +35,7 @@ Route::get('/counter', Counter::class);
 Route::get('/login', Login::class)->name('login');
 Route::get('/news', NewsPage::class)->name('news');
 Route::get('/our-works', OurWorksPage::class);
+Route::get('/donate', DonatePage::class);
 Route::post('/logout', function () {
   Auth::logout();
   request()->session()->invalidate();
