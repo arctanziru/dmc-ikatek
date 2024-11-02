@@ -6,11 +6,14 @@ use App\Models\News;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Layout('components.layouts.dashboard')]
 #[Title('News Management')]
 class NewsManagement extends Component
 {
+    use WithPagination;
+
     public $search = '';
     public $perPage = 10;
 
@@ -34,9 +37,12 @@ class NewsManagement extends Component
 
     public function render()
     {
-        $news = News::where('title', 'like', '%' . $this->search . '%')
-            ->orWhere('content', 'like', '%' . $this->search . '%')
-            ->with('newsCategory')
+        $news = News::join('news_categories', 'news.news_category_id', '=', 'news_categories.id')
+            ->select('news.*', 'news_categories.name as category')
+            ->where('news.title', 'like', '%' . $this->search . '%')
+            ->orWhere('news.content', 'like', '%' . $this->search . '%')
+            ->orWhere('news_categories.name', 'like', '%' . $this->search . '%') // Include category name in search
+            ->orderBy('news.created_at', 'desc')
             ->paginate($this->perPage);
 
         return view('livewire.dashboard.news.news-management', ['news' => $news]);

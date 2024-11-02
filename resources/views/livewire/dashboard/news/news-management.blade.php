@@ -22,7 +22,7 @@ $perPageData = [
             <option value="{{ $data['value'] }}">{{ $data['label'] }}</option>
             @endforeach
         </select>
-        <x-button wire:click="redirectToCreate" class="shrink-0 mb-4">Create User</x-button>
+        <x-button wire:click="redirectToCreate" class="shrink-0 mb-4">Create News</x-button>
     </div>
 
     <x-bladewind::table has_shadow="true" divider="thin">
@@ -38,11 +38,11 @@ $perPageData = [
             @foreach ($news as $newsItem)
             <tr>
                 <td>{{ $newsItem->title }}</td>
-                <td><img src="{{ asset('storage/' . $newsItem->image) }}" alt="{{ $newsItem->title }}" class="w-20 h-20 object-cover"></td>
+                <td class="w-[100px]"><img src="{{ asset($newsItem->image) }}" alt="" class="w-full h-auto object-cover"></td>
                 <td>{{ $newsItem->category }}</td>
                 <td>{{ $newsItem->description }}</td>
                 <td>{{ $newsItem->author }}</td>
-                <td>
+                <td class="shrink-0">
                     <x-bladewind::button wire:click="redirectToEdit({{ $newsItem->id }})" size="small" color="primary" icon="pencil-square">
                         Edit
                     </x-bladewind::button>
@@ -57,11 +57,4 @@ $perPageData = [
 
     <!-- Pagination links -->
     {{ $news->links() }}
-
-    <!-- Show Notification -->
-    @if (session()->has('message') && session()->has('title'))
-    <script>
-        showNotification("{{ session('title') }}", "{{ session('message') }}");
-    </script>
-    @endif
 </div>

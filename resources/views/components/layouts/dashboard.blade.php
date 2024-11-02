@@ -7,20 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>{{ $title ?? 'Dashboard - DMC Ikatek' }}</title>
-  <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet" />
-  <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset( 'vendor/bladewind/css/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
   <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
   <script defer src="https://unpkg.com/alpinejs" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  @livewireStyles
-  @livewireScripts
   <script src="https://cdn.tailwindcss.com"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
-  </link>
 
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
   <script>
     tailwind.config = {
       theme: {
@@ -60,6 +57,9 @@
     }
     localStorage.removeItem('theme');
   </script>
+
+  @livewireStyles
+  @livewireScripts
 </head>
 
 <body class="m-0 p-0 w-screen h-screen overflow-x-hidden text-black">
@@ -136,8 +136,13 @@
       }
     });
   </script>
+  <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 
-
+  @if (session()->has('message') && session()->has('title'))
+  <script>
+    showNotification("{{ session('title') }}", "{{ session('message') }}");
+  </script>
+  @endif
 </body>
 
 </html>

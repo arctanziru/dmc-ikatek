@@ -1,50 +1,50 @@
 @php
-    $cards = [
-        [
-            'name' => 'Our Mission',
-            'subtitle' => 'Learn About Our Commitment.',
-            'button' => 'Learn More'
-        ],
-        [
-            'name' => 'Corporate Strategy',
-            'subtitle' => 'Discover our approach to disaster response.',
-            'button' => 'Explore Strategy'
-        ],
-        [
-            'name' => 'Organization & Leadership',
-            'subtitle' => 'Meet our leaders and governance team',
-            'button' => 'Meet The Team'
-        ],
-        [
-            'name' => 'Our History',
-            'subtitle' => 'Track our key milestones in disaster management',
-            'button' => 'Read More'
-        ],
-    ];
-    $partners = [
-        [
-            'name' => 'Government',
-            'path' => 'icons/Govt.svg',
-        ],
-        [
-            'name' => 'Non-Gov Organization',
-            'path' => 'icons/NonGovt.svg',
-        ],
-        [
-            'name' => 'Private Sector Partnership',
-            'path' => 'icons/PSP.svg',
-        ],
-        [
-            'name' => 'Academia and Think Tanks',
-            'path' => 'icons/Academia.svg',
-        ],
-        [
-            'name' => 'Goodwill Ambassador & High Level Supporter',
-            'path' => 'icons/Ambassador.svg',
-        ],
+$cards = [
+[
+'name' => 'Our Mission',
+'subtitle' => 'Learn About Our Commitment.',
+'button' => 'Learn More'
+],
+[
+'name' => 'Corporate Strategy',
+'subtitle' => 'Discover our approach to disaster response.',
+'button' => 'Explore Strategy'
+],
+[
+'name' => 'Organization & Leadership',
+'subtitle' => 'Meet our leaders and governance team',
+'button' => 'Meet The Team'
+],
+[
+'name' => 'Our History',
+'subtitle' => 'Track our key milestones in disaster management',
+'button' => 'Read More'
+],
+];
+$partners = [
+[
+'name' => 'Government',
+'path' => 'icons/Govt.svg',
+],
+[
+'name' => 'Non-Gov Organization',
+'path' => 'icons/NonGovt.svg',
+],
+[
+'name' => 'Private Sector Partnership',
+'path' => 'icons/PSP.svg',
+],
+[
+'name' => 'Academia and Think Tanks',
+'path' => 'icons/Academia.svg',
+],
+[
+'name' => 'Goodwill Ambassador & High Level Supporter',
+'path' => 'icons/Ambassador.svg',
+],
 
-    ];
-    $newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
+];
+$newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
 @endphp
 
 <x-layouts.landing :title="'Home Page'">
@@ -99,24 +99,24 @@
             </section>
             <section class="flex gap-3 justify-center w-full items-center  ">
                 @foreach ($cards as $card)
-                    <main class="flex p-[22px] items-center flex-col justify-between w-[250px] border-primary border">
-                        <div class="gap-3 items-center flex flex-col h-[140px]">
-                            <p>
-                                <img src="icons/check.svg" alt="image" class="w-8 h-8" />
-                            </p>
-                            <p class="text-[20px] font-bold text-center">
-                                {{$card['name']}}
-                            </p>
-                            <p class="text-center text-[10px] min-h-">
-                                {{$card['subtitle']}}
-                            </p>
-                        </div>
-                        <x-button variant="outlined" class="rounded-none w-full inline-flex">
-                            <p class="text-[10px] ">
-                                {{$card['button']}}
-                            </p>
-                        </x-button>
-                    </main>
+                <main class="flex p-[22px] items-center flex-col justify-between w-[250px] border-primary border">
+                    <div class="gap-3 items-center flex flex-col h-[140px]">
+                        <p>
+                            <img src="icons/check.svg" alt="image" class="w-8 h-8" />
+                        </p>
+                        <p class="text-[20px] font-bold text-center">
+                            {{$card['name']}}
+                        </p>
+                        <p class="text-center text-[10px] min-h-">
+                            {{$card['subtitle']}}
+                        </p>
+                    </div>
+                    <x-button variant="outlined" class="rounded-none w-full inline-flex">
+                        <p class="text-[10px] ">
+                            {{$card['button']}}
+                        </p>
+                    </x-button>
+                </main>
                 @endforeach
             </section>
             <section class="flex flex-col justify-center w-full items-center ">
@@ -129,10 +129,10 @@
                 </div>
                 <div class="flex gap-9">
                     @foreach ($partners as $partner)
-                        <div class="gap-3 w-[120px] flex flex-col select-none items-center">
-                            <img draggable="false" src="{{ $partner['path'] }}" class="h-[60px] w-full" />
-                            <p class="text-center text-primary text-[10px] font-semibold">{{ $partner['name'] }}</p>
-                        </div>
+                    <div class="gap-3 w-[120px] flex flex-col select-none items-center">
+                        <img draggable="false" src="{{ $partner['path'] }}" class="h-[60px] w-full" />
+                        <p class="text-center text-primary text-[10px] font-semibold">{{ $partner['name'] }}</p>
+                    </div>
                     @endforeach
                 </div>
             </section>
@@ -332,7 +332,7 @@
             </div>
             <section class="flex gap-4 w-full justify-center h-[436px] ">
                 <!-- Left Section (Featured News) -->
-                <section class="flex-1 flex justify-start ">
+                <section class="flex-1 flex justify-start w-full">
                     <div class="w-[32px] relative flex justify-center items-center">
                         <div
                             class="bg-white/95 shadow-sm gap-2 shadow-dark/40 w-[360px] flex flex-col p-8 absolute z-50 left-0">
@@ -355,8 +355,8 @@
                         </div>
                     </div>
 
-                    <div class="flex-1 relative flex w-full h-full">
-                        <img src="{{ asset($news->first()->image) }}" class="rounded-lg w-full object-cover"
+                    <div class="flex-1 relative flex w-full min-w-[640px] h-full">
+                        <img src="x" class="rounded-lg w-full object-cover"
                             alt="Featured News Image" />
                     </div>
                 </section>
@@ -364,23 +364,23 @@
                 <!-- Right Section (News List) -->
                 <section class="flex flex-col gap-1 h-[436px]">
                     @foreach ($newsItems as $newsItem)
-                        <div id="news-card"
-                            class="flex gap-4 bg-white cursor-pointer items-center justify-start hover:bg-white-light p-2 rounded-md w-[360px]">
-                            <img src="{{ asset($newsItem->image) }}" class="h-[80px] w-[80px] object-cover rounded-lg"
-                                alt="News Image" />
-                            <div class="flex flex-col justify-between">
-                                <div class="flex flex-col">
-                                    <p class="font-light">{{ $newsItem->author }}</p>
-                                    <p class="font-medium text-ellipsis line-clamp-2">{{ $newsItem->title }}</p>
-                                </div>
-                                <div class="flex gap-1">
-                                    <p class="font-normal text-[12px] text-primary">{{ $newsItem->category ?? 'N/A' }} •</p>
-                                    <p class="font-light text-[12px] text-dark-light">
-                                        {{ optional(value: $newsItem->created_at)->diffForHumans() }}
-                                    </p>
-                                </div>
+                    <div id="news-card"
+                        class="flex gap-4 bg-white cursor-pointer items-center justify-start hover:bg-white-light p-2 rounded-md w-[360px]">
+                        <img src="{{ asset($newsItem->image) }}" class="h-[80px] w-[80px] object-cover rounded-lg"
+                            alt="News Image" />
+                        <div class="flex flex-col justify-between">
+                            <div class="flex flex-col">
+                                <p class="font-light">{{ $newsItem->author }}</p>
+                                <p class="font-medium text-ellipsis line-clamp-2">{{ $newsItem->title }}</p>
+                            </div>
+                            <div class="flex gap-1">
+                                <p class="font-normal text-[12px] text-primary">{{ $newsItem->category ?? 'N/A' }} •</p>
+                                <p class="font-light text-[12px] text-dark-light">
+                                    {{ optional(value: $newsItem->created_at)->diffForHumans() }}
+                                </p>
                             </div>
                         </div>
+                    </div>
                     @endforeach
                 </section>
             </section>

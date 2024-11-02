@@ -3,16 +3,14 @@
 use App\Livewire\Auth\Login;
 use App\Livewire\Counter;
 use App\Livewire\NewsPage;
-use App\Http\Controllers\HomeController; // Import the HomeController
+use App\Http\Controllers\HomeController;
 use App\Livewire\Dashboard\News\NewsCreate;
 use App\Livewire\Dashboard\News\NewsEdit;
 use App\Livewire\Dashboard\News\NewsManagement;
 use App\Livewire\Dashboard\User\UserCreate;
 use App\Livewire\Dashboard\User\UserEdit;
 use App\Livewire\Dashboard\User\UserManagement;
-use App\Livewire\NewsPage;
 use App\Livewire\OurWorksPage;
-use App\Http\Controllers\HomeController; // Import the HomeController
 use App\Livewire\Dashboard\Dashboard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
