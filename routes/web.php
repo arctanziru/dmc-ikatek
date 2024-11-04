@@ -1,8 +1,12 @@
 <?php
 
+use App\Livewire\AboutUsPage;
+use App\Livewire\AccountabilityPage;
 use App\Livewire\Auth\Login;
 use App\Livewire\Counter;
+use App\Livewire\HistoryPage;
 use App\Livewire\NewsPage;
+use App\Livewire\OurTeamPage;
 use App\Livewire\OurWorksPage;
 use App\Livewire\DonatePage;
 use App\Http\Controllers\HomeController; // Import the HomeController
@@ -13,6 +17,7 @@ use App\Livewire\Dashboard\User\UserCreate;
 use App\Livewire\Dashboard\User\UserEdit;
 use App\Livewire\Dashboard\User\UserManagement;
 use App\Livewire\Dashboard\Dashboard;
+use App\Livewire\StrategyPage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +41,12 @@ Route::get('/login', Login::class)->name('login');
 Route::get('/news', NewsPage::class)->name('news');
 Route::get('/our-works', OurWorksPage::class);
 Route::get('/donate', DonatePage::class);
+Route::get('/about-us', AboutUsPage::class);
+Route::get('/leadership-and-organization', OurTeamPage::class);
+Route::get('/history', HistoryPage::class);
+Route::get('/strategy', StrategyPage::class);
+Route::get('/accountability', AccountabilityPage::class);
+
 Route::post('/logout', function () {
   Auth::logout();
   request()->session()->invalidate();

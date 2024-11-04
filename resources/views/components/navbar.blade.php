@@ -38,14 +38,14 @@
                     class="text-[12px] transition-[200ms] hover:transition-[200ms] hover:text-primary">{{ $link['name'] }}</a>
             @endforeach
         </div>
+
         <a href="/donate">
             <x-button size="medium">
                 <p class="text-[12px]">Donate</p>
-            </a>
+        </a>
         </x-button>
     </div>
 
-    <!-- Mobile menu button aligned to right -->
     <!-- Mobile menu button aligned to right -->
     <div class="flex md:hidden relative">
         <!-- Button to toggle the dropdown menu with overlay -->
