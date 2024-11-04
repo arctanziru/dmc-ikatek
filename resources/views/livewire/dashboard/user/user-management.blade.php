@@ -57,11 +57,4 @@ $perPageData = [
 
     <!-- Pagination links -->
     {{ $users->links() }}
-
-    <!-- Show Notification -->
-    @if (session()->has('message') && session()->has('title'))
-    <script>
-        showNotification("{{ session('title') }}", "{{ session('message') }}");
-    </script>
-    @endif
 </div>
