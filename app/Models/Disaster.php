@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Laravolt\Indonesia\Models\District;
+use Laravolt\Indonesia\Models\City;
 
 class Disaster extends Model
 {
-    use HasFactory;
-
     use HasFactory;
 
     protected $fillable = [
@@ -17,12 +15,19 @@ class Disaster extends Model
         'description',
         'latitude',
         'longitude',
-        'district_id'
+        'city_id',
+        'status',
+        'user_id',
     ];
 
-    public function district()
+    public function user()
     {
-        return $this->belongsTo(District::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 
     public function programs()

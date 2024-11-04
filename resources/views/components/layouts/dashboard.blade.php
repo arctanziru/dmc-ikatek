@@ -57,6 +57,8 @@
     }
     localStorage.removeItem('theme');
   </script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 
   @livewireStyles
   @livewireScripts
@@ -81,6 +83,9 @@
       </a>
       <a href="{{ route('dashboard.news') }}" class="p-2 rounded hover:bg-secondary-light transition">
         News
+      </a>
+      <a href="{{ route('dashboard.disaster') }}" class="p-2 rounded hover:bg-secondary-light transition">
+        Disaster
       </a>
     </nav>
 

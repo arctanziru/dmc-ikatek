@@ -33,11 +33,13 @@ class Dashboard extends Component
             ->take(5)
             ->get();
 
-        $this->recentDisasters = Disaster::where('status', 'active')
-            ->with('district.city.province')
+        $this->recentDisasters = Disaster::with('city.province')
             ->latest()
             ->take(5)
-            ->get();
+            ->get()
+            ->filter(function ($disaster) {
+                return $disaster->city && $disaster->city->province;
+            });
 
         $this->recentPrograms = DisasterProgram::where('status', 'active')
             ->with('category')
@@ -64,9 +66,12 @@ class Dashboard extends Component
 
     private function getDisasterCountByProvince()
     {
-        $disasterCounts = Disaster::with('district.city.province')
+        $disasterCounts = Disaster::with('city.province')
             ->get()
-            ->groupBy(fn($disaster) => $disaster->district->city->province->name);
+            ->filter(function ($disaster) {
+                return $disaster->city && $disaster->city->province;
+            })
+            ->groupBy(fn($disaster) => $disaster->city->province->name);
 
         $labels = $disasterCounts->keys()->toArray();
         $data = $disasterCounts->map->count()->values()->toArray();
@@ -76,6 +81,7 @@ class Dashboard extends Component
             'data' => $data,
         ];
     }
+
 
     public function render()
     {
