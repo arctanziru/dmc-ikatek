@@ -37,12 +37,13 @@ class NewsManagement extends Component
 
     public function render()
     {
-        $news = News::join('news_categories', 'news.news_category_id', '=', 'news_categories.id')
-            ->select('news.*', 'news_categories.name as category')
-            ->where('news.title', 'like', '%' . $this->search . '%')
-            ->orWhere('news.content', 'like', '%' . $this->search . '%')
-            ->orWhere('news_categories.name', 'like', '%' . $this->search . '%') // Include category name in search
-            ->orderBy('news.created_at', 'desc')
+        $news = News::with('newsCategory')
+            ->where('title', 'like', '%' . $this->search . '%')
+            ->orWhere('content', 'like', '%' . $this->search . '%')
+            ->orWhereHas('newsCategory', function ($query) {
+                $query->where('name', 'like', '%' . $this->search . '%');
+            })
+            ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
 
         return view('livewire.dashboard.news.news-management', ['news' => $news]);
@@ -62,5 +63,8 @@ class NewsManagement extends Component
     {
         $news = News::find($newsId);
         $news->delete();
+
+        session()->flash('title', 'News Deleted');
+        session()->flash('message', 'News deleted successfully.');
     }
 }

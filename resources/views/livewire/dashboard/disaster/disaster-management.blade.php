@@ -48,8 +48,8 @@ $statusOptions = [
                 <td>{{ $disaster->name }}</td>
                 <td>{{ $disaster->latitude }}</td>
                 <td>{{ $disaster->longitude }}</td>
-                <td>{{ $disaster->city_name }}</td>
-                <td>{{ $disaster->user_name }}</td>
+                <td>{{ $disaster->city->name }}</td>
+                <td>{{ $disaster->user->name }}</td>
                 <td class="w-[120px]">
                     <select wire:change="updateStatus({{ $disaster->id }}, $event.target.value)" class="border rounded-md w-full p-1">
                         @foreach($statusOptions as $value => $label)

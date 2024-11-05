@@ -39,10 +39,10 @@ $perPageData = [
             <tr>
                 <td>{{ $newsItem->title }}</td>
                 <td class="w-[100px]"><img src="{{ asset($newsItem->image) }}" alt="" class="w-full h-auto object-cover"></td>
-                <td>{{ $newsItem->category }}</td>
+                <td>{{ $newsItem->newsCategory->name }}</td>
                 <td>{{ $newsItem->description }}</td>
                 <td>{{ $newsItem->author }}</td>
-                <td class="shrink-0">
+                <td class="w-[200px]">
                     <x-bladewind::button wire:click="redirectToEdit({{ $newsItem->id }})" size="small" color="primary" icon="pencil-square">
                         Edit
                     </x-bladewind::button>

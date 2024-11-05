@@ -38,13 +38,13 @@ class DisasterManagement extends Component
 
     public function render()
     {
-        $disasters = Disaster::join('indonesia_cities', 'disasters.city_id', '=', 'indonesia_cities.id')
-            ->join('users', 'disasters.user_id', '=', 'users.id')
-            ->select('disasters.*', 'indonesia_cities.name as city_name', 'users.name as user_name')
-            ->where('disasters.name', 'like', '%' . $this->search . '%')
-            ->orWhere('disasters.description', 'like', '%' . $this->search . '%')
-            ->orWhere('indonesia_cities.name', 'like', '%' . $this->search . '%')
-            ->orderBy('disasters.created_at', 'desc')
+        $disasters = Disaster::with(['city', 'user'])
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->orWhere('description', 'like', '%' . $this->search . '%')
+            ->orWhereHas('city', function ($query) {
+                $query->where('name', 'like', '%' . $this->search . '%');
+            })
+            ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
 
         return view('livewire.dashboard.disaster.disaster-management', ['disasters' => $disasters]);
@@ -73,5 +73,8 @@ class DisasterManagement extends Component
     {
         $disaster = Disaster::find($disasterId);
         $disaster->delete();
+
+        session()->flash('title', 'Disaster Deleted');
+        session()->flash('message', 'Disaster "' . $disaster->name . '" deleted successfully.');
     }
 }

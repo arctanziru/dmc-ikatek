@@ -18,6 +18,15 @@ use App\Livewire\Dashboard\User\UserEdit;
 use App\Livewire\Dashboard\User\UserManagement;
 use App\Livewire\Dashboard\Dashboard;
 use App\Livewire\StrategyPage;
+use App\Livewire\Dashboard\Disaster\DisasterCreate;
+use App\Livewire\Dashboard\Disaster\DisasterEdit;
+use App\Livewire\Dashboard\Disaster\DisasterManagement;
+use App\Livewire\Dashboard\Disaster\Program\Category\DisasterProgramCategoryCreate;
+use App\Livewire\Dashboard\Disaster\Program\Category\DisasterProgramCategoryEdit;
+use App\Livewire\Dashboard\Disaster\Program\Category\DisasterProgramCategoryManagement;
+use App\Livewire\Dashboard\Disaster\Program\DisasterProgramCreate;
+use App\Livewire\Dashboard\Disaster\Program\DisasterProgramEdit;
+use App\Livewire\Dashboard\Disaster\Program\DisasterProgramManagement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -69,5 +78,22 @@ Route::prefix('dashboard')
       Route::get('/', NewsManagement::class)->name('dashboard.news');
       Route::get('/create', NewsCreate::class)->name('dashboard.news.create');
       Route::get('/{news}/edit', NewsEdit::class)->name('dashboard.news.edit');
+    });
+
+    Route::group(['prefix' => 'disaster'], function () {
+      Route::get('/', DisasterManagement::class)->name('dashboard.disaster');
+      Route::get('/create', DisasterCreate::class)->name('dashboard.disaster.create');
+      Route::get('/{disaster}/edit', DisasterEdit::class)->name('dashboard.disaster.edit');
+      Route::group(['prefix' => 'program'], function () {
+        Route::get('/', DisasterProgramManagement::class)->name('dashboard.disaster.program');
+        Route::get('/create', DisasterProgramCreate::class)->name('dashboard.disaster.program.create');
+        Route::get('/{program}/edit', DisasterProgramEdit::class)->name('dashboard.disaster.program.edit');
+
+        Route::group(['prefix' => 'category'], function () {
+          Route::get('/', DisasterProgramCategoryManagement::class)->name('dashboard.disaster.program.category');
+          Route::get('/create', DisasterProgramCategoryCreate::class)->name('dashboard.disaster.program.category.create');
+          Route::get('/{category}/edit', DisasterProgramCategoryEdit::class)->name('dashboard.disaster.program.category.edit');
+        });
+      });
     });
   });

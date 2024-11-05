@@ -1,22 +1,22 @@
 @php
 
-  $navLinks = [
-    [
-    'route' => 'dashboard',
-    'icon' => 'chart-bar-square',
-    'label' => 'Dashboard'
-    ],
-    [
-    'route' => 'users',
-    'icon' => 'user-circle',
-    'label' => 'Users'
-    ],
-    [
-    'route' => 'dashboard.news',
-    'icon' => 'newspaper',
-    'label' => 'News'
-    ],
-  ];
+$navLinks = [
+[
+'route' => 'dashboard',
+'icon' => 'chart-bar-square',
+'label' => 'Dashboard'
+],
+[
+'route' => 'users',
+'icon' => 'user-circle',
+'label' => 'Users'
+],
+[
+'route' => 'dashboard.news',
+'icon' => 'newspaper',
+'label' => 'News'
+],
+];
 
 @endphp
 
@@ -102,24 +102,44 @@
       <!-- Navigation Links -->
       <nav class="flex flex-col gap-3">
         @foreach ($navLinks as $link)
-          @php
-      // Check if the current route name matches the link's route
-      $isActive = Route::currentRouteName() === $link['route'];
-      @endphp
+        @php
+        $isActive = Route::currentRouteName() === $link['route'];
+        @endphp
 
-          <a href="{{ route($link['route']) }}"
-            class="p-[12px_14px_12px_12px] rounded {{ $isActive ? 'bg-primary text-dark font-bold hover:bg-primary-dark' : 'hover:bg-primary hover:text-dark hover:font-bold' }} flex gap-4 items-center justify-between duration-200 text-[14px]">
-            <div class="flex items-center gap-4">
+        <a href="{{ route($link['route']) }}"
+          class="p-[12px_14px_12px_12px] rounded {{ $isActive ? 'bg-primary text-dark font-bold hover:bg-primary-dark' : 'hover:bg-primary hover:text-dark hover:font-bold' }} flex gap-4 items-center justify-between duration-200 text-[14px]">
+          <div class="flex items-center gap-4">
             <x-bladewind::icon name="{{ $link['icon'] }}" class="!h-6 !w-6" />
             <p>{{ $link['label'] }}</p>
-            </div>
-            <div class="{{ $isActive ? 'bg-secondary' : 'bg-transparent ' }} rounded-sm hover: w-[2px] h-full"></div>
-          </a>
-    @endforeach
+          </div>
+          <div class="{{ $isActive ? 'bg-secondary' : 'bg-transparent ' }} rounded-sm hover: w-[2px] h-full"></div>
+        </a>
+        @endforeach
       </nav>
 
     </div>
 
+    <!-- Navigation Links -->
+    <nav class="flex flex-col space-y-2 p-4">
+      <a href="{{ route('dashboard') }}" class="p-2 rounded hover:bg-secondary-light transition">
+        Dashboard
+      </a>
+      <a href="{{ route('users') }}" class="p-2 rounded hover:bg-secondary-light transition">
+        Users
+      </a>
+      <a href="{{ route('dashboard.news') }}" class="p-2 rounded hover:bg-secondary-light transition">
+        News
+      </a>
+      <a href="{{ route('dashboard.disaster') }}" class="p-2 rounded hover:bg-secondary-light transition">
+        Disaster
+      </a>
+      <a href="{{ route('dashboard.disaster.program.category') }}" class="p-2 rounded hover:bg-secondary-light transition">
+        Disaster program category
+      </a>
+      <a href="{{ route('dashboard.disaster.program') }}" class="p-2 rounded hover:bg-secondary-light transition">
+        Disaster program
+      </a>
+    </nav>
 
     <!-- Sidebar Footer -->
     <div class="p-4 text-sm border-t border-secondary-light">
@@ -164,7 +184,7 @@
       dropdown.classList.toggle('hidden');
     }
 
-    document.addEventListener('click', function (event) {
+    document.addEventListener('click', function(event) {
       const dropdown = document.getElementById('profileDropdown');
       const button = event.target.closest('button');
 
