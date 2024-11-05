@@ -194,7 +194,11 @@ $navLinks = [
     });
   </script>
 
-
+  @if (session()->has('message') && session()->has('title'))
+  <script>
+    showNotification("{{ session('title') }}", "{{ session('message') }}");
+  </script>
+  @endif
 </body>
 
 </html>

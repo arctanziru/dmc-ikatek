@@ -35,7 +35,7 @@ class DonationEdit extends Component
         'donor_email' => 'required|email|max:255',
         'amount' => 'required|numeric|min:0',
         'message' => 'nullable|string|max:500',
-        'transfer_evidence' => 'required|file|max:5120',
+        'transfer_evidence' => 'nullable|file|max:5120',
         'donation_date' => 'nullable|date',
         'disaster_program_id' => 'nullable|exists:disaster_programs,id',
     ];
@@ -49,7 +49,7 @@ class DonationEdit extends Component
         $this->amount = $donation->amount;
         $this->message = $donation->message;
         $this->existingTransferEvidence = $donation->transfer_evidence;
-        $this->donation_date = $donation->donation_date->format('Y-m-d');
+        $this->donation_date = $donation->donation_date;
         $this->disaster_program_id = $donation->disaster_program_id;
 
         $this->programs = DisasterProgram::all();
@@ -57,7 +57,6 @@ class DonationEdit extends Component
 
     public function update()
     {
-        // Custom validation logic for transfer evidence
         if (!$this->transfer_evidence && !$this->existingTransferEvidence) {
             $this->addError('transfer_evidence', 'The transfer evidence is required.');
             return;
