@@ -56,25 +56,20 @@
 
     <!-- Graph Section -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-        <!-- Donations Chart -->
         <div class="bg-white rounded shadow p-4">
             <h3 class="font-semibold text-lg">Donations Over Time</h3>
-            <canvas id="donationsChart" class="mt-4 h-48"></canvas>
+            <canvas id="donationsChart" height="360" class="mt-4"></canvas>
         </div>
 
-        <!-- Disasters Chart -->
         <div class="bg-white rounded shadow p-4" wire:ignore>
-            <h3 class="font-semibold text-lg">Disaster Types</h3>
-            <canvas id="disastersChart" class="mt-4 h-48"></canvas>
+            <h3 class="font-semibold text-lg">Disaster Provinces</h3>
+            <canvas id="disastersChart" height="360" class="mt-4"></canvas>
         </div>
     </div>
 
 
     <script>
-        document.addEventListener('livewire:load', function() {
-            console.log('Livewire loaded');
-
-            // Donations Chart
+        document.addEventListener('livewire:init', function() {
             var donationsCtx = document.getElementById('donationsChart');
             if (donationsCtx) {
                 var donationsChart = new Chart(donationsCtx.getContext('2d'), {
@@ -92,14 +87,19 @@
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: false
+                        maintainAspectRatio: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            }
+                        }
                     }
                 });
             } else {
                 console.error('Element with ID "donationsChart" not found');
-            }
+            } // Disasters Chart
 
-            // Disasters Chart
+
             var disastersCtx = document.getElementById('disastersChart');
             if (disastersCtx) {
                 var disastersChart = new Chart(disastersCtx.getContext('2d'), {
@@ -109,13 +109,18 @@
                         datasets: [{
                             label: 'Disasters',
                             data: @json($disasterData['data']),
-                            backgroundColor: ['#35408D', '#5966B0', '#2A336E', '#b36d27'],
-                            borderWidth: 1
                         }]
                     },
                     options: {
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    usePointStyle: true
+                                }
+                            }
+                        },
                         responsive: true,
-                        maintainAspectRatio: false
+                        maintainAspectRatio: true
                     }
                 });
             } else {
@@ -123,5 +128,4 @@
             }
         });
     </script>
-
 </div>

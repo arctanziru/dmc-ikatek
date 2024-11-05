@@ -55,6 +55,8 @@ $navLinks = [
   <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
   <script defer src="https://unpkg.com/alpinejs" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 
   @livewireStyles
   @livewireScripts

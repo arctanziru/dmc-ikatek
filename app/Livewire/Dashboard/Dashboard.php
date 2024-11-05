@@ -5,6 +5,7 @@ namespace App\Livewire\Dashboard;
 use App\Models\Disaster;
 use App\Models\DisasterProgram;
 use App\Models\Donation;
+use Laravolt\Indonesia\Models\Province;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -47,18 +48,40 @@ class Dashboard extends Component
             ->take(5)
             ->get();
 
+        // Generate labels for each month from January to December
+        $months = [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ];
+
+        // Initialize donation data with zeros
+        $donationAmounts = array_fill(0, 12, 0);
+
+        // Retrieve donation data for the current year and group by month
+        $donations = Donation::where('status', 'verified')
+            ->whereYear('created_at', now()->year)
+            ->selectRaw('MONTH(created_at) as month, SUM(amount) as total')
+            ->groupBy('month')
+            ->pluck('total', 'month');
+
+        // Map donation amounts to the corresponding month
+        foreach ($donations as $month => $total) {
+            $donationAmounts[$month - 1] = $total; // Subtract 1 to match array index
+        }
+
         $this->donationData = [
-            'labels' => Donation::where('status', 'verified')
-                ->orderBy('created_at')
-                ->pluck('created_at')
-                ->map(fn($date) => $date->format('M'))
-                ->unique()
-                ->toArray(),
-            'data' => Donation::where('status', 'verified')
-                ->selectRaw('SUM(amount) as total')
-                ->groupByRaw('MONTH(created_at)')
-                ->pluck('total')
-                ->toArray(),
+            'labels' => $months,
+            'data' => $donationAmounts,
         ];
 
         $this->disasterData = $this->getDisasterCountByProvince();
@@ -66,22 +89,31 @@ class Dashboard extends Component
 
     private function getDisasterCountByProvince()
     {
-        $disasterCounts = Disaster::with('city.province')
+        $allProvinces = Province::pluck('name')->toArray();
+        $provinceCounts = array_fill_keys($allProvinces, 0);
+
+        $disasters = Disaster::with('city.province')
+            ->where('status', 'active')
             ->get()
             ->filter(function ($disaster) {
                 return $disaster->city && $disaster->city->province;
-            })
-            ->groupBy(fn($disaster) => $disaster->city->province->name);
+            });
 
-        $labels = $disasterCounts->keys()->toArray();
-        $data = $disasterCounts->map->count()->values()->toArray();
+        foreach ($disasters as $disaster) {
+            $provinceName = $disaster->city->province->name;
+            if (isset($provinceCounts[$provinceName])) {
+                $provinceCounts[$provinceName]++;
+            }
+        }
+
+        $labels = array_keys($provinceCounts);
+        $data = array_values($provinceCounts);
 
         return [
             'labels' => $labels,
             'data' => $data,
         ];
     }
-
 
     public function render()
     {
