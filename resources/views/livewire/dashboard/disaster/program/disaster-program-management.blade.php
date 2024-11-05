@@ -5,6 +5,11 @@ $perPageData = [
 ['label' => '15', 'value' => '15'],
 ['label' => '20', 'value' => '20'],
 ];
+
+$statusOptions = [
+'active' => 'Active',
+'inactive' => 'Inactive',
+];
 @endphp
 
 <div class="p-6 space-y-4">
@@ -22,26 +27,50 @@ $perPageData = [
             <option value="{{ $data['value'] }}">{{ $data['label'] }}</option>
             @endforeach
         </select>
+        <select wire:model.live.debounce.150ms="status" class="border rounded-md bw-raw-select w-24 mb-4">
+            <option value="">All</option>
+            @foreach($statusOptions as $value => $label)
+            <option value="{{ $value }}" @if($status===$value) selected @endif>
+                {{ $label }}
+            </option>
+            @endforeach
+        </select>
         <x-button wire:click="redirectToCreate" class="shrink-0 mb-4">Create Program</x-button>
     </div>
 
     <x-bladewind::table has_shadow="true" divider="thin">
         <x-slot name="header" class="bg-gray-50">
             <th>Name</th>
+            <th>Description</th>
+            <th>Image</th>
             <th>Category</th>
             <th>Disaster</th>
-            <th>Description</th>
-            <th>Total Donations</th> <!-- New Column for Donations -->
+            <th>Status</th>
+            <th>Total Donations</th>
+            <th>Target Donations</th>
             <th>Actions</th>
         </x-slot>
         <tbody>
             @foreach ($programs as $program)
             <tr>
                 <td>{{ $program->name }}</td>
+                <td>{{ $program->description }}</td>
+                <td>
+                    <img src="{{ $program->image }}" alt="{{ $program->name }}" class="w-[100px] h-[100px] object-cover">
+                </td>
                 <td>{{ $program->category->name ?? 'N/A' }}</td>
                 <td>{{ $program->disaster->name ?? 'N/A' }}</td>
-                <td>{{ $program->description }}</td>
-                <td>Rp{{ number_format($program->donations->sum('amount'), 0, ',', '.') }}</td> <!-- Total Donations -->
+                <td class="w-[120px]">
+                    <select wire:change="updateStatus({{ $program->id }}, $event.target.value)" class="border rounded-md w-full p-1">
+                        @foreach($statusOptions as $value => $label)
+                        <option value="{{ $value }}" @if($program->status === $value) selected @endif>
+                            {{ $label }}
+                        </option>
+                        @endforeach
+                    </select>
+                </td>
+                <td>Rp{{ number_format($program->donations->sum('amount'), 0, ',', '.') }}</td>
+                <td>{{ $program->target_donation ? 'Rp'.number_format($program->target_donation, 0, ',', '.') : 'N/A' }}</td>
                 <td class="shrink-0">
                     <x-bladewind::button wire:click="redirectToEdit({{ $program->id }})" size="small" color="primary" icon="pencil-square">
                         Edit

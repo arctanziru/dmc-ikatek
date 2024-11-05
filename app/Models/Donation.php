@@ -23,6 +23,6 @@ class Donation extends Model
 
     public function disasterProgram()
     {
-        return $this->belongsTo(DisasterProgram::class);
+        return $this->belongsTo(DisasterProgram::class)->withDefault();
     }
 }

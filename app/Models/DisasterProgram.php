@@ -9,7 +9,16 @@ class DisasterProgram extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'category_id', 'disaster_id'];
+    protected $fillable = [
+        'name',
+        'description',
+        'category_id',
+        'disaster_id',
+        'status',
+        'image',
+        'tor_link',
+        'target_donation',
+    ];
 
     public function category()
     {

@@ -16,13 +16,15 @@ class DisasterProgramManagement extends Component
 
     public $search = '';
     public $perPage = 10;
+    public $status = '';
 
-    protected $queryString = ['search', 'perPage'];
+    protected $queryString = ['search', 'perPage', 'status'];
 
     public function mount()
     {
         $this->perPage = $this->perPage ?? 10;
         $this->search = $this->search ?? '';
+        $this->status = $this->status ?? null;
     }
 
     public function updatedSearch()
@@ -35,12 +37,21 @@ class DisasterProgramManagement extends Component
         $this->resetPage();
     }
 
+    public function updatedStatus()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         $programs = DisasterProgram::with(['category', 'disaster', 'donations'])
-            ->where('name', 'like', '%' . $this->search . '%')
-            ->orWhere('description', 'like', '%' . $this->search . '%')
-            ->orderBy('created_at', 'desc')
+            ->when($this->status, function ($query) {
+                $query->where('status', $this->status);
+            })
+            ->where(function ($query) {
+                $query->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('description', 'like', '%' . $this->search . '%');
+            })->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
 
         return view('livewire.dashboard.disaster.program.disaster-program-management', [

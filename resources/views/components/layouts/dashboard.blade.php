@@ -16,6 +16,26 @@ $navLinks = [
 'icon' => 'newspaper',
 'label' => 'News'
 ],
+[
+'route' => 'dashboard.disaster',
+'icon' => 'fire',
+'label' => 'Disaster'
+],
+[
+'route' => 'dashboard.disaster.program.category',
+'icon' => 'fire',
+'label' => 'Disaster program category'
+],
+[
+'route' => 'dashboard.disaster.program',
+'icon' => 'fire',
+'label' => 'Disaster program'
+],
+[
+'route' => 'dashboard.donation',
+'icon' => 'cash',
+'label' => 'Donation'
+],
 ];
 
 @endphp
@@ -93,7 +113,7 @@ $navLinks = [
 
       <!-- Sidebar Header -->
       <div class="flex font-semibold items-center gap-2">
-        <img src="images/Logo.png" class="!w-[42px] !h-[42px]" />
+        <img src="/images/Logo.png" class="!w-[42px] !h-[42px]" />
         <p class="text-[16px] ">
           DMC IKATEK-UH
         </p>
@@ -118,28 +138,6 @@ $navLinks = [
       </nav>
 
     </div>
-
-    <!-- Navigation Links -->
-    <nav class="flex flex-col space-y-2 p-4">
-      <a href="{{ route('dashboard') }}" class="p-2 rounded hover:bg-secondary-light transition">
-        Dashboard
-      </a>
-      <a href="{{ route('users') }}" class="p-2 rounded hover:bg-secondary-light transition">
-        Users
-      </a>
-      <a href="{{ route('dashboard.news') }}" class="p-2 rounded hover:bg-secondary-light transition">
-        News
-      </a>
-      <a href="{{ route('dashboard.disaster') }}" class="p-2 rounded hover:bg-secondary-light transition">
-        Disaster
-      </a>
-      <a href="{{ route('dashboard.disaster.program.category') }}" class="p-2 rounded hover:bg-secondary-light transition">
-        Disaster program category
-      </a>
-      <a href="{{ route('dashboard.disaster.program') }}" class="p-2 rounded hover:bg-secondary-light transition">
-        Disaster program
-      </a>
-    </nav>
 
     <!-- Sidebar Footer -->
     <div class="p-4 text-sm border-t border-secondary-light">

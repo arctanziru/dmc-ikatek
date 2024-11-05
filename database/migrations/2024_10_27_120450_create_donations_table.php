@@ -16,12 +16,12 @@ return new class extends Migration
             $table->string('donor_name');
             $table->string('donor_organization')->nullable();
             $table->string('donor_email')->nullable();
-            $table->decimal('amount', 10, 2);
+            $table->unsignedBigInteger('amount');
             $table->text('message')->nullable();
-            $table->string('transfer_evidence')->nullable(); // Path for evidence upload
+            $table->string('transfer_evidence');
             $table->enum('status', ['pending', 'verified', 'rejected'])->default('pending');
             $table->date('donation_date')->nullable();
-            $table->foreignId('disaster_program_id')->constrained('disaster_programs')->onDelete('cascade');
+            $table->foreignId('disaster_program_id')->nullable()->constrained('disaster_programs')->onDelete('cascade');
             $table->timestamps();
         });
     }

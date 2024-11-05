@@ -27,6 +27,9 @@ use App\Livewire\Dashboard\Disaster\Program\Category\DisasterProgramCategoryMana
 use App\Livewire\Dashboard\Disaster\Program\DisasterProgramCreate;
 use App\Livewire\Dashboard\Disaster\Program\DisasterProgramEdit;
 use App\Livewire\Dashboard\Disaster\Program\DisasterProgramManagement;
+use App\Livewire\Dashboard\Donation\DonationCreate;
+use App\Livewire\Dashboard\Donation\DonationEdit;
+use App\Livewire\Dashboard\Donation\DonationManagement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -95,5 +98,11 @@ Route::prefix('dashboard')
           Route::get('/{category}/edit', DisasterProgramCategoryEdit::class)->name('dashboard.disaster.program.category.edit');
         });
       });
+    });
+
+    Route::group(['prefix' => 'donation'], function () {
+      Route::get('/', DonationManagement::class)->name('dashboard.donation');
+      Route::get('/create', DonationCreate::class)->name('dashboard.donation.create');
+      Route::get('/{donation}/edit', DonationEdit::class)->name('dashboard.donation.edit');
     });
   });
