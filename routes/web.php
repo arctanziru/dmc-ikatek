@@ -1,20 +1,23 @@
 <?php
 
+use App\Livewire\AboutUsPage;
+use App\Livewire\AccountabilityPage;
 use App\Livewire\Auth\Login;
 use App\Livewire\Counter;
+use App\Livewire\HistoryPage;
 use App\Livewire\NewsPage;
-use App\Http\Controllers\HomeController;
+use App\Livewire\OurTeamPage;
+use App\Livewire\OurWorksPage;
+use App\Livewire\DonatePage;
+use App\Http\Controllers\HomeController; // Import the HomeController
 use App\Livewire\Dashboard\News\NewsCreate;
 use App\Livewire\Dashboard\News\NewsEdit;
 use App\Livewire\Dashboard\News\NewsManagement;
 use App\Livewire\Dashboard\User\UserCreate;
 use App\Livewire\Dashboard\User\UserEdit;
 use App\Livewire\Dashboard\User\UserManagement;
-use App\Livewire\OurWorksPage;
 use App\Livewire\Dashboard\Dashboard;
-use App\Livewire\Dashboard\Disaster\DisasterCreate;
-use App\Livewire\Dashboard\Disaster\DisasterEdit;
-use App\Livewire\Dashboard\Disaster\DisasterManagement;
+use App\Livewire\StrategyPage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +40,13 @@ Route::get('/counter', Counter::class);
 Route::get('/login', Login::class)->name('login');
 Route::get('/news', NewsPage::class)->name('news');
 Route::get('/our-works', OurWorksPage::class);
+Route::get('/donate', DonatePage::class);
+Route::get('/about-us', AboutUsPage::class);
+Route::get('/leadership-and-organization', OurTeamPage::class);
+Route::get('/history', HistoryPage::class);
+Route::get('/strategy', StrategyPage::class);
+Route::get('/accountability', AccountabilityPage::class);
+
 Route::post('/logout', function () {
   Auth::logout();
   request()->session()->invalidate();
@@ -59,11 +69,5 @@ Route::prefix('dashboard')
       Route::get('/', NewsManagement::class)->name('dashboard.news');
       Route::get('/create', NewsCreate::class)->name('dashboard.news.create');
       Route::get('/{news}/edit', NewsEdit::class)->name('dashboard.news.edit');
-    });
-
-    Route::group(['prefix'=> 'disaster'], function () {
-      Route::get('/', DisasterManagement::class)->name('dashboard.disaster');
-      Route::get('/create', DisasterCreate::class)->name('dashboard.disaster.create');
-      Route::get('/{disaster}/edit', DisasterEdit::class)->name('dashboard.disaster.edit');
     });
   });

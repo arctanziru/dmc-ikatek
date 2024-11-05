@@ -1,0 +1,39 @@
+<?php
+
+namespace App\View\Components;
+
+use Closure;
+use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
+
+class TeamCard extends Component
+{
+    public $name;
+    public $position;
+    public $img;
+    public $socialMedia;
+
+    /**
+     * Create a new component instance.
+     */
+    public function __construct($name = 'John Doe', $position = 'Member', $img = 'images/placeholder.jpg', $socialMedia = [])
+    {
+        $this->name = $name;
+        $this->position = $position;
+        $this->img = $img;
+        $this->socialMedia = array_merge([
+            'x' => null,
+            'facebook' => null,
+            'instagram' => null,
+            'email' => null,
+        ], $socialMedia);
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render(): View|Closure|string
+    {
+        return view('components.team-card');
+    }
+}

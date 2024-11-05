@@ -1,50 +1,50 @@
 @php
-$cards = [
-[
-'name' => 'Our Mission',
-'subtitle' => 'Learn About Our Commitment.',
-'button' => 'Learn More'
-],
-[
-'name' => 'Corporate Strategy',
-'subtitle' => 'Discover our approach to disaster response.',
-'button' => 'Explore Strategy'
-],
-[
-'name' => 'Organization & Leadership',
-'subtitle' => 'Meet our leaders and governance team',
-'button' => 'Meet The Team'
-],
-[
-'name' => 'Our History',
-'subtitle' => 'Track our key milestones in disaster management',
-'button' => 'Read More'
-],
-];
-$partners = [
-[
-'name' => 'Government',
-'path' => 'icons/Govt.svg',
-],
-[
-'name' => 'Non-Gov Organization',
-'path' => 'icons/NonGovt.svg',
-],
-[
-'name' => 'Private Sector Partnership',
-'path' => 'icons/PSP.svg',
-],
-[
-'name' => 'Academia and Think Tanks',
-'path' => 'icons/Academia.svg',
-],
-[
-'name' => 'Goodwill Ambassador & High Level Supporter',
-'path' => 'icons/Ambassador.svg',
-],
+    $cards = [
+        [
+            'name' => 'Our Mission',
+            'subtitle' => 'Learn About Our Commitment.',
+            'button' => 'Learn More'
+        ],
+        [
+            'name' => 'Corporate Strategy',
+            'subtitle' => 'Discover our approach to disaster response.',
+            'button' => 'Explore Strategy'
+        ],
+        [
+            'name' => 'Organization & Leadership',
+            'subtitle' => 'Meet our leaders and governance team',
+            'button' => 'Meet The Team'
+        ],
+        [
+            'name' => 'Our History',
+            'subtitle' => 'Track our key milestones in disaster management',
+            'button' => 'Read More'
+        ],
+    ];
+    $partners = [
+        [
+            'name' => 'Government',
+            'path' => 'icons/Govt.svg',
+        ],
+        [
+            'name' => 'Non-Gov Organization',
+            'path' => 'icons/NonGovt.svg',
+        ],
+        [
+            'name' => 'Private Sector Partnership',
+            'path' => 'icons/PSP.svg',
+        ],
+        [
+            'name' => 'Academia and Think Tanks',
+            'path' => 'icons/Academia.svg',
+        ],
+        [
+            'name' => 'Goodwill Ambassador & High Level Supporter',
+            'path' => 'icons/Ambassador.svg',
+        ],
 
-];
-$newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
+    ];
+    $newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
 @endphp
 
 <x-layouts.landing :title="'Home Page'">
@@ -66,12 +66,11 @@ $newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
                 <div class="flex flex-col gap-2 p-[0_24px] flex-1">
                     <!-- <img src="images/img.jpeg" class="w-full max-w-[480px] h-[280px]" /> -->
                     <p class="text-primary text-[14px] font-medium">ABOUT DMC IKATEK-UH</p>
-                    <p class="text-dark text-[38px] font-bold">Prepared for Today Ready for Tomorrow</p>
-                    <p class="text-dark text-[16px]  font-light">Help those at the frontlines of disaster
-                        response
-                        by donating today. Your contribution will go towards disaster preparedness, risk reduction,
-                        and
-                        innovative solutions that protect lives and livelihoods in crisis-affected regions.</p>
+                    <p class="text-dark text-[38px] font-bold">Creating Lasting Impact, One Community at a Time</p>
+                    <p class="text-dark text-[16px]  font-light">Through your support, we're not only providing
+                        life-saving aid in times of crisis but also fostering long-term resilience. Our initiatives
+                        include emergency relief, education on preparedness, community rebuilding, and support for
+                        sustainable recovery across affected regions.</p>
 
                     <div class="grid grid-cols-2 gap-3">
                         <div class="flex gap-2 items-center ">
@@ -99,24 +98,24 @@ $newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
             </section>
             <section class="flex gap-3 justify-center w-full items-center  ">
                 @foreach ($cards as $card)
-                <main class="flex p-[22px] items-center flex-col justify-between w-[250px] border-primary border">
-                    <div class="gap-3 items-center flex flex-col h-[140px]">
-                        <p>
-                            <img src="icons/check.svg" alt="image" class="w-8 h-8" />
-                        </p>
-                        <p class="text-[20px] font-bold text-center">
-                            {{$card['name']}}
-                        </p>
-                        <p class="text-center text-[10px] min-h-">
-                            {{$card['subtitle']}}
-                        </p>
-                    </div>
-                    <x-button variant="outlined" class="rounded-none w-full inline-flex">
-                        <p class="text-[10px] ">
-                            {{$card['button']}}
-                        </p>
-                    </x-button>
-                </main>
+                    <main class="flex p-[22px] items-center flex-col justify-between w-[250px] border-primary border">
+                        <div class="gap-3 items-center flex flex-col h-[140px]">
+                            <p>
+                                <img src="icons/check.svg" alt="image" class="w-8 h-8" />
+                            </p>
+                            <p class="text-[20px] font-bold text-center">
+                                {{$card['name']}}
+                            </p>
+                            <p class="text-center text-[10px] min-h-">
+                                {{$card['subtitle']}}
+                            </p>
+                        </div>
+                        <x-button variant="outlined" class="rounded-none w-full inline-flex">
+                            <p class="text-[10px] ">
+                                {{$card['button']}}
+                            </p>
+                        </x-button>
+                    </main>
                 @endforeach
             </section>
             <section class="flex flex-col justify-center w-full items-center ">
@@ -129,10 +128,10 @@ $newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
                 </div>
                 <div class="flex gap-9">
                     @foreach ($partners as $partner)
-                    <div class="gap-3 w-[120px] flex flex-col select-none items-center">
-                        <img draggable="false" src="{{ $partner['path'] }}" class="h-[60px] w-full" />
-                        <p class="text-center text-primary text-[10px] font-semibold">{{ $partner['name'] }}</p>
-                    </div>
+                        <div class="gap-3 w-[120px] flex flex-col select-none items-center">
+                            <img draggable="false" src="{{ $partner['path'] }}" class="h-[60px] w-full" />
+                            <p class="text-center text-primary text-[10px] font-semibold">{{ $partner['name'] }}</p>
+                        </div>
                     @endforeach
                 </div>
             </section>
@@ -194,7 +193,7 @@ $newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
             </section>
 
 
-            <section
+            <section id="get-involved"
                 class="relative z-0 p-[40px_0px] -mt-16 w-full flex flex-col justify-center items-center overflow-hidden">
                 <!-- Background image -->
                 <img src="images/Our Reach.jpeg" class="absolute top-0 left-0 w-full h-full object-cover -z-10" />
@@ -211,13 +210,13 @@ $newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
                                 to help with
                                 disaster relief
                                 efforts. <br />Your time and skills can make a difference.</p>
-                            <x-button rounded="none" size="large" variant="fill" color="white"
-                                class="absolute -bottom-[20.5px] left-auto right-auto">
-                                <p class="text-[14px] font-light">
-
-                                    Donate Now
-                                </p>
-                            </x-button>
+                            <a href="/donate" class="absolute -bottom-[20.5px] left-auto right-auto">
+                                <x-button rounded="none" size="large" variant="fill" color="white">
+                                    <p class="text-[14px] font-light">
+                                        Donate Now
+                                    </p>
+                                </x-button>
+                            </a>
                         </div>
                         <div
                             class="bg-white/70 h-max mt-[60px] p-[48px_64px] justify-center flex flex-col relative items-center">
@@ -227,13 +226,13 @@ $newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
                                 using the Share The Meal app. Every meal
                                 <br /> helps save a life.
                             </p>
-                            <x-button rounded="none" variant="fill" color="dark" size="large"
-                                class="absolute -bottom-[20.5px] left-auto right-auto">
-                                <p class="text-[14px] font-light">
-
-                                    Download App
-                                </p>
-                            </x-button>
+                            <a href="https://sharethemeal.org" class="absolute -bottom-[20.5px] left-auto right-auto">
+                                <x-button rounded="none" size="large" variant="fill" color="dark">
+                                    <p class="text-[14px] font-light">
+                                        Download App
+                                    </p>
+                                </x-button>
+                            </a>
                         </div>
                     </section>
                     <section id="statistics" class="flex gap-3 w-full">
@@ -326,16 +325,16 @@ $newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
 
             </section>
         </main>
-        <main class="max-w-[1980px] flex flex-col items-center p-16 gap-4">
+        <main class="max-w-[1980px] w-full flex flex-col items-center p-16 gap-4">
             <div class="flex w-full p-2 border-l-4 border-l-primary">
-                <p class="text-[20px] font-medium">Check Our News</p>
+                <p class="text-[24px] font-medium">Check Our News</p>
             </div>
-            <section class="flex gap-4 w-full justify-center h-[436px] ">
+            <section class="flex gap-4 w-full justify-start h-[436px] ">
                 <!-- Left Section (Featured News) -->
-                <section class="flex-1 flex justify-start w-full">
-                    <div class="w-[32px] relative flex justify-center items-center">
+                <section class="flex-1 flex justify-start relative bg-white/20 max-w-[940px] ">
+                    <div class=" relative flex justify-start items-center w-[80px] ">
                         <div
-                            class="bg-white/95 shadow-sm gap-2 shadow-dark/40 w-[360px] flex flex-col p-8 absolute z-50 left-0">
+                            class="bg-white/90 shadow-sm gap-2 shadow-dark/40 w-[360px] flex flex-col p-8 absolute z-50 left-0">
                             <p class="text-[18px] font-medium text-primary">
                                 {{ $news->first()->author ?? 'N/A' }}
                             </p>
@@ -355,8 +354,8 @@ $newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
                         </div>
                     </div>
 
-                    <div class="flex-1 relative flex w-full min-w-[640px] h-full">
-                        <img src="x" class="rounded-lg w-full object-cover"
+                    <div class="relative flex h-full rounded-lg overflow-hidden bg-dark-light/20 flex-1">
+                        <img src="{{ asset($news->first()->image) }}" class="rounded-lg w-full object-cover"
                             alt="Featured News Image" />
                     </div>
                 </section>
@@ -364,23 +363,26 @@ $newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
                 <!-- Right Section (News List) -->
                 <section class="flex flex-col gap-1 h-[436px]">
                     @foreach ($newsItems as $newsItem)
-                    <div id="news-card"
-                        class="flex gap-4 bg-white cursor-pointer items-center justify-start hover:bg-white-light p-2 rounded-md w-[360px]">
-                        <img src="{{ asset($newsItem->image) }}" class="h-[80px] w-[80px] object-cover rounded-lg"
-                            alt="News Image" />
-                        <div class="flex flex-col justify-between">
-                            <div class="flex flex-col">
-                                <p class="font-light">{{ $newsItem->author }}</p>
-                                <p class="font-medium text-ellipsis line-clamp-2">{{ $newsItem->title }}</p>
+                        <div id="news-card"
+                            class="flex gap-4 bg-white cursor-pointer items-center justify-start hover:bg-white-light p-2 rounded-md w-[360px]">
+                            <div class="rounded-lg min-h-20 min-w-20 bg-dark">
+                                <img src="{{ asset($newsItem->image) }}" class="h-[80px] w-[80px] object-cover rounded-lg"
+                                    alt="News Image" />
                             </div>
-                            <div class="flex gap-1">
-                                <p class="font-normal text-[12px] text-primary">{{ $newsItem->category ?? 'N/A' }} •</p>
-                                <p class="font-light text-[12px] text-dark-light">
-                                    {{ optional(value: $newsItem->created_at)->diffForHumans() }}
-                                </p>
+
+                            <div class="flex flex-col justify-between">
+                                <div class="flex flex-col">
+                                    <p class="font-light">{{ $newsItem->author }}</p>
+                                    <p class="font-medium text-ellipsis line-clamp-2">{{ $newsItem->title }}</p>
+                                </div>
+                                <div class="flex gap-1">
+                                    <p class="font-normal text-[12px] text-primary">{{ $newsItem->category ?? 'N/A' }} •</p>
+                                    <p class="font-light text-[12px] text-dark-light">
+                                        {{ optional(value: $newsItem->created_at)->diffForHumans() }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </section>
             </section>

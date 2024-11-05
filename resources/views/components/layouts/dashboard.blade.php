@@ -1,3 +1,26 @@
+@php
+
+  $navLinks = [
+    [
+    'route' => 'dashboard',
+    'icon' => 'chart-bar-square',
+    'label' => 'Dashboard'
+    ],
+    [
+    'route' => 'users',
+    'icon' => 'user-circle',
+    'label' => 'Users'
+    ],
+    [
+    'route' => 'dashboard.news',
+    'icon' => 'newspaper',
+    'label' => 'News'
+    ],
+  ];
+
+@endphp
+
+
 <!DOCTYPE html>
 <html class="light" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -7,17 +30,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>{{ $title ?? 'Dashboard - DMC Ikatek' }}</title>
-  <link href="{{ asset( 'vendor/bladewind/css/animate.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
   <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
   <script defer src="https://unpkg.com/alpinejs" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  @livewireStyles
+  @livewireScripts
   <script src="https://cdn.tailwindcss.com"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet">
+  </link>
 
-  <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
   <script>
     tailwind.config = {
       theme: {
@@ -57,37 +83,43 @@
     }
     localStorage.removeItem('theme');
   </script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-
-  @livewireStyles
-  @livewireScripts
 </head>
 
 <body class="m-0 p-0 w-screen h-screen overflow-x-hidden text-black">
   <x-bladewind::notification />
-  <aside class="bg-secondary-dark text-white w-64 h-screen fixed flex flex-col justify-between">
+  <aside class="p-4 bg-dark text-white w-[240px] h-screen fixed flex flex-col justify-between">
 
-    <!-- Sidebar Header -->
-    <div class="p-4 text-2xl font-poppins font-semibold">
-      DMC Ikatek
+    <div class="flex flex-col gap-6">
+
+      <!-- Sidebar Header -->
+      <div class="flex font-semibold items-center gap-2">
+        <img src="images/Logo.png" class="!w-[42px] !h-[42px]" />
+        <p class="text-[16px] ">
+          DMC IKATEK-UH
+        </p>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="flex flex-col gap-3">
+        @foreach ($navLinks as $link)
+          @php
+      // Check if the current route name matches the link's route
+      $isActive = Route::currentRouteName() === $link['route'];
+      @endphp
+
+          <a href="{{ route($link['route']) }}"
+            class="p-[12px_14px_12px_12px] rounded {{ $isActive ? 'bg-primary text-dark font-bold hover:bg-primary-dark' : 'hover:bg-primary hover:text-dark hover:font-bold' }} flex gap-4 items-center justify-between duration-200 text-[14px]">
+            <div class="flex items-center gap-4">
+            <x-bladewind::icon name="{{ $link['icon'] }}" class="!h-6 !w-6" />
+            <p>{{ $link['label'] }}</p>
+            </div>
+            <div class="{{ $isActive ? 'bg-secondary' : 'bg-transparent ' }} rounded-sm hover: w-[2px] h-full"></div>
+          </a>
+    @endforeach
+      </nav>
+
     </div>
 
-    <!-- Navigation Links -->
-    <nav class="flex flex-col space-y-2 p-4">
-      <a href="{{ route('dashboard') }}" class="p-2 rounded hover:bg-secondary-light transition">
-        Dashboard
-      </a>
-      <a href="{{ route('users') }}" class="p-2 rounded hover:bg-secondary-light transition">
-        Users
-      </a>
-      <a href="{{ route('dashboard.news') }}" class="p-2 rounded hover:bg-secondary-light transition">
-        News
-      </a>
-      <a href="{{ route('dashboard.disaster') }}" class="p-2 rounded hover:bg-secondary-light transition">
-        Disaster
-      </a>
-    </nav>
 
     <!-- Sidebar Footer -->
     <div class="p-4 text-sm border-t border-secondary-light">
@@ -96,7 +128,7 @@
   </aside>
 
   <!-- Main Content Wrapper -->
-  <div class="ml-64 relative">
+  <div class="ml-[240px] relative">
     <!-- Sticky Navbar -->
     <nav class="bg-secondary-dark text-white sticky top-0 z-10 p-4 flex justify-between items-center shadow-md">
       <div class="text-lg font-bold">
@@ -112,7 +144,7 @@
         </button>
 
         <!-- Dropdown Menu -->
-        <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
+        <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50">
           <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
@@ -132,7 +164,7 @@
       dropdown.classList.toggle('hidden');
     }
 
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
       const dropdown = document.getElementById('profileDropdown');
       const button = event.target.closest('button');
 
@@ -141,13 +173,8 @@
       }
     });
   </script>
-  <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 
-  @if (session()->has('message') && session()->has('title'))
-  <script>
-    showNotification("{{ session('title') }}", "{{ session('message') }}");
-  </script>
-  @endif
+
 </body>
 
 </html>
