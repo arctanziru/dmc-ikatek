@@ -67,14 +67,12 @@ class Dashboard extends Component
         // Initialize donation data with zeros
         $donationAmounts = array_fill(0, 12, 0);
 
-        // Retrieve donation data for the current year and group by month
         $donations = Donation::where('status', 'verified')
-            ->whereYear('created_at', now()->year)
-            ->selectRaw('MONTH(created_at) as month, SUM(amount) as total')
+            ->whereYear('donation_date', now()->year)
+            ->selectRaw('MONTH(donation_date) as month, SUM(amount) as total')
             ->groupBy('month')
             ->pluck('total', 'month');
 
-        // Map donation amounts to the corresponding month
         foreach ($donations as $month => $total) {
             $donationAmounts[$month - 1] = $total; // Subtract 1 to match array index
         }
