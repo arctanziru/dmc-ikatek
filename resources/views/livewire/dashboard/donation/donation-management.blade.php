@@ -39,8 +39,8 @@ $statusOptions = [
             <th>Email</th>
             <th>Amount</th>
             <th>Program</th>
-            <th>Status</th>
             <th>Donation Date</th>
+            <th>Status</th>
             <th>Actions</th>
         </x-slot>
         <tbody>
@@ -51,7 +51,7 @@ $statusOptions = [
                 <td>{{ $donation->donor_email }}</td>
                 <td>Rp{{ number_format($donation->amount, 0, ',', '.') }}</td>
                 <td>{{ $donation->disasterProgram->name ?? 'N/A' }}</td>
-                <td>{{ $donation->donation_date }}</td>
+                <td>{{ \Carbon\Carbon::parse($donation->donation_date)->format('d M Y') }}</td>
                 <td>
                     <select wire:change="updateDonationStatus({{ $donation->id }}, $event.target.value)" class="border rounded-md w-full p-1">
                         @foreach($statusOptions as $value => $label)

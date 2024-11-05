@@ -4,6 +4,7 @@ namespace App\Livewire\Dashboard\Donation;
 
 use App\Models\Donation;
 use App\Models\DisasterProgram;
+use Carbon\Carbon;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -49,7 +50,7 @@ class DonationEdit extends Component
         $this->amount = $donation->amount;
         $this->message = $donation->message;
         $this->existingTransferEvidence = $donation->transfer_evidence;
-        $this->donation_date = $donation->donation_date;
+        $this->donation_date = Carbon::parse($donation->donation_date)->format('Y-m-d');
         $this->disaster_program_id = $donation->disaster_program_id;
 
         $this->programs = DisasterProgram::all();
@@ -63,6 +64,8 @@ class DonationEdit extends Component
         }
 
         $this->validate();
+
+        $donationDate = (strtotime($this->donation_date) !== false) ? $this->donation_date : null;
 
         $transferEvidencePath = $this->existingTransferEvidence;
         if ($this->transfer_evidence) {
@@ -79,8 +82,8 @@ class DonationEdit extends Component
             'amount' => $this->amount,
             'message' => $this->message,
             'transfer_evidence' => $transferEvidencePath,
-            'donation_date' => $this->donation_date,
             'disaster_program_id' => $this->disaster_program_id,
+            'donation_date' => $donationDate ?? now()->toDateString(),
         ]);
 
         session()->flash('title', 'Donation Updated');

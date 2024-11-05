@@ -47,6 +47,7 @@ class DonationCreate extends Component
         $this->validate();
 
         $transferEvidencePath = $this->transfer_evidence ? '/storage/' . $this->transfer_evidence->store('images/transfer_evidence', 'public') : null;
+        $donationDate = (strtotime($this->donation_date) !== false) ? $this->donation_date : null;
 
         Donation::create([
             'donor_name' => $this->donor_name,
@@ -55,7 +56,7 @@ class DonationCreate extends Component
             'amount' => $this->amount,
             'message' => $this->message,
             'transfer_evidence' => $transferEvidencePath,
-            'donation_date' => $this->donation_date,
+            'donation_date' => $donationDate ?? now()->toDateString(),
             'disaster_program_id' => $this->disaster_program_id,
         ]);
 
