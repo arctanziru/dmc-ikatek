@@ -1,34 +1,17 @@
 @php
-  $category = [
-    ['id' => 1, 'name' => 'Technology'],
-    ['id' => 2, 'name' => 'Health'],
-    ['id' => 3, 'name' => 'Education']
-  ];
-
-  $programHere = [
-    ['id' => 1, 'name' => 'Emergency Training', 'description' => 'Training program for emergency response.', 'category_id' => 2, 'disaster_id' => 3, 'created_at' => '2024-10-20T10:00:00Z', 'updated_at' => '2024-10-20T10:00:00Z'],
-    ['id' => 2, 'name' => 'Coding for Kids', 'description' => 'Introductory programming for children.', 'category_id' => 1, 'disaster_id' => null, 'created_at' => '2024-10-20T11:00:00Z', 'updated_at' => '2024-10-20T11:00:00Z'],
-    ['id' => 3, 'name' => 'Mental Health Awareness', 'description' => 'Promoting mental health awareness.', 'category_id' => 2, 'disaster_id' => null, 'created_at' => '2024-10-21T09:00:00Z', 'updated_at' => '2024-10-21T09:00:00Z'],
-    ['id' => 4, 'name' => 'Disaster Preparedness', 'description' => 'Guidelines for disaster preparedness.', 'category_id' => 2, 'disaster_id' => 3, 'created_at' => '2024-10-22T08:30:00Z', 'updated_at' => '2024-10-22T08:30:00Z'],
-    ['id' => 5, 'name' => 'Tech Literacy Workshop', 'description' => 'Technology basics for adults.', 'category_id' => 1, 'disaster_id' => null, 'created_at' => '2024-10-23T15:00:00Z', 'updated_at' => '2024-10-23T15:00:00Z'],
-    ['id' => 6, 'name' => 'First Aid Training', 'description' => 'Basic first aid skills.', 'category_id' => 2, 'disaster_id' => 3, 'created_at' => '2024-10-24T10:00:00Z', 'updated_at' => '2024-10-24T10:00:00Z'],
-    ['id' => 7, 'name' => 'Digital Safety', 'description' => 'Ensuring safe digital practices.', 'category_id' => 1, 'disaster_id' => null, 'created_at' => '2024-10-25T10:00:00Z', 'updated_at' => '2024-10-25T10:00:00Z'],
-    ['id' => 8, 'name' => 'Nutrition for All', 'description' => 'Nutrition basics for a healthy lifestyle.', 'category_id' => 2, 'disaster_id' => null, 'created_at' => '2024-10-25T10:30:00Z', 'updated_at' => '2024-10-25T10:30:00Z'],
-    ['id' => 9, 'name' => 'Climate Change Workshop', 'description' => 'Awareness on climate change impacts.', 'category_id' => 1, 'disaster_id' => null, 'created_at' => '2024-10-26T12:00:00Z', 'updated_at' => '2024-10-26T12:00:00Z'],
-    ['id' => 10, 'name' => 'Youth Leadership', 'description' => 'Training youth for community leadership.', 'category_id' => 3, 'disaster_id' => null, 'created_at' => '2024-10-27T11:15:00Z', 'updated_at' => '2024-10-27T11:15:00Z'],
-    ['id' => 11, 'name' => 'Financial Literacy', 'description' => 'Basic financial literacy for all ages.', 'category_id' => 3, 'disaster_id' => null, 'created_at' => '2024-10-27T14:00:00Z', 'updated_at' => '2024-10-27T14:00:00Z'],
-    ['id' => 12, 'name' => 'Wellness Programs', 'description' => 'Promoting wellness activities.', 'category_id' => 2, 'disaster_id' => null, 'created_at' => '2024-10-28T09:30:00Z', 'updated_at' => '2024-10-28T09:30:00Z'],
-    ['id' => 13, 'name' => 'Earthquake Safety', 'description' => 'Safety protocols during earthquakes.', 'category_id' => 2, 'disaster_id' => 3, 'created_at' => '2024-10-28T10:00:00Z', 'updated_at' => '2024-10-28T10:00:00Z'],
-    ['id' => 14, 'name' => 'Digital Skills for Youth', 'description' => 'Teaching digital skills to youth.', 'category_id' => 1, 'disaster_id' => null, 'created_at' => '2024-10-29T09:45:00Z', 'updated_at' => '2024-10-29T09:45:00Z'],
-    ['id' => 15, 'name' => 'Emergency Response Simulation', 'description' => 'Simulation exercises for emergency response.', 'category_id' => 2, 'disaster_id' => 3, 'created_at' => '2024-10-30T10:15:00Z', 'updated_at' => '2024-10-30T10:15:00Z'],
-    ['id' => 16, 'name' => 'Safe Cooking Practices', 'description' => 'Promoting safe cooking and hygiene practices.', 'category_id' => 2, 'disaster_id' => null, 'created_at' => '2024-10-30T10:30:00Z', 'updated_at' => '2024-10-30T10:30:00Z'],
-    ['id' => 17, 'name' => 'Reading Literacy Drive', 'description' => 'Encouraging reading in underprivileged areas.', 'category_id' => 3, 'disaster_id' => null, 'created_at' => '2024-10-31T09:00:00Z', 'updated_at' => '2024-10-31T09:00:00Z'],
-    ['id' => 18, 'name' => 'Public Speaking Workshop', 'description' => 'Public speaking basics.', 'category_id' => 3, 'disaster_id' => null, 'created_at' => '2024-10-31T10:00:00Z', 'updated_at' => '2024-10-31T10:00:00Z'],
-    ['id' => 19, 'name' => 'Water Safety', 'description' => 'Water safety tips for children.', 'category_id' => 2, 'disaster_id' => null, 'created_at' => '2024-11-01T08:00:00Z', 'updated_at' => '2024-11-01T08:00:00Z'],
-    ['id' => 20, 'name' => 'Technology in Farming', 'description' => 'Using tech to enhance agriculture.', 'category_id' => 1, 'disaster_id' => null, 'created_at' => '2024-11-01T09:30:00Z', 'updated_at' => '2024-11-01T09:30:00Z']
-  ];
+  function formatCurrency($amount)
+  {
+    if ($amount >= 1_000_000_000_000) { // Trillion
+    return number_format($amount / 1_000_000_000_000, 3) . ' T+'; // Format to 3 decimal places and add +
+    } elseif ($amount >= 1_000_000_000) { // Billion
+    return number_format($amount / 1_000_000_000, 3) . ' B+'; // Format to 3 decimal places and add +
+    } elseif ($amount >= 1_000_000) { // Million
+    return number_format($amount / 1_000_000, 2) . ' M'; // Format to 2 decimal places
+    } else {
+    return number_format($amount, 2); // Default formatting
+    }
+  }
 @endphp
-
 
 <main class="w-full flex bg-white-dark/10 justify-center">
   <main class="max-w-[1440px] gap-8 w-full p-4 md:p-8 lg:p-12 flex flex-col-reverse lg:grid lg:grid-cols-2">
@@ -59,33 +42,33 @@
           <div class="p-4 flex flex-col gap-2 ">
             <div class="flex border-b-2 justify-between w-full pb-4 ">
               <div class="flex-col flex">
-                <p class="text-[20px] font-bold">Rp. 234M+</p>
+                <p class="text-[20px] font-bold">Rp. {{(formatCurrency($totalDonations))}}</p>
                 <p class="text-[14px]">Raised</p>
 
               </div>
               <div class="flex-col flex justify-end items-end">
-                <p class="text-[20px] font-bold text-primary">+Rp. 24M</p>
+                <p class="text-[20px] font-bold text-primary">+Rp. {{formatCurrency($totalDonationsThisYear)}}</p>
                 <p class="text-[14px] text-primary">in Last Year</p>
               </div>
             </div>
 
             <div class="flex border-b-dark/20 justify-between w-full pb-4 ">
               <div class="flex-col flex">
-                <p class="text-[20px] font-bold">10.000+ </p>
-                <p class="text-[14px]">Donors</p>
+                <p class="text-[20px] font-bold">{{$donorCount}} </p>
+                <p class="text-[14px]">Donors (per email)</p>
               </div>
               <div class="flex-col flex justify-end items-end">
-                <p class="text-[20px] font-bold text-primary">+2.000+ </p>
+                <p class="text-[20px] font-bold text-primary">+{{$donorCountThisYear}} </p>
                 <p class="text-[14px] text-primary">in Last Year</p>
               </div>
             </div>
             <div class="flex border-b-2 justify-between w-full pb-4 ">
               <div class="flex-col flex">
-                <p class="text-[20px] font-bold">23 Program</p>
-                <p class="text-[14px]">Completed</p>
+                <p class="text-[20px] font-bold">{{$programCount}} Program</p>
+                <p class="text-[14px]">Made</p>
               </div>
               <div class="flex-col flex justify-end items-end">
-                <p class="text-[20px] font-bold text-primary">+12 Program</p>
+                <p class="text-[20px] font-bold text-primary">+{{$programCountThisYear}} Program</p>
                 <p class="text-[14px] text-primary">in Last Year</p>
               </div>
             </div>
@@ -116,7 +99,7 @@
     </section>
 
     <!-- Right Donate Section (Sticky) -->
-    <section
+    <form wire:submit.prevent="save" id="donationForm"
       class="bg-white lg:sticky top-[80px] rounded-lg shadow-[0_0_3px_0] shadow-dark/20 p-8 flex flex-col gap-8 lg:max-w-2xl lg:max-h-fit lg:h-[calc(100vh-100px)] overflow-y-auto">
       <!-- Title Section -->
       <h1 class="text-4xl font-bold text-primary text-center">Donate</h1>
@@ -126,84 +109,60 @@
         <!-- Personal Information Fields -->
         <p class="text-[14px] text-dark font-medium">Donor Detail</p>
         <div class="flex flex-col">
+          @error('donor_name') <span class="text-red-600">{{ $message }}</span> @enderror
           <x-bladewind::input type="text" label="Name" name="donor_name" required
             class="bg-transparent border-dark border-[1px]" />
+
+          @error('donor_email') <span class="text-red-600">{{ $message }}</span> @enderror
           <x-bladewind::input type="text" label="Email" name="donor_email" required
             class="bg-transparent border-dark border-[1px]" />
+
+          @error('donor_organization') <span class="text-red-600">{{ $message }}</span> @enderror
           <x-bladewind::input type="text" label="Affiliation (Optional)" name="donor_organization"
             class="bg-transparent border-dark border-[1px]" />
+
         </div>
+
+
+
+
+
+
 
         <!-- Upload Transfer Evidence Section -->
         <div class="flex flex-col gap-2">
           <p class="text-[14px] text-dark font-medium">Donation Detail</p>
           <div class="flex flex-col">
+            @error('amount') <span class="text-red-600">{{ $message }}</span> @enderror
             <x-bladewind::input type="number" required label="Amount of Donation (Rp.)" name="amount"
               class="bg-transparent border-dark border-[1px]" />
+
+            @error('transfer_evidence') <span class="text-red-600">{{ $message }}</span> @enderror
             <x-bladewind::input type="file" required label="Upload" placeholder="Drop Image Here"
               name="transfer_evidence" class="bg-transparent border-dark border-[1px]" />
+
           </div>
 
 
           <!-- Input field to trigger program selection -->
-          <div class=" rounded-md flex flex-col gap-2">
-            <div class="flex gap-3 items-center">
-              <div class="w-7 h-7 ">
-                <x-bladewind::input type="checkbox" id="programCheckbox" onchange="togglePrograms()"
-                  class="bg-transparent border-dark border-[1px]" />
-              </div>
-              <p class="text-[12px]">
-                Allocate Donation to a Program</p>
-            </div>
-
-            <main id="programButtons" class="hidden flex flex-col gap-2 shadow-sm">
-              <!-- Selected Program Wrapper -->
-              <div id="selectedProgramWrapper"
-                class="flex w-full  bg-white-dark p-2 items-center justify-between hidden">
-                <section class="flex gap-1 flex-col">
-                  <p class="text-[14px] font-bold">Selected Program:</p>
-                  <p id="selectedProgramInput" class="text-[14px]"></p>
-                </section>
-                <div>
-                  <x-button color="primary" variant="ghost" rounded="[120px]" size="square-sm"
-                    onclick="clearSelectedProgram()">
-                    <x-bladewind::icon name="x-mark" class="text-primary" />
-                  </x-button>
-                </div>
-              </div>
-
-              <div class="flex w-full flex-col gap-3 items-start" id="programList">
-                <div class="flex gap-3 items-start w-full">
-
-                  <input type="text" label="Search Program" wire:model.defer="search" placeholder="Search Program"
-                    class="text-[12px] rounded-md" wire:keydown.enter="performSearch" />
-                  <x-button color="dark" class="h-max" size="medium" variant="outlined" rounded="none">
-                    <p class="text-[12px]">Search</p>
-                  </x-button>
-                  <x-button onclick="window.location='/news'" color="dark" class="h-max" size="medium"
-                    variant="outlined" rounded="none">
-                    <p class="text-[12px]">Clear</p>
-                  </x-button>
-                </div>
-
-                <!-- Program List Container -->
-                <div class="flex flex-col w-full p-2 bg-white-l">
-                  @foreach ($programHere as $program)
-            <div onclick="selectProgram('{{ $program['id'] }}', '{{ $program['name'] }}')"
-            class="bg-transparent hover:bg-white-dark p-2 rounded-sm">
-            {{ $program['id'] }} - {{ $program['name'] }}
-            </div>
-          @endforeach
-                </div>
-              </div>
-            </main>
+          <div class="flex flex-col gap-2">
+            <label for="disaster_program_id" class="text-[14px] font-medium text-gray-700">Disaster Program</label>
+            <select id="disaster_program_id" wire:model="disaster_program_id"
+              class="w-full p-3 border-gray-300 rounded">
+              <option value="">Select Program</option>
+              @foreach ($programs as $program)
+          <option value="{{ $program->id }}">{{ $program->name }}</option>
+          @error('disaster_program_id') <span class="text-red-600">{{ $message }}</span> @enderror
+        @endforeach
+            </select>
+            @error('message') <span class="text-red-600">{{ $message }}</span> @enderror
           </div>
         </div>
-      </div>
-      <x-button>
-        Donate
-      </x-button>
-    </section>
+
+        <x-button type="submit">
+          Donate
+        </x-button>
+    </form>
   </main>
 </main>
 

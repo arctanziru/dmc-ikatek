@@ -2,47 +2,22 @@
 
   $navLinks = [
     [
-    'route' => 'dashboard',
+    'label' => 'My Dashboard',
+    'route' => 'reporter.dashboard',
     'icon' => 'chart-bar-square',
-    'label' => 'Dashboard'
     ],
     [
-    'route' => 'users',
-    'icon' => 'user-circle',
-    'label' => 'Users'
-    ],
-    [
-    'route' => 'dashboard.news',
-    'icon' => 'newspaper',
-    'label' => 'News'
-    ],
-    [
-    'route' => 'dashboard.disaster',
-    'icon' => 'fire',
-    'label' => 'Disaster'
-    ],
-    [
-    'route' => 'dashboard.disaster.program.category',
-    'icon' => 'fire',
-    'label' => 'Disaster program category'
-    ],
-    [
-    'route' => 'dashboard.disaster.program',
-    'icon' => 'fire',
-    'label' => 'Disaster program'
-    ],
-    [
-    'route' => 'dashboard.donation',
-    'icon' => 'banknotes',
-    'label' => 'Donation'
+    'label' => 'Report A Disaster',
+    'route' => 'reporter.disaster',
+    'icon' => 'bell-alert',
     ],
   ];
 
 @endphp
 
 
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html class="light" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>

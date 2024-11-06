@@ -44,7 +44,7 @@
         ],
 
     ];
-    $newsItems = $news->slice(1, 4); // Skip the first item and take the next 4
+    $newsItems = $news // Skip the first item and take the next 4
 @endphp
 
 <x-layouts.landing :title="'Home Page'">
@@ -184,12 +184,30 @@
                         <div class="h-[2px] w-60 bg-primary"></div>
                     </section>
                 </div>
-                <section class="flex gap-6 justify-center w-full ">
-                    <x-program-card />
-                    <x-program-card />
-                    <x-program-card />
-                    <x-program-card />
+
+                <section class="flex gap-6 justify-center w-full">
+                    @foreach ($programs as $program)
+                        <x-program-card name="{{ $program->name }}" desc="{{ $program->description }}"
+                            target="{{ (int) $program->target_donation }}"
+                            totalDonation="{{ $program->donations->sum('amount') }}"
+                            category="{{ $program->category->name }}" id="{{ $program->id }}"
+                            createdAt="{{ $program->created_at->format('d M Y') }}" />
+                    @endforeach
+                    <a href="/programs"
+                        class=" hover:text-primary  cursor-pointer p-3 shadow-[0_0_2px_0_rgba(0,0,0,0.80)] hover:shadow-primary z-20 bg-white flex flex-col items-start gap-2 justify-center overflow-hidden w-[264px]items-center">
+                        <div class="w-[240px] flex flex-col items-center justify-center">
+                            <div class="rounded-[50%] p-2 border-[1px] border-inherit">
+                                <x-bladewind::icon name="chevron-right" class="!h-6 !w-6" />
+                            </div>
+                            <p class="text-[18px]">
+                                More Program
+                            </p>
+                        </div>
+
+                    </a>
                 </section>
+
+
             </section>
 
 

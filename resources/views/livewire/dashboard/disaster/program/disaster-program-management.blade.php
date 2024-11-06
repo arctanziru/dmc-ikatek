@@ -38,7 +38,8 @@ $statusOptions = [
         <x-button wire:click="redirectToCreate" class="shrink-0 mb-4">Create Program</x-button>
     </div>
 
-    <x-bladewind::table has_shadow="true" divider="thin">
+    <div class=overflow-x-auto""> 
+<x-bladewind::table has_shadow="true" divider="thin">
         <x-slot name="header" class="bg-gray-50">
             <th>Name</th>
             <th>Description</th>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Dashboard;
+namespace App\Livewire\Reporter;
 
 use App\Models\Disaster;
 use App\Models\DisasterProgram;
@@ -10,8 +10,8 @@ use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-#[Layout('components.layouts.dashboard')]
-class Dashboard extends Component
+#[Layout('components.layouts.reporter-dashboard')]
+class Reporter extends Component
 {
     public $totalDonations;
     public $totalPrograms;
@@ -46,7 +46,7 @@ class Dashboard extends Component
 
         $this->recentDisasters = Disaster::with('city.province')
             ->latest()
-            ->take(value: 5)
+            ->take(5)
             ->get()
             ->filter(function ($disaster) {
                 return $disaster->city && $disaster->city->province;
@@ -148,6 +148,6 @@ class Dashboard extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.dashboard');
+        return view('livewire.reporter.reporter-dashboard');
     }
 }

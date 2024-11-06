@@ -3,7 +3,7 @@
         ['name' => 'About Us', 'url' => '/about-us'],
         ['name' => 'Our Works', 'url' => '/our-works'],
         ['name' => 'Our Reach', 'url' => '/our-reach'],
-        ['name' => 'Get Involved', 'url' => '/#get-involved']
+        ['name' => 'Get Involved', 'url' => '/#get-involved'],
     ];
 
     // Set classes for navbar variant
@@ -31,19 +31,23 @@
     </div>
 
     <!-- Right menu for desktop -->
-    <div class="hidden gap-5 items-center justify-center md:flex">
-        <div class="flex gap-6">
+    <div class="hidden gap-3 items-center justify-center md:flex">
+        <div class="flex gap-3">
             @foreach ($links as $link)
                 <a href="{{ $link['url'] }}"
                     class="text-[12px] transition-[200ms] hover:transition-[200ms] hover:text-primary">{{ $link['name'] }}</a>
             @endforeach
         </div>
-
+        <a href="/disaster">
+            <x-button size="medium" variant="outlined" color="white">
+                <p class="text-[12px]">Disaster <x-bladewind::icon name="arrow-right" class="h-4 w-4"/></p>
+            </x-button>
+        </a>
         <a href="/donate">
             <x-button size="medium">
                 <p class="text-[12px]">Donate</p>
+            </x-button>
         </a>
-        </x-button>
     </div>
 
     <!-- Mobile menu button aligned to right -->
@@ -109,7 +113,7 @@
             if ({{ $variant === "transparent"}}) {
 
 
-                if (window.scrollY >= window.innerHeight - 100) {
+                if (window.scrollY >= window.innerHeight - 500) {
                     navbar.classList.remove(transparentClass);
                     navbar.classList.remove(textClass);
                     navbar.classList.add(darkClass);

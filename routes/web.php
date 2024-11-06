@@ -4,8 +4,10 @@ use App\Livewire\AboutUsPage;
 use App\Livewire\AccountabilityPage;
 use App\Livewire\Auth\Login;
 use App\Livewire\Counter;
+;
 use App\Livewire\HistoryPage;
 use App\Livewire\NewsPage;
+use App\Livewire\OurReachPage;
 use App\Livewire\OurTeamPage;
 use App\Livewire\OurWorksPage;
 use App\Livewire\DonatePage;
@@ -32,6 +34,12 @@ use App\Livewire\Dashboard\Donation\DonationEdit;
 use App\Livewire\Dashboard\Donation\DonationManagement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Reporter\Reporter;
+use App\Livewire\Reporter\Disaster\DisasterReportManagement;
+use App\Livewire\Reporter\Disaster\DisasterReportCreate;
+use App\Livewire\ReportDisaster;
+use App\Livewire\DisasterPage;
+use App\Livewire\ProgramPage;
 
 /*
 |----------------------------------------------------------------------
@@ -52,12 +60,16 @@ Route::get('/counter', Counter::class);
 Route::get('/login', Login::class)->name('login');
 Route::get('/news', NewsPage::class)->name('news');
 Route::get('/our-works', OurWorksPage::class);
+Route::get('/our-reach', OurReachPage::class);
 Route::get('/donate', DonatePage::class);
 Route::get('/about-us', AboutUsPage::class);
 Route::get('/leadership-and-organization', OurTeamPage::class);
 Route::get('/history', HistoryPage::class);
 Route::get('/strategy', StrategyPage::class);
 Route::get('/accountability', AccountabilityPage::class);
+Route::get('/disaster', DisasterPage::class);
+Route::get('/disaster/report', ReportDisaster::class);
+Route::get('/programs', ProgramPage::class);
 
 Route::post('/logout', function () {
   Auth::logout();
@@ -106,3 +118,11 @@ Route::prefix('dashboard')
       Route::get('/{donation}/edit', DonationEdit::class)->name('dashboard.donation.edit');
     });
   });
+
+
+// Route::prefix('report')
+//   ->middleware(['auth:sanctum', 'role:admin,reporter'])
+//   ->group(function () {
+//     Route::get('/dashboard', Reporter::class)->name('reporter.dashboard');
+//     Route::get('/disaster', DisasterReportCreate::class)->name('reporter.disaster');
+//   });
