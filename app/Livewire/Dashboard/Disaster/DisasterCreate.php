@@ -17,6 +17,7 @@ class DisasterCreate extends Component
     public $longitude;
     public $city_id;
     public $user_id;
+    public $reporter_name;
     public $selectedProvince = null;
     public $provinces = [];
     public $cities = [];
@@ -27,7 +28,8 @@ class DisasterCreate extends Component
         'latitude' => 'required|numeric',
         'longitude' => 'required|numeric',
         'city_id' => 'required|exists:indonesia_cities,id',
-        'user_id' => 'required|exists:users,id',
+        'user_id' => 'nullable|exists:users,id',
+        'reporter_name' => 'nullable|string|max:255',
     ];
 
     public function mount()
@@ -54,6 +56,7 @@ class DisasterCreate extends Component
             'longitude' => $this->longitude,
             'city_id' => $this->city_id,
             'user_id' => $this->user_id,
+            'reporter_name' => $this->reporter_name,
         ]);
 
         session()->flash('title', 'Disaster Created');

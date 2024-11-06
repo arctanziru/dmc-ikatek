@@ -17,6 +17,7 @@ class DisasterReportCreate extends Component
     public $longitude;
     public $city_id;
     public $user_id;
+    public $reporter_name;
     public $selectedProvince = null;
     public $provinces = [];
     public $cities = [];
@@ -27,7 +28,8 @@ class DisasterReportCreate extends Component
         'latitude' => 'required|numeric',
         'longitude' => 'required|numeric',
         'city_id' => 'required|exists:indonesia_cities,id',
-        'user_id' => 'required|exists:users,id',
+        'user_id' => 'nullable|exists:users,id',
+        'reporter_name' => 'nullable|string|max:255',
     ];
 
     public function mount()
@@ -54,12 +56,13 @@ class DisasterReportCreate extends Component
             'longitude' => $this->longitude,
             'city_id' => $this->city_id,
             'user_id' => $this->user_id,
+            'reporter_name' => $this->reporter_name,
         ]);
 
-        session()->flash('title', 'Disaster Created');
-        session()->flash('message', 'Disaster created successfully.');
+        session()->flash('title', 'Disaster Reporter');
+        session()->flash('message', 'Disaster reported successfully.');
 
-        return redirect()->route('dashboard.disaster');
+        return redirect()->route('home');
     }
 
     public function render()

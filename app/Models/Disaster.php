@@ -18,6 +18,7 @@ class Disaster extends Model
         'city_id',
         'status',
         'user_id',
+        'reporter_name',
     ];
 
     public function user()

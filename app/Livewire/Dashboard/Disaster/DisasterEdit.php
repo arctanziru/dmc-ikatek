@@ -17,6 +17,7 @@ class DisasterEdit extends Component
     public $latitude;
     public $longitude;
     public $city_id;
+    public $reporter_name;
     public $selectedProvince = null;
     public $provinces = [];
     public $cities = [];
@@ -27,6 +28,7 @@ class DisasterEdit extends Component
         'latitude' => 'required|numeric',
         'longitude' => 'required|numeric',
         'city_id' => 'required|exists:indonesia_cities,id',
+        'reporter_name' => 'nullable|string|max:255',
     ];
 
     public function mount(Disaster $disaster)
@@ -37,6 +39,7 @@ class DisasterEdit extends Component
         $this->latitude = $disaster->latitude;
         $this->longitude = $disaster->longitude;
         $this->city_id = $disaster->city_id;
+        $this->reporter_name = $disaster->reporter_name;
 
         $this->provinces = \Indonesia::allProvinces();
 
@@ -71,6 +74,7 @@ class DisasterEdit extends Component
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'city_id' => $this->city_id,
+            'reporter_name' => $this->reporter_name,
         ]);
 
         session()->flash('title', 'Disaster Updated');

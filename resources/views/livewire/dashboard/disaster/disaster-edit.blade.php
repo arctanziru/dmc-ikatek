@@ -13,6 +13,11 @@
         </div>
 
         <div class="mb-4">
+            <label for="reporter_name" class="block text-gray-700">Reporter name</label>
+            <input type="text" id="reporter_name" wire:model="reporter_name" class="w-full border-gray-300 rounded">
+        </div>
+
+        <div class="mb-4">
             <label for="province" class="block text-gray-700">Province</label>
             <select id="province" wire:model="selectedProvince" class="w-full border-gray-300 rounded">
                 <option value="">Select Province</option>
@@ -36,6 +41,7 @@
 
         <div wire:ignore>
             <div id="map" class="w-full h-64 mb-4"></div>
+            @error('latitude') <span class="text-red-600">You need to select a point from the map</span> @enderror
         </div>
 
         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update Disaster</button>

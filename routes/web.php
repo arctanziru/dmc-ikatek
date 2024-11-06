@@ -3,8 +3,8 @@
 use App\Livewire\AboutUsPage;
 use App\Livewire\AccountabilityPage;
 use App\Livewire\Auth\Login;
-use App\Livewire\Counter;
-;
+use App\Livewire\Counter;;
+
 use App\Livewire\HistoryPage;
 use App\Livewire\NewsPage;
 use App\Livewire\OurReachPage;
@@ -68,7 +68,7 @@ Route::get('/history', HistoryPage::class);
 Route::get('/strategy', StrategyPage::class);
 Route::get('/accountability', AccountabilityPage::class);
 Route::get('/disaster', DisasterPage::class);
-Route::get('/disaster/report', ReportDisaster::class);
+Route::get('/disaster/report', ReportDisaster::class)->name('report.disaster');
 Route::get('/programs', ProgramPage::class);
 
 Route::post('/logout', function () {
