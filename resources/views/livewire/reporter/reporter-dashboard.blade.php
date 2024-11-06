@@ -75,13 +75,6 @@
                     @endforeach
                 @endif
             </div>
-
-            <div class="w-full text-center">
-                <a class="text-dark font-bold text-[16px] hover:underline duration-200 cursor-pointer hover:text-secondary"
-                    href="/dashboard/donation">
-                    See All Donation
-                </a>
-            </div>
         </div>
         <div class="bg-white flex-col flex gap-1 md:gap-2 lg:gap-4 rounded shadow p-6">
             <h3 class="font-semibold text-lg">Recent Pending Donations</h3>
@@ -118,13 +111,6 @@
                         </div>
                     @endforeach
                 @endif
-            </div>
-
-            <div class="w-full text-center">
-                <a class="text-dark font-bold text-[16px] hover:underline duration-200 cursor-pointer hover:text-secondary"
-                    href="/dashboard/donation">
-                    See All Donation
-                </a>
             </div>
         </div>
     </section>
@@ -172,13 +158,6 @@
 
                     @endforeach
                 @endif
-            </div>
-
-            <div class="w-full text-center">
-                <a class="text-dark font-bold text-[16px] hover:underline duration-200 cursor-pointer hover:text-secondary"
-                    href="/dashboard/disaster">
-                    See All Disaster
-                </a>
             </div>
         </div>
         <div class="bg-white flex-col flex gap-1 md:gap-2 lg:gap-4 rounded shadow p-6">
@@ -237,31 +216,18 @@
                             @endforeach
                 @endif
             </div>
-
-            <div class="w-full text-center">
-                <a class="text-dark font-bold text-[16px] hover:underline duration-200 cursor-pointer hover:text-secondary"
-                    href="/dashboard/disaster/program">
-                    See All Program
-                </a>
-            </div>
         </div>
 
     </section>
     <!-- Graph Section -->
-    {{$disasterData['data'][0]}}
-
-    <!-- Graph Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-        <!-- Donations Chart -->
         <div class="bg-white rounded shadow p-4">
             <h3 class="font-semibold text-lg">Donations Over Time</h3>
             <canvas id="donationsChart" height="360" class="mt-4"></canvas>
         </div>
 
-        <!-- Disaster Provinces Chart -->
-        <div class="bg-white rounded shadow p-4">
+        <div class="bg-white rounded shadow p-4" wire:ignore>
             <h3 class="font-semibold text-lg">Disaster Provinces</h3>
-            <!-- Remove any centering classes or styles from the canvas -->
             <canvas id="disastersChart" height="360" class="mt-4"></canvas>
         </div>
     </div>
@@ -327,5 +293,4 @@
             }
         });
     </script>
-
 </main>

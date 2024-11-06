@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Livewire\Auth;
 
 use Illuminate\Support\Facades\Auth;
@@ -32,6 +31,15 @@ class Login extends Component
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             session()->regenerate();
             session()->flash('success_login', "Glad to see you back, " . Auth::user()->name);
+
+            // Check the user's role after logging in
+            $user = Auth::user();
+            if ($user->role === 'admin') {
+                return redirect()->intended('/dashboard');
+            }else if($user->role === 'reporter')
+            {
+                return redirect()->intended('/report');
+            }
 
             return redirect()->intended('/dashboard');
         }

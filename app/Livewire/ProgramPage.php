@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Livewire\Dashboard\Disaster\Program;
+namespace App\Livewire;
 
 use App\Models\DisasterProgram;
+use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
-use Livewire\Component;
 use Livewire\WithPagination;
 
-#[Layout('components.layouts.dashboard')]
-#[Title('Disaster Program Management')]
-class DisasterProgramManagement extends Component
+
+
+#[Layout('components.layouts.landing')]
+#[Title(content: 'Donate - DMC Ikatek FT-UH')]
+class ProgramPage extends Component
 {
     use WithPagination;
 
@@ -58,29 +60,6 @@ class DisasterProgramManagement extends Component
             })->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
 
-        return view('livewire.dashboard.disaster.program.disaster-program-management', [
-            'programs' => $programs,
-        ]);
-    }
-
-    public function redirectToCreate()
-    {
-        return redirect()->route('dashboard.disaster.program.create');
-    }
-
-    public function redirectToEdit($programId)
-    {
-        return redirect()->route('dashboard.disaster.program.edit', ['program' => $programId]);
-    }
-
-    public function deleteProgram($programId)
-    {
-        $program = DisasterProgram::find($programId);
-        if ($program) {
-            $program->delete();
-        }
-
-        session()->flash('title', 'Program Deleted');
-        session()->flash('message', 'Disaster Program "' . $program->name . '" deleted successfully.');
+        return view('livewire.program-page',['programs'=> $programs]);
     }
 }
