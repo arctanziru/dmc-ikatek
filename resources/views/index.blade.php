@@ -1,61 +1,61 @@
 @php
-    $cards = [
-        [
-            'name' => 'Our Mission',
-            'subtitle' => 'Learn About Our Commitment.',
-            'button' => 'Learn More'
-        ],
-        [
-            'name' => 'Corporate Strategy',
-            'subtitle' => 'Discover our approach to disaster response.',
-            'button' => 'Explore Strategy'
-        ],
-        [
-            'name' => 'Organization & Leadership',
-            'subtitle' => 'Meet our leaders and governance team',
-            'button' => 'Meet The Team'
-        ],
-        [
-            'name' => 'Our History',
-            'subtitle' => 'Track our key milestones in disaster management',
-            'button' => 'Read More'
-        ],
-    ];
-    function formatCurrency($amount)
-    {
-        if ($amount >= 1_000_000_000_000) { // Trillion
-            return number_format($amount / 1_000_000_000_000, 0) . ' T+'; // Format to 3 decimal places and add +
-        } elseif ($amount >= 1_000_000_000) { // Billion
-            return number_format($amount / 1_000_000_000, 0) . ' B+'; // Format to 3 decimal places and add +
-        } else {
-            return number_format($amount, 2); // Default formatting
-        }
-    }
+$cards = [
+[
+'name' => 'Our Mission',
+'subtitle' => 'Learn About Our Commitment.',
+'button' => 'Learn More'
+],
+[
+'name' => 'Corporate Strategy',
+'subtitle' => 'Discover our approach to disaster response.',
+'button' => 'Explore Strategy'
+],
+[
+'name' => 'Organization & Leadership',
+'subtitle' => 'Meet our leaders and governance team',
+'button' => 'Meet The Team'
+],
+[
+'name' => 'Our History',
+'subtitle' => 'Track our key milestones in disaster management',
+'button' => 'Read More'
+],
+];
+function formatCurrency($amount)
+{
+if ($amount >= 1_000_000_000_000) { // Trillion
+return number_format($amount / 1_000_000_000_000, 0) . ' T+'; // Format to 3 decimal places and add +
+} elseif ($amount >= 1_000_000_000) { // Billion
+return number_format($amount / 1_000_000_000, 0) . ' B+'; // Format to 3 decimal places and add +
+} else {
+return number_format($amount, 2); // Default formatting
+}
+}
 
-    $partners = [
-        [
-            'name' => 'Government',
-            'path' => 'icons/Govt.svg',
-        ],
-        [
-            'name' => 'Non-Gov Organization',
-            'path' => 'icons/NonGovt.svg',
-        ],
-        [
-            'name' => 'Private Sector Partnership',
-            'path' => 'icons/PSP.svg',
-        ],
-        [
-            'name' => 'Academia and Think Tanks',
-            'path' => 'icons/Academia.svg',
-        ],
-        [
-            'name' => 'Goodwill Ambassador & High Level Supporter',
-            'path' => 'icons/Ambassador.svg',
-        ],
+$partners = [
+[
+'name' => 'Government',
+'path' => 'icons/Govt.svg',
+],
+[
+'name' => 'Non-Gov Organization',
+'path' => 'icons/NonGovt.svg',
+],
+[
+'name' => 'Private Sector Partnership',
+'path' => 'icons/PSP.svg',
+],
+[
+'name' => 'Academia and Think Tanks',
+'path' => 'icons/Academia.svg',
+],
+[
+'name' => 'Goodwill Ambassador & High Level Supporter',
+'path' => 'icons/Ambassador.svg',
+],
 
-    ];
-    $newsItems = $news // Skip the first item and take the next 4
+];
+$newsItems = $news // Skip the first item and take the next 4
 @endphp
 
 <x-layouts.landing :title="'Home Page'">
@@ -150,10 +150,10 @@
                     </div>
                     <div class="flex gap-3 md:gap-6 lg:gap-9 flex-wrap md:flex-nowrap items-center justify-center">
                         @foreach ($partners as $partner)
-                            <div class="gap-3 w-24 md:w-32 lg:w-40 flex flex-col select-none items-center">
-                                <img draggable="false" src="{{ $partner['path'] }}" class="h-[60px] w-full" />
-                                <p class="text-center text-primary text-[10px] font-semibold">{{ $partner['name'] }}</p>
-                            </div>
+                        <div class="gap-3 w-24 md:w-32 lg:w-40 flex flex-col select-none items-center">
+                            <img draggable="false" src="{{ $partner['path'] }}" class="h-[60px] w-full" />
+                            <p class="text-center text-primary text-[10px] font-semibold">{{ $partner['name'] }}</p>
+                        </div>
                         @endforeach
                     </div>
                 </section>
@@ -199,7 +199,21 @@
                         src="https://datawrapper.dwcdn.net/wAZge/1/" scrolling="no" frameborder="0"
                         style="width: 100%; min-width: 100% !important; border: none;" height="256"
                         data-external="1"></iframe>
-                    <script type="text/javascript">!function () { "use strict"; window.addEventListener("message", (function (a) { if (void 0 !== a.data["datawrapper-height"]) { var e = document.querySelectorAll("iframe"); for (var t in a.data["datawrapper-height"]) for (var r = 0; r < e.length; r++)if (e[r].contentWindow === a.source) { var i = a.data["datawrapper-height"][t] + "px"; e[r].style.height = i } } })) }();
+                    <script type="text/javascript">
+                        ! function() {
+                            "use strict";
+                            window.addEventListener("message", (function(a) {
+                                if (void 0 !== a.data["datawrapper-height"]) {
+                                    var e = document.querySelectorAll("iframe");
+                                    for (var t in a.data["datawrapper-height"])
+                                        for (var r = 0; r < e.length; r++)
+                                            if (e[r].contentWindow === a.source) {
+                                                var i = a.data["datawrapper-height"][t] + "px";
+                                                e[r].style.height = i
+                                            }
+                                }
+                            }))
+                        }();
                     </script>
                 </section>
                 <x-button variant="outlined" color="white" size="small" class=" mt-4">
@@ -229,13 +243,13 @@
 
                 <section class="hidden md:flex gap-3 lg:gap-6 justify-center w-full">
                     @foreach ($programs as $program)
-                        <div class="flex justify-center">
-                            <x-program-card name="{{ $program->name }}" image="{{ $program->image }}"
-                                desc="{{ $program->description }}" target="{{ (int) $program->target_donation }}"
-                                totalDonation="{{ $program->donations->sum('amount') }}"
-                                category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
-                                createdAt="{{ $program->created_at->format('d M Y') }}" status="{{$program->status}}" />
-                        </div>
+                    <div class="flex justify-center">
+                        <x-program-card name="{{ $program->name }}" image="{{ $program->image }}"
+                            desc="{{ $program->description }}" target="{{ (int) $program->target_donation }}"
+                            totalDonation="{{ $program->donations->sum('amount') }}"
+                            category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
+                            createdAt="{{ $program->created_at->format('d M Y') }}" status="{{$program->status}}" />
+                    </div>
                     @endforeach
 
                     <a href="/programs"
@@ -472,28 +486,30 @@
                     <!-- Right Section (News List) -->
                     <section class="grid grid-cols-2 lg:flex lg:flex-col gap-1 md:gap-2 lg:h-[436px]">
                         @foreach ($newsItems->skip(1) as $newsItem)
-                            <a id="news-card"href="/news/{{$newsItem->id}}"
-                                class="flex gap-2 lg:gap-4 shadow-[0_0_1px_0] shadow-dark/20  lg:shadow-none bg-white cursor-pointer items-center lg:flex-row flex-col justify-start hover:bg-white-light p-1 md:p-2 rounded-md lg:w-[360px]">
-                                <div class="rounded-lg h-24 md:h-32 lg:h-20 w-full lg:w-20 flex bg-dark">
-                                    <img src="{{ asset($newsItem->image) }}" class="w-full h-full object-cover rounded-lg"
-                                        alt="News Image" />
-                                </div>
+                        <a id="news-card" href="/news/{{$newsItem->id}}"
+                            class="flex gap-2 lg:gap-4 shadow-[0_0_1px_0] shadow-dark/20  lg:shadow-none bg-white cursor-pointer items-center lg:flex-row flex-col justify-start hover:bg-white-light p-1 md:p-2 rounded-md lg:w-[360px]">
+                            <div class="rounded-lg h-24 md:h-32 lg:h-20 w-full lg:w-20 flex bg-dark">
+                                <img src="{{ $newsItem->image }}" class="w-full h-full object-cover rounded-lg"
+                                    alt="News Image" />
+                            </div>
 
-                                <div class="flex flex-col w-full lg:w-fit lg:p-0 p-2 flex-1 justify-between">
-                                    <div class="flex flex-col">
-                                        <p class="font-light text-[8px] md:text-[14px] lg:text-[16px]">
-                                            {{ $newsItem->author }}</p>
-                                        <p
-                                            class="font-medium text-[10px] md:text-[14px] lg:text-[16px] text-ellipsis line-clamp-2">
-                                            {{ $newsItem->title }}</p>
-                                    </div>
-                                    <div class="flex gap-1">
-                                        <p class="font-light text-[8px] md:text-[12px] text-dark-light">
-                                            {{ optional(value: $newsItem->created_at)->diffForHumans() }}
-                                        </p>
-                                    </div>
+                            <div class="flex flex-col w-full lg:w-fit lg:p-0 p-2 flex-1 justify-between">
+                                <div class="flex flex-col">
+                                    <p class="font-light text-[8px] md:text-[14px] lg:text-[16px]">
+                                        {{ $newsItem->author }}
+                                    </p>
+                                    <p
+                                        class="font-medium text-[10px] md:text-[14px] lg:text-[16px] text-ellipsis line-clamp-2">
+                                        {{ $newsItem->title }}
+                                    </p>
                                 </div>
-                            </a>
+                                <div class="flex gap-1">
+                                    <p class="font-light text-[8px] md:text-[12px] text-dark-light">
+                                        {{ optional(value: $newsItem->created_at)->diffForHumans() }}
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
                         @endforeach
                     </section>
                 </section>

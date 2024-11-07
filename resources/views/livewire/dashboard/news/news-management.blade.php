@@ -1,10 +1,10 @@
 @php
-    $perPageData = [
-        ['label' => '5', 'value' => '5'],
-        ['label' => '10', 'value' => '10'],
-        ['label' => '15', 'value' => '15'],
-        ['label' => '20', 'value' => '20'],
-    ]
+$perPageData = [
+['label' => '5', 'value' => '5'],
+['label' => '10', 'value' => '10'],
+['label' => '15', 'value' => '15'],
+['label' => '20', 'value' => '20'],
+]
 @endphp
 
 <div class="p-6 space-y-4">
@@ -16,7 +16,7 @@
 
         <select wire:model.live.debounce.150ms="perPage" class="border  rounded-md bw-raw-select w-20 mb-4">
             @foreach($perPageData as $data)
-                <option value="{{ $data['value'] }}">{{ $data['label'] }}</option>
+            <option value="{{ $data['value'] }}">{{ $data['label'] }}</option>
             @endforeach
         </select>
         <x-button wire:click="redirectToCreate" class="shrink-0 mb-4">Create News</x-button>
@@ -34,24 +34,24 @@
             </x-slot>
             <tbody>
                 @foreach ($news as $newsItem)
-                    <tr>
-                        <td>{{ $newsItem->title }}</td>
-                        <td class="w-[100px]"><img src="{{ asset($newsItem->image) }}" alt=""
-                                class="w-full h-auto object-cover"></td>
-                        <td>{{ $newsItem->newsCategory->name }}</td>
-                        <td>{{ $newsItem->description }}</td>
-                        <td>{{ $newsItem->author }}</td>
-                        <td class="w-[200px]">
-                            <x-bladewind::button wire:click="redirectToEdit({{ $newsItem->id }})" size="small"
-                                color="primary" icon="pencil-square">
-                                Edit
-                            </x-bladewind::button>
-                            <x-bladewind::button wire:click="deleteNews({{ $newsItem->id }})"
-                                wire:confirm="Are you sure to delete this?" size="small" color="red" icon="trash">
-                                Delete
-                            </x-bladewind::button>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ $newsItem->title }}</td>
+                    <td class="w-[100px]"><img src="{{ $newsItem->image }}" alt=""
+                            class="w-full h-auto object-cover"></td>
+                    <td>{{ $newsItem->newsCategory->name }}</td>
+                    <td>{{ $newsItem->description }}</td>
+                    <td>{{ $newsItem->author }}</td>
+                    <td class="w-[200px]">
+                        <x-bladewind::button wire:click="redirectToEdit({{ $newsItem->id }})" size="small"
+                            color="primary" icon="pencil-square">
+                            Edit
+                        </x-bladewind::button>
+                        <x-bladewind::button wire:click="deleteNews({{ $newsItem->id }})"
+                            wire:confirm="Are you sure to delete this?" size="small" color="red" icon="trash">
+                            Delete
+                        </x-bladewind::button>
+                    </td>
+                </tr>
                 @endforeach
             </tbody>
         </x-bladewind::table>

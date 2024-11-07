@@ -93,7 +93,7 @@
                         <p>No recent pending donations available.</p>
                     </div>
                 @else
-                    @foreach($recentDonations as $index => $donation)
+                    @foreach($pendingDonations as $index => $donation)
                         <div class="flex flex-col items-center">
                             <section
                                 class="flex p-2 gap-3 w-full cursor-pointer items-center rounded bg-transparent hover:bg-dark/5 duration-200">
