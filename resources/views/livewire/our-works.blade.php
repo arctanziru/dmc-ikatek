@@ -170,14 +170,15 @@ $areasofworks = [
 
       <section class="flex w-full max-w-[1440px]">
         <div class="h-full flex flex-col gap-4 md:gap-8 lg:gap-0 lg:flex-row w-full justify-between  ">
-          <div class="flex lg:min-w-[520px]">
-            <div class="h-full flex-1 lg:h-full md:h-[360px] lg:w-fit w-full">
-              <img src="images/placeholder.webp" class="rounded-md h-full w-full object-cover grow shrink basis-0" />
+          <div class="flex lg:min-w-[360px]">
+            <div class="h-full  lg:h-full md:h-[360px]  lg:w-fit flex overflow-hidden">
+              <img src="/images/disaster risk.JPG"
+                class="rounded-md h-fit w-full lg:w-[360px] object-cover grow shrink basis-0" />
             </div>
             <div class="hidden lg:inline lg:w-[90px] h-full"></div>
           </div>
 
-          <div class="flex flex-col md:gap-2 lg:gap-6  self-stretch justify-start flex-grow">
+          <div class="flex flex-col md:gap-2 lg:gap-6 flex-1 self-stretch justify-start flex-grow">
             <div class="flex flex-col gap-2">
               <p class="text-primary font-medium">DISASTER RISK REDUCTION</p>
 
@@ -222,8 +223,8 @@ $areasofworks = [
       <!-- Emergency Response -->
       <section class="flex relative flex-col gap-4 md:gap-0  w-full items-center  overflow-hidden"
         id="emergency-response-plan">
-        <img src="images/hero.jpg"
-          class="static md:absolute top-0 left-auto w-full rounded-sm lg:rounded-none md:w-[30%] max-w-[480px] h-full object-cover -z-10" />
+        <img src="images/responseplan.JPG"
+          class="static md:absolute top-0 left-auto w-full flex-1 h-full rounded-sm lg:rounded-none md:w-[30%] max-w-[480px] object-cover z-20  md:-z-10" />
         <main class="grid lg:grid-cols-2 gap-4 md:gap-8 lg:gap-16 w-full max-w-[1440px] z-20 ">
 
           <section class="flex flex-col  gap-8 lg:mb-12">
@@ -327,7 +328,8 @@ $areasofworks = [
               <div class="flex flex-col gap-2">
                 <p class="text-primary font-medium">EDUCATION & TECHNOLOGY</p>
 
-                <p class="font-bold text-[32px]">We Empower Communities Through Knowledge and Innovation for a Resilient
+                <p class="font-bold text-[24px] md:text-[32px]">We Empower Communities Through Knowledge and Innovation
+                  for a Resilient
                   Future.</p>
               </div>
               <p>
@@ -348,12 +350,12 @@ $areasofworks = [
                 <div class="h-16 w-full">
                 </div>
                 <div class="h-full ">
-                  <img src="images/MST.webp" class="h-full object-cover rounded-lg" />
+                  <img src="images/management.jpeg" class="h-full object-cover rounded-lg" />
                 </div>
               </div>
               <div class="flex flex-col h-full ">
                 <div class="h-full ">
-                  <img src="images/Scholar.webp" class="h-full object-cover rounded-lg" />
+                  <img src="images/scholar.JPG" class="h-full object-cover rounded-lg" />
                 </div>
                 <div class="h-16 w-full">
                 </div>
@@ -379,7 +381,8 @@ $areasofworks = [
                   <div class="w-full grid grid-cols-2 gap-y-2">
                     <div class="flex gap-2 items-start">
                       <img src="icons/check.svg" class="h-4 w-4 " />
-                      <p class="font-light text-[10px] md:text-[12px]">Providing educational access to low-income families.</p>
+                      <p class="font-light text-[10px] md:text-[12px]">Providing educational access to low-income
+                        families.</p>
                     </div>
                     <div class="flex gap-2 items-start">
                       <img src="icons/check.svg" class="h-4 w-4 " />
@@ -407,7 +410,8 @@ $areasofworks = [
                     </div>
                     <div class="flex gap-2 items-start">
                       <img src="icons/check.svg" class="h-4 w-4 " />
-                      <p class="font-light text-[10px] md:text-[12px]">Contribution to social and economic development.</p>
+                      <p class="font-light text-[10px] md:text-[12px]">Contribution to social and economic development.
+                      </p>
                     </div>
                     <div class="flex gap-2 items-start">
                       <img src="icons/check.svg" class="h-4 w-4 " />
@@ -448,7 +452,8 @@ $areasofworks = [
                     </div>
                     <div class="flex gap-2 items-start">
                       <img src="icons/check.svg" class="h-4 w-4 " />
-                      <p class="font-light text-[10px] md:text-[12px]">Improving operational efficiency and effectiveness.</p>
+                      <p class="font-light text-[10px] md:text-[12px]">Improving operational efficiency and
+                        effectiveness.</p>
                     </div>
                     <div class="flex gap-2 items-start">
                       <img src="icons/check.svg" class="h-4 w-4 " />
@@ -460,7 +465,8 @@ $areasofworks = [
                     </div>
                     <div class="flex gap-2 items-start">
                       <img src="icons/check.svg" class="h-4 w-4 " />
-                      <p class="font-light text-[10px] md:text-[12px]">Boosting communication, collaboration, and adaptability.</p>
+                      <p class="font-light text-[10px] md:text-[12px]">Boosting communication, collaboration, and
+                        adaptability.</p>
                     </div>
                   </div>
 
