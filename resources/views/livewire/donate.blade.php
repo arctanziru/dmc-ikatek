@@ -18,7 +18,7 @@ return number_format($amount, 2); // Default formatting
     <!-- Left Section (Content) -->
     <section class="flex-1  flex flex-col gap-8">
       <div class="relative">
-        <img src="images/placeholder.webp" class="max-h-[360px] lg:max-h-none w-full object-cover" />
+        <img src="images/donate.jpg" class="max-h-[360px] lg:max-h-none w-full object-cover" />
         <div class="absolute top-0 left-0 z-20 bg-dark/70 flex w-full h-full p-6 md:p-12 items-end">
           <div class="flex flex-col">
             <p class="text-[24px]  md:text-[36px] text-white font-bold font-poppins">

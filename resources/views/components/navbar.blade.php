@@ -84,6 +84,12 @@
                             </a>
                         @endforeach
                         <!-- Donate Button at Bottom -->
+                        <a href="/disaster">
+
+                            <x-button variant="outlined" color="white" class="w-full" allignment="center">
+                                <p class="text-[14px]">Donate</p>
+                            </x-button>
+                        </a>
                         <a href="/donate">
 
                             <x-button variant="fill" color="primary" class="w-full" allignment="center">
