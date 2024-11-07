@@ -1,7 +1,9 @@
 <x-layouts.app>
+
   <div>
     <x-slot name="title">{{ $title }}</x-slot>
     <x-navbar variant="{{ request()->is('/') ? 'transparent' : 'default' }}" />
+    <x-bladewind::notification />
     {{ $slot }}
     <x-footer />
   </div>

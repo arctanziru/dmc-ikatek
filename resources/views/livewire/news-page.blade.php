@@ -7,7 +7,7 @@ return [
 })->toArray();
 @endphp
 <main class="flex flex-col justify-center items-center">
-    <div class="flex flex-col p-16 gap-8">
+    <div class="flex flex-col p-4 md:p-8 lg:p-12 max-w-[1440px] gap-8">
         <div class="w-full items-center flex justify-center">
             <h1 class="text-[36px] font-bold">Latest News</h1>
         </div>
@@ -50,7 +50,7 @@ return [
         {{-- News Items --}}
         <div class=" grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-[1440px]  ">
             @forelse ($news as $item)
-            <div
+            <a href="news/{{$item["id"]}}"
                 class="flex shadow-sm overflow-hidden shadow-dark/20 cursor-pointer flex-col hover:bg-white-light transition-[200ms] hover:transition-[200ms]">
                 <div class="min-w-full  h-[140px] rounded-lg bg-white-light">
 
@@ -81,7 +81,7 @@ return [
                     <p class="text-dark text-[12px] line-clamp-2">{{ $item['description'] }}</p>
 
                 </div>
-            </div>
+            </a>
             @empty
             <p class="text-gray-500 w-screen">No news articles found.</p>
             @endforelse
