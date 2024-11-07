@@ -65,6 +65,12 @@
 </head>
 
 <body class="m-0 p-0 w-screen overflow-x-hidden">
+    <x-bladewind::notification />
+    @if (session()->has('message') && session()->has('title'))
+    <script>
+        showNotification("{{ session('title') }}", "{{ session('message') }}");
+    </script>
+    @endif
 
     {{ $slot }}
 

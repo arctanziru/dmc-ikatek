@@ -95,10 +95,10 @@ class DonatePage extends Component
             'disaster_program_id' => $this->disaster_program_id,
         ]);
 
-        session()->flash('title', 'Donation Created');
-        session()->flash('message', 'Donation from "' . $this->donor_name . '" created successfully.');
+        session()->flash('title', 'Thank you for the donation!');
+        session()->flash('message', 'Donation from "' . $this->donor_name . '" sent successfully.');
 
-        return redirect()->route('donate');
+        return redirect()->route('home');
     }
 
     public function render()

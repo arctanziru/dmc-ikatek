@@ -35,7 +35,6 @@ class ReportDisaster extends Component
     public function mount()
     {
         $this->provinces = \Indonesia::allProvinces();
-        $this->user_id = auth()->user()->id;
     }
     public function updatedSelectedProvince($provinceId)
     {

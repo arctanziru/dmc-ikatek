@@ -1,16 +1,16 @@
 @php
-  function formatCurrency($amount)
-  {
-    if ($amount >= 1_000_000_000_000) { // Trillion
-    return number_format($amount / 1_000_000_000_000, 3) . ' T+'; // Format to 3 decimal places and add +
-    } elseif ($amount >= 1_000_000_000) { // Billion
-    return number_format($amount / 1_000_000_000, 3) . ' B+'; // Format to 3 decimal places and add +
-    } elseif ($amount >= 1_000_000) { // Million
-    return number_format($amount / 1_000_000, 2) . ' M'; // Format to 2 decimal places
-    } else {
-    return number_format($amount, 2); // Default formatting
-    }
-  }
+function formatCurrency($amount)
+{
+if ($amount >= 1_000_000_000_000) { // Trillion
+return number_format($amount / 1_000_000_000_000, 3) . ' T+'; // Format to 3 decimal places and add +
+} elseif ($amount >= 1_000_000_000) { // Billion
+return number_format($amount / 1_000_000_000, 3) . ' B+'; // Format to 3 decimal places and add +
+} elseif ($amount >= 1_000_000) { // Million
+return number_format($amount / 1_000_000, 2) . ' M'; // Format to 2 decimal places
+} else {
+return number_format($amount, 2); // Default formatting
+}
+}
 @endphp
 
 <main class="w-full flex bg-white-dark/10 justify-center">
@@ -110,15 +110,15 @@
         <p class="text-[14px] text-dark font-medium">Donor Detail</p>
         <div class="flex flex-col">
           @error('donor_name') <span class="text-red-600">{{ $message }}</span> @enderror
-          <x-bladewind::input type="text" label="Name" name="donor_name" required
+          <x-bladewind::input type="text" label="Name" name="donor_name" wire:model="donor_name" required
             class="bg-transparent border-dark border-[1px]" />
 
           @error('donor_email') <span class="text-red-600">{{ $message }}</span> @enderror
-          <x-bladewind::input type="text" label="Email" name="donor_email" required
+          <x-bladewind::input type="text" label="Email" name="donor_email" wire:model="donor_email" required
             class="bg-transparent border-dark border-[1px]" />
 
           @error('donor_organization') <span class="text-red-600">{{ $message }}</span> @enderror
-          <x-bladewind::input type="text" label="Affiliation (Optional)" name="donor_organization"
+          <x-bladewind::input type="text" label="Affiliation (Optional)" name="donor_organization" wire:model="donor_organization"
             class="bg-transparent border-dark border-[1px]" />
 
         </div>
@@ -134,26 +134,26 @@
           <p class="text-[14px] text-dark font-medium">Donation Detail</p>
           <div class="flex flex-col">
             @error('amount') <span class="text-red-600">{{ $message }}</span> @enderror
-            <x-bladewind::input type="number" required label="Amount of Donation (Rp.)" name="amount"
+            <x-bladewind::input type="number" required label="Amount of Donation (Rp.)" name="amount" wire:model="amount"
               class="bg-transparent border-dark border-[1px]" />
 
             @error('transfer_evidence') <span class="text-red-600">{{ $message }}</span> @enderror
             <x-bladewind::input type="file" required label="Upload" placeholder="Drop Image Here"
-              name="transfer_evidence" class="bg-transparent border-dark border-[1px]" />
+              name="transfer_evidence" class="bg-transparent border-dark border-[1px]" wire:model="transfer_evidence" />
 
           </div>
 
 
           <!-- Input field to trigger program selection -->
           <div class="flex flex-col gap-2">
+            @error('disaster_program_id') <span class="text-red-600">{{ $message }}</span> @enderror
             <label for="disaster_program_id" class="text-[14px] font-medium text-gray-700">Disaster Program</label>
             <select id="disaster_program_id" wire:model="disaster_program_id"
               class="w-full p-3 border-gray-300 rounded">
               <option value="">Select Program</option>
               @foreach ($programs as $program)
-          <option value="{{ $program->id }}">{{ $program->name }}</option>
-          @error('disaster_program_id') <span class="text-red-600">{{ $message }}</span> @enderror
-        @endforeach
+              <option value="{{ $program->id }}">{{ $program->name }}</option>
+              @endforeach
             </select>
             @error('message') <span class="text-red-600">{{ $message }}</span> @enderror
           </div>
