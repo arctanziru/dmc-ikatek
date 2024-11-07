@@ -40,7 +40,7 @@
         </div>
         <a href="/disaster">
             <x-button size="medium" variant="outlined" color="white">
-                <p class="text-[12px]">Disaster <x-bladewind::icon name="arrow-right" class="h-4 w-4"/></p>
+                <p class="text-[12px]">Disaster <x-bladewind::icon name="arrow-right" class="h-4 w-4" /></p>
             </x-button>
         </a>
         <a href="/donate">
@@ -110,24 +110,29 @@
 
         // Function to handle scroll event
         function handleScroll() {
-            if ({{ $variant === "transparent"}}) {
+            // Check if the screen width is 640px (sm) or smaller
+            if (window.innerWidth < 640) {
+                // Always keep the navbar dark on small devices
+                navbar.classList.remove(transparentClass);
+                navbar.classList.add(darkClass);
+                navbar.classList.add(textClass);
+                return; // Exit the function for small devices
+            }
 
-
+            // Existing logic for larger devices
+            if ({{ $variant === "transparent" }}) {
                 if (window.scrollY >= window.innerHeight - 500) {
                     navbar.classList.remove(transparentClass);
                     navbar.classList.remove(textClass);
                     navbar.classList.add(darkClass);
                     navbar.classList.add(textClass); // Ensure text color remains white
-                    console.log("Scrollling");
-
+                    console.log("Scrolling");
                 } else {
                     navbar.classList.remove(darkClass);
                     navbar.classList.add(transparentClass);
                     navbar.classList.add(textClass); // Ensure text color remains white
-                    console.log("Scrollling");
+                    console.log("Scrolling");
                 }
-            } else {
-                return;
             }
         }
 
@@ -137,6 +142,7 @@
         // Initial check in case the page is already scrolled
         handleScroll();
     });
+
 </script>
 <script>
     function toggleDropdown() {

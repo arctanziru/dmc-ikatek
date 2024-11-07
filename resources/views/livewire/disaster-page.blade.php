@@ -22,7 +22,7 @@ $perPageData = [
 
                     <input type="text" wire:model.live.debounce.500ms="search" type="text" label="Search News"
                         wire:model.defer="search" placeholder="Search Disaster..."
-                        class="text-[12px] w-full md:w-fit rounded-md" wire:keydown.enter="performSearch" />
+                        class="text-[12px] flex-1 max-w-md rounded-md" wire:keydown.enter="performSearch" />
 
                     {{-- per data --}}
                     <div class="flex min-w-[60px]">

@@ -38,7 +38,7 @@
         </div>
         <p class="uppercase text-secondary text-[24px] md:text-[32px] lg:text-[36px] font-bold">
           Disasters should never catch us unprepared </p>
-        <div class="hidden md:flex flex-col gap-1 text-[14px] font-bold text-secondary-light">
+        <!-- <div class="hidden md:flex flex-col gap-1 text-[14px] font-bold text-secondary-light">
           <a href="/strategy" class=" border-b-[1px] border-dark/20">
             <p class="duration-200 w-full py-1 cursor-pointer hover:pb-2 hover:text-secondary-dark  hover:text-[15px]">
               Corporate Strategy</p>
@@ -56,7 +56,7 @@
               Our History</p>
           </a>
 
-        </div>
+        </div> -->
       </div>
       <div class="flex flex-col gap-2 md:pt-4 lg:pt-8 flex-1">
         <div class="hidden md:inline bg-secondary h-[2px] w-full"></div>
@@ -83,7 +83,7 @@
           those in need, working hand in hand with communities to create <strong>safer, more resilient, and sustainable
             futures</strong>.
         </p>
-        <div class="md:hidden flex flex-col gap-1 text-[14px] font-bold text-secondary-light">
+        <!-- <div class="md:hidden flex flex-col gap-1 text-[14px] font-bold text-secondary-light">
           <a href="/strategy" class=" border-b-[1px] border-dark/20">
             <p class="duration-200 w-full py-1 cursor-pointer hover:pb-2 hover:text-secondary-dark  hover:text-[15px]">
               Corporate Strategy</p>
@@ -101,7 +101,7 @@
               Our History</p>
           </a>
 
-        </div>
+        </div> -->
 
 
         <div class="flex flex-col gap-2 flex-1">

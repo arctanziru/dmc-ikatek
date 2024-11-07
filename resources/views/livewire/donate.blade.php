@@ -85,10 +85,10 @@ return number_format($amount, 2); // Default formatting
             communities worldwide. Join us in making a lasting impact.
           </p>
           <a>
-            <p
+            <a href="/our-works"
               class="font-bold text-[14px] md:text-[16px] lg:text-[12px] cursor-pointer text-secondary md:text-white hover:text-secondary-dark md:hover:text-primary duration-200">
               Learn More <x-bladewind::icon class="h-3 w-3" name="chevron-right" />
-            </p>
+            </a>
           </a>
         </div>
 
