@@ -337,7 +337,7 @@ $newsItems = $news // Skip the first item and take the next 4
                                         <img src="icons/Program.svg" class="h-12" />
 
                                         <p class="text-[24px] md:text-[36px] lg:text-[48px] text-primary">
-                                            34
+                                            {{$totalProgramCount}}
                                         </p>
                                         <p
                                             class="text-[12px] md:text-[18px] lg:text-[24px] font-poppins font-extralight text-white">

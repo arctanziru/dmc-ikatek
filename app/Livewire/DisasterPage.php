@@ -38,10 +38,12 @@ class DisasterPage extends Component
     public function render()
     {
         $disasters = Disaster::with(['city', 'user'])
-            ->where('name', 'like', '%' . $this->search . '%')
-            ->orWhere('description', 'like', '%' . $this->search . '%')
-            ->orWhereHas('city', function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%');
+            ->where(function ($query) {
+                $query->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('description', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('city', function ($query) {
+                        $query->where('name', 'like', '%' . $this->search . '%');
+                    });
             })
             ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
