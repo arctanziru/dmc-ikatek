@@ -1,42 +1,42 @@
 @php
 
-  $navLinks = [
-    [
-    'route' => 'dashboard',
-    'icon' => 'chart-bar-square',
-    'label' => 'Dashboard'
-    ],
-    [
-    'route' => 'users',
-    'icon' => 'user-circle',
-    'label' => 'Users'
-    ],
-    [
-    'route' => 'dashboard.news',
-    'icon' => 'newspaper',
-    'label' => 'News'
-    ],
-    [
-    'route' => 'dashboard.disaster',
-    'icon' => 'fire',
-    'label' => 'Disaster'
-    ],
-    [
-    'route' => 'dashboard.disaster.program.category',
-    'icon' => 'fire',
-    'label' => 'Disaster program category'
-    ],
-    [
-    'route' => 'dashboard.disaster.program',
-    'icon' => 'fire',
-    'label' => 'Disaster program'
-    ],
-    [
-    'route' => 'dashboard.donation',
-    'icon' => 'banknotes',
-    'label' => 'Donation'
-    ],
-  ];
+$navLinks = [
+[
+'route' => 'dashboard',
+'icon' => 'chart-bar-square',
+'label' => 'Dashboard'
+],
+[
+'route' => 'users',
+'icon' => 'user-circle',
+'label' => 'Users'
+],
+[
+'route' => 'dashboard.news',
+'icon' => 'newspaper',
+'label' => 'News'
+],
+[
+'route' => 'dashboard.disaster',
+'icon' => 'fire',
+'label' => 'Disaster'
+],
+[
+'route' => 'dashboard.disaster.program.category',
+'icon' => 'fire',
+'label' => 'Disaster program category'
+],
+[
+'route' => 'dashboard.disaster.program',
+'icon' => 'fire',
+'label' => 'Disaster program'
+],
+[
+'route' => 'dashboard.donation',
+'icon' => 'banknotes',
+'label' => 'Donation'
+],
+];
 
 @endphp
 
@@ -49,6 +49,7 @@
   <meta charset="utf-8">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>{{ $title ?? 'Dashboard - DMC Ikatek' }}</title>
   <link href="{{ asset('vendor/bladewind/css/animate.min.css') }}" rel="stylesheet" />
@@ -128,18 +129,18 @@
       <!-- Navigation Links -->
       <nav class="flex flex-col gap-3 overflow-y-auto h-full flex-1">
         @foreach ($navLinks as $link)
-          @php
-      $isActive = Route::currentRouteName() === $link['route'];
-      @endphp
-          <a href="{{ route($link['route']) }}"
-            class="p-[12px_14px_12px_12px] rounded {{ $isActive ? 'bg-primary text-dark font-bold hover:bg-primary-dark' : 'hover:bg-primary hover:text-dark hover:font-bold' }} flex gap-4 items-center justify-between duration-200 text-[14px]">
-            <div class="flex items-center gap-4">
+        @php
+        $isActive = Route::currentRouteName() === $link['route'];
+        @endphp
+        <a href="{{ route($link['route']) }}"
+          class="p-[12px_14px_12px_12px] rounded {{ $isActive ? 'bg-primary text-dark font-bold hover:bg-primary-dark' : 'hover:bg-primary hover:text-dark hover:font-bold' }} flex gap-4 items-center justify-between duration-200 text-[14px]">
+          <div class="flex items-center gap-4">
             <x-bladewind::icon name="{{ $link['icon'] }}" class="!h-6 !w-6" />
             <p class="flex-1">{{ $link['label'] }}</p>
-            </div>
-            <div class="{{ $isActive ? 'bg-secondary' : 'bg-transparent' }} rounded-sm w-[2px] h-full"></div>
-          </a>
-    @endforeach
+          </div>
+          <div class="{{ $isActive ? 'bg-secondary' : 'bg-transparent' }} rounded-sm w-[2px] h-full"></div>
+        </a>
+        @endforeach
       </nav>
     </div>
     <!-- Sidebar Footer -->
@@ -199,46 +200,52 @@
 
 
   @if (session()->has('message') && session()->has('title'))
-    <script>
+  <script>
     showNotification("{{ session('title') }}", "{{ session('message') }}");
-    </script>
+  </script>
   @endif
+
+  @auth
+  <script src="{{ asset('js/enable-push.js') }}" defer></script>
+  @endauth
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const toggleButton = document.getElementById('sidebarToggle');
+
+      function openSidebar() {
+        sidebar.classList.remove('-translate-x-full');
+        sidebar.classList.add('translate-x-0');
+        overlay.classList.remove('hidden');
+      }
+
+      function closeSidebar() {
+        sidebar.classList.add('-translate-x-full');
+        sidebar.classList.remove('translate-x-0');
+        overlay.classList.add('hidden');
+      }
+
+      toggleButton.addEventListener('click', openSidebar);
+      overlay.addEventListener('click', closeSidebar);
+    });
+
+    function toggleDropdown() {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.toggle('hidden');
+    }
+
+    document.addEventListener('click', function(event) {
+      const dropdown = document.getElementById('profileDropdown');
+      const button = event.target.closest('button');
+
+      if (!dropdown.contains(event.target) && !button) {
+        dropdown.classList.add('hidden');
+      }
+    });
+  </script>
 </body>
 
 </html>
 <!-- JavaScript to Toggle Sidebar and Overlay -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    const toggleButton = document.getElementById('sidebarToggle');
-
-    function openSidebar() {
-      sidebar.classList.remove('-translate-x-full');
-      sidebar.classList.add('translate-x-0');
-      overlay.classList.remove('hidden');
-    }
-
-    function closeSidebar() {
-      sidebar.classList.add('-translate-x-full');
-      sidebar.classList.remove('translate-x-0');
-      overlay.classList.add('hidden');
-    }
-
-    toggleButton.addEventListener('click', openSidebar);
-    overlay.addEventListener('click', closeSidebar);
-  });
-  function toggleDropdown() {
-    const dropdown = document.getElementById('profileDropdown');
-    dropdown.classList.toggle('hidden');
-  }
-
-  document.addEventListener('click', function (event) {
-    const dropdown = document.getElementById('profileDropdown');
-    const button = event.target.closest('button');
-
-    if (!dropdown.contains(event.target) && !button) {
-      dropdown.classList.add('hidden');
-    }
-  });
-</script>

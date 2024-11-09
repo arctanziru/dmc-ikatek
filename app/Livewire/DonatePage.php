@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use App\Models\DisasterProgram;
 use App\Models\Donation;
+use App\Models\User;
+use App\Notifications\NewDonationNotification;
 use Carbon\Carbon;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -84,7 +86,7 @@ class DonatePage extends Component
         $transferEvidencePath = $this->transfer_evidence ? '/storage/' . $this->transfer_evidence->store('images/transfer_evidence', 'public') : null;
         $donationDate = (strtotime($this->donation_date) !== false) ? $this->donation_date : null;
 
-        Donation::create([
+        $donation = Donation::create([
             'donor_name' => $this->donor_name,
             'donor_organization' => $this->donor_organization,
             'donor_email' => $this->donor_email,
@@ -94,6 +96,12 @@ class DonatePage extends Component
             'donation_date' => $donationDate ?? now()->toDateString(),
             'disaster_program_id' => $this->disaster_program_id,
         ]);
+
+        $users = User::get();
+        foreach ($users as $user) {
+            $user->notify(new NewDonationNotification($donation));
+        }
+
 
         session()->flash('title', 'Thank you for the donation!');
         session()->flash('message', 'Donation from "' . $this->donor_name . '" sent successfully.');

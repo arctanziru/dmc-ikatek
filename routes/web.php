@@ -13,6 +13,7 @@ use App\Livewire\OurTeamPage;
 use App\Livewire\OurWorksPage;
 use App\Livewire\DonatePage;
 use App\Http\Controllers\HomeController; // Import the HomeController
+use App\Http\Controllers\PushSubscriptionController;
 use App\Livewire\Dashboard\News\NewsCreate;
 use App\Livewire\Dashboard\News\NewsEdit;
 use App\Livewire\Dashboard\News\NewsManagement;
@@ -124,6 +125,10 @@ Route::prefix('dashboard')
       Route::get('/{donation}/edit', DonationEdit::class)->name('dashboard.donation.edit');
     });
   });
+
+Route::post('/push', [PushSubscriptionController::class, 'store'])
+  ->middleware('auth')
+  ->name('push');
 
 
 // Route::prefix('report')

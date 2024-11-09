@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Disaster;
+use App\Models\User;
+use App\Notifications\NewDisasterNotification;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -48,7 +50,7 @@ class ReportDisaster extends Component
     {
         $this->validate();
 
-        Disaster::create([
+        $disaster = Disaster::create([
             'name' => $this->name,
             'description' => $this->description,
             'latitude' => $this->latitude,
@@ -58,8 +60,13 @@ class ReportDisaster extends Component
             'reporter_name' => $this->reporter_name,
         ]);
 
-        session()->flash('title', 'Disaster Created');
-        session()->flash('message', 'Disaster created successfully.');
+        $users = User::get();
+        foreach ($users as $user) {
+            $user->notify(new NewDisasterNotification($disaster));
+        }
+
+        session()->flash('title', 'Disaster Reported');
+        session()->flash('message', 'Wait for the admin to verify the disaster report');
 
         return redirect()->route('home');
     }
