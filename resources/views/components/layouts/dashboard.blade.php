@@ -183,13 +183,19 @@ $navLinks = [
         </x-button>
 
         <!-- Dropdown Menu -->
-        <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50">
+        <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50 overflow-hidden">
           <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
               Logout
             </button>
           </form>
+          @csrf
+          <a href="{{ route('password.reset') }}">
+            <button class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
+              Reset Password
+            </button>
+          </a>
         </div>
       </div>
     </nav>

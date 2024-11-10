@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('disaster_program_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('description')->nullable();
+            $table->text('desccolumn: ription')->nullable();
             $table->timestamps();
         });
     }

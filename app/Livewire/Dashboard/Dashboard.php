@@ -46,17 +46,14 @@ class Dashboard extends Component
 
         $this->recentDisasters = Disaster::with('city.province')
             ->latest()
-            ->take(value: 5)
+            ->take(5)
             ->get()
             ->filter(function ($disaster) {
                 return $disaster->city && $disaster->city->province;
             });
 
         $this->totalPrograms = DisasterProgram::where('status', 'active')
-            ->with('category')
-            ->latest()
-            ->take(5)
-            ->get();
+            ->count();
 
         $this->recentPrograms = DisasterProgram::where('status', 'active')
             ->with([
@@ -69,19 +66,6 @@ class Dashboard extends Component
             ->take(5)
             ->get();
 
-        $this->fullFundedProgramCount = DisasterProgram::where('status', 'active')
-            ->where('target_donation', '>', 0)
-            ->whereHas('donations', function ($query) {
-                $query->where('status', 'verified');
-            })
-            ->withSum([
-                'donations as total_verified_donations' => function ($query) {
-                    $query->where('status', 'verified');
-                }
-            ], 'amount')
-            ->havingRaw('total_verified_donations > target_donation')
-            ->count();
-        // Generate labels for each month from January to December
         $months = [
             'Jan',
             'Feb',

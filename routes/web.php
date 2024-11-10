@@ -12,7 +12,7 @@ use App\Livewire\OurReachPage;
 use App\Livewire\OurTeamPage;
 use App\Livewire\OurWorksPage;
 use App\Livewire\DonatePage;
-use App\Http\Controllers\HomeController; // Import the HomeController
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PushSubscriptionController;
 use App\Livewire\Dashboard\News\NewsCreate;
 use App\Livewire\Dashboard\News\NewsEdit;
@@ -41,6 +41,7 @@ use Illuminate\Support\Facades\Route;
 // use App\Livewire\Reporter\Disaster\DisasterReportCreate;
 use App\Livewire\ReportDisaster;
 use App\Livewire\DisasterPage;
+use App\Livewire\PasswordReset;
 use App\Livewire\Programs\ProgramPage;
 use App\Livewire\Programs\ProgramDetailPage;
 
@@ -124,6 +125,7 @@ Route::prefix('dashboard')
       Route::get('/create', DonationCreate::class)->name('dashboard.donation.create');
       Route::get('/{donation}/edit', DonationEdit::class)->name('dashboard.donation.edit');
     });
+    Route::get('/password/reset', PasswordReset::class)->name('password.reset');
   });
 
 Route::post('/push', [PushSubscriptionController::class, 'store'])
