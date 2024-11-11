@@ -48,11 +48,13 @@
             </p>
         </section>
         <section class="w-full justify-center md:justify-start flex gap-3 md:gap-6">
-            <x-button size="medium" color="white" class="w-full md:w-fit">
-                <p class="text-[10px] md:text-[14px]">
-                    Explore
-                </p>
-            </x-button>
+            <a class="w-full md:w-fit" href="/about-us">
+                <x-button size="medium" color="white">
+                    <p class="text-[10px] md:text-[14px]">
+                        Explore
+                    </p>
+                </x-button>
+            </a>
             <x-button onclick="scrollToNewsletter()" size="medium" variant="outlined" color="white"
                 class="w-full md:w-fit">
                 <p class="text-[10px] md:text-[14px]">
