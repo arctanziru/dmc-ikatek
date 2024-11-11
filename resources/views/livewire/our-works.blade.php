@@ -165,7 +165,6 @@ $areasofworks = [
       }
     </script>
     <!-- paste -->
-
     <main class="flex flex-col w-full items-center pt-4 gap-4 md:gap-6 lg:gap-8" id="disaster-risk-reduction">
 
       <section class="flex w-full max-w-[1440px]">
@@ -178,7 +177,7 @@ $areasofworks = [
             <div class="hidden lg:inline lg:w-[90px] h-full"></div>
           </div>
 
-          <div class="flex flex-col md:gap-2 lg:gap-6 flex-1 self-stretch justify-start flex-grow">
+          <div class="flex flex-col md:gap-2 lg:gap-6 flex-1 self-stretch justify-start flex-grow" id="disaster">
             <div class="flex flex-col gap-2">
               <p class="text-primary font-medium">DISASTER RISK REDUCTION</p>
 
@@ -319,7 +318,7 @@ $areasofworks = [
 
 
       <!-- Education and Technology -->
-      <section class="flex flex-col lg:gap-4 gap-8">
+      <section class="flex flex-col lg:gap-4 gap-8" id="edu-tech">
 
         <main id="education-and-technology" class="flex w-full justify-center ">
           <section class="flex flex-col-reverse  lg:grid lg:grid-cols-2 md:gap-8 lg:gap-16 w-full max-w-[1440px] ">

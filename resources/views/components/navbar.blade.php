@@ -4,6 +4,7 @@
         ['name' => 'Our Works', 'url' => '/our-works'],
         ['name' => 'Our Reach', 'url' => '/our-reach'],
         ['name' => 'Get Involved', 'url' => '/#get-involved'],
+        ['name' => 'News', 'url' => '/news'],
     ];
 
     // Set classes for navbar variant
@@ -34,7 +35,7 @@
     <div class="hidden gap-3 items-center justify-center md:flex">
         <div class="flex gap-3">
             @foreach ($links as $link)
-                <a href="{{ $link['url'] }}"
+                <a href="{{ $link['url'] }}" target="_blank" rel="noopener noreferrer"
                     class="text-[12px] transition-[200ms] hover:transition-[200ms] hover:text-primary">{{ $link['name'] }}</a>
             @endforeach
         </div>

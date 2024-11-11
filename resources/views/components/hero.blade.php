@@ -53,7 +53,8 @@
                     Explore
                 </p>
             </x-button>
-            <x-button size="medium" variant="outlined" color="white" class="w-full md:w-fit">
+            <x-button onclick="scrollToNewsletter()" size="medium" variant="outlined" color="white"
+                class="w-full md:w-fit">
                 <p class="text-[10px] md:text-[14px]">
                     Contact Us
                 </p>
@@ -62,3 +63,16 @@
 
     </div>
 </main>
+
+
+<script>
+    function scrollToNewsletter() {
+        const newsletterInput = document.getElementById('newsletter');
+        if (newsletterInput) {
+            newsletterInput.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+                newsletterInput.focus();
+            }, 500); // Adjust delay as needed
+        }
+    }
+</script>
