@@ -49,7 +49,7 @@
         </section>
         <section class="w-full justify-center md:justify-start flex gap-3 md:gap-6">
             <a class="w-full md:w-fit" href="/about-us">
-                <x-button size="medium" color="white">
+                <x-button size="medium" color="white" class="w-full">
                     <p class="text-[10px] md:text-[14px]">
                         Explore
                     </p>
@@ -71,7 +71,9 @@
     function scrollToNewsletter() {
         const newsletterInput = document.getElementById('newsletter');
         if (newsletterInput) {
-            newsletterInput.scrollIntoView({ behavior: 'smooth' });
+            newsletterInput.scrollIntoView({
+                behavior: 'smooth'
+            });
             setTimeout(() => {
                 newsletterInput.focus();
             }, 500); // Adjust delay as needed

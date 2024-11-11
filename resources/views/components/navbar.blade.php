@@ -88,7 +88,7 @@
                         <a href="/disaster">
 
                             <x-button variant="outlined" color="white" class="w-full" allignment="center">
-                                <p class="text-[14px]">Donate</p>
+                                <p class="text-[14px]">Disaster <x-bladewind::icon name="arrow-right" class="h-4 w-4" /></p>
                             </x-button>
                         </a>
                         <a href="/donate">
