@@ -8,7 +8,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Create Disaster Program Category - DMC Ikatek FT-UH')]
+#[Title('Create Disaster Program Category - DMC Ikatek-UH')]
 class DisasterProgramCategoryCreate extends Component
 {
   public $name;

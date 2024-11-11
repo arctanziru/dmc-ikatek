@@ -7,7 +7,7 @@ use Livewire\Component;
 
 
 #[Layout('components.layouts.landing')]
-#[Title('Our Reach - DMC Ikatek FT-UH')]
+#[Title('Our Reach - DMC Ikatek-UH')]
 class StrategyPage extends Component
 {
   public function render()

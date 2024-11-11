@@ -7,7 +7,7 @@ use Livewire\Component;
 
 
 #[Layout('components.layouts.landing')]
-#[Title('About Us Works - DMC Ikatek FT-UH')]
+#[Title('About Us Works - DMC Ikatek-UH')]
 class AboutUsPage extends Component
 {
   public function render()

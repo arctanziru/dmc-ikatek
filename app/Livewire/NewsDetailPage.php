@@ -9,7 +9,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.landing')]
-#[Title('News Detail - DMC Ikatek FT-UH')]
+#[Title('News Detail - DMC Ikatek-UH')]
 class NewsDetailPage extends Component
 {
     public $news;

@@ -10,7 +10,7 @@ use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Create Donation - DMC Ikatek FT-UH')]
+#[Title('Create Donation - DMC Ikatek-UH')]
 class DonationCreate extends Component
 {
     use WithFileUploads;

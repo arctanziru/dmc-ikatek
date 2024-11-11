@@ -9,7 +9,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Layout('components.layouts.landing')]
-#[Title('Programs - DMC Ikatek FT-UH')]
+#[Title('Programs - DMC Ikatek-UH')]
 class ProgramPage extends Component
 {
     use WithPagination;

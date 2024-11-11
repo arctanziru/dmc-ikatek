@@ -13,7 +13,7 @@ use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 #[Layout('components.layouts.landing')]
-#[Title(content: 'Donate - DMC Ikatek FT-UH')]
+#[Title(content: 'Donate - DMC Ikatek-UH')]
 class DonatePage extends Component
 {
     use WithFileUploads;

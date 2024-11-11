@@ -11,7 +11,7 @@ use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 #[Layout('components.layouts.landing')]
-#[Title(content: 'Program Detail - DMC Ikatek FT-UH')]
+#[Title(content: 'Program Detail - DMC Ikatek-UH')]
 class ProgramDetailPage extends Component
 {
     use WithFileUploads;

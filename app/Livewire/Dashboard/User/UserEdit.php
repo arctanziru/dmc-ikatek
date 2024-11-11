@@ -9,7 +9,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Edit User - DMC Ikatek FT-UH')]
+#[Title('Edit User - DMC Ikatek-UH')]
 class UserEdit extends Component
 {
     public UserForm $form;

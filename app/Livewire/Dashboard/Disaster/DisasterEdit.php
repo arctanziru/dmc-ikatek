@@ -8,7 +8,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Edit Disaster - DMC Ikatek FT-UH')]
+#[Title('Edit Disaster - DMC Ikatek-UH')]
 class DisasterEdit extends Component
 {
     public $disaster;

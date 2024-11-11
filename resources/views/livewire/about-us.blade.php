@@ -14,7 +14,7 @@
           </span>
         </p>
         <p class=" text-[16px]  text-left md:text-left md:text-[16px] lg:text-[18px] text-dark">
-          DMC IKATEK FT-UH is a disaster management organization dedicated to saving lives and building resilient
+          DMC IKATEK-UH is a disaster management organization dedicated to saving lives and building resilient
           communities. We provide essential support during emergencies and develop long-term strategies for safety,
           stability, and sustainable development. By empowering communities impacted by natural disasters, conflicts,
           and climate change, we strive to create a safer, more secure future for all.</p>
@@ -66,7 +66,7 @@
           resilient communities should be a priority. However, the impacts of climate change, conflict, inequality, and
           unexpected crises continue to put countless lives at risk. Many communities remain vulnerable, lacking the
           necessary resources and support to effectively respond and recover. Driven by the dedication, expertise, and
-          collaboration of our passionate team, <strong>DMC IKATEK FT-UH</strong> operates across 14 regions within 7
+          collaboration of our passionate team, <strong>DMC IKATEK-UH</strong> operates across 14 regions within 7
           provinces, striving to fulfill our mission of <strong>saving lives</strong> and <strong>empowering
             communities</strong>.
           <br />

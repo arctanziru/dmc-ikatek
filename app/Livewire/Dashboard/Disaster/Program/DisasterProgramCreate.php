@@ -11,7 +11,7 @@ use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Create Disaster Program - DMC Ikatek FT-UH')]
+#[Title('Create Disaster Program - DMC Ikatek-UH')]
 class DisasterProgramCreate extends Component
 {
     use WithFileUploads;

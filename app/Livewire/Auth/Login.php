@@ -6,7 +6,7 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Login - DMC Ikatek FT-UH')]
+#[Title('Login - DMC Ikatek-UH')]
 class Login extends Component
 {
     public $email;

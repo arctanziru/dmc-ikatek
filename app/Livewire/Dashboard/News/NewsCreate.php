@@ -11,7 +11,7 @@ use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Create News - DMC Ikatek FT-UH')]
+#[Title('Create News - DMC Ikatek-UH')]
 
 class NewsCreate extends Component
 {

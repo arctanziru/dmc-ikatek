@@ -11,7 +11,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Layout('components.layouts.landing')]
-#[Title('News - DMC Ikatek FT-UH')]
+#[Title('News - DMC Ikatek-UH')]
 
 class NewsPage extends Component
 {

@@ -10,7 +10,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('components.layouts.landing')]
-#[Title('Create Disaster - DMC Ikatek FT-UH')]
+#[Title('Create Disaster - DMC Ikatek-UH')]
 class ReportDisaster extends Component
 {
     public $name;

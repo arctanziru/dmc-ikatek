@@ -89,7 +89,7 @@ $perPageData = [
                 </div>
             </div>
             @empty
-            <p class="text-gray-500 w-screen">No news articles found.</p>
+            <p class="text-gray-500 w-screen">No disaster reported.</p>
             @endforelse
         </div>
 

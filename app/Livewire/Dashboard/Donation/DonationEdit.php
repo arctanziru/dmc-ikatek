@@ -12,7 +12,7 @@ use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Edit Donation - DMC Ikatek FT-UH')]
+#[Title('Edit Donation - DMC Ikatek-UH')]
 class DonationEdit extends Component
 {
     use WithFileUploads;
