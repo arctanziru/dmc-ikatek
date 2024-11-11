@@ -58,7 +58,7 @@
     $newsItems = $news // Skip the first item and take the next 4
 @endphp
 
-<x-layouts.landing :title="'Home Page'">
+<x-layouts.landing :title="'DMC Ikatek FT-UH'">
 
     <x-hero />
     <main class="flex flex-col items-center">
