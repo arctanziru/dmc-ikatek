@@ -11,6 +11,27 @@
     <link href="{{ asset('vendor/bladewind/css/bladewind-ui.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('vendor/bladewind/js/helpers.js') }}"></script>
     <script defer src="https://unpkg.com/alpinejs" defer></script>
+    <link rel="icon" href="{{ asset('images/Logo.png') }}" type="image/x-icon" />
+
+    <meta name="title" content="DMC Ikatek-UH">
+    <meta name="description" content="DMC Ikatek-UH (Disaster Management Center Ikatek Universitas Hasanuddin / UNHAS) is a disaster management center at Hasanuddin University.">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="DMC Ikatek-UH, DMC Ikatek UH, DMC Ikatek Unhas, Disaster Management Center, Hasanuddin University, UNHAS, Disaster Management, Disaster, Management, Center, Universitas Hasanuddin, Universitas, Hasanuddin, Makassar, Sulawesi Selatan, Sulawesi, Selatan, Indonesia, South Sulawesi, South, Indonesia">
+    <meta name="author" content="Ikatan Alumni Teknik Universitas Hasanuddin (Unhas)">
+    <meta name="publisher" content="Ikatan Alumni Teknik Universitas Hasanuddin (Unhas)">
+
+    <meta name="geo.placename" content="Makassar, Sulawesi Selatan, Indonesia">
+    <meta name="geo.region" content="ID-SN">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dmcikatek-uh.org/">
+    <meta property="og:title" content="DMC Ikatek-UH">
+    <meta property="og:description" content="DMC Ikatek-UH (Disaster Management Center Ikatek Universitas Hasanuddin / UNHAS) is a disaster management center at Hasanuddin University.">
+    <meta property="og:image" content="https://dmcikatek-uh.org/images/Logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+
 
     <x-bladewind::notification />
     @livewireStyles

@@ -22,6 +22,11 @@ $navLinks = [
 'label' => 'Disaster'
 ],
 [
+'route' => 'dashboard.disaster.program.areaOfWork',
+'icon' => 'fire',
+'label' => 'Disaster program area of work'
+],
+[
 'route' => 'dashboard.disaster.program.category',
 'icon' => 'fire',
 'label' => 'Disaster program category'
@@ -59,6 +64,7 @@ $navLinks = [
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <link rel="icon" href="{{ asset('images/Logo.png') }}" type="image/x-icon">
 
   @livewireStyles
   @livewireScripts

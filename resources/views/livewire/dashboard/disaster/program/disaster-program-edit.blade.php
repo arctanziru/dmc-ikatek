@@ -14,7 +14,7 @@
 
         <div class="mb-4">
             <label for="category_id" class="block text-gray-700">Category</label>
-            <select id="category_id" wire:model="category_id" class="w-full border-gray-300 rounded">
+            <select id="category_id" wire:model="category_id" class="w-full p-3 border-gray-300 rounded">
                 <option value="">Select Category</option>
                 @foreach ($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -25,7 +25,7 @@
 
         <div class="mb-4">
             <label for="disaster_id" class="block text-gray-700">Disaster</label>
-            <select id="disaster_id" wire:model="disaster_id" class="w-full border-gray-300 rounded">
+            <select id="disaster_id" wire:model="disaster_id" class="w-full p-3 border-gray-300 rounded">
                 <option value="">Select Disaster</option>
                 @foreach ($disasters as $disaster)
                 <option value="{{ $disaster->id }}">{{ $disaster->name }}</option>
@@ -36,7 +36,7 @@
 
         <div class="mb-4">
             <label for="image" class="block text-gray-700">Image</label>
-            <input type="file" id="image" wire:model="image" class="w-fit border-gray-300 rounded">
+            <input type="file" accept="image/*" id="image" wire:model="image" class="w-fit border-gray-300 rounded">
             @error('image') <span class="text-red-600">{{ $message }}</span> @enderror
 
             @if ($existingImage)

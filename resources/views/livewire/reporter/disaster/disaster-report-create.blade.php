@@ -21,7 +21,7 @@
 
     <div class="mb-4">
       <label for="province" class="block text-gray-700">Province</label>
-      <select id="province" wire:model.live.debounce.150ms="selectedProvince" class="w-full border-gray-300 rounded">
+      <select id="province" wire:model.live.debounce.150ms="selectedProvince" class="w-full p-3 border-gray-300 rounded">
         <option value="">Select Province</option>
         @foreach ($provinces as $province)
         <option value="{{ $province->id }}">{{ $province->name }}</option>
@@ -32,7 +32,7 @@
     @if (!is_null($selectedProvince) && !is_null($cities))
     <div class="mb-4">
       <label for="city" class="block text-gray-700">City</label>
-      <select id="city" wire:model.live.debounce.150ms="city_id" class="w-full border-gray-300 rounded">
+      <select id="city" wire:model.live.debounce.150ms="city_id" class="w-full p-3 border-gray-300 rounded">
         <option value="">Select City</option>
         @foreach ($cities as $city)
         <option value="{{ $city->id }}">{{ $city->name }}</option>

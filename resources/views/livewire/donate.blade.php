@@ -148,8 +148,7 @@ return number_format($amount, 2); // Default formatting
           <div class="flex flex-col gap-2">
             @error('disaster_program_id') <span class="text-red-600">{{ $message }}</span> @enderror
             <label for="disaster_program_id" class="text-[14px] font-medium text-gray-700">Disaster Program</label>
-            <select id="disaster_program_id" wire:model="disaster_program_id"
-              class="w-full p-3 border-gray-300 rounded">
+            <select id="disaster_program_id" wire:model="disaster_program_id" class="w-full p-3 border-gray-300 rounded">
               <option value="">Select Program</option>
               @foreach ($programs as $program)
               <option value="{{ $program->id }}">{{ $program->name }}</option>

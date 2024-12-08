@@ -9,7 +9,15 @@ self.addEventListener('push', function (e) {
     e.waitUntil(self.registration.showNotification(msg.title, {
       body: msg.body,
       icon: msg.icon,
-      actions: msg.actions
+      actions: msg.actions,
+      data: msg.data
     }));
   }
 });
+
+
+self.addEventListener('notificationclick', function (e) {
+  console.log(e)
+  e.notification.close();
+  e.waitUntil(clients.openWindow(e.notification.data));
+})

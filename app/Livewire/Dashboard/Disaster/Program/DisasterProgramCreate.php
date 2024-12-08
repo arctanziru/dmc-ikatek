@@ -32,7 +32,7 @@ class DisasterProgramCreate extends Component
         'description' => 'nullable|string|max:500',
         'category_id' => 'required|exists:disaster_program_categories,id',
         'disaster_id' => 'required|exists:disasters,id',
-        'image' => 'nullable|image|max:2048',
+        'image' => 'nullable|image|max:5120', // Max 5MB
         'tor_link' => 'nullable|string|url',
         'target_donation' => 'nullable|numeric|min:0',
     ];

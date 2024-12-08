@@ -251,9 +251,6 @@ return number_format($amount, 2); // Default formatting
 
     </section>
     <!-- Graph Section -->
-    {{$disasterData['data'][0]}}
-
-    <!-- Graph Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         <!-- Donations Chart -->
         <div class="bg-white rounded shadow p-4">

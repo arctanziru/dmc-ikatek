@@ -14,7 +14,7 @@
 
         <div class="mb-4">
             <label for="image" class="block text-gray-700">Image</label>
-            <input type="file" id="image" wire:model="image" class="w-fit border-gray-300 rounded">
+            <input type="file" accept="image/*" id="image" wire:model="image" class="w-fit border-gray-300 rounded">
             @error('image') <span class="text-red-600">{{ $message }}</span> @enderror
 
             @if ($image)
@@ -41,7 +41,7 @@
 
         <div class="mb-4">
             <label for="news_category_id" class="block text-gray-700">Category</label>
-            <select id="news_category_id" wire:model="news_category_id" class="w-full border-gray-300 rounded p-2">
+            <select id="news_category_id" wire:model="news_category_id" class="w-full p-3 border-gray-300 rounded p-2">
                 <option value="">Select Category</option>
                 @foreach ($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>

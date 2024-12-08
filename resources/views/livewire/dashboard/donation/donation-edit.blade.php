@@ -56,7 +56,7 @@
 
         <div class="mb-4">
             <label for="disaster_program_id" class="block text-gray-700">Disaster Program</label>
-            <select id="disaster_program_id" wire:model="disaster_program_id" class="w-full border-gray-300 rounded">
+            <select id="disaster_program_id" wire:model="disaster_program_id" class="w-full p-3 border-gray-300 rounded">
                 <option value="">Select Program</option>
                 @foreach ($programs as $program)
                 <option value="{{ $program->id }}">{{ $program->name }}</option>

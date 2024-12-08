@@ -9,7 +9,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Layout('components.layouts.dashboard')]
-#[Title('Disaster Program Category Management')]
+#[Title('Disaster Program Category Management - DMC Ikatek-UH')]
 class DisasterProgramCategoryManagement extends Component
 {
     use WithPagination;

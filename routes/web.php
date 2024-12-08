@@ -25,6 +25,9 @@ use App\Livewire\StrategyPage;
 use App\Livewire\Dashboard\Disaster\DisasterCreate;
 use App\Livewire\Dashboard\Disaster\DisasterEdit;
 use App\Livewire\Dashboard\Disaster\DisasterManagement;
+use App\Livewire\Dashboard\Disaster\Program\AreaOfWork\AreaOfWorkCreate;
+use App\Livewire\Dashboard\Disaster\Program\AreaOfWork\AreaOfWorkEdit;
+use App\Livewire\Dashboard\Disaster\Program\AreaOfWork\AreaOfWorkManagement;
 use App\Livewire\Dashboard\Disaster\Program\Category\DisasterProgramCategoryCreate;
 use App\Livewire\Dashboard\Disaster\Program\Category\DisasterProgramCategoryEdit;
 use App\Livewire\Dashboard\Disaster\Program\Category\DisasterProgramCategoryManagement;
@@ -116,6 +119,12 @@ Route::prefix('dashboard')
           Route::get('/', DisasterProgramCategoryManagement::class)->name('dashboard.disaster.program.category');
           Route::get('/create', DisasterProgramCategoryCreate::class)->name('dashboard.disaster.program.category.create');
           Route::get('/{category}/edit', DisasterProgramCategoryEdit::class)->name('dashboard.disaster.program.category.edit');
+        });
+
+        Route::group(['prefix' => 'areaOfWork'], function () {
+          Route::get('/', AreaOfWorkManagement::class)->name('dashboard.disaster.program.areaOfWork');
+          Route::get('/create', AreaOfWorkCreate::class)->name('dashboard.disaster.program.areaOfWork.create');
+          Route::get('/{areaOfWork}/edit', AreaOfWorkEdit::class)->name('dashboard.disaster.program.areaOfWork.edit');
         });
       });
     });

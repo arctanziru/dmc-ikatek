@@ -28,7 +28,7 @@ class NewsCreate extends Component
 
     protected $rules = [
         'title' => 'required|string|max:255',
-        'image' => 'nullable|image|max:2048',
+        'image' => 'nullable|image|max:5120',
         'news_category_id' => 'required|exists:news_categories,id',
         'description' => 'required|string|max:500',
         'content' => 'required|string',
