@@ -1,18 +1,15 @@
 <?php
 
 use App\Livewire\AboutUsPage;
-use App\Livewire\AccountabilityPage;
 use App\Livewire\Auth\Login;
 use App\Livewire\Counter;;
 
-use App\Livewire\HistoryPage;
 use App\Livewire\NewsPage;
 use App\Livewire\NewsDetailPage;
 use App\Livewire\OurReachPage;
 use App\Livewire\OurTeamPage;
 use App\Livewire\OurWorksPage;
 use App\Livewire\DonatePage;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PushSubscriptionController;
 use App\Livewire\Dashboard\News\NewsCreate;
 use App\Livewire\Dashboard\News\NewsEdit;
@@ -21,7 +18,6 @@ use App\Livewire\Dashboard\User\UserCreate;
 use App\Livewire\Dashboard\User\UserEdit;
 use App\Livewire\Dashboard\User\UserManagement;
 use App\Livewire\Dashboard\Dashboard;
-use App\Livewire\StrategyPage;
 use App\Livewire\Dashboard\Disaster\DisasterCreate;
 use App\Livewire\Dashboard\Disaster\DisasterEdit;
 use App\Livewire\Dashboard\Disaster\DisasterManagement;
@@ -39,15 +35,14 @@ use App\Livewire\Dashboard\Donation\DonationEdit;
 use App\Livewire\Dashboard\Donation\DonationManagement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-// use App\Livewire\Reporter\Reporter;
-// use App\Livewire\Reporter\Disaster\DisasterReportManagement;
-// use App\Livewire\Reporter\Disaster\DisasterReportCreate;
 use App\Livewire\ReportDisaster;
 use App\Livewire\DisasterPage;
+use App\Livewire\HomePage;
 use App\Livewire\PasswordReset;
 use App\Livewire\Programs\ProgramPage;
 use App\Livewire\Programs\ProgramDetailPage;
 use App\Livewire\ProgramCategoryPage;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |----------------------------------------------------------------------
@@ -60,8 +55,14 @@ use App\Livewire\ProgramCategoryPage;
 |
 */
 
+
+Route::get('/link-storage', function () {
+  Artisan::call('storage:link');
+  return 'success';
+});
+
 // Define a route for the landing page
-Route::get('/', [HomeController::class, 'index'])->name('home'); // Update to use HomeController
+Route::get('/', HomePage::class)->name('home'); // Update to use HomeController
 
 // Other routes
 Route::get('/counter', Counter::class);
