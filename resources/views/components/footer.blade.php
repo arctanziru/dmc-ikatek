@@ -82,14 +82,15 @@ $rightNavs =
                         <x-bladewind::icon name="chevron-right" class="!h-3 !w-3 " />
                     </div>
 
-                    <p class="text-[12px] font-light">Phone: +123 456 7890</p>
+                    <p class="text-[12px] font-light">Phone: 0821 9010 1214 / 0823 4986 8076</p>
                 </div>
                 <div class="flex gap-2 items-center text-white">
                     <div>
                         <x-bladewind::icon name="chevron-right" class="!h-3 !w-3 " />
                     </div>
 
-                    <p class="text-[12px] font-light">Address: DMC IKATEK, 456 Relief Avenue, City, Country</p>
+                    <p class="text-[12px] font-light">Address: Jl. Boulevard-Ruko Ruby
+                        No.26 Makassar, Sulawesi Selatan 90231</p>
                 </div>
                 <div class="flex gap-4">
                     @foreach ($links as $link)

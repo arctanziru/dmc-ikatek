@@ -1,68 +1,3 @@
-<?php
-
-$areasofworks = [
-  "Disaster Risk Reduction" => [
-    [
-      "name" => "Capacity Building",
-      "id" => "capacity-building",
-      "desc" => "Training to enhance DMC IKATEK-UNHAS members' and volunteers' skills for better effectiveness."
-
-    ],
-    [
-      "name" => "Mitigation of Disaster Risk Areas",
-      "id" => "mitigation",
-      "desc" => "Stakeholder collaboration to reduce risks in vulnerable areas through a pentahelix approach."
-    ],
-    [
-      "name" => "Disaster Literacy Education",
-      "id" => "literacy-edu",
-      "desc" => "Education to boost community preparedness, including the Gen-T program for students."
-    ],
-    [
-      "name" => "Emergency Response Simulation",
-      "id" => "emergency-simulation",
-      "desc" => "Simulations with various parties to strengthen disaster response skills and readiness."
-    ],
-    [
-      "name" => "Set Up Village for Disaster Response",
-      "id" => "village-setup",
-      "desc" => "The PRBBK program builds disaster-ready villages to enhance community resilience."
-    ]
-  ],
-
-  "Emergency Response Plan" => [
-    [
-      "name" => "Emergency Response Plan",
-      "id" => "emergency-plan",
-      "desc" => "Quick DMC responses including rescue, evacuation, and housing support during emergencies."
-    ],
-    [
-      "name" => "Rehabilitation & Reconstruction",
-      "id" => "rehabilitation",
-      "desc" => "Post-disaster recovery to restore communities, covering social and economic resilience."
-    ]
-  ],
-
-  "Education And Technology" => [
-    [
-      "name" => "Scholarship",
-      "id" => "scholarship",
-      "desc" => "Scholarships for underprivileged students, supporting education and fostering achievement."
-    ],
-    [
-      "name" => "Management System Training",
-      "id" => "mst",
-      "desc" => "Training on Industry 4.0 and ISO concepts for students entering the industrial workforce."
-    ]
-  ]
-];
-
-
-?>
-
-
-
-
 <main class="flex flex-col w-screen justify-center gap-0 p-4 md:p-8 lg:p-12 items-center bg-white md:bg-white-dark/20 ">
   <div class="w-full max-w-[1440px]">
 
@@ -93,35 +28,25 @@ $areasofworks = [
             <main class="p-4 md:p-6 lg:p-8">
 
               <section class="flex flex-col gap-6">
-                @foreach ($areasofworks as $category => $tasks)
-          <div div class="flex flex-col gap-2">
+                @foreach ($areaOfWorks as $area)
+          <div class="flex flex-col gap-2">
             <div class="flex gap-2 items-center ">
             <img src="icons/check.svg" class="hidden lg:inline" />
             <p class="text-[14px] lg:text-[16px] uppercase font-semibold underline">
-              {{ str_replace('_', ' ', $category) }}:
+              {{$area->name }}:
             </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2 pl-8">
-            @foreach ($tasks as $task)
-        <div class="flex gap-2 text-dark hover:text-primary cursor-pointer"
-          onclick="scrollToIdWithOffset('{{ $task['id'] }}')">
+            @foreach ($area->categories as $category)
+        <a href="./program-category/{{$category->id}}" class="flex gap-2 text-dark hover:text-primary cursor-pointer">
           <div class="flex flex-col gap-1">
-          <p class="text-[14px] lg:text-[16px] font-medium">{{ $task['name'] }}</p>
-          <p class="md:inline hidden md:text-[12px] lg:text-[14px] font-light">{{ $task['desc'] }}</p>
+          <p class="text-[14px] lg:text-[16px] font-medium">{{ $category->name }}</p>
+          <p class="md:inline hidden md:text-[12px] lg:text-[14px] font-light">
+          {{ $category->short_description}}</p>
           </div>
-        </div>
+        </a>
       @endforeach
-
-            <script>
-              function scrollToIdWithOffset(id) {
-              const element = document.getElementById(id);
-              const yOffset = -100; // Adjust this value based on your navbar height
-              const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
-              window.scrollTo({ top: y, behavior: 'smooth' });
-              }
-            </script>
 
             </div>
           </div>
@@ -133,13 +58,22 @@ $areasofworks = [
 
         </section>
         <div class="flex gap-1">
-          @foreach ($areasofworks as $category => $tasks)
+          @foreach ($areaOfWorks as $category)
         <x-button variant="ghost" color="dark" size="small"
-        @click="document.getElementById('{{ strtolower(str_replace(' ', '-', $category)) }}').scrollIntoView({ behavior: 'smooth' })">
+        @click="scrollToIdWithOffset('{{ $category->id }}')">
         <p class="capitalize text-[8px] md:text-[14px] font-medium">
-          {{ $category }}
+          {{ $category->name }}
         </p>
         </x-button>
+        <script>
+              function scrollToIdWithOffset(id) {
+              const element = document.getElementById(id);
+              const yOffset = -100; // Adjust this value based on your navbar height
+              const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+              window.scrollTo({ top: y, behavior: 'smooth' });
+              }
+            </script>
       @endforeach
 
         </div>
@@ -165,62 +99,45 @@ $areasofworks = [
       }
     </script>
     <!-- paste -->
-    <main class="flex flex-col w-full items-center pt-4 gap-4 md:gap-6 lg:gap-8" id="disaster-risk-reduction">
+    <main class="flex flex-col w-full items-center pt-4 gap-4 md:gap-6 lg:gap-12">
 
-      <section class="flex w-full max-w-[1440px]">
-        <div class="h-full flex flex-col gap-4 md:gap-8 lg:gap-0 lg:flex-row w-full justify-between  ">
-          <div class="flex lg:min-w-[360px]">
-            <div class="h-full  lg:h-full md:h-[360px]  lg:w-fit flex overflow-hidden">
-              <img src="/images/disaster risk.JPG"
-                class="rounded-md h-fit w-full lg:w-[360px] object-cover grow shrink basis-0" />
-            </div>
-            <div class="hidden lg:inline lg:w-[90px] h-full"></div>
-          </div>
+      @foreach ($areaOfWorks as $area)
+      <section class="flex w-full max-w-[1440px] " id="{{$area->id}}">
+      <div class="h-full flex flex-col gap-4 md:gap-8 lg:gap-0 lg:flex-row w-full justify-between">
+        <div class="flex lg:min-w-[360px]">
+        <div class="h-full lg:h-full md:h-[360px] lg:w-fit flex overflow-hidden">
+        <img src="{{ asset('storage/' . $area->cover_image) }}" alt="{{ $area->name }}" class="rounded-md h-fit w-full lg:w-[360px] object-cover grow shrink basis-0" loading="lazy" />
 
-          <div class="flex flex-col md:gap-2 lg:gap-6 flex-1 self-stretch justify-start flex-grow" id="disaster">
-            <div class="flex flex-col gap-2">
-              <p class="text-primary font-medium">DISASTER RISK REDUCTION</p>
-
-              <p class="font-bold text-[24px] md:text-[32px]">We Proactively Reduce Risk to Protect Lives and Secure Our
-                Future.</p>
-            </div>
-            <p class="text-[12px] md:text-[14px] lg:text-[16px]">
-              We take a proactive approach to reduce disaster risks. By providing training, educating communities,
-              mitigating high-risk areas, and running emergency simulations, we empower local communities to respond
-              effectively to crises and build resilience for the future.
-              <br />
-              Our approach to disaster risk reduction focuses on proactive steps to protect lives and strengthen
-              communities.
-            </p>
-            <div class="flex flex-wrap gap-2">
-              <div class="flex gap-2 items-center text-dark cursor-pointer hover:underline hover:text-primary">
-                <div class="h-[10px] w-[10px] rounded-[50%] bg-primary"></div>
-                <p class="text-[12px] md:text-[14px] lg:text-[16px] font-medium">Capacity Building</p>
-              </div>
-              <div class="flex gap-2 items-center text-dark cursor-pointer hover:underline hover:text-primary">
-                <div class="h-[10px] w-[10px] rounded-[50%] bg-primary"></div>
-                <p class="text-[12px] md:text-[14px] lg:text-[16px] font-medium">Mitigation of Disaster Risk Areas</p>
-              </div>
-              <div class="flex gap-2 items-center text-dark cursor-pointer hover:underline hover:text-primary">
-                <div class="h-[10px] w-[10px] rounded-[50%] bg-primary"></div>
-                <p class="text-[12px] md:text-[14px] lg:text-[16px] font-medium">Disaster Literacy Education</p>
-              </div>
-              <div class="flex gap-2 items-center text-dark cursor-pointer hover:underline hover:text-primary">
-                <div class="h-[10px] w-[10px] rounded-[50%] bg-primary"></div>
-                <p class="text-[12px] md:text-[14px] lg:text-[16px] font-medium">Emergency Response Simulation</p>
-              </div>
-              <div class="flex gap-2 items-center text-dark cursor-pointer hover:underline hover:text-primary">
-                <div class="h-[10px] w-[10px] rounded-[50%] bg-primary"></div>
-                <p class="text-[12px] md:text-[14px] lg:text-[16px] font-medium">Disaster Response Village Set Up</p>
-              </div>
-            </div>
-            <div>
-            </div>
-          </div>
         </div>
+        <div class="hidden lg:inline lg:w-[90px] h-full">
+        </div>
+        </div>
+
+        <div class="flex flex-col md:gap-2 lg:gap-6 flex-1 self-stretch justify-start flex-grow" id="disaster">
+        <div class="flex flex-col gap-2">
+          <p class="text-primary font-medium">{{ $area->name }}</p>
+          <p class="font-bold text-[24px] md:text-[32px]">{{ $area->short_description }}</p>
+        </div>
+        <p class="text-[12px] md:text-[14px] lg:text-[16px]">
+          {{ $area->description }}
+        </p>
+        <div class="flex flex-wrap gap-2">
+          @foreach ($area->categories as $category) <!-- Corrected from $area->category to $area->categories -->
+        <a href="/program-category/{{$category->id}}"
+        class="flex gap-2 items-center text-dark cursor-pointer hover:underline hover:text-primary">
+        <div class="h-[10px] w-[10px] rounded-[50%] bg-primary"></div>
+        <p class="text-[12px] md:text-[14px] lg:text-[16px] font-medium">{{ $category->name }}</p>
+        </a>
+      @endforeach
+        </div>
+        </div>
+      </div>
       </section>
+    @endforeach
+
+
       <!-- Emergency Response -->
-      <section class="flex relative flex-col gap-4 md:gap-0  w-full items-center  overflow-hidden"
+      <!-- <section class="flex relative flex-col gap-4 md:gap-0  w-full items-center  overflow-hidden"
         id="emergency-response-plan">
         <img src="images/responseplan.JPG"
           class="static md:absolute top-0 left-auto w-full flex-1 h-full rounded-sm lg:rounded-none md:w-[30%] max-w-[480px] object-cover z-20  md:-z-10" />
@@ -313,12 +230,12 @@ $areasofworks = [
             </div>
           </section>
         </main>
-      </section>
+      </section> -->
 
 
 
       <!-- Education and Technology -->
-      <section class="flex flex-col lg:gap-4 gap-8" id="edu-tech">
+      <!-- <section class="flex flex-col lg:gap-4 gap-8" id="edu-tech">
 
         <main id="education-and-technology" class="flex w-full justify-center ">
           <section class="flex flex-col-reverse  lg:grid lg:grid-cols-2 md:gap-8 lg:gap-16 w-full max-w-[1440px] ">
@@ -479,8 +396,7 @@ $areasofworks = [
           </main>
 
 
-        </main>
-      </section>
+        </main> -->
 
     </main>
   </div>

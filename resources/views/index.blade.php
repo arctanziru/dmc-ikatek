@@ -55,7 +55,34 @@
         ],
 
     ];
-    $newsItems = $news // Skip the first item and take the next 4
+    $newsItems = $news;// Skip the first item and take the next 4
+
+    $currentLanguage = 'idn';
+
+    $about = [
+        [
+            'idn' => "Membangun ketahanan, Memulihkan harapan",
+            'en' => "Building Resilience, Restoring Hope"
+        ],
+        [
+            'idn' => "Dengan dukunganmu",
+            'en' => "With your support",
+        ],
+        [
+            'idn' => "berkomitmen untuk membangun ketahanan dan menyelamatkan nyawa dengan berfokus pada kesiapsiagaan bencana, respons cepat, dan pemulihan jangka panjang. Kami memberikan strategi inovatif, dukungan masyarakat, dan solusi langsung untuk mengelola risiko dan bencana secara efektif.",
+            'en' => "are committed to building resilience and saving lives by focusing on disaster preparedness, rapid response, and long-term recovery. We deliver innovative strategies, community support, and hands-on solutions to effectively manage disaster risks and challenges.",
+        ]
+    ];
+
+    $ourworkstext = [
+        [
+            'idn' => "Di Disaster Management Center, kami berkomitmen untuk menyediakan bantuan dan dukungan bencana yang efektif di beberapa Provinsi dan Daerah. Operasi kami mencakup berbagai wilayah, seperti yang ditunjukkan pada peta di bawah ini.",
+            'en' => "At the Disaster Management Center, we are committed to providing effective disaster relief and support across Several Provinces and Regions. Our operations cover a wide range of areas, as shown on the map below.
+
+    "
+        ],
+    ]
+
 @endphp
 
 <x-layouts.landing :title="'DMC Ikatek-UH'">
@@ -63,7 +90,7 @@
     <x-hero />
     <main class="flex flex-col items-center">
         <!-- About Us -->
-        <div class="lg:p-12 md:p-8 p-4 w-full">
+        <div class="lg:p-12 md:p-8 p-4 w-full  max-w-[1440px]">
             <main class="w-full max-w-[1440px] flex flex-col  gap-8">
                 <section class="flex justify-center md:flex-col md:gap-4 lg:gap-0 lg:flex-row w-full items-center ">
                     <div class="hidden md:flex flex-1 justify-end ">
@@ -80,16 +107,18 @@
                         <!-- <img src="images/img.jpeg" class="w-full max-w-[480px] h-[280px]" /> -->
                         <img src="images/img.jpeg" class="w-full md:hidden max-h-[240px] object-cover rounded-md" />
                         <p class="text-primary text-[14px] font-medium">ABOUT DMC IKATEK-UH</p>
-                        <p class="text-dark text-[24px] md:text-[30px] lg:text-[36px] font-bold">Creating Lasting
-                            Impact,
-                            One Community at a Time</p>
-                        <p class="text-dark text-[12px] md:text-[14px] lg:text-[16px]  font-light">Through your support,
-                            we're not only providing
-                            life-saving aid in times of crisis but also fostering long-term resilience. Our initiatives
-                            include emergency relief, education on preparedness, community rebuilding, and support for
-                            sustainable recovery across affected regions.</p>
+                        <p class="text-dark text-[24px] md:text-[30px] lg:text-[36px] font-bold">
+                            <?= htmlspecialchars($about[0][$currentLanguage]); ?>
+                        </p>
+                        <p class="text-dark text-[12px] md:text-[14px] lg:text-[16px]  font-normal">
+                            <?= htmlspecialchars($about[1][$currentLanguage]); ?>,
+                            <span class="md:text-[14px] text-primary lg:text-[16px] font-semibold font-primary">
+                                DMC IKATEK-UNHAS
+                            </span>
+                            <?= htmlspecialchars($about[2][$currentLanguage]); ?>
+                        </p>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                             <div class="flex gap-2 items-center ">
                                 <img src="icons/check.svg" />
                                 <p class="text-dark text-[12px] md:text-[14px] lg:text-[16px] ">Provide Emergency Relief
@@ -111,7 +140,7 @@
                                     Evacuation
                                     Efforts
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </section>
                 <section class="hidden md:flex flex-col justify-center w-full items-center ">
@@ -182,16 +211,12 @@
                             </span>Province</p>
                         <div class="self-stretch w-[2px] bg-white"></div>
                         <p class="text-white font-poppins text-[16px] md:text-[32px] lg:text-[48px] font-normal"><span
-                                class="text-[16px] md:text-[32px] lg:text-[48px] font-bold">14
+                                class="text-[16px] md:text-[32px] lg:text-[48px] font-bold">18
                             </span>Region</p>
                     </div>
                     <p
                         class="max-w-[980px] font-poppins text-center md:font-medium text-white text-[8px] md:text-[12px] lg:text-[16px]">
-                        At the Disaster Management Center, we are committed to providing effective disaster relief
-                        and
-                        support across 7 Provinces and their 14 Regions. Our operations cover a wide range of areas,
-                        as
-                        shown on the map below.
+                        <?= htmlspecialchars($ourworkstext[0][$currentLanguage]); ?>
                     </p>
                 </div>
                 <section class=" w-full flex text-[12px]">
@@ -216,10 +241,13 @@
                         }();
                     </script>
                 </section>
-                <x-button variant="outlined" color="white" size="small" class=" mt-4">
-                    <p class="text-[12px] md:text-[14px] lg:text-[16px] p-1">
-                        View Province and Regions
-                    </p>
+                <a href="/our-reach">
+
+                    <x-button variant="outlined" color="white" size="small" class=" mt-4">
+                        <p class="text-[12px] md:text-[14px] lg:text-[16px] p-1">
+                            View Province and Regions
+                        </p>
+                </a>
                 </x-button>
             </div>
         </main>
@@ -429,7 +457,7 @@
 
         <!-- news -->
 
-        <main class="w-full p-4 md:p-8 lg:p-12 ">
+        <main class="w-full p-4 md:p-8 lg:p-12 flex justify-center ">
             <div class="max-w-[1440px] w-full flex flex-col items-center gap-4">
 
                 <div class="flex w-full p-2 border-l-4 border-l-primary">

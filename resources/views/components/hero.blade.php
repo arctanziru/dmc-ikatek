@@ -12,7 +12,7 @@
     <!-- Content container (overlay on top of the background) -->
     <div id="hero-content" class="flex flex-col items-start gap-8 w-full z-10 max-w-[1440px] ">
         <!-- Main Content -->
-        <section class="flex flex-col gap-3">
+        <section class="flex flex-col gap-3 w-full">
             <div class="md:flex gap-3 items-center hidden">
                 <div class="w-9 h-9 bg-secondary rounded-md"></div>
                 <p class="text-[18px] text-white">
@@ -37,17 +37,61 @@
                     </p>
                 </div>
             </div>
-            <p class="max-w-[700px] text-white-dark text-[12px] md:text-[16px] ">
+            <!-- <p class="max-w-[700px] text-white-dark text-[12px] md:text-[16px] ">
 
                 <span class="text-[12px] md:text-[16px] text-primary">
                     DMC IKATEK-UH
-                </span>
-                are committed to building resilience and saving lives by focusing on disaster
-                preparedness, rapid response, and long-term recovery. We deliver innovative strategies, community
-                support, and hands-on solutions to effectively manage disaster risks and challenges.
+                </span>, established by Yayasan Teknik Peduli 09, is dedicated to disaster management and
+                humanitarian social programs. We focus on the three crucial phases of disaster management: Pre-Disaster,
+                Emergency Response, and Post-Disaster Recovery.
+                <br />
+                <br />
+                With our engineering expertise, <span class="text-[12px] md:text-[16px] text-primary">
+                    DMC IKATEK-UH
+                </span> plays a vital role in delivering effective disaster
+                relief, reducing disaster risks, and supporting recovery efforts across Indonesia. Our commitment is to
+                continually strengthen our team's capacity and contribute to a disaster-resilient Indonesia.
+            </p> -->
+            <p class="text-white">
+                Area Of Works :
             </p>
+            <section class="w-full overflow-x-auto grid grid-cols-2 md:flex gap-2 md:gap-4 md:py-4 scrollbar-hidden">
+                @foreach ($areaOfWorks as $area)
+                    <a href="/our-works#{{$area->id}}"
+                        class="flex-shrink-0 cursor-pointer relative overflow-hidden rounded-lg h-[120px] md:w-[360px] md:h-[240px] transform  hover:-translate-y-2 hover:shadow-lg hover:shadow-primary/20 transition-[200ms]">
+                        <img src="{{ asset('storage/' . $area->image) }}" alt="Gallery Image"
+                            class="absolute w-full h-full object-cover" />
+                        <div class="absolute w-full h-full z-10 flex p-2 md:p-4 justify-end items-start flex-col"
+                            style="background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));">
+                            <p class="uppercase font-bold text-[12px] md:text-[24px] text-white">
+                                {{$area->name}}
+                            </p>
+                            <p class="font-poppins hidden md:inline text-[12px] text-white line-clamp-3">
+                                {{$area->short_description}}
+                            </p>
+                        </div>
+                    </a>
+                @endforeach
+            </section>
+
+
+
+            <style>
+                /* Hide scrollbar for Chrome, Safari, and Edge */
+                .scrollbar-hidden::-webkit-scrollbar {
+                    display: none;
+                }
+
+                /* Hide scrollbar for Firefox */
+                .scrollbar-hidden {
+                    -ms-overflow-style: none;
+                    /* IE and Edge */
+                    scrollbar-width: none;
+                    /* Firefox */
+                }
+            </style>
         </section>
-        <section class="w-full justify-center md:justify-start flex gap-3 md:gap-6">
+        <section class="w-full justify-center md:justify-start grid grid-cols-2 md:flex gap-3 md:gap-6">
             <a class="w-full md:w-fit" href="/about-us">
                 <x-button size="medium" color="white" class="w-full">
                     <p class="text-[10px] md:text-[14px]">
