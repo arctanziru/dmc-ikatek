@@ -24,27 +24,21 @@ class HomeController extends Controller
     public function index()
     {
         $programs = DisasterProgram::with(['category', 'disaster', 'donations'])
-            ->latest()
-            ->where('status', 'active') // Only get active programs
+            ->where('status', 'active') // Filter by active programs
             ->where(function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')
                     ->orWhere('description', 'like', '%' . $this->search . '%');
             })
-            ->orderBy('created_at', 'desc')
-            ->take(3) // Limit to the first 3 programs
-            ->paginate($this->perPage);
-
+            ->orderBy('created_at', 'desc') // Order by the most recent
+            ->take(3) // Limit the results to 3
+            ->get(); // Use get() instead of paginate()
 
         $totalProgramCount = DisasterProgram::count();
-
-        // Get the unique count of donations by donor_email
         $uniqueDonorCount = Donation::distinct('donor_email')->count('donor_email');
-
-        // Get the sum of the 'amount' field in donations
         $donationSum = Donation::sum('amount');
-        // Fetch the latest news articles
-        $news = News::orderBy('created_at', 'desc')->take(5)->get(); // Adjust the number of articles as needed
+        $news = News::orderBy('created_at', 'desc')->take(5)->get();
 
         return view('index', compact('news', 'programs', 'totalProgramCount', 'uniqueDonorCount', 'donationSum'));
     }
+
 }

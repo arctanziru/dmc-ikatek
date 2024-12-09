@@ -47,6 +47,7 @@ use App\Livewire\DisasterPage;
 use App\Livewire\PasswordReset;
 use App\Livewire\Programs\ProgramPage;
 use App\Livewire\Programs\ProgramDetailPage;
+use App\Livewire\ProgramCategoryPage;
 
 /*
 |----------------------------------------------------------------------
@@ -71,6 +72,7 @@ Route::get('/our-works', OurWorksPage::class);
 Route::get('/our-reach', OurReachPage::class);
 Route::get('/donate', DonatePage::class);
 Route::get('/about-us', AboutUsPage::class);
+Route::get('/program-category/{id}', ProgramCategoryPage::class);
 // About Us
 // Route::get('/leadership-and-organization', OurTeamPage::class);
 // Route::get('/history', HistoryPage::class);

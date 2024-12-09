@@ -1,13 +1,18 @@
 @php
   $regions = [
-    'Sulawesi Selatan' => ['Luwu Utara', 'Palopo', 'Makassar', 'Gowa'],
+    'Sulawesi Selatan' => ['Luwu Utara', 'Palopo', 'Makassar', 'Gowa', 'Toraja', 'Toraja Utara'],
     'Sulawesi Barat' => ['Mamuju'],
     'Sulawesi Tengah' => ['Palu', 'Parigi'],
     'Jawa Barat' => ['Cianjur', 'Bogor'],
     'Jawa Timur' => ['Lumajang'],
-    'Sumatera Barat' => ['Padang'],
-    'Nusa Tenggara Timur' => ['Lembata', 'Alor']
+    'Sumatera Barat' => ['Padang', 'Pasaman', 'Agam'],
+    'Nusa Tenggara Timur' => ['Lembata', 'Alor', 'Flores Timur - Larantuka']
   ];
+
+  $provinceCount = count($regions);
+  $regionCount = array_reduce($regions, function ($count, $regionList) {
+      return $count + count($regionList);
+  }, 0);
 
 @endphp
 
@@ -30,13 +35,15 @@
     </section>
     <section class="w-full justify-center flex">
       <div class="flex gap-2 md:gap-4 lg:gap-8 items-center ">
-        <p class="text-dark font-poppins text-[24px] md:text-[36px] lg:text-[48px] font-normal"><span
-            class=" text-[24px] md:text-[36px] lg:text-[48px] font-bold">7
-          </span>Province</p>
+        <p class="text-dark font-poppins text-[24px] md:text-[36px] lg:text-[48px] font-normal">
+          <span class="text-[24px] md:text-[36px] lg:text-[48px] font-bold">{{ $provinceCount }}</span>
+          Province{{ $provinceCount > 1 ? 's' : '' }}
+        </p>
         <div class="self-stretch w-[2px] bg-dark"></div>
-        <p class="text-dark font-poppins text-[24px] md:text-[36px] lg:text-[48px] font-normal"><span
-            class=" text-[24px] md:text-[36px] lg:text-[48px] font-bold">13
-          </span>Regions</p>
+        <p class="text-dark font-poppins text-[24px] md:text-[36px] lg:text-[48px] font-normal">
+          <span class="text-[24px] md:text-[36px] lg:text-[48px] font-bold">{{ $regionCount }}</span>
+          Region{{ $regionCount > 1 ? 's' : '' }}
+        </p>
       </div>
     </section>
     <section class=" w-full flex">
@@ -53,7 +60,7 @@
           <span class="text-[20px] md:text-[24px] w-full font-bold">Our Regions :</span>
         </p>
       </div>
-      <main  class=" md:px-4 lg:px-0 overflow-hidden transition-all duration-500 ease-in-out ">
+      <main class=" md:px-4 lg:px-0 overflow-hidden transition-all duration-500 ease-in-out ">
         <!-- Content to show when expanded -->
         <main class="">
           <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-6">

@@ -1,16 +1,23 @@
 @php
-function formatCurrency($amount)
-{
-if ($amount >= 1_000_000_000_000) { // Trillion
-return number_format($amount / 1_000_000_000_000, 3) . ' T+'; // Format to 3 decimal places and add +
-} elseif ($amount >= 1_000_000_000) { // Billion
-return number_format($amount / 1_000_000_000, 3) . ' B+'; // Format to 3 decimal places and add +
-} elseif ($amount >= 1_000_000) { // Million
-return number_format($amount / 1_000_000, 2) . ' M'; // Format to 2 decimal places
-} else {
-return number_format($amount, 2); // Default formatting
-}
-}
+  function formatCurrency($amount)
+  {
+    if ($amount >= 1_000_000_000_000) { // Trillion
+    return number_format($amount / 1_000_000_000_000, 3) . ' T+'; // Format to 3 decimal places and add +
+    } elseif ($amount >= 1_000_000_000) { // Billion
+    return number_format($amount / 1_000_000_000, 3) . ' B+'; // Format to 3 decimal places and add +
+    } elseif ($amount >= 1_000_000) { // Million
+    return number_format($amount / 1_000_000, 2) . ' M'; // Format to 2 decimal places
+    } else {
+    return number_format($amount, 2); // Default formatting
+    }
+  }
+
+  $donationText = [
+    'en' => 'To ensure your donation is properly accounted for, please send us your payment evidence (bukti transfer) after completing the donation. This will help us verify and confirm your contribution.',
+    'idn' => 'Untuk memastikan donasi Anda tercatat dengan baik, harap kirimkan bukti pembayaran (bukti transfer) setelah melakukan donasi. Hal ini akan membantu kami untuk memverifikasi dan mengonfirmasi kontribusi Anda.'
+  ];
+
+$currentLanguage = 'en'
 @endphp
 
 <main class="w-full flex bg-white-dark/10 justify-center">
@@ -99,69 +106,158 @@ return number_format($amount, 2); // Default formatting
     </section>
 
     <!-- Right Donate Section (Sticky) -->
-    <form wire:submit.prevent="save" id="donationForm"
-      class="bg-white lg:sticky top-[80px] rounded-lg shadow-[0_0_3px_0] shadow-dark/20 p-8 flex flex-col gap-8 lg:max-w-2xl lg:max-h-fit lg:h-[calc(100vh-100px)] overflow-y-auto">
-      <!-- Title Section -->
-      <h1 class="text-4xl font-bold text-primary text-center">Donate</h1>
 
-      <!-- Form Section -->
-      <div class="flex flex-col gap-2">
-        <!-- Personal Information Fields -->
-        <p class="text-[14px] text-dark font-medium">Donor Detail</p>
-        <div class="flex flex-col">
-          @error('donor_name') <span class="text-red-600">{{ $message }}</span> @enderror
-          <x-bladewind::input type="text" label="Name" name="donor_name" wire:model="donor_name" required
-            class="bg-transparent border-dark border-[1px]" />
+    <div
+      class="bg-white lg:sticky top-[80px] rounded-lg shadow-[0_0_3px_0] shadow-dark/20 lg:max-w-2xl lg:max-h-fit lg:h-[calc(100vh-100px)] overflow-y-auto">
+      <x-bladewind::tab-group name="donate-box" color="orange" >
 
-          @error('donor_email') <span class="text-red-600">{{ $message }}</span> @enderror
-          <x-bladewind::input type="text" label="Email" name="donor_email" wire:model="donor_email" required
-            class="bg-transparent border-dark border-[1px]" />
-
-          @error('donor_organization') <span class="text-red-600">{{ $message }}</span> @enderror
-          <x-bladewind::input type="text" label="Affiliation (Optional)" name="donor_organization" wire:model="donor_organization"
-            class="bg-transparent border-dark border-[1px]" />
-
-        </div>
+        <x-slot:headings>
+          <x-bladewind::tab-heading active="true" name="unsplash-1" label="Donate Now" />
 
 
+          <x-bladewind::tab-heading name="unsplash-2" label="Send Evidence" />
+        </x-slot:headings>
+
+        <x-bladewind::tab-body>
+
+          <x-bladewind::tab-content active="true" name="unsplash-1">
+            <div class="w-full p-2 md:p-4 lg:p-8 flex flex-col gap-8">
+              <p class="text-[16px]">
+                You Can Donate via :
+              </p>
+              <div class="flex flex-col gap-4">
+
+                <div class="flex flex-col gap-2 items-center">
+                  <img src="images/Logo QRIS.png" class="h-[32px]" />
+                  <img src="images/donate-qr.jpg" class="max-w-max h-[120px] md:h-[180px]" />
+                  <p class="text-[18px] md:text-[24px] font-bold text-center">
+                    TOKO DMC IKATEK UH
+                  </p>
+                </div>
+                <div class="flex gap-1 items-center">
+                  <div class="h-[1px] flex-1 bg-dark/20"></div>
+                  <p class="text-[14px] text-dark/40">or</p>
+                  <div class="h-[1px] flex-1 bg-dark/20"></div>
+                </div>
+                <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
+                  <button onclick="copyToClipboard('064201002158560')"
+                    class="border-secondary border-[1px] bg-transparent hover:bg-secondary/20 cursor-pointer p-3">
+                    <div class="flex gap-2 items-center">
+                      <div class="w-[80px]  md:w-[100px]">
+                        <img src="images/BRI Logo.svg" class="h-[24px] w-max" />
+                      </div>
+                      <div class="w-full flex items-center justify-between">
+                        <div class="flex flex-col items-start">
+                          <p class="text-[10px] md:text-[12px] font-semibold text-left">(002) No. 0642.01.002158.56.0
+                          </p>
+                          <p class="text-[10px] md:text-[12px] font-semibold text-left">DMC IKATEK-UH</p>
+                        </div>
+                        <x-bladewind::icon name="clipboard" class="hidden md:flex" />
+                      </div>
+
+                    </div>
+                  </button>
+                  <button onclick="copyToClipboard('7709909098')"
+                    class="border-secondary border-[1px] bg-transparent hover:bg-secondary/20 cursor-pointer p-3">
+                    <div class="flex gap-2 items-center">
+                      <div class="w-[80px]  md:w-[100px]">
+                        <img src="images/BSI Logo.png" class="h-[24px] w-max" />
+                      </div>
+                      <div class="w-full flex items-center justify-between">
+                        <div class="flex flex-col items-start">
+                          <p class="text-[10px] md:text-[12px] font-semibold text-left">(451) No. 7709-9090-98
+                          </p>
+                          <p class="text-[10px] md:text-[12px] font-semibold text-left">DMC IKATEK-UH</p>
+                        </div>
+                        <x-bladewind::icon name="clipboard" class="hidden md:flex" />
+                      </div>
+
+                    </div>
+                  </button>
+                </main>
+                <p class="text-left text-[12px] text-dark/90">
+
+                  <?= htmlspecialchars($donationText[$currentLanguage]); ?>
+                </p>
+              </div>
+
+            </div>
+
+          </x-bladewind::tab-content>
+          <x-bladewind::tab-content name="unsplash-2" class="">
+            <form wire:submit.prevent="save" id="donationForm" class="p-8 ">
+              <h1 class="text-4xl font-bold p-8 text-primary text-center  flex flex-col gap-8">Donate</h1>
+
+              <!-- Form Section -->
+              <div class="flex flex-col gap-2">
+                <!-- Personal Information Fields -->
+                <p class="text-[14px] text-dark font-medium">Donor Detail</p>
+                <div class="flex flex-col">
+                  @error('donor_name') <span class="text-red-600">{{ $message }}</span> @enderror
+                  <x-bladewind::input type="text" label="Name" name="donor_name" wire:model="donor_name" required
+                    class="bg-transparent border-dark border-[1px]" />
+
+                  @error('donor_email') <span class="text-red-600">{{ $message }}</span> @enderror
+                  <x-bladewind::input type="text" label="Email" name="donor_email" wire:model="donor_email" required
+                    class="bg-transparent border-dark border-[1px]" />
+
+                  @error('donor_organization') <span class="text-red-600">{{ $message }}</span> @enderror
+                  <x-bladewind::input type="text" label="Affiliation (Optional)" name="donor_organization"
+                    wire:model="donor_organization" class="bg-transparent border-dark border-[1px]" />
+
+                </div>
 
 
 
 
 
-        <!-- Upload Transfer Evidence Section -->
-        <div class="flex flex-col gap-2">
-          <p class="text-[14px] text-dark font-medium">Donation Detail</p>
-          <div class="flex flex-col">
-            @error('amount') <span class="text-red-600">{{ $message }}</span> @enderror
-            <x-bladewind::input type="number" required label="Amount of Donation (Rp.)" name="amount" wire:model="amount"
-              class="bg-transparent border-dark border-[1px]" />
-
-            @error('transfer_evidence') <span class="text-red-600">{{ $message }}</span> @enderror
-            <x-bladewind::input type="file" required label="Upload" placeholder="Drop Image Here"
-              name="transfer_evidence" class="bg-transparent border-dark border-[1px]" wire:model="transfer_evidence" />
-
-          </div>
 
 
-          <!-- Input field to trigger program selection -->
-          <div class="flex flex-col gap-2">
-            @error('disaster_program_id') <span class="text-red-600">{{ $message }}</span> @enderror
-            <label for="disaster_program_id" class="text-[14px] font-medium text-gray-700">Disaster Program</label>
-            <select id="disaster_program_id" wire:model="disaster_program_id" class="w-full p-3 border-gray-300 rounded">
-              <option value="">Select Program</option>
-              @foreach ($programs as $program)
+                <!-- Upload Transfer Evidence Section -->
+                <div class="flex flex-col gap-2">
+                  <p class="text-[14px] text-dark font-medium">Donation Detail</p>
+                  <div class="flex flex-col">
+                    @error('amount') <span class="text-red-600">{{ $message }}</span> @enderror
+                    <x-bladewind::input type="number" required label="Amount of Donation (Rp.)" name="amount"
+                      wire:model="amount" class="bg-transparent border-dark border-[1px]" />
+
+                    @error('transfer_evidence') <span class="text-red-600">{{ $message }}</span> @enderror
+                    <x-bladewind::input type="file" required label="Upload" placeholder="Drop Image Here"
+                      name="transfer_evidence" class="bg-transparent border-dark border-[1px]"
+                      wire:model="transfer_evidence" />
+
+                  </div>
+
+
+                  <!-- Input field to trigger program selection -->
+                  <div class="flex flex-col gap-2">
+                    @error('disaster_program_id') <span class="text-red-600">{{ $message }}</span> @enderror
+                    <label for="disaster_program_id" class="text-[14px] font-medium text-gray-700">Disaster
+                      Program</label>
+                    <select id="disaster_program_id" wire:model="disaster_program_id"
+                      class="w-full p-3 border-gray-300 rounded">
+                      <option value="">Select Program</option>
+                      @foreach ($programs as $program)
               <option value="{{ $program->id }}">{{ $program->name }}</option>
-              @endforeach
-            </select>
-            @error('message') <span class="text-red-600">{{ $message }}</span> @enderror
-          </div>
-        </div>
+            @endforeach
+                    </select>
+                    @error('message') <span class="text-red-600">{{ $message }}</span> @enderror
+                  </div>
+                </div>
 
-        <x-button type="submit">
-          Donate
-        </x-button>
-    </form>
+                <x-button type="submit">
+                  Donate
+                </x-button>
+              </div>
+            </form>
+          </x-bladewind::tab-content>
+        </x-bladewind::tab-body>
+      </x-bladewind::tab-group>
+
+
+
+      <!-- Title Section -->
+
   </main>
 </main>
 
@@ -205,5 +301,27 @@ return number_format($amount, 2); // Default formatting
 
     // Show the program list
     programList.classList.remove('hidden');
+  }
+</script>
+
+<script>
+  function copyToClipboard(text) {
+    // Create a dummy input element to hold the text
+    const input = document.createElement('input');
+    input.value = text;
+    document.body.appendChild(input);
+
+    // Select the text inside the input
+    input.select();
+    input.setSelectionRange(0, 99999); // For mobile devices
+
+    // Execute the copy command
+    document.execCommand('copy');
+
+    // Remove the dummy input element
+    document.body.removeChild(input);
+
+    // Optionally, you can display a success message or change the icon
+    alert("Bank account number copied to clipboard!");
   }
 </script>
