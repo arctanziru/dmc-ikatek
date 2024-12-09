@@ -17,6 +17,7 @@ class ProgramCard extends Component
     public string $status;
     public string $createdAt;
     public bool $fullwidth;
+    public string $location;
 
     /**
      * Create a new component instance.
@@ -32,6 +33,7 @@ class ProgramCard extends Component
         string $createdAt,
         string $status,
         bool $fullwidth = false,
+        string $location = "",
     ) {
         $this->name = $name;
         $this->image = $image;
@@ -43,6 +45,7 @@ class ProgramCard extends Component
         $this->createdAt = $createdAt;
         $this->fullwidth = $fullwidth;
         $this->status = $status;
+        $this->location = $location;
     }
 
     /**

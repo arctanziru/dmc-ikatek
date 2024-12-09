@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Livewire\Programs;
 
 use App\Models\DisasterProgram;
@@ -36,7 +35,7 @@ class ProgramPage extends Component
 
     public function render()
     {
-        $programs = DisasterProgram::with(['category', 'disaster', 'donations'])
+        $programs = DisasterProgram::with(['category', 'disaster', 'donations', 'disaster.city'])  // Eager load city relation
             ->when($this->status !== '', function ($query) {
                 $query->where('status', $this->status);
             })

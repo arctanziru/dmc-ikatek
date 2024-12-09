@@ -31,13 +31,27 @@
         </section>
     </section>
     <section class="self-stretch flex-1 flex flex-col">
+        <div class="flex">
+            @if ($location)
+                <!-- <x-bladewind::icon name="map-pin" class="h-[14px]" /> -->
+                <p class="text-[12px] text-secondary capitalize">
+                    {{ ucwords(strtolower($location)) }}
+                </p>
+            @else
+
+            @endif
+        </div>
         <p class="text-[16px] text-black max-w-max line-clamp-2">{{ $name }}</p>
         <p class="text-[12px] font-light text-dark line-clamp-3">{{ $desc }}</p>
     </section>
-    <div class="flex w-full justify-end items-center">
-        <x-bladewind::icon name="calendar-days" class="h-[14px]"/>
-        <p class="text-[10px] text-black font-medium">
-            {{ $createdAt }}
-        </p>
+    <div class="flex w-full justify-between items-center">
+
+        <div class="flex">
+
+            <x-bladewind::icon name="calendar-days" class="h-[14px]" />
+            <p class="text-[10px] text-black font-medium">
+                {{ $createdAt }}
+            </p>
+        </div>
     </div>
 </a>

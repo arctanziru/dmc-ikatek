@@ -49,6 +49,24 @@
                 <p class="text-[12px]">Donate</p>
             </x-button>
         </a>
+
+        <x-bladewind::dropmenu>
+            <x-slot:trigger>
+                <div class="flex gap-0 items-center">
+                    <x-bladewind::icon name="language" class="h-[16px]" />
+                    <p>
+                        EN
+                    </p>
+                </div>
+            </x-slot:trigger>
+            <x-bladewind::dropmenu-item>
+                English
+            </x-bladewind::dropmenu-item>
+            <x-bladewind::dropmenu-item>
+                Bahasa Indonesia
+            </x-bladewind::dropmenu-item>
+        </x-bladewind::dropmenu>
+
     </div>
 
     <!-- Mobile menu button aligned to right -->
@@ -88,7 +106,8 @@
                         <a href="/disaster">
 
                             <x-button variant="outlined" color="white" class="w-full" allignment="center">
-                                <p class="text-[14px]">Disaster <x-bladewind::icon name="arrow-right" class="h-4 w-4" /></p>
+                                <p class="text-[14px]">Disaster <x-bladewind::icon name="arrow-right" class="h-4 w-4" />
+                                </p>
                             </x-button>
                         </a>
                         <a href="/donate">
