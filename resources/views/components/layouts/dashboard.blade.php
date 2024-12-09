@@ -23,17 +23,17 @@ $navLinks = [
 ],
 [
 'route' => 'dashboard.disaster.program.areaOfWork',
-'icon' => 'fire',
+'icon' => 'square-3-stack-3d',
 'label' => 'Disaster program area of work'
 ],
 [
 'route' => 'dashboard.disaster.program.category',
-'icon' => 'fire',
+'icon' => 'tag',
 'label' => 'Disaster program category'
 ],
 [
 'route' => 'dashboard.disaster.program',
-'icon' => 'fire',
+'icon' => 'chart-pie',
 'label' => 'Disaster program'
 ],
 [
@@ -125,7 +125,7 @@ $navLinks = [
   <!-- Sidebar -->
   <aside id="sidebar"
     class="p-4 z-[100] -translate-x-full lg:translate-x-0 bg-dark text-white w-[240px] h-full fixed flex flex-col justify-between transition-transform duration-300">
-    <div class="flex flex-col flex-1 h-full gap-6">
+    <div class="flex flex-col flex-1 overflow-y-auto gap-6">
       <!-- Sidebar Header -->
       <div class="flex font-semibold items-center gap-2">
         <img src="{{ asset('images/Logo.png') }}" class="!w-[42px] !h-[42px]" alt="Logo" />
@@ -133,7 +133,7 @@ $navLinks = [
       </div>
 
       <!-- Navigation Links -->
-      <nav class="flex flex-col gap-3 overflow-y-auto h-full flex-1">
+      <nav class="flex flex-col gap-3 overflow-y-auto flex-1">
         @foreach ($navLinks as $link)
         @php
         $isActive = Route::currentRouteName() === $link['route'];

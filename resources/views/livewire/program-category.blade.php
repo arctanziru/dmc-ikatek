@@ -21,8 +21,8 @@
     </div>
   </main>
 
-  <main class="max-w-[1440px] w-full flex flex-col gap-4 md:gap-8 lg:gap-12 p-4 md:p-8 lg:p-12">
-    <section class="w-full flex-col flex gap-2 md:gap-6">
+  <main class=" p-4 md:p-8 lg:p-12 w-full flex flex-col gap-4 md:gap-8 lg:gap-12">
+    <section class="w-full max-w-[1440px] flex-col flex gap-2 md:gap-6">
 
       <p class="text-[16px] md:text-[24px] font-poppins">
         Programs
@@ -65,7 +65,8 @@
             totalDonation="{{ $program->donations->sum('amount') }}"
             category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
             createdAt="{{ $program->created_at->format('d M Y') }}" fullwidth="true"
-            status="{{ $program->status }}" />
+            status="{{ $program->status }}"
+            location="{{$program->disaster->city->name}}, {{$program->disaster->city->province->name}}" />
           </div>
         @empty
         <p class="text-gray-500 w-full text-center">No active programs found.</p>
@@ -84,7 +85,8 @@
             totalDonation="{{ $program->donations->sum('amount') }}"
             category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
             createdAt="{{ $program->created_at->format('d M Y') }}" fullwidth="true"
-            status="{{ $program->status }}" />
+            status="{{ $program->status }}"
+            location="{{$program->disaster->city->name}}, {{$program->disaster->city->province->name}}" />
           </div>
         @empty
         <p class="text-gray-500 w-full text-center">No inactive programs found.</p>

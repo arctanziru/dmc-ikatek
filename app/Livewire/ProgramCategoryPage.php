@@ -47,8 +47,9 @@ class ProgramCategoryPage extends Component
         $programCategory = DisasterProgramCategory::findOrFail($this->categoryId);
         $programCategory->image_galleries = json_decode($programCategory->image_galleries, true);
 
-        // Fetch all programs and paginate them
-        $programs = DisasterProgram::where('category_id', $this->categoryId)
+        // Fetch all programs, including the disaster's city, and paginate them
+        $programs = DisasterProgram::with(['disaster.city']) // Eager load disaster and city
+            ->where('category_id', $this->categoryId)
             ->when($this->search !== '', function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')
                     ->orWhere('description', 'like', '%' . $this->search . '%');

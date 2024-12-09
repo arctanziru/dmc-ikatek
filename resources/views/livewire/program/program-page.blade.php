@@ -46,8 +46,12 @@
                         totalDonation="{{ $program->donations->sum('amount') }}"
                         category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
                         createdAt="{{ $program->created_at->format('d M Y') }}" fullwidth="true"
-                        status="{{$program->status}}" />
+                        status="{{$program->status}}"
+                        location="{{$program->disaster->city->name}}, {{$program->disaster->city->province->name}}" />
                 </div>
+
+                <!-- Display the city name related to the disaster -->
+                <!-- <div>City: {{ $program->disaster->city->name ?? 'N/A' }}</div> -->
 
             @empty
                 <p class="text-gray-500 w-full text-center">No programs found.</p>
