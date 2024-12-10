@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('latitude', 10, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
-            $table->foreignId('city_id')->constrained(table: config('laravolt.indonesia.table_prefix') . 'cities')->onDelete('cascade'); // Updated to district level
+            $table->foreignId('city_id')->constrained(table: config(key: 'laravolt.indonesia.table_prefix') . 'cities')->onDelete('cascade'); // Updated to district level
             $table->enum('status', allowed: ['pending', 'active', 'inactive', 'rejected'])->default('pending');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();

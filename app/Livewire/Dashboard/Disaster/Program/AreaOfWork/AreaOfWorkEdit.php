@@ -39,7 +39,10 @@ class AreaOfWorkEdit extends Component
 
   public function update()
   {
-    $this->validate();
+    $this->validate([
+      ...$this->rules,
+      'name' => 'required|string|max:255|unique:area_of_works,name,' . $this->areaOfWork->id,
+    ]);
 
     if ($this->image) {
       $imagePath = $this->image->store('images', 'public');

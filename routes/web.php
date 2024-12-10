@@ -7,10 +7,12 @@ use App\Livewire\Counter;;
 use App\Livewire\NewsPage;
 use App\Livewire\NewsDetailPage;
 use App\Livewire\OurReachPage;
-use App\Livewire\OurTeamPage;
 use App\Livewire\OurWorksPage;
 use App\Livewire\DonatePage;
 use App\Http\Controllers\PushSubscriptionController;
+use App\Livewire\Dashboard\CoveredArea\CoveredAreaCreate;
+use App\Livewire\Dashboard\CoveredArea\CoveredAreaEdit;
+use App\Livewire\Dashboard\CoveredArea\CoveredAreaManagement;
 use App\Livewire\Dashboard\News\NewsCreate;
 use App\Livewire\Dashboard\News\NewsEdit;
 use App\Livewire\Dashboard\News\NewsManagement;
@@ -42,6 +44,7 @@ use App\Livewire\PasswordReset;
 use App\Livewire\Programs\ProgramPage;
 use App\Livewire\Programs\ProgramDetailPage;
 use App\Livewire\ProgramCategoryPage;
+use App\Livewire\Programs\CityPrograms;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -70,7 +73,7 @@ Route::get('/login', Login::class)->name('login');
 Route::get('/news', NewsPage::class)->name('news');
 Route::get('/news/{id}', NewsDetailPage::class)->name('news.detail');
 Route::get('/our-works', OurWorksPage::class);
-Route::get('/our-reach', OurReachPage::class);
+Route::get('/our-reach', OurReachPage::class)->name('our-reach');
 Route::get('/donate', DonatePage::class);
 Route::get('/about-us', AboutUsPage::class);
 Route::get('/program-category/{id}', ProgramCategoryPage::class);
@@ -81,7 +84,8 @@ Route::get('/program-category/{id}', ProgramCategoryPage::class);
 // Route::get('/accountability', AccountabilityPage::class);
 Route::get('/disaster', DisasterPage::class);
 Route::get('/disaster/report', ReportDisaster::class)->name('report.disaster');
-Route::get('/programs', ProgramPage::class);
+Route::get('/programs', ProgramPage::class)->name('programs');
+Route::get('/programs/city/{city}', CityPrograms::class)->name('city-programs');
 Route::get('/programs/{id}', ProgramDetailPage::class)->name('programs.detail');
 
 
@@ -100,6 +104,12 @@ Route::prefix('dashboard')
       Route::get('/', UserManagement::class)->name('users');
       Route::get('/create', UserCreate::class)->name('users.create');
       Route::get('/{user}/edit', UserEdit::class)->name('users.edit');
+    });
+
+    Route::group(['prefix' => 'covered-area'], function () {
+      Route::get('/', CoveredAreaManagement::class)->name('dashboard.covered-area');
+      Route::get('/create', CoveredAreaCreate::class)->name('dashboard.covered-area.create');
+      Route::get('/{coveredArea}/edit', CoveredAreaEdit::class)->name('dashboard.covered-area.edit');
     });
 
     // news

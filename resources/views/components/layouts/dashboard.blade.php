@@ -22,6 +22,11 @@ $navLinks = [
 'label' => 'Disaster'
 ],
 [
+'route' => 'dashboard.covered-area',
+'icon' => 'map',
+'label' => 'Covered Area'
+],
+[
 'route' => 'dashboard.disaster.program.areaOfWork',
 'icon' => 'square-3-stack-3d',
 'label' => 'Disaster program area of work'

@@ -51,7 +51,12 @@ class DisasterProgramCategoryEdit extends Component
 
   public function update()
   {
-    $this->validate();
+    $this->validate(
+      [
+        ...$this->rules,
+        'name' => 'required|string|max:255|unique:disaster_program_categories,name,' . $this->category->id,
+      ]
+    );
 
     // Handle image uploads (if any)
     $cover_image_path = $this->cover_image ? $this->cover_image->store('cover_images', 'public') : $this->category->cover_image;

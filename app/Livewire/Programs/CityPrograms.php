@@ -3,25 +3,26 @@
 namespace App\Livewire\Programs;
 
 use App\Models\DisasterProgram;
+use Laravolt\Indonesia\Models\City;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Layout('components.layouts.landing')]
-#[Title('Programs - DMC Ikatek-UH')]
-class ProgramPage extends Component
+#[Title('Programs in City - DMC Ikatek-UH')]
+class CityPrograms extends Component
 {
     use WithPagination;
 
     public $search = '';
     public $perPage = 10;
     public $status = '';
+    public $city;
 
-    protected $queryString = ['search', 'perPage', 'status'];
-
-    public function mount()
+    public function mount(City $city)
     {
+        $this->city = $city;
         $this->perPage = $this->perPage ?? 10;
         $this->search = $this->search ?? '';
         $this->status = $this->status ?? '';
@@ -37,6 +38,9 @@ class ProgramPage extends Component
     public function render()
     {
         $programs = DisasterProgram::with(['category', 'disaster', 'donations', 'disaster.city'])  // Eager load city relation
+            ->whereHas('disaster', function ($query) {
+                $query->where('city_id', $this->city->id);
+            })
             ->when($this->status !== '', function ($query) {
                 $query->where('status', $this->status);
             })
@@ -47,6 +51,6 @@ class ProgramPage extends Component
             ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
 
-        return view('livewire.programs.program-page', ['programs' => $programs]);
+        return view('livewire.programs.city-programs', ['programs' => $programs]);
     }
 }

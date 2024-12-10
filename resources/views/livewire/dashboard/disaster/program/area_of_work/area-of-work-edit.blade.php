@@ -21,8 +21,10 @@
     <div class="mb-4">
       <label for="image" class="block text-gray-700">Image</label>
       <input type="file" accept="image/*" id="image" wire:model="image" class="w-full border-gray-300 rounded">
-      @if ($areaOfWork->image)
-      <img src="{{ asset('storage/' . $areaOfWork->image) }}" class="mt-2 w-32">
+      @if ($image)
+      <img src="{{ $image->temporaryUrl() }}" class="mt-2">
+      @elseif ($areaOfWork->image)
+      <img src="{{ asset('storage/' . $areaOfWork->image) }}" class="mt-2">
       @endif
       @error('image') <span class="text-red-600">{{ $message }}</span> @enderror
     </div>
@@ -30,8 +32,10 @@
     <div class="mb-4">
       <label for="cover_image" class="block text-gray-700">Cover Image</label>
       <input type="file" accept="image/*" id="cover_image" wire:model="cover_image" class="w-full border-gray-300 rounded">
-      @if ($areaOfWork->cover_image)
-      <img src="{{ asset('storage/' . $areaOfWork->cover_image) }}" class="mt-2 w-32">
+      @if ($cover_image)
+      <img src="{{ $cover_image->temporaryUrl() }}" class="mt-2">
+      @elseif ($areaOfWork->cover_image)
+      <img src="{{ asset('storage/' . $areaOfWork->cover_image) }}" class="mt-2">
       @endif
       @error('cover_image') <span class="text-red-600">{{ $message }}</span> @enderror
     </div>

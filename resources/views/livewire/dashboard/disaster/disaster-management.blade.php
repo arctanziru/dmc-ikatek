@@ -14,7 +14,7 @@ $statusOptions = [
 ];
 @endphp
 
-<div class="p-6 space-y-4">
+<main class="p-6 space-y-4">
     <h2 class="text-2xl font-semibold mb-4">Disaster Management</h2>
 
     <div class="flex items-center space-x-4">
@@ -77,4 +77,4 @@ $statusOptions = [
 
     <!-- Pagination links -->
     {{ $disasters->links() }}
-</div>
+</main>

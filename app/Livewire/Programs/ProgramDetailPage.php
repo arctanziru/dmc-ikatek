@@ -89,7 +89,7 @@ class ProgramDetailPage extends Component
 
     public function render()
     {
-        return view('livewire.program.program-detail-page', [
+        return view('livewire.programs.program-detail-page', [
             'program' => $this->program,
             'totalDonation' => $this->totalDonation,
             'program_category' => $this->program_category,
