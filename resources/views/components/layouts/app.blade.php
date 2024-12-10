@@ -82,6 +82,42 @@
         }
         localStorage.theme = 'light'
     </script>
+
+    <style>
+        * {
+            --scrollbar-color-thumb: #cccccc;
+            --scrollbar-color-thumb-hover: #cccccc;
+            --scrollbar-color-track: rgba(256, 256, 256, 0.1);
+            --scrollbar-width: thin;
+            --scrollbar-width-legacy: 12px;
+        }
+
+        @supports (scrollbar-width: auto) {
+            * {
+                scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-track);
+                scrollbar-width: var(--scrollbar-width);
+            }
+        }
+
+        @supports selector(::-webkit-scrollbar) {
+            *::-webkit-scrollbar-thumb {
+                background: var(--scrollbar-color-thumb);
+            }
+
+            *::-webkit-scrollbar-thumb:hover {
+                background: var(--scrollbar-color-thumb-hover);
+            }
+
+            *::-webkit-scrollbar-track {
+                background: var(--scrollbar-color-track);
+            }
+
+            *::-webkit-scrollbar {
+                max-width: var(--scrollbar-width-legacy);
+                max-height: var(--scrollbar-width-legacy);
+            }
+        }
+    </style>
 </head>
 
 <body class="m-0 p-0 w-screen overflow-x-hidden">

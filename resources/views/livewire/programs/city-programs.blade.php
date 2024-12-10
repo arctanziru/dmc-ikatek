@@ -8,7 +8,6 @@ $perPageData = [
 @endphp
 
 <main class="flex flex-col gap-2 md:gap-4 lg:gap-8 max-w-[1440px] w-full items-center p-4 md:p-8 lg:p-12 mx-auto">
-    <!-- back button and title Programs in Makassar -->
     <div class="flex items-center gap-4 w-full">
         <a href="{{ route('our-reach') }}" class="flex items-center gap-2">
             <!-- chevron left -->
