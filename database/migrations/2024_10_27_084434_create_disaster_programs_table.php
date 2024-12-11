@@ -17,7 +17,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->foreignId('category_id')->constrained('disaster_program_categories')->onDelete('cascade');
-            $table->foreignId('disaster_id')->constrained('disasters')->onDelete('cascade');
+            $table->foreignId('disaster_id')->nullable()->constrained('disasters')->onDelete('cascade');
+            $table->foreignId('city_id')->nullable()->constrained(table: config('laravolt.indonesia.table_prefix') . 'cities')->onDelete('cascade');
             $table->timestamps();
         });
     }

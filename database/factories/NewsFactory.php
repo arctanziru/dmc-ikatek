@@ -25,7 +25,7 @@ class NewsFactory extends Factory
     return [
       "title" => $this->faker->sentence(),
       "image" => $this->faker->imageUrl(),
-      "description" => $this->faker->paragraph(),
+      "description" => $this->faker->sentence(),
       "content" => $this->faker->paragraphs(3, true),
       "author" => $this->faker->name(),
       "news_category_id" => NewsCategory::factory(),

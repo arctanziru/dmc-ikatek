@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravolt\Indonesia\Models\City;
 
 class DisasterProgram extends Model
 {
@@ -13,6 +14,7 @@ class DisasterProgram extends Model
         'name',
         'description',
         'category_id',
+        'city_id',
         'disaster_id',
         'status',
         'image',
@@ -33,5 +35,10 @@ class DisasterProgram extends Model
     public function donations()
     {
         return $this->hasMany(Donation::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 }

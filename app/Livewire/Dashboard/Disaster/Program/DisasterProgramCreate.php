@@ -23,6 +23,10 @@ class DisasterProgramCreate extends Component
     public $image;
     public $tor_link;
     public $target_donation;
+    public $city_id;
+    public $selectedProvince = null;
+    public $provinces = [];
+    public $cities = [];
 
     public $categories = [];
     public $disasters = [];
@@ -31,14 +35,24 @@ class DisasterProgramCreate extends Component
         'name' => 'required|string|max:255',
         'description' => 'nullable|string|max:500',
         'category_id' => 'required|exists:disaster_program_categories,id',
-        'disaster_id' => 'required|exists:disasters,id',
+        'disaster_id' => 'nullable|exists:disasters,id',
+        'city_id' => 'nullable|exists:indonesia_cities,id',
         'image' => 'nullable|image|max:5120', // Max 5MB
         'tor_link' => 'nullable|string|url',
         'target_donation' => 'nullable|numeric|min:0',
     ];
 
+    public function updatedSelectedProvince($provinceId)
+    {
+        $this->cities = [];
+        $this->cities = \Indonesia::findProvince($provinceId, ['cities'])['cities'];
+        $this->city_id = null;
+    }
+
+
     public function mount()
     {
+        $this->provinces = \Indonesia::allProvinces();
         $this->categories = DisasterProgramCategory::all();
         $this->disasters = Disaster::all();
     }
@@ -54,6 +68,7 @@ class DisasterProgramCreate extends Component
             'description' => $this->description,
             'category_id' => $this->category_id,
             'disaster_id' => $this->disaster_id,
+            'city_id' => $this->city_id,
             'image' => $imagePath,
             'tor_link' => $this->tor_link,
             'target_donation' => $this->target_donation,

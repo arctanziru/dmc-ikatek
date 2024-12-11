@@ -48,7 +48,7 @@ class DisasterProgramManagement extends Component
 
     public function render()
     {
-        $programs = DisasterProgram::with(['category', 'disaster', 'donations'])
+        $programs = DisasterProgram::with(['category', 'disaster', 'donations', 'city'])
             ->when($this->status, function ($query) {
                 $query->where('status', $this->status);
             })
@@ -81,6 +81,6 @@ class DisasterProgramManagement extends Component
         }
 
         session()->flash('title', 'Program Deleted');
-        session()->flash('message', 'Disaster Program "' . $program->name . '" deleted successfully.');
+        session()->flash('message', 'Program "' . $program->name . '" deleted successfully.');
     }
 }

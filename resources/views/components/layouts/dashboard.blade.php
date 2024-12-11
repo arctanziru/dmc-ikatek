@@ -29,17 +29,17 @@ $navLinks = [
 [
 'route' => 'dashboard.disaster.program.areaOfWork',
 'icon' => 'square-3-stack-3d',
-'label' => 'Disaster program area of work'
+'label' => 'Area of work'
 ],
 [
 'route' => 'dashboard.disaster.program.category',
 'icon' => 'tag',
-'label' => 'Disaster program category'
+'label' => 'Program category'
 ],
 [
 'route' => 'dashboard.disaster.program',
 'icon' => 'chart-pie',
-'label' => 'Disaster program'
+'label' => 'Program'
 ],
 [
 'route' => 'dashboard.donation',

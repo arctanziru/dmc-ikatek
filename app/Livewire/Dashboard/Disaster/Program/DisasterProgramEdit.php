@@ -26,15 +26,20 @@ class DisasterProgramEdit extends Component
     public $existingImage;
     public $tor_link;
     public $target_donation;
+    public $city_id;
 
     public $categories = [];
     public $disasters = [];
+    public $selectedProvince = null;
+    public $provinces = [];
+    public $cities = [];
 
     protected $rules = [
         'name' => 'required|string|max:255',
         'description' => 'nullable|string|max:500',
         'category_id' => 'required|exists:disaster_program_categories,id',
         'disaster_id' => 'required|exists:disasters,id',
+        'city_id' => 'nullable|exists:indonesia_cities,id',
         'image' => 'nullable|image|max:5120',
         'tor_link' => 'nullable|string|url',
         'target_donation' => 'nullable|numeric|min:0',
@@ -53,6 +58,22 @@ class DisasterProgramEdit extends Component
 
         $this->categories = DisasterProgramCategory::all();
         $this->disasters = Disaster::all();
+
+        $this->provinces = \Indonesia::allProvinces();
+
+        $city = \Indonesia::findCity($this->city_id, ['province']);
+        if ($city) {
+            $this->selectedProvince = $city->province->id;
+            $province = \Indonesia::findProvince($this->selectedProvince, ['cities']);
+            if ($province) {
+                $this->cities = $province->cities;
+            } else {
+                $this->cities = collect(); // Initialize as an empty collection
+            }
+        } else {
+            $this->selectedProvince = null;
+            $this->cities = collect(); // Initialize as an empty collection
+        }
     }
 
     public function update()
@@ -75,10 +96,11 @@ class DisasterProgramEdit extends Component
             'image' => $imagePath,
             'tor_link' => $this->tor_link,
             'target_donation' => $this->target_donation,
+            'city_id' => $this->city_id,
         ]);
 
         session()->flash('title', 'Program Updated');
-        session()->flash('message', 'Disaster Program "' . $this->name . '" updated successfully.');
+        session()->flash('message', 'Program "' . $this->name . '" updated successfully.');
 
         return redirect()->route('dashboard.disaster.program');
     }

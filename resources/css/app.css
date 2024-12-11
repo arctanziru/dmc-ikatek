@@ -14,3 +14,7 @@ p {
 * {
     box-sizing: border-box;
 }
+
+textarea {
+    min-height: 320px;
+}
