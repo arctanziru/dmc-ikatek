@@ -47,19 +47,27 @@
       <label for="image_galleries" class="block text-gray-700">Image Galleries</label>
       <input type="file" accept="image/*" id="image_galleries" wire:model="image_galleries" class="w-full" multiple>
       @error('image_galleries.*') <span class="text-red-600">{{ $message }}</span> @enderror
-      @if ($image_galleries)
-      <div class="mt-2">
-        @foreach ($image_galleries as $image_gallery)
-        <img src="{{ $image_gallery->temporaryUrl() }}" class="inline-block mt-2" style="max-width: 100px;">
-        @endforeach
-      </div>
-      @elseif ($category->image_galleries)
-      <div class="mt-2">
-        @foreach (json_decode($category->image_galleries) as $image_gallery)
-        <img src="{{ Storage::url($image_gallery) }}" class="inline-block mt-2" style="max-width: 100px;">
+
+      @if ($existing_image_galleries)
+      <div class="mt-2 flex flex-wrap gap-4">
+        @foreach ($existing_image_galleries as $key => $existing_image)
+        <div class="relative">
+          <img src="{{ Storage::url($existing_image) }}" class="inline-block mt-2" style="max-width: 160px;">
+          <div class="absolute top-0 right-0" wire:click="deleteGalleryImage({{ $key }})">
+            <x-bladewind::button.circle icon="trash" />
+          </div>
+        </div>
         @endforeach
       </div>
       @endif
+      @if ($image_galleries)
+      <div class="mt-2 flex flex-wrap gap-4">
+        @foreach ($image_galleries as $image_gallery)
+        <img src="{{ $image_gallery->temporaryUrl() }}" class="inline-block mt-2" style="max-width: 160px;">
+        @endforeach
+      </div>
+      @endif
+
     </div>
 
     <!-- Area of Work -->

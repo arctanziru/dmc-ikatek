@@ -37,7 +37,7 @@ class DisasterProgramCreate extends Component
         'category_id' => 'required|exists:disaster_program_categories,id',
         'disaster_id' => 'nullable|exists:disasters,id',
         'city_id' => 'nullable|exists:indonesia_cities,id',
-        'image' => 'nullable|image|max:5120', // Max 5MB
+        'image' => 'nullable|image|max:5120', //  Max 5MB
         'tor_link' => 'nullable|string|url',
         'target_donation' => 'nullable|numeric|min:0',
     ];

@@ -22,6 +22,7 @@ class DisasterProgramCategoryEdit extends Component
   public $cover_image;
   public $image;
   public $image_galleries = [];
+  public $existing_image_galleries = [];
   public $area_of_work_id;
 
   // Validation rules
@@ -42,11 +43,7 @@ class DisasterProgramCategoryEdit extends Component
     $this->description = $category->description;
     $this->short_description = $category->short_description;
     $this->area_of_work_id = $category->area_of_work_id;
-
-    // Populate image fields if they exist
-    $this->cover_image = $category->cover_image;
-    $this->image = $category->image;
-    $this->image_galleries = json_decode($category->image_galleries) ?: [];
+    $this->existing_image_galleries = json_decode($category->image_galleries, true) ?? [];
   }
 
   public function update()
@@ -61,12 +58,13 @@ class DisasterProgramCategoryEdit extends Component
     // Handle image uploads (if any)
     $cover_image_path = $this->cover_image ? $this->cover_image->store('cover_images', 'public') : $this->category->cover_image;
     $image_path = $this->image ? $this->image->store('images', 'public') : $this->category->image;
-    $image_galleries_paths = [];
-    if ($this->image_galleries) {
-      foreach ($this->image_galleries as $image_gallery) {
-        $image_galleries_paths[] = $image_gallery->store('image_galleries', 'public');
-      }
+    $uploadedImagePaths = [];
+    foreach ($this->image_galleries as $image) {
+      $uploadedImagePaths[] = $image->store('image_galleries', 'public');
     }
+
+    // Merge new images with existing ones
+    $image_galleries_paths = array_merge($this->existing_image_galleries, $uploadedImagePaths);
 
     // Update the category
     $this->category->update([
@@ -84,6 +82,12 @@ class DisasterProgramCategoryEdit extends Component
 
     return redirect()->route('dashboard.disaster.program.category');
   }
+
+  public function deleteGalleryImage($key)
+  {
+    unset($this->existing_image_galleries[$key]);
+  }
+
 
   public function render()
   {
