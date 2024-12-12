@@ -19,6 +19,7 @@ class CityPrograms extends Component
     public $perPage = 10;
     public $status = '';
     public $city;
+    public $activeTab = "existing";
 
     public function mount(City $city)
     {
@@ -37,20 +38,23 @@ class CityPrograms extends Component
 
     public function render()
     {
-        $programs = DisasterProgram::with(['category', 'disaster', 'donations', 'disaster.city'])  // Eager load city relation
-            ->whereHas('disaster', function ($query) {
-                $query->where('city_id', $this->city->id);
-            })
+        $programs = DisasterProgram::query()
+            ->with(['category', 'disaster', 'donations', 'city']) // Eager load necessary relations
+            ->where('city_id', $this->city->id) // Filter by city ID directly
             ->when($this->status !== '', function ($query) {
-                $query->where('status', $this->status);
+                $query->where('status', $this->status); // Filter by status if provided
             })
             ->when($this->search !== '', function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('description', 'like', '%' . $this->search . '%');
+                $query->where(function ($query) {
+                    $query->where('name', 'like', '%' . $this->search . '%')
+                        ->orWhere('description', 'like', '%' . $this->search . '%');
+                });
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('created_at', 'desc') // Order by creation date
             ->paginate($this->perPage);
 
-        return view('livewire.programs.city-programs', ['programs' => $programs]);
+        return view('livewire.programs.city-programs', [
+            'programs' => $programs,
+        ]);
     }
 }

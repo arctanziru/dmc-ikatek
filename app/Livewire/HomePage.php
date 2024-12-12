@@ -6,46 +6,84 @@ use App\Models\AreaOfWork;
 use App\Models\DisasterProgram;
 use App\Models\Donation;
 use App\Models\News;
+use App\Models\CoveredArea; // Import CoveredArea model
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-
 
 #[Layout('components.layouts.landing')]
 #[Title('DMC Ikatek-UH')]
 class HomePage extends Component
 {
-    public $search = ''; // To hold the search query
+public $search = ''; // To hold the search query
+public $totalCities;
+public $totalProvinces;
+public $provincesWithCities = [];
 
-    public function render()
-    {
-        $programs = DisasterProgram::with(['category', 'disaster', 'donations'])
-            ->where('status', 'active')
-            ->where(function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%')
-                    ->orWhere('description', 'like', '%' . $this->search . '%');
-            })
-            ->orderBy('created_at', 'desc')
-            ->take(3) // Limit to 3 programs
-            ->get();
+public function render()
+{
+// Fetch programs and other data
+$programs = DisasterProgram::with(['category', 'disaster', 'donations'])
+->where('status', 'active')
+->where(function ($query) {
+$query->where('name', 'like', '%' . $this->search . '%')
+->orWhere('description', 'like', '%' . $this->search . '%');
+})
+->orderBy('created_at', 'desc')
+->take(3) // Limit to 3 programs
+->get();
 
-        $totalProgramCount = DisasterProgram::count();
+$totalProgramCount = DisasterProgram::count();
+$uniqueDonorCount = Donation::distinct('donor_email')->count('donor_email');
+$donationSum = Donation::sum('amount');
+$news = News::orderBy('created_at', 'desc')->take(5)->get();
+$areaOfWorks = AreaOfWork::all();
 
-        $uniqueDonorCount = Donation::distinct('donor_email')->count('donor_email');
+// Calculate totalCities and totalProvinces
+$this->calculateCitiesAndProvinces();
 
-        $donationSum = Donation::sum('amount');
+return view('livewire.home-page', [
+'programs' => $programs,
+'totalProgramCount' => $totalProgramCount,
+'uniqueDonorCount' => $uniqueDonorCount,
+'donationSum' => $donationSum,
+'news' => $news,
+'areaOfWorks' => $areaOfWorks,
+'totalCities' => $this->totalCities,
+'totalProvinces' => $this->totalProvinces,
+]);
+}
 
-        $news = News::orderBy('created_at', 'desc')->take(5)->get();
+// This method calculates the totalCities and totalProvinces
+public function calculateCitiesAndProvinces()
+{
+// Fetch CoveredArea data and related city and province
+$coveredAreas = CoveredArea::with(['city', 'province'])
+->orderBy('created_at', 'desc')
+->get();
 
-        $areaOfWorks = AreaOfWork::all();
+$provincesWithCities = [];
 
-        return view('livewire.home-page', [
-            'programs' => $programs,
-            'totalProgramCount' => $totalProgramCount,
-            'uniqueDonorCount' => $uniqueDonorCount,
-            'donationSum' => $donationSum,
-            'news' => $news,
-            'areaOfWorks' => $areaOfWorks,
-        ]);
-    }
+foreach ($coveredAreas as $area) {
+$provinceName = $area->province->name;
+$city = $area->city;
+
+if (!$city || !$provinceName) {
+continue;
+}
+
+if (!isset($provincesWithCities[$provinceName])) {
+$provincesWithCities[$provinceName] = [];
+}
+
+if (!in_array($city, $provincesWithCities[$provinceName])) {
+$provincesWithCities[$provinceName][] = $city;
+}
+}
+
+// Set the public properties with calculated data
+$this->provincesWithCities = $provincesWithCities;
+$this->totalCities = count(array_unique(array_merge(...array_values($provincesWithCities))));
+$this->totalProvinces = count($provincesWithCities);
+}
 }

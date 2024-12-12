@@ -26,7 +26,7 @@ return $count + count($regionList);
         Where We <br /> Work
       </p>
       <p class="text-[16px] lg:text-[18px] text-secondary">
-        DMC IKATEK-UH operates across 13 regions within 7 provinces, providing critical assistance in times of
+        DMC IKATEK-UH operates across {{ $totalCities }} regions within {{ $totalProvinces }} provinces, providing critical assistance in times of
         disaster
         and working to build sustainable and resilient communities. We deliver life-saving support during emergencies
         and engage in long-term efforts to strengthen disaster preparedness and risk reduction, striving to create safer

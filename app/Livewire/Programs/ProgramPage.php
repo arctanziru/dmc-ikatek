@@ -18,6 +18,8 @@ class ProgramPage extends Component
     public $perPage = 10;
     public $status = '';
 
+    public $activeTab = 'existing'; // Default active tab
+
     protected $queryString = ['search', 'perPage', 'status'];
 
     public function mount()
@@ -36,7 +38,7 @@ class ProgramPage extends Component
 
     public function render()
     {
-        $programs = DisasterProgram::with(['category', 'disaster', 'donations', 'disaster.city'])  // Eager load city relation
+        $programs = DisasterProgram::with(['category', 'disaster', 'donations', 'city'])  // Eager load city relation
             ->when($this->status !== '', function ($query) {
                 $query->where('status', $this->status);
             })

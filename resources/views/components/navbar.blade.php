@@ -3,7 +3,7 @@
         ['name' => 'About Us', 'url' => '/about-us'],
         ['name' => 'Our Works', 'url' => '/our-works'],
         ['name' => 'Our Reach', 'url' => '/our-reach'],
-        ['name' => 'Get Involved', 'url' => '/#get-involved'],
+        ['name' => 'Programs', 'url' => '/programs'],
         ['name' => 'News', 'url' => '/news'],
     ];
 

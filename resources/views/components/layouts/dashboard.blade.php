@@ -168,10 +168,10 @@ $navLinks = [
     class="p-4 z-[100] -translate-x-full lg:translate-x-0 bg-dark text-white w-[240px] h-full fixed flex flex-col justify-between transition-transform duration-300">
     <div class="flex flex-col flex-1 overflow-y-auto gap-6">
       <!-- Sidebar Header -->
-      <div class="flex font-semibold items-center gap-2">
+      <a href="/" class="flex font-semibold items-center gap-2">
         <img src="{{ asset('images/Logo.png') }}" class="!w-[42px] !h-[42px]" alt="Logo" />
         <p class="text-[16px]">DMC IKATEK-UH</p>
-      </div>
+      </a>
 
       <!-- Navigation Links -->
       <nav class="flex flex-col gap-3 overflow-y-auto flex-1">
