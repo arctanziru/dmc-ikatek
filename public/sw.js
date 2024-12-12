@@ -17,7 +17,10 @@ self.addEventListener('push', function (e) {
 
 
 self.addEventListener('notificationclick', function (e) {
-  console.log(e)
   e.notification.close();
-  e.waitUntil(clients.openWindow(e.notification.data));
+  // e.waitUntil(clients.openWindow(e.notification.data));
+  e.waitUntil(
+    self.clients.openWindow('https://dmcikatek-uh.org/dashboard')
+  );
+
 })
