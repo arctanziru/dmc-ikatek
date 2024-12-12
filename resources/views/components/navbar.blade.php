@@ -50,23 +50,7 @@
             </x-button>
         </a>
 
-        <x-bladewind::dropmenu>
-            <x-slot:trigger>
-                <div class="flex gap-0 items-center">
-                    <x-bladewind::icon name="language" class="h-[16px]" />
-                    <p>
-                        EN
-                    </p>
-                </div>
-            </x-slot:trigger>
-            <x-bladewind::dropmenu-item>
-                English
-            </x-bladewind::dropmenu-item>
-            <x-bladewind::dropmenu-item>
-                Bahasa Indonesia
-            </x-bladewind::dropmenu-item>
-        </x-bladewind::dropmenu>
-
+        @livewire('components.language-switcher')
     </div>
 
     <!-- Mobile menu button aligned to right -->
