@@ -5,55 +5,57 @@
         ['name' => 'Youtube', 'path' => '/icons/youtube.svg', 'url' => 'https://www.instagram.com/dmcikatek.uh/'],
     ];
 
-    $rightNavs =
+    $rightNavs = [
+        // Section 1
         [
-            //1
             [
-                [
-                    'title' => 'About Us',
-                    'links' => [
-                        ['text' => 'About Us', 'url' => '/about-us'],
-                    ]
+                'title' => 'About Us',
+                'links' => [
+                    ['text' => 'About Us', 'url' => '/about-us'],
                 ],
-                [
-                    'title' => 'Our Reach',
-                    'links' => [
-                        ['text' => 'Provinces And Region', 'url' => '/our-reach'],
-
-                    ]
+            ],
+            [
+                'title' => 'Our Reach',
+                'links' => [
+                    ['text' => 'Provinces And Region', 'url' => '/our-reach'],
                 ],
-
             ],
-            //2
+        ],
+        // Section 2 (Dynamic Our Works)
+        [
             [
-                [
-                    'title' => 'Our Works',
-                    'links' => [
-                        ['text' => 'Disaster Risk Reduction', 'url' => '/our-works/#disaster-risk-reduction'],
-                        ['text' => 'Emergency Response Plan', 'url' => '/our-works/#emergency-response-plan'],
-                        ['text' => 'Education and Technology', 'url' => '/our-works#education-and-technology'],
-                        ['text' => 'All Programs', 'url' => '/programs'],
+                'title' => 'Our Works',
+                'links' => array_merge(
+                    $areaOfWorks->map(function ($work) {
+                        return [
+                            'text' => $work->name, // AreaOfWork name
+                            'url' => "/our-works#{$work->id}", // AreaOfWork ID
+                        ];
+                    })->toArray(),
+                    [ // Append the static 'All Programs' link
+                        ['text' => 'All Programs', 'url' => '/programs']
                     ]
-                ]
+                ),
             ],
-            //3
+        ],
+        // Section 3
+        [
             [
-                [
-                    'title' => 'Get Involved',
-                    'links' => [
-                        ['text' => 'Donate', 'url' => '/donate'],
-                        ['text' => 'Share The Meal App', 'url' => 'https://sharethemeal.org/'], // Updated URL
-                    ]
-                ]
+                'title' => 'Get Involved',
+                'links' => [
+                    ['text' => 'Donate', 'url' => '/donate'],
+                    ['text' => 'Share The Meal App', 'url' => 'https://sharethemeal.org/'],
+                ],
             ],
+        ],
+    ];
 
-        ]
 
 @endphp
 
 
 <footer class="w-screen flex p-4 md:p-8 lg:p-12 bg-dark flex-col gap-4 items-center justify-center">
-    <main class=" max-w-[1440px] gap-6 md:gap-7 lg:gap-8 w-full flex flex-col lg:flex-row items-start justify-center">
+    <main class=" max-w-[1440px] gap-6 md:gap-7 lg:gap-8 w-full flex flex-col items-start justify-center">
         <section class="flex flex-col gap-6 lg:max-w-[320px]">
             <a href="/"
                 class="text-primary text-[24px] md:text-[28px] cursor-pointer lg:text-[32px] flex gap-3 items-center">
@@ -61,37 +63,47 @@
                     class="h-[30px] md:h-[36px] lg:h-[42px]">
                 DMC IKATEK-UH
             </a>
-            <p class="text-white text-[10px] md:text-[12px] font-[500]">
-                <span class="text-primary text-[10px] md:text-[12px] font-[500]">
 
-                    Disaster Management Center (DMC) IKATEK
-                </span>
-                is dedicated to providing timely disaster management, relief,
-                and recovery operations. Through collaboration with governments, NGOs, and the private sector, we strive
-                to minimize the impact of disasters and support affected communities. Our mission includes disaster risk
-                reduction, emergency response, and long-term resilience building.
-            </p>
-            <nav class="lg:flex flex-col gap-2 hidden ">
-                <div class="flex gap-2 items-center">
-                    <div class="bg-primary h-1 w-[15px] rounded-xl"></div>
-                    <p class="font-semibold text-[18px] shadow text-white">Contact Us</p>
-                </div>
-                <div class="flex gap-2 items-center text-white">
-                    <div>
-                        <x-bladewind::icon name="chevron-right" class="!h-3 !w-3 " />
+        </section>
+
+        <section class="flex gap-6 w-full flex-col md:flex-row">
+            <section class="flex flex-col w-[320px] max-w-[100%] gap-6">
+
+                <p class="text-white text-[10px] md:text-[12px] font-[500]">
+                    <span class="text-primary text-[10px] md:text-[12px] font-[500]">
+
+                        Disaster Management Center (DMC) IKATEK
+                    </span>
+                    is dedicated to providing timely disaster management, relief,
+                    and recovery operations. Through collaboration with governments, NGOs, and the private sector,
+                    we strive
+                    to minimize the impact of disasters and support affected communities. Our mission includes
+                    disaster risk
+                    reduction, emergency response, and long-term resilience building.
+                </p>
+                <nav class="hidden md:flex flex-col gap-2 ">
+
+                    <div class="flex gap-2 items-center">
+                        <div class="bg-primary h-1 w-[15px] rounded-xl"></div>
+                        <p class="font-semibold text-[18px] shadow text-white">Contact Us</p>
                     </div>
+                    <div class="flex gap-2 items-center text-white">
+                        <div>
+                            <x-bladewind::icon name="chevron-right" class="!h-3 !w-3 " />
+                        </div>
 
-                    <p class="text-[12px] font-light">Phone: 0821 9010 1214 / 0823 4986 8076</p>
-                </div>
-                <div class="flex gap-2 items-center text-white">
-                    <div>
-                        <x-bladewind::icon name="chevron-right" class="!h-3 !w-3 " />
+                        <p class="text-[12px] font-light">Phone: 0821 9010 1214 / 0823 4986 8076</p>
                     </div>
+                    <div class="flex gap-2 items-center text-white">
+                        <div>
+                            <x-bladewind::icon name="chevron-right" class="!h-3 !w-3 " />
+                        </div>
 
-                    <p class="text-[12px] font-light">Address: Jl. Boulevard-Ruko Ruby
-                        No.26 Makassar, Sulawesi Selatan 90231</p>
-                </div>
-                <div class="flex gap-4">
+                        <p class="text-[12px] font-light">Address: Jl. Boulevard-Ruko Ruby
+                            No.26 Makassar, Sulawesi Selatan 90231</p>
+                </nav>
+                <div class="hidden md:flex gap-4">
+
                     @foreach ($links as $link)
                         <a>
                             <div class="h-8 w-8 items-center flex rounded-[50%] bg-white justify-center cursor-pointer">
@@ -100,10 +112,8 @@
                         </a>
                     @endforeach
                 </div>
-            </nav>
-        </section>
+            </section>
 
-        <section class="flex flex-col gap-6 flex-1 w-full">
             <!-- <div class="flex flex-wrap gap-4 items-start ">
                 <div class="flex gap-4 lg:flex-1">
                     <div
@@ -131,7 +141,9 @@
 
             <!-- Footer Right Menu -->
             <!-- Right Navigation Menu (mapped from $rightNavs) -->
-            <div class="grid grid-cols-2 gap-4 md:grid-cols-3 w-full lg:grid-cols-3">
+
+
+            <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-2 w-full lg:grid-cols-3">
                 @foreach ($rightNavs as $navSection)
                     <nav class="flex flex-col gap-4 md:gap-6 lg:gap-8">
                         @foreach ($navSection as $navGroup)
@@ -165,7 +177,7 @@
 
 
         </section>
-        <nav class="flex lg:hidden flex-col gap-2 ">
+        <nav class="flex md:hidden flex-col gap-2 ">
             <div class="flex gap-2 items-center">
                 <div class="bg-primary h-1 w-[15px] rounded-xl"></div>
                 <p class="font-semibold text-[18px] shadow text-white">Contact Us</p>
@@ -182,7 +194,7 @@
                     <x-bladewind::icon name="chevron-right" class="!h-3 !w-3 " />
                 </div>
                 <p class="text-[12px] font-light">Address: Jl. Boulevard-Ruko Ruby
-                    No.26 Makassar, Sulawesi Selatan 90231</p>
+                No.26 Makassar, Sulawesi Selatan 90231</p>
             </div>
             <div class="flex gap-4">
                 @foreach ($links as $link)

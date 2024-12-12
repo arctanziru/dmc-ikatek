@@ -20,7 +20,7 @@ class ProgramCategoryPage extends Component
 
     protected $queryString = ['search', 'perPage']; // Bind query string with pagination params
 
-    public $activeTab = 'active'; // Default active tab
+    public $activeTab = 'existing'; // Default active tab
 
     public function mount($id)
     {

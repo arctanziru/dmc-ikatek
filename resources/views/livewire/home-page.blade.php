@@ -56,7 +56,7 @@
 
     ];
 
-    $currentLanguage = 'idn';
+    $currentLanguage = 'en';
 
     $about = [
         [
@@ -216,11 +216,11 @@
                     </p>
                     <div class="flex gap-8 items-center ">
                         <p class="text-white font-poppins text-[16px] md:text-[32px] lg:text-[48px] font-normal"><span
-                                class="text-[16px] md:text-[32px] lg:text-[48px] font-bold">7
+                                class="text-[16px] md:text-[32px] lg:text-[48px] font-bold">{{$totalCities}}
                             </span>Province</p>
                         <div class="self-stretch w-[2px] bg-white"></div>
                         <p class="text-white font-poppins text-[16px] md:text-[32px] lg:text-[48px] font-normal"><span
-                                class="text-[16px] md:text-[32px] lg:text-[48px] font-bold">18
+                                class="text-[16px] md:text-[32px] lg:text-[48px] font-bold">{{$totalProvinces}}
                             </span>Region</p>
                     </div>
                     <p

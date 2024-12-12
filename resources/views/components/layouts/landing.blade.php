@@ -5,7 +5,7 @@
     <x-navbar variant="{{ request()->is('/') ? 'transparent' : 'default' }}" />
     <x-bladewind::notification />
     {{ $slot }}
-    <x-footer />
+    @livewire('footer')
   </div>
 </x-layouts.app>
 

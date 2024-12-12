@@ -46,19 +46,19 @@
 
 
       <!-- Program Cards -->
-      <x-bladewind::tab-group name="programs">
+      <x-bladewind::tab-group name="programs" color="orange">
         <x-slot:headings>
+          <x-bladewind::tab-heading active="{{ $activeTab === 'existing' }}" name="existing" label="Existing" />
           <x-bladewind::tab-heading active="{{ $activeTab === 'active' }}" name="active" label="Active" />
-          <x-bladewind::tab-heading active="{{ $activeTab === 'inactive' }}" name="inactive" label="Inactive" />
           <x-bladewind::tab-heading active="{{ $activeTab === 'done' }}" name="done" label="Done" />
         </x-slot:headings>
 
         <x-bladewind::tab-body>
           <!-- Active Tab -->
-          <x-bladewind::tab-content name="active" active="{{ $activeTab === 'active' }}">
+          <x-bladewind::tab-content name="existing" active="{{ $activeTab === 'existing' }}">
             <div
-              class="grid grid-cols-1 w-full justify-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-4 lg:gap-4">
-              @forelse($programs->where('status', 'active') as $program)
+              class="grid grid-cols-1 w-full justify-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-4">
+              @forelse($programs as $program)
           <div class="flex justify-center">
           <x-program-card name="{{ $program->name }}" image="{{ $program->image }}"
             desc="{{ $program->description }}" target="{{ (int) $program->target_donation }}"
@@ -66,7 +66,7 @@
             category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
             createdAt="{{ $program->created_at->format('d M Y') }}" fullwidth="true"
             status="{{ $program->status }}"
-            location="{{$program->disaster->city->name}}, {{$program->disaster->city->province->name}}" />
+            location="{{$program->city->name ?? 'N/A'}}, {{$program->city->province->name ?? 'N/A'}}" />
           </div>
         @empty
         <p class="text-gray-500 w-full text-center">No active programs found.</p>
@@ -75,10 +75,10 @@
           </x-bladewind::tab-content>
 
           <!-- Inactive Tab -->
-          <x-bladewind::tab-content name="inactive" active="{{ $activeTab === 'inactive' }}">
+          <x-bladewind::tab-content name="active" active="{{ $activeTab === 'active' }}">
             <div
-              class="grid grid-cols-1 w-full justify-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-4 lg:gap-4">
-              @forelse($programs->where('status', 'inactive') as $program)
+              class="grid grid-cols-1 w-full justify-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-4">
+              @forelse($programs->where('status', 'active') as $program)
           <div class="flex justify-center">
           <x-program-card name="{{ $program->name }}" image="{{ $program->image }}"
             desc="{{ $program->description }}" target="{{ (int) $program->target_donation }}"
@@ -86,7 +86,7 @@
             category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
             createdAt="{{ $program->created_at->format('d M Y') }}" fullwidth="true"
             status="{{ $program->status }}"
-            location="{{$program->disaster->city->name}}, {{$program->disaster->city->province->name}}" />
+            location="{{$program->city->name ?? 'N/A'}}, {{$program->city->province->name ?? 'N/A'}}" />
           </div>
         @empty
         <p class="text-gray-500 w-full text-center">No inactive programs found.</p>
@@ -96,7 +96,22 @@
 
           <!-- Done Tab -->
           <x-bladewind::tab-content name="done" active="{{ $activeTab === 'done' }}">
-            <!-- Content for Done tab if needed -->
+            <div
+              class="grid grid-cols-1 w-full justify-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-4">
+              @forelse($programs->where('status', 'inactive') as $program)
+          <div class="flex justify-center">
+          <x-program-card name="{{ $program->name }}" image="{{ $program->image }}"
+            desc="{{ $program->description }}" target="{{ (int) $program->target_donation }}"
+            totalDonation="{{ $program->donations->sum('amount') }}"
+            category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
+            createdAt="{{ $program->created_at->format('d M Y') }}" fullwidth="true"
+            status="{{ $program->status }}"
+            location="{{$program->city->name ?? 'N/A'}}, {{$program->city->province->name ?? 'N/A'}}" />
+          </div>
+        @empty
+        <p class="text-gray-500 w-full text-center">No inactive programs found.</p>
+      @endforelse
+            </div>
           </x-bladewind::tab-content>
         </x-bladewind::tab-body>
       </x-bladewind::tab-group>
