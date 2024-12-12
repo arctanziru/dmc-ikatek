@@ -129,7 +129,7 @@
           </div>
           <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
             <button onclick="copyToClipboard('064201002158560')"
-              class="border-secondary border-[1px] bg-transparent hover:bg-secondary/20 cursor-pointer p-3">
+              class="border-secondary/20 rounded-sm border-[1px] bg-transparent hover:bg-secondary/20 cursor-pointer p-3">
               <div class="flex gap-2 items-center">
                 <div class="w-[80px]  md:w-[100px]">
                   <img src="images/bri.svg" class="h-[24px] w-max" />
@@ -146,7 +146,7 @@
               </div>
             </button>
             <button onclick="copyToClipboard('7709909098')"
-              class="border-secondary border-[1px] bg-transparent hover:bg-secondary/20 cursor-pointer p-3">
+              class="border-secondary/20 rounded-sm border-[1px] bg-transparent hover:bg-secondary/20 cursor-pointer p-3">
               <div class="flex gap-2 items-center">
                 <div class="w-[80px]  md:w-[100px]">
                   <img src="images/bsi.png" class="h-[24px] w-max" />

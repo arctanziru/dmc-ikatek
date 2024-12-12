@@ -72,13 +72,15 @@
                         <x-bladewind::icon name="calendar-days" class="!h-4 !w-4" />
                         {{ $program->created_at ? $program->created_at->format('d M Y - H:i') : 'Date Not Available' }}
                     </p>
-                    <a class="w-full" href="{{ $program->tor_link ?? '#' }}">
-                        <x-button variant="outlined" rounded="none" color="dark" class="w-full">
-                            <p class="text-[12px] md:text-[14px] font-medium">
-                                View Detail
-                            </p>
-                        </x-button>
-                    </a>
+                    @if ($program->tor_link)
+                        <a class="w-full" href="{{ $program->tor_link ?? '#' }}">
+                            <x-button variant="outlined" rounded="none" color="dark" class="w-full">
+                                <p class="text-[12px] md:text-[14px] font-medium">
+                                    View Detail
+                                </p>
+                            </x-button>
+                        </a>
+                    @endif
                 </article>
             </section>
 
@@ -113,10 +115,10 @@
         </div>
 
         <!-- Donation Section -->
-        <div
-            class="bg-white lg:sticky top-[80px] rounded-lg shadow-[0_0_3px_0] shadow-dark/20 lg:max-w-2xl lg:max-h-fit lg:h-[calc(100vh-100px)] overflow-y-auto">
+        <main
+            class=" lg:sticky top-[80px] rounded-lg shadow-[0_0_3px_0] w-full lg:w-[480px] bg-white shadow-dark/20 lg:max-w-2xl lg:max-h-fit lg:h-[calc(100vh-100px)] overflow-y-auto">
             <!-- Donation Content -->
-            <div class="w-full p-4 md:p-6 lg:p-8 flex flex-col gap-8">
+            <div class="w-full p-2 md:p-4 lg:p-8 flex flex-col gap-8">
                 <p class="text-[16px]">You Can Donate via:</p>
                 <!-- Payment Options -->
                 <div class="flex flex-col gap-4">
@@ -135,7 +137,7 @@
                     <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
                         <!-- Payment Buttons -->
                         <button onclick="copyToClipboard('064201002158560')"
-                            class="border-secondary border-[1px] bg-transparent hover:bg-secondary/20 cursor-pointer p-3">
+                            class="border-secondary/20 rounded-sm border-[1px] bg-transparent hover:bg-secondary/20 cursor-pointer p-3">
                             <div class="flex gap-2 items-center">
                                 <div class="w-[80px] md:w-[100px]">
                                     <img src="{{ asset('images/bri.svg') }}" class="h-[24px] w-max" />
@@ -151,7 +153,7 @@
                             </div>
                         </button>
                         <button onclick="copyToClipboard('7709909098')"
-                            class="border-secondary border-[1px] bg-transparent hover:bg-secondary/20 cursor-pointer p-3">
+                            class="border-secondary/20 rounded-sm border-[1px] bg-transparent hover:bg-secondary/20 cursor-pointer p-3">
                             <div class="flex gap-2 items-center">
                                 <div class="w-[80px] md:w-[100px]">
                                     <img src="{{ asset('images/bsi.png') }}" class="h-[24px] w-max" />
@@ -245,6 +247,6 @@
                     </x-button>
                 </main>
             </form>
-        </div>
+        </main>
     </div>
 </main>
