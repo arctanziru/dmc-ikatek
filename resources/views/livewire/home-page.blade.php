@@ -100,11 +100,12 @@ $ourworkstext = [
     </style>
 
     <main id="hero-section"
-        class="relative p-4 md:p-8 lg:p-16 min-h-[420px] lg:min-h-[720px] w-screen flex justify-center items-end overflow-hidden cursor-pointer">
+        class="relative p-4 md:p-8 lg:p-12 h-[420px] lg:h-[720px] lg:max-h-screen w-screen flex justify-center items-end overflow-hidden cursor-pointer">
 
         <!-- Background image with fade transition -->
         <img id="hero-background"
-            src="{{ $areaOfWorks->isEmpty() ? asset('images/hero.jpg') : asset('storage/' . $areaOfWorks[0]->image) }}"
+            src="{{ $areaOfWorks->isEmpty() ? 'images/noimage.jpeg' : asset('storage/' . $areaOfWorks[0]->image) }}"
+            onerror="this.src='/images/noimage.jpeg'"
             class="absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-100 transition-opacity duration-1000" />
 
         <!-- Semi-transparent overlay -->
@@ -119,11 +120,11 @@ $ourworkstext = [
             <a class="flex gap-6 items-center">
                 <div class="w-[6px] h-[100px] hidden md:inline bg-primary rounded-[10px_1px_1px_10px]">
                 </div>
-                <div class="flex flex-col gap-4">
-                    <p id="hero-title" class="text-[48px] leading-[60px] font-bold text-white uppercase">
+                <div class="flex flex-col md:gap-2 lg:gap-4">
+                    <p id="hero-title" class="text-[20px] md:text-[28px] lg:text-[36px] font-bold text-white uppercase">
                         {{ $areaOfWorks->isEmpty() ? 'DMC IKATEK-UH' : $areaOfWorks[0]->name }}
                     </p>
-                    <p id="hero-description" class="text-[32px] leading-[40px] font-semibold capitalize text-white">
+                    <p id="hero-description" class="text-[12px] md:text-[18px] lg:text-[24px] font-semibold capitalize text-white">
                         {{ $areaOfWorks->isEmpty() ? 'Building Resilience, Restoring Hope' : $areaOfWorks[0]->short_description }}
                     </p>
                 </div>
@@ -137,11 +138,11 @@ $ourworkstext = [
 
         <!-- Navigation arrows -->
         <x-button variant="outlined" size="square-sm" rounded="[50%]" color="white" id="prev-arrow"
-            class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white font-bold text-[32px]">
+            class="absolute left-3 lg:left-4 top-1/2 transform -translate-y-1/2 text-white font-bold text-[32px]">
             <x-bladewind::icon name="chevron-left" />
         </x-button>
         <x-button variant="outlined" size="square-sm" rounded="[50%]" color="white" id="next-arrow"
-            class="absolute right-6 top-1/2 transform -translate-y-1/2 text-white font-bold text-[32px]">
+            class="absolute right-3 lg:right-6 top-1/2 transform -translate-y-1/2 text-white font-bold text-[32px]">
             <x-bladewind::icon name="chevron-right" />
         </x-button>
 
@@ -672,7 +673,7 @@ $ourworkstext = [
             currentIndex = (currentIndex === areaOfWorks.length - 1) ? 0 : currentIndex + 1;
             updateHeroContent();
             updateNavigation();
-        }, 5000); // 5 seconds interval
+        }, 30000); // 5 seconds interval
     }
 
     // Reset the auto-change timer

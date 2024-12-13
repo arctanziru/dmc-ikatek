@@ -15,75 +15,75 @@ use Livewire\Component;
 #[Title('DMC Ikatek-UH')]
 class HomePage extends Component
 {
-public $search = ''; // To hold the search query
-public $totalCities;
-public $totalProvinces;
-public $provincesWithCities = [];
+  public $search = ''; // To hold the search query
+  public $totalCities;
+  public $totalProvinces;
+  public $provincesWithCities = [];
 
-public function render()
-{
-// Fetch programs and other data
-$programs = DisasterProgram::with(['category', 'disaster', 'donations'])
-->where('status', 'active')
-->where(function ($query) {
-$query->where('name', 'like', '%' . $this->search . '%')
-->orWhere('description', 'like', '%' . $this->search . '%');
-})
-->orderBy('created_at', 'desc')
-->take(3) // Limit to 3 programs
-->get();
+  public function render()
+  {
+    // Fetch programs and other data
+    $programs = DisasterProgram::with(['category', 'disaster', 'donations'])
+      ->where('status', 'active')
+      ->where(function ($query) {
+        $query->where('name', 'like', '%' . $this->search . '%')
+          ->orWhere('description', 'like', '%' . $this->search . '%');
+      })
+      ->orderBy('created_at', 'desc')
+      ->take(3) // Limit to 3 programs
+      ->get();
 
-$totalProgramCount = DisasterProgram::count();
-$uniqueDonorCount = Donation::distinct('donor_email')->count('donor_email');
-$donationSum = Donation::sum('amount');
-$news = News::orderBy('created_at', 'desc')->take(5)->get();
-$areaOfWorks = AreaOfWork::all();
+    $totalProgramCount = DisasterProgram::count();
+    $uniqueDonorCount = Donation::distinct('donor_email')->count('donor_email');
+    $donationSum = Donation::sum('amount');
+    $news = News::orderBy('created_at', 'desc')->take(5)->get();
+    $areaOfWorks = AreaOfWork::all();
 
-// Calculate totalCities and totalProvinces
-$this->calculateCitiesAndProvinces();
+    // Calculate totalCities and totalProvinces
+    $this->calculateCitiesAndProvinces();
 
-return view('livewire.home-page', [
-'programs' => $programs,
-'totalProgramCount' => $totalProgramCount,
-'uniqueDonorCount' => $uniqueDonorCount,
-'donationSum' => $donationSum,
-'news' => $news,
-'areaOfWorks' => $areaOfWorks,
-'totalCities' => $this->totalCities,
-'totalProvinces' => $this->totalProvinces,
-]);
-}
+    return view('livewire.home-page', [
+      'programs' => $programs,
+      'totalProgramCount' => $totalProgramCount,
+      'uniqueDonorCount' => $uniqueDonorCount,
+      'donationSum' => $donationSum,
+      'news' => $news,
+      'areaOfWorks' => $areaOfWorks,
+      'totalCities' => $this->totalCities,
+      'totalProvinces' => $this->totalProvinces,
+    ]);
+  }
 
-// This method calculates the totalCities and totalProvinces
-public function calculateCitiesAndProvinces()
-{
-// Fetch CoveredArea data and related city and province
-$coveredAreas = CoveredArea::with(['city', 'province'])
-->orderBy('created_at', 'desc')
-->get();
+  // This method calculates the totalCities and totalProvinces
+  public function calculateCitiesAndProvinces()
+  {
+    // Fetch CoveredArea data and related city and province
+    $coveredAreas = CoveredArea::with(['city', 'province'])
+      ->orderBy('created_at', 'desc')
+      ->get();
 
-$provincesWithCities = [];
+    $provincesWithCities = [];
 
-foreach ($coveredAreas as $area) {
-$provinceName = $area->province->name;
-$city = $area->city;
+    foreach ($coveredAreas as $area) {
+      $provinceName = $area->province->name;
+      $city = $area->city;
 
-if (!$city || !$provinceName) {
-continue;
-}
+      if (!$city || !$provinceName) {
+        continue;
+      }
 
-if (!isset($provincesWithCities[$provinceName])) {
-$provincesWithCities[$provinceName] = [];
-}
+      if (!isset($provincesWithCities[$provinceName])) {
+        $provincesWithCities[$provinceName] = [];
+      }
 
-if (!in_array($city, $provincesWithCities[$provinceName])) {
-$provincesWithCities[$provinceName][] = $city;
-}
-}
+      if (!in_array($city, $provincesWithCities[$provinceName])) {
+        $provincesWithCities[$provinceName][] = $city;
+      }
+    }
 
-// Set the public properties with calculated data
-$this->provincesWithCities = $provincesWithCities;
-$this->totalCities = count(array_unique(array_merge(...array_values($provincesWithCities))));
-$this->totalProvinces = count($provincesWithCities);
-}
+    // Set the public properties with calculated data
+    $this->provincesWithCities = $provincesWithCities;
+    $this->totalProvinces = count(array_unique(array_merge(...array_values($provincesWithCities))));
+    $this->totalCities = count($provincesWithCities);
+  }
 }

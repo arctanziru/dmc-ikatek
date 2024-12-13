@@ -3,8 +3,12 @@
 namespace App\Livewire\Dashboard\CoveredArea;
 
 use App\Models\CoveredArea;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Layout('components.layouts.dashboard')]
+#[Title('Add Covered Area - DMC Ikatek-UH')]
 class CoveredAreaCreate extends Component
 {
     public $city_id;

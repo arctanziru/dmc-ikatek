@@ -23,6 +23,6 @@
         @endif
         @error('city_id') <span class="text-red-600">{{ $message }}</span> @enderror
 
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Create Disaster</button>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Covered Area</button>
     </form>
 </main>

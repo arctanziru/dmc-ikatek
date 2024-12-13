@@ -2,8 +2,12 @@
 
 namespace App\Livewire\Dashboard\CoveredArea;
 
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Layout('components.layouts.dashboard')]
+#[Title('Edit Covererd Area - DMC Ikatek-UH')]
 class CoveredAreaEdit extends Component
 {
     public $coveredArea;
