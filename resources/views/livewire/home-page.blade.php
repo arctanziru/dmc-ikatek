@@ -1,84 +1,84 @@
 @php
-$cards = [
-[
-'name' => 'Our Mission',
-'subtitle' => 'Learn About Our Commitment.',
-'button' => 'Learn More'
-],
-[
-'name' => 'Corporate Strategy',
-'subtitle' => 'Discover our approach to disaster response.',
-'button' => 'Explore Strategy'
-],
-[
-'name' => 'Organization & Leadership',
-'subtitle' => 'Meet our leaders and governance team',
-'button' => 'Meet The Team'
-],
-[
-'name' => 'Our History',
-'subtitle' => 'Track our key milestones in disaster management',
-'button' => 'Read More'
-],
-];
-function formatCurrency($amount)
-{
-if ($amount >= 1_000_000_000_000) { // Trillion
-return number_format($amount / 1_000_000_000_000, 0) . ' T+'; // Format to 3 decimal places and add +
-} elseif ($amount >= 1_000_000_000) { // Billion
-return number_format($amount / 1_000_000_000, 0) . ' B+'; // Format to 3 decimal places and add +
-} else {
-return number_format($amount, 2); // Default formatting
-}
-}
+    $cards = [
+        [
+            'name' => 'Our Mission',
+            'subtitle' => 'Learn About Our Commitment.',
+            'button' => 'Learn More'
+        ],
+        [
+            'name' => 'Corporate Strategy',
+            'subtitle' => 'Discover our approach to disaster response.',
+            'button' => 'Explore Strategy'
+        ],
+        [
+            'name' => 'Organization & Leadership',
+            'subtitle' => 'Meet our leaders and governance team',
+            'button' => 'Meet The Team'
+        ],
+        [
+            'name' => 'Our History',
+            'subtitle' => 'Track our key milestones in disaster management',
+            'button' => 'Read More'
+        ],
+    ];
+    function formatCurrency($amount)
+    {
+        if ($amount >= 1_000_000_000_000) { // Trillion
+            return number_format($amount / 1_000_000_000_000, 0) . ' T+'; // Format to 3 decimal places and add +
+        } elseif ($amount >= 1_000_000_000) { // Billion
+            return number_format($amount / 1_000_000_000, 0) . ' B+'; // Format to 3 decimal places and add +
+        } else {
+            return number_format($amount, 2); // Default formatting
+        }
+    }
 
-$partners = [
-[
-'name' => 'Government',
-'path' => 'icons/Govt.svg',
-],
-[
-'name' => 'Non-Gov Organization',
-'path' => 'icons/NonGovt.svg',
-],
-[
-'name' => 'Private Sector Partnership',
-'path' => 'icons/PSP.svg',
-],
-[
-'name' => 'Academia and Think Tanks',
-'path' => 'icons/Academia.svg',
-],
-[
-'name' => 'Goodwill Ambassador & High Level Supporter',
-'path' => 'icons/Ambassador.svg',
-],
+    $partners = [
+        [
+            'name' => 'Government',
+            'path' => 'icons/Govt.svg',
+        ],
+        [
+            'name' => 'Non-Gov Organization',
+            'path' => 'icons/NonGovt.svg',
+        ],
+        [
+            'name' => 'Private Sector Partnership',
+            'path' => 'icons/PSP.svg',
+        ],
+        [
+            'name' => 'Academia and Think Tanks',
+            'path' => 'icons/Academia.svg',
+        ],
+        [
+            'name' => 'Goodwill Ambassador & High Level Supporter',
+            'path' => 'icons/Ambassador.svg',
+        ],
 
-];
+    ];
 
-$currentLanguage = 'en';
+    $currentLanguage = 'en';
 
-$about = [
-[
-'idn' => "Membangun ketahanan, Memulihkan harapan",
-'en' => "Building Resilience, Restoring Hope"
-],
-[
-'idn' => "Dengan dukunganmu",
-'en' => "With your support",
-],
-[
-'idn' => "berkomitmen untuk membangun ketahanan dan menyelamatkan nyawa dengan berfokus pada kesiapsiagaan bencana, respons cepat, dan pemulihan jangka panjang. Kami memberikan strategi inovatif, dukungan masyarakat, dan solusi langsung untuk mengelola risiko dan bencana secara efektif.",
-'en' => "are committed to building resilience and saving lives by focusing on disaster preparedness, rapid response, and long-term recovery. We deliver innovative strategies, community support, and hands-on solutions to effectively manage disaster risks and challenges.",
-]
-];
+    $about = [
+        [
+            'idn' => "Membangun ketahanan, Memulihkan harapan",
+            'en' => "Building Resilience, Restoring Hope"
+        ],
+        [
+            'idn' => "Dengan dukunganmu",
+            'en' => "With your support",
+        ],
+        [
+            'idn' => "berkomitmen untuk membangun ketahanan dan menyelamatkan nyawa dengan berfokus pada kesiapsiagaan bencana, respons cepat, dan pemulihan jangka panjang. Kami memberikan strategi inovatif, dukungan masyarakat, dan solusi langsung untuk mengelola risiko dan bencana secara efektif.",
+            'en' => "are committed to building resilience and saving lives by focusing on disaster preparedness, rapid response, and long-term recovery. We deliver innovative strategies, community support, and hands-on solutions to effectively manage disaster risks and challenges.",
+        ]
+    ];
 
-$ourworkstext = [
-[
-'idn' => "Di Disaster Management Center, kami berkomitmen untuk menyediakan bantuan dan dukungan bencana yang efektif di beberapa Provinsi dan Daerah. Operasi kami mencakup berbagai wilayah, seperti yang ditunjukkan pada peta di bawah ini.",
-'en' => "At the Disaster Management Center, we are committed to providing effective disaster relief and support across Several Provinces and Regions. Our operations cover a wide range of areas, as shown on the map below."
-],
-]
+    $ourworkstext = [
+        [
+            'idn' => "Di Disaster Management Center, kami berkomitmen untuk menyediakan bantuan dan dukungan bencana yang efektif di beberapa Provinsi dan Daerah. Operasi kami mencakup berbagai wilayah, seperti yang ditunjukkan pada peta di bawah ini.",
+            'en' => "At the Disaster Management Center, we are committed to providing effective disaster relief and support across Several Provinces and Regions. Our operations cover a wide range of areas, as shown on the map below."
+        ],
+    ]
 
 @endphp
 
@@ -190,10 +190,10 @@ $ourworkstext = [
                     </div>
                     <div class="flex gap-3 md:gap-6 lg:gap-9 flex-wrap md:flex-nowrap items-center justify-center">
                         @foreach ($partners as $partner)
-                        <div class="gap-3 w-24 md:w-32 lg:w-40 flex flex-col select-none items-center">
-                            <img draggable="false" src="{{ $partner['path'] }}" class="h-[60px] w-full" />
-                            <p class="text-center text-primary text-[10px] font-semibold">{{ $partner['name'] }}</p>
-                        </div>
+                            <div class="gap-3 w-24 md:w-32 lg:w-40 flex flex-col select-none items-center">
+                                <img draggable="false" src="{{ $partner['path'] }}" class="h-[60px] w-full" />
+                                <p class="text-center text-primary text-[10px] font-semibold">{{ $partner['name'] }}</p>
+                            </div>
                         @endforeach
                     </div>
                 </section>
@@ -235,9 +235,9 @@ $ourworkstext = [
                         style="width: 100%; min-width: 100% !important; border: none;" height="256"
                         data-external="1"></iframe>
                     <script type="text/javascript">
-                        ! function() {
+                        ! function () {
                             "use strict";
-                            window.addEventListener("message", (function(a) {
+                            window.addEventListener("message", (function (a) {
                                 if (void 0 !== a.data["datawrapper-height"]) {
                                     var e = document.querySelectorAll("iframe");
                                     for (var t in a.data["datawrapper-height"])
@@ -280,13 +280,13 @@ $ourworkstext = [
 
                 <section class="hidden md:flex gap-3 lg:gap-6 justify-center w-full">
                     @foreach ($programs as $program)
-                    <div class="flex justify-center">
-                        <x-program-card name="{{ $program->name }}" image="{{ $program->image }}"
-                            desc="{{ $program->description }}" target="{{ (int) $program->target_donation }}"
-                            totalDonation="{{ $program->donations->sum('amount') }}"
-                            category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
-                            createdAt="{{ $program->created_at->format('d M Y') }}" status="{{$program->status}}" />
-                    </div>
+                        <div class="flex justify-center">
+                            <x-program-card name="{{ $program->name }}" image="{{ $program->image }}"
+                                desc="{{ $program->description }}" target="{{ (int) $program->target_donation }}"
+                                totalDonation="{{ $program->donations->sum('amount') }}"
+                                category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
+                                createdAt="{{ $program->created_at->format('d M Y') }}" status="{{$program->status}}" />
+                        </div>
                     @endforeach
 
                     <a href="/programs"
@@ -330,10 +330,13 @@ $ourworkstext = [
                         <div
                             class="bg-primary lg:bg-primary/70 lg:h-max p-[12px_16px] md:p-[24px_32px] lg:p-[48px_64px] gap-2 justify-center flex flex-col relative items-center">
                             <img src="icons/donate.svg" />
-                            <p class="text-[16px] md:text-[22px] lg:text-[28px] text-white font-semibold">
-                                {{__('landing.makeADonation')}}
-                            </p>
-                            <p class="text-[10px] md:text-[12px] lg:text-[14px] text-white font-light text-center ">{{__('landing.makeADonationDesc')}}</p>
+                            <p class="text-[16px] md:text-[22px] lg:text-[28px] text-white font-semibold">Make A
+                                Donation</p>
+                            <p class="text-[10px] md:text-[12px] lg:text-[14px] text-white font-light text-center ">Join
+                                us on the ground or remotely
+                                to help with
+                                disaster relief
+                                Your time and skills can make a difference.</p>
                             <a href="/donate" class="inline lg:absolute -bottom-[20.5px] left-auto right-auto">
                                 <x-button rounded="none" size="medium" variant="fill" color="white">
                                     <p class="text-[12px] lg:text-[14px] lg:p-1 font-light">
@@ -468,88 +471,88 @@ $ourworkstext = [
                     <p class="text-[24px] font-medium">Check Our News</p>
                 </div>
                 @if (!$news || $news->isEmpty())
-                <div class="flex flex-col items-center gap-4">
-                    <p class="text-[16px] text-dark-light">No news available</p>
-                </div>
+                    <div class="flex flex-col items-center gap-4">
+                        <p class="text-[16px] text-dark-light">No news available</p>
+                    </div>
                 @else
-                <section class="flex gap-4 w-full justify-start flex-col lg:flex-row lg:h-[436px] ">
-                    <!-- Left Section (Featured News) -->
-                    <section class="flex-1 flex justify-start relative bg-white/20 max-w-[940px] ">
-                        <div class="hidden relative lg:flex justify-start items-center w-[80px] ">
+                    <section class="flex gap-4 w-full justify-start flex-col lg:flex-row lg:h-[436px] ">
+                        <!-- Left Section (Featured News) -->
+                        <section class="flex-1 flex justify-start relative bg-white/20 max-w-[940px] ">
+                            <div class="hidden relative lg:flex justify-start items-center w-[80px] ">
+                                <div
+                                    class="bg-white/90 shadow-sm gap-2 shadow-dark/40 w-[360px] flex flex-col p-8 absolute z-50 left-0">
+                                    <p class="text-[18px] font-medium text-primary">
+                                        {{ $news->first()->author ?? 'N/A' }}
+                                    </p>
+                                    <p class="text-ellipsis line-clamp-2 text-[24px] font-semibold">
+                                        {{ $news->first()->title ?? 'N/A' }}
+                                    </p>
+                                    <p class="text-ellipsis text-[14px] line-clamp-3">
+                                        {{ $news->first()->description ?? 'N/A' }}
+                                    </p>
+                                    <p class="w-full text-right text-[12px]">
+                                        {{ optional(value: $news->first())->created_at->format('d M Y') }}
+                                    </p>
+
+                                    </p>
+                                    <x-button href="/news" rounded="none" variant="outlined" color="dark">Read
+                                        More</x-button>
+                                </div>
+                            </div>
+
                             <div
-                                class="bg-white/90 shadow-sm gap-2 shadow-dark/40 w-[360px] flex flex-col p-8 absolute z-50 left-0">
-                                <p class="text-[18px] font-medium text-primary">
-                                    {{ $news->first()->author ?? 'N/A' }}
-                                </p>
-                                <p class="text-ellipsis line-clamp-2 text-[24px] font-semibold">
-                                    {{ $news->first()->title ?? 'N/A' }}
-                                </p>
-                                <p class="text-ellipsis text-[14px] line-clamp-3">
-                                    {{ $news->first()->description ?? 'N/A' }}
-                                </p>
-                                <p class="w-full text-right text-[12px]">
-                                    {{ optional(value: $news->first())->created_at->format('d M Y') }}
-                                </p>
-
-                                </p>
-                                <x-button href="/news" rounded="none" variant="outlined" color="dark">Read
-                                    More</x-button>
-                            </div>
-                        </div>
-
-                        <div
-                            class="relative flex h-full min-h-[240px] md:min-h-[320px] lg:min-h-fit rounded-lg overflow-hidden bg-dark-light/20 flex-1">
-                            <img src="{{ asset($news->first()->image) }}" class="rounded-lg w-full object-cover"
-                                alt="Featured News Image" />
-                            <a
-                                class="absolute hover:bg-dark/80 cursor-pointer duration-200 flex lg:hidden top-0 left-0 w-full h-full bg-dark/40 p-2 md:p-6 flex-col justify-end items-start ">
-                                <p class="text-[16px] md:text-[18px] font-medium text-white">
-                                    {{ $news->first()->author ?? 'N/A' }}
-                                </p>
-                                <p
-                                    class="text-ellipsis line-clamp-2 text-white text-[20px] md:text-[24px] font-semibold">
-                                    {{ $news->first()->title ?? 'N/A' }}
-                                </p>
-                                <p class="text-ellipsis md:text-[14px] text-white text-[12px] line-clamp-3">
-                                    {{ $news->first()->description ?? 'N/A' }}
-                                </p>
-                                <p class="w-full text-left text-white text-[10px] md:text-[12px]">
-                                    {{ optional(value: $news->first())->created_at->format('d M Y') }}
-                                </p>
-                            </a>
-                        </div>
-                    </section>
-
-                    <!-- Right Section (News List) -->
-                    <section class="grid grid-cols-2 lg:flex lg:flex-col gap-1 md:gap-2 lg:h-[436px]">
-                        @foreach ($news->skip(1) as $newsItem)
-                        <a id="news-card" href="/news/{{$newsItem->id}}"
-                            class="flex gap-2 lg:gap-4 shadow-[0_0_1px_0] shadow-dark/20  lg:shadow-none bg-white cursor-pointer items-center lg:flex-row flex-col justify-start hover:bg-white-light p-1 md:p-2 rounded-md lg:w-[360px]">
-                            <div class="rounded-lg h-24 md:h-32 lg:h-20 w-full lg:w-20 flex bg-dark">
-                                <img src="{{ $newsItem->image }}" class="w-full h-full object-cover rounded-lg"
-                                    alt="News Image" />
-                            </div>
-
-                            <div class="flex flex-col w-full lg:w-fit lg:p-0 p-2 flex-1 justify-between">
-                                <div class="flex flex-col">
-                                    <p class="font-light text-[8px] md:text-[14px] lg:text-[16px]">
-                                        {{ $newsItem->author }}
+                                class="relative flex h-full min-h-[240px] md:min-h-[320px] lg:min-h-fit rounded-lg overflow-hidden bg-dark-light/20 flex-1">
+                                <img src="{{ asset($news->first()->image) }}" class="rounded-lg w-full object-cover"
+                                    alt="Featured News Image" />
+                                <a
+                                    class="absolute hover:bg-dark/80 cursor-pointer duration-200 flex lg:hidden top-0 left-0 w-full h-full bg-dark/40 p-2 md:p-6 flex-col justify-end items-start ">
+                                    <p class="text-[16px] md:text-[18px] font-medium text-white">
+                                        {{ $news->first()->author ?? 'N/A' }}
                                     </p>
                                     <p
-                                        class="font-medium text-[10px] md:text-[14px] lg:text-[16px] text-ellipsis line-clamp-2">
-                                        {{ $newsItem->title }}
+                                        class="text-ellipsis line-clamp-2 text-white text-[20px] md:text-[24px] font-semibold">
+                                        {{ $news->first()->title ?? 'N/A' }}
                                     </p>
-                                </div>
-                                <div class="flex gap-1">
-                                    <p class="font-light text-[8px] md:text-[12px] text-dark-light">
-                                        {{ optional(value: $newsItem->created_at)->diffForHumans() }}
+                                    <p class="text-ellipsis md:text-[14px] text-white text-[12px] line-clamp-3">
+                                        {{ $news->first()->description ?? 'N/A' }}
                                     </p>
-                                </div>
+                                    <p class="w-full text-left text-white text-[10px] md:text-[12px]">
+                                        {{ optional(value: $news->first())->created_at->format('d M Y') }}
+                                    </p>
+                                </a>
                             </div>
-                        </a>
-                        @endforeach
+                        </section>
+
+                        <!-- Right Section (News List) -->
+                        <section class="grid grid-cols-2 lg:flex lg:flex-col gap-1 md:gap-2 lg:h-[436px]">
+                            @foreach ($news->skip(1) as $newsItem)
+                                <a id="news-card" href="/news/{{$newsItem->id}}"
+                                    class="flex gap-2 lg:gap-4 shadow-[0_0_1px_0] shadow-dark/20  lg:shadow-none bg-white cursor-pointer items-center lg:flex-row flex-col justify-start hover:bg-white-light p-1 md:p-2 rounded-md lg:w-[360px]">
+                                    <div class="rounded-lg h-24 md:h-32 lg:h-20 w-full lg:w-20 flex bg-dark">
+                                        <img src="{{ $newsItem->image }}" class="w-full h-full object-cover rounded-lg"
+                                            alt="News Image" />
+                                    </div>
+
+                                    <div class="flex flex-col w-full lg:w-fit lg:p-0 p-2 flex-1 justify-between">
+                                        <div class="flex flex-col">
+                                            <p class="font-light text-[8px] md:text-[14px] lg:text-[16px]">
+                                                {{ $newsItem->author }}
+                                            </p>
+                                            <p
+                                                class="font-medium text-[10px] md:text-[14px] lg:text-[16px] text-ellipsis line-clamp-2">
+                                                {{ $newsItem->title }}
+                                            </p>
+                                        </div>
+                                        <div class="flex gap-1">
+                                            <p class="font-light text-[8px] md:text-[12px] text-dark-light">
+                                                {{ optional(value: $newsItem->created_at)->diffForHumans() }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </section>
                     </section>
-                </section>
                 @endif
             </div>
         </section>
@@ -597,8 +600,7 @@ $ourworkstext = [
                 // Static fallback content
                 heroTitle.textContent = 'DMC IKATEK UH';
                 heroDescription.textContent = 'HASANUDDIN UNIVERSITY';
-                heroBackground.src = '{{ asset('
-                images / hero.jpg ') }}';
+                heroBackground.src = '{{ asset('images/hero.jpg') }}';
             } else {
                 // Dynamic content
                 heroTitle.textContent = areaOfWorks[currentIndex].name;
@@ -647,7 +649,7 @@ $ourworkstext = [
 
     // Handle previous button click
     document.getElementById('prev-arrow').addEventListener('click', () => {
-        if (areaOfWorks.length === 0) return; // If empty, do nothing
+        if (areaOfWorks.length === 0) return;  // If empty, do nothing
 
         currentIndex = (currentIndex === 0) ? areaOfWorks.length - 1 : currentIndex - 1;
         updateHeroContent();
@@ -657,7 +659,7 @@ $ourworkstext = [
 
     // Handle next button click
     document.getElementById('next-arrow').addEventListener('click', () => {
-        if (areaOfWorks.length === 0) return; // If empty, do nothing
+        if (areaOfWorks.length === 0) return;  // If empty, do nothing
 
         currentIndex = (currentIndex === areaOfWorks.length - 1) ? 0 : currentIndex + 1;
         updateHeroContent();
@@ -667,7 +669,7 @@ $ourworkstext = [
 
     // Auto-update every 10 seconds
     function startAutoChange() {
-        if (areaOfWorks.length === 0) return; // If empty, do nothing
+        if (areaOfWorks.length === 0) return;  // If empty, do nothing
 
         autoChangeInterval = setInterval(() => {
             currentIndex = (currentIndex === areaOfWorks.length - 1) ? 0 : currentIndex + 1;
