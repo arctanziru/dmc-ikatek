@@ -50,22 +50,6 @@
             </x-button>
         </a>
 
-        <!-- <x-bladewind::dropmenu>
-            <x-slot:trigger>
-                <div class="flex gap-0 items-center">
-                    <x-bladewind::icon name="language" class="h-[16px]" />
-                    <p>
-                        EN
-                    </p>
-                </div>
-            </x-slot:trigger>
-            <x-bladewind::dropmenu-item>
-                English
-            </x-bladewind::dropmenu-item>
-            <x-bladewind::dropmenu-item>
-                Bahasa Indonesia
-            </x-bladewind::dropmenu-item>
-        </x-bladewind::dropmenu> -->
 
     </div>
 
@@ -135,7 +119,7 @@
         const darkClass = 'bg-dark'; // Change this to your desired dark class
 
         // Function to handle scroll event
-        function handleScroll() {
+        function handleScropll() {
             // Check if the screen width is 640px (sm) or smaller
             if (window.innerWidth < 640) {
                 // Always keep the navbar dark on small devices
