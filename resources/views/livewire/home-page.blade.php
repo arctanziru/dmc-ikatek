@@ -1,4 +1,9 @@
 @php
+
+    use Illuminate\Support\Facades\File;
+
+    $images = File::files(public_path('images/partners'));
+
     $cards = [
         [
             'name' => 'Our Mission',
@@ -124,7 +129,8 @@
                     <p id="hero-title" class="text-[20px] md:text-[28px] lg:text-[36px] font-bold text-white uppercase">
                         {{ $areaOfWorks->isEmpty() ? 'DMC IKATEK-UH' : $areaOfWorks[0]->name }}
                     </p>
-                    <p id="hero-description" class="text-[12px] md:text-[18px] lg:text-[24px] font-semibold capitalize text-white">
+                    <p id="hero-description"
+                        class="text-[12px] md:text-[18px] lg:text-[24px] font-semibold capitalize text-white">
                         {{ $areaOfWorks->isEmpty() ? 'Building Resilience, Restoring Hope' : $areaOfWorks[0]->short_description }}
                     </p>
                 </div>
@@ -160,12 +166,12 @@
                             <div
                                 class="w-[300px] h-[125px] bg-primary absolute  left-[-16px] md:top-[-17px] lg:bottom-[-17px] -z-10">
                             </div>
-                            <img src="/images/img.jpeg"
+                            <img src="/images/CD8.jpg"
                                 class="w-full lg:max-w-[480px] h-[280px] border-l-8 md:border-t-8  lg:border-b-8 border-white" />
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 flex-1">
-                        <img src="/images/img.jpeg" class="w-full md:hidden max-h-[240px] object-cover rounded-md" />
+                        <img src="/images/CD8.jpg" class="w-full md:hidden max-h-[240px] object-cover rounded-md" />
                         <p class="text-primary text-[14px] font-medium">ABOUT DMC IKATEK-UH</p>
                         <p class="text-dark text-[24px] md:text-[30px] lg:text-[36px] font-bold">
                             <?= htmlspecialchars($about[0][$currentLanguage]); ?>
@@ -184,18 +190,30 @@
                     <div class="w-[2px] h-10 bg-primary"></div>
                     <div class="h-[2px] w-60 bg-primary"></div>
                 </section>
-                <section class="flex flex-col gap-2 md:gap-4 lg:gap-6 items-center">
+                <section class="flex flex-col gap-3 md:gap-4 lg:gap-6 items-center">
                     <div>
-                        <p class="text-[24px] font-semibold">Our Partners</p>
+                        <p class="text-[20px] md:text-[24px] font-semibold text-primary">Our Partners</p>
                     </div>
-                    <div class="flex gap-3 md:gap-6 lg:gap-9 flex-wrap md:flex-nowrap items-center justify-center">
-                        @foreach ($partners as $partner)
-                            <div class="gap-3 w-24 md:w-32 lg:w-40 flex flex-col select-none items-center">
-                                <img draggable="false" src="{{ $partner['path'] }}" class="h-[60px] w-full" />
-                                <p class="text-center text-primary text-[10px] font-semibold">{{ $partner['name'] }}</p>
-                            </div>
-                        @endforeach
+
+
+                    <div class="w-full inline-flex overflow-hidden">
+                        @for ($i = 0; $i < 2; $i++)
+                            <ul class="grid grid-rows-2 gap-2 md:gap-4 items-center justify-center md:justify-start [&_img]:max-w-none animate-infinite-scroll select-none"
+                                style="grid-auto-flow: column;">
+                                @foreach ($images as $image)
+                                    @if (in_array($image->getExtension(), ['png', 'jpg', 'jpeg', 'gif', 'webp']))
+                                        <li class="w-full flex justify-center select-none">
+                                            <img class="h-6 sm:h-8 md:h-12 lg:h-16 object-contain select-none" draggable="false"
+                                                src="{{ asset('images/partners/' . $image->getFilename()) }}"
+                                                alt="Partner {{ $loop->iteration }}" />
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        @endfor
                     </div>
+
+
                 </section>
             </main>
         </section>
