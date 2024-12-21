@@ -18,7 +18,6 @@
 <nav id="navbar"
     class="w-screen p-[12px_16px] md:p-[12px_32px] lg:p-[12px_48px] items-center flex justify-between z-[100] top-0 m-0 {{ $navbarVariantClass }} {{ $class }}">
 
-    <!-- Logo centered on small screens -->
     <div class="flex-grow flex justify-start">
         <a href="/">
             <div class="flex gap-2 items-center select-none cursor-pointer">
@@ -31,7 +30,6 @@
         </a>
     </div>
 
-    <!-- Right menu for desktop -->
     <div class="hidden gap-3 items-center justify-center md:flex">
         <div class="flex gap-3">
             @foreach ($links as $link)
@@ -49,21 +47,15 @@
                 <p class="text-[12px]">Donate</p>
             </x-button>
         </a>
-
-
     </div>
 
-    <!-- Mobile menu button aligned to right -->
     <div class="flex md:hidden relative">
-        <!-- Button to toggle the dropdown menu with overlay -->
         <x-button onclick="toggleDropdown()" variant="ghost" rounded="[50%]" size="square-sm">
             <x-bladewind::icon name="bars-3" class="text-primary" />
         </x-button>
 
-        <!-- Overlay to close when clicked -->
         <div id="menuOverlay" class="fixed inset-0 bg-black/50 hidden opacity-0 transition-opacity duration-100 z-30"
             onclick="closeDropdown()">
-            <!-- Dropdown Menu (Accordion Style) with stopPropagation -->
             <div id="mobileDropdown"
                 class="absolute top-0 left-0 w-full bg-dark text-white shadow-lg max-h-0 overflow-hidden transition-[max-height] duration-200 ease-in-out"
                 onclick="event.stopPropagation()">
@@ -76,7 +68,6 @@
                     </div>
                     <section class="p-4 gap-2 flex flex-col">
 
-                        <!-- Menu Links -->
                         @foreach ($links as $link)
                             <a href="{{ $link['url'] }}">
                                 <x-button variant="ghost" color="white" class="w-full" allignment="center">
@@ -86,7 +77,7 @@
                                 </x-button>
                             </a>
                         @endforeach
-                        <!-- Donate Button at Bottom -->
+
                         <a href="/disaster">
 
                             <x-button variant="outlined" color="white" class="w-full" allignment="center">
@@ -108,7 +99,6 @@
     </div>
 </nav>
 
-<!-- Include the JavaScript at the end of your body -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const navbar = document.getElementById('navbar');
@@ -119,7 +109,7 @@
         const darkClass = 'bg-dark'; // Change this to your desired dark class
 
         // Function to handle scroll event
-        function handleScropll() {
+        function handleScroll() {
             // Check if the screen width is 640px (sm) or smaller
             if (window.innerWidth < 640) {
                 // Always keep the navbar dark on small devices
