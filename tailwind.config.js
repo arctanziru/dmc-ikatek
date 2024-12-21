@@ -5,7 +5,7 @@ module.exports = {
         "./vendor/bladewind//*.blade.php", // Include Bladewind components
         "./vendor/mkocansey/bladewind/resources/views/**/*.blade.php",
     ],
-    darkMode: 'false',
+    darkMode: "false",
     theme: {
         extend: {
             fontFamily: {
@@ -37,6 +37,15 @@ module.exports = {
                     light: "#2e2e2e",
                     dark: "#1a1a1a",
                     contrast: "#ffffff",
+                },
+            },
+            animation: {
+                "infinite-scroll": "infinite-scroll 40s linear infinite",
+            },
+            keyframes: {
+                "infinite-scroll": {
+                    from: { transform: "translateX(0)" },
+                    to: { transform: "translateX(-100%)" },
                 },
             },
         },

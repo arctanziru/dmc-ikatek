@@ -88,6 +88,15 @@ $navLinks = [
             poppins: ['Inter', 'sans-serif'], // Add Roboto font
             poppins: ['Poppins', 'sans-serif'], // Add Roboto font
           },
+          animation: {
+                "infinite-scroll": "infinite-scroll 40s linear infinite",
+            },
+            keyframes: {
+                "infinite-scroll": {
+                    from: { transform: "translateX(0)" },
+                    to: { transform: "translateX(-100%)" },
+                },
+            },
 
           colors: {
             primary: {
