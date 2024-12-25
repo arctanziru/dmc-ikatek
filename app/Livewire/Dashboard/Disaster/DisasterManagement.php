@@ -76,5 +76,7 @@ class DisasterManagement extends Component
 
         session()->flash('title', 'Disaster Deleted');
         session()->flash('message', 'Disaster "' . $disaster->name . '" deleted successfully.');
+
+        return redirect()->route('dashboard.disaster');
     }
 }

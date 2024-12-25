@@ -17,6 +17,11 @@ $navLinks = [
 'label' => 'News'
 ],
 [
+'route' => 'dashboard.news.category',
+'icon' => 'tag',
+'label' => 'News category'
+],
+[
 'route' => 'dashboard.disaster',
 'icon' => 'fire',
 'label' => 'Disaster'

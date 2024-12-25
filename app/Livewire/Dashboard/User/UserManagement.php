@@ -61,5 +61,7 @@ class UserManagement extends Component
 
         session()->flash('title', 'User Deleted');
         session()->flash('message', 'User "' . $user->name . '" has been deleted.');
+
+        return redirect()->route('users');
     }
 }

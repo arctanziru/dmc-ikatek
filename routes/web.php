@@ -35,6 +35,9 @@ use App\Livewire\Dashboard\Disaster\Program\DisasterProgramManagement;
 use App\Livewire\Dashboard\Donation\DonationCreate;
 use App\Livewire\Dashboard\Donation\DonationEdit;
 use App\Livewire\Dashboard\Donation\DonationManagement;
+use App\Livewire\Dashboard\News\Category\NewsCategoryCreate;
+use App\Livewire\Dashboard\News\Category\NewsCategoryEdit;
+use App\Livewire\Dashboard\News\Category\NewsCategoryManagement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\ReportDisaster;
@@ -117,6 +120,13 @@ Route::prefix('dashboard')
       Route::get('/', NewsManagement::class)->name('dashboard.news');
       Route::get('/create', NewsCreate::class)->name('dashboard.news.create');
       Route::get('/{news}/edit', NewsEdit::class)->name('dashboard.news.edit');
+
+      // news category
+      Route::group(['prefix' => 'category'], function () {
+        Route::get('/', NewsCategoryManagement::class)->name('dashboard.news.category');
+        Route::get('/create', NewsCategoryCreate::class)->name('dashboard.news.category.create');
+        Route::get('/{category}/edit', NewsCategoryEdit ::class)->name('dashboard.news.category.edit');
+      });
     });
 
     Route::group(['prefix' => 'disaster'], function () {

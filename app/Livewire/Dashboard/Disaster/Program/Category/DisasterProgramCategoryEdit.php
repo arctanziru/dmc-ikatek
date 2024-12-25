@@ -45,7 +45,7 @@ class DisasterProgramCategoryEdit extends Component
     $this->area_of_work_id = $category->area_of_work_id;
     $this->existing_image_galleries = json_decode($category->image_galleries, true) ?? [];
   }
-
+ 
   public function update()
   {
     $this->validate(

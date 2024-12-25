@@ -85,5 +85,7 @@ class DonationManagement extends Component
 
         session()->flash('title', 'Donation deleted');
         session()->flash('message', 'Donation from "' . $donation->donor_name . '" deleted successfully.');
+
+        return redirect()->route('dashboard.donation');
     }
 }

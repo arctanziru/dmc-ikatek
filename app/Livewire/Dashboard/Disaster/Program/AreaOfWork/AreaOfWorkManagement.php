@@ -57,12 +57,9 @@ class AreaOfWorkManagement extends Component
     $areaOfWork = AreaOfWork::find($areaOfWorkId);
     $areaOfWork->delete();
 
-
     session()->flash('title', 'Area of Work Deleted');
     session()->flash('message', 'Area of Work "' . $areaOfWork->name . '" deleted successfully.');
 
-    // rerender
-    
-    
+    return redirect()->route('dashboard.disaster.program.areaOfWork');
   }
 }

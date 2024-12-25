@@ -82,5 +82,7 @@ class DisasterProgramManagement extends Component
 
         session()->flash('title', 'Program Deleted');
         session()->flash('message', 'Program "' . $program->name . '" deleted successfully.');
+
+        return redirect()->route('dashboard.disaster.program');
     }
 }

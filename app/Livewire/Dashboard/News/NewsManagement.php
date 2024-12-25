@@ -66,5 +66,7 @@ class NewsManagement extends Component
 
         session()->flash('title', 'News Deleted');
         session()->flash('message', 'News deleted successfully.');
+
+        return redirect()->route('dashboard.news');
     }
 }

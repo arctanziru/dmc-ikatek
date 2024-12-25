@@ -64,5 +64,7 @@ class DisasterProgramCategoryManagement extends Component
 
         session()->flash('title', 'Category Deleted');
         session()->flash('message', 'Disaster Program Category "' . $category->name . '" deleted successfully.');
+
+        return redirect()->route('dashboard.disaster.program.category');
     }
 }
