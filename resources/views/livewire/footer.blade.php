@@ -1,8 +1,8 @@
 @php
     $links = [
-        ['name' => 'Twitter', 'path' => '/icons/twitter.svg', 'url' => 'https://www.instagram.com/dmcikatek.uh/'],
+        ['name' => 'Facebook', 'path' => '/icons/fb.svg', 'url' => 'https://web.facebook.com/DMCIKATEKUH'],
         ['name' => 'Instagram', 'path' => '/icons/instagram.svg', 'url' => 'https://www.instagram.com/dmcikatek.uh/'],
-        ['name' => 'Youtube', 'path' => '/icons/youtube.svg', 'url' => 'https://www.instagram.com/dmcikatek.uh/'],
+        ['name' => 'Youtube', 'path' => '/icons/youtube.svg', 'url' => 'https://www.youtube.com/@dmcikatekunhas1304'],
     ];
 
     $rightNavs = [
@@ -92,20 +92,25 @@
                             <x-bladewind::icon name="chevron-right" class="!h-3 !w-3 " />
                         </div>
 
-                        <p class="text-[12px] font-light">Phone: 0821 9010 1214 / 0823 4986 8076</p>
+                        <p class="text-[12px] ">Phone:
+                            <span class="text-[12px] hover:text-primary"><a target="_blank"
+                                    href="https://wa.me/+6281340734686">0813-4073-4686</a></span> /
+                            <span class="text-[12px] hover:text-primary"><a target="_blank"
+                                    href="https://wa.me/+6281524063470">0815-2406-3470</a></span>
+                        </p>
                     </div>
                     <div class="flex gap-2 items-center text-white">
                         <div>
                             <x-bladewind::icon name="chevron-right" class="!h-3 !w-3 " />
                         </div>
 
-                        <p class="text-[12px] font-light">Address: Jl. Boulevard-Ruko Ruby
+                        <p class="text-[12px] ">Address: Jl. Boulevard-Ruko Ruby
                             No.26 Makassar, Sulawesi Selatan 90231</p>
                 </nav>
                 <div class="hidden md:flex gap-4">
 
                     @foreach ($links as $link)
-                        <a>
+                        <a href="{{$link['url']}}" target="_blank">
                             <div class="h-8 w-8 items-center flex rounded-[50%] bg-white justify-center cursor-pointer">
                                 <img src="{{$link['path']}}" />
                             </div>
@@ -187,14 +192,19 @@
                     <x-bladewind::icon name="chevron-right" class="!h-3 !w-3 " />
                 </div>
 
-                <p class="text-[12px] font-light">Phone: 0821 9010 1214 / 0823 4986 8076</p>
+                <p class="text-[12px] ">Phone:
+                    <span class="text-[12px] hover:text-primary"><a target="_blank"
+                            href="https://wa.me/+6281340734686">0813-4073-4686</a></span> /
+                    <span class="text-[12px] hover:text-primary"><a target="_blank"
+                            href="https://wa.me/+6281524063470">0815-2406-3470</a></span>
+                </p>
             </div>
             <div class="flex gap-1 items-center text-white">
                 <div>
                     <x-bladewind::icon name="chevron-right" class="!h-3 !w-3 " />
                 </div>
-                <p class="text-[12px] font-light">Address: Jl. Boulevard-Ruko Ruby
-                No.26 Makassar, Sulawesi Selatan 90231</p>
+                <p class="text-[12px] ">Address: Jl. Boulevard-Ruko Ruby
+                    No.26 Makassar, Sulawesi Selatan 90231</p>
             </div>
             <div class="flex gap-4">
                 @foreach ($links as $link)
@@ -211,7 +221,8 @@
     </main>
     <section class="flex gap-[10px] items-center self-stretch">
         <div class="h-[2px] bg-white-dark flex-1"></div>
-        <div class="text-[10px] text-center lg:text-[14px] font-light text-white-dark">© 2024 Disaster Management Center
+        <div class="text-[10px] text-center lg:text-[14px] font-light  text-white-dark">© 2024 Disaster Management
+            Center
             IKATEK. All Rights
             Reserved.</div>
         <div class="h-[2px] bg-white-dark flex-1"></div>

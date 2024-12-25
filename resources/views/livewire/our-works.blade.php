@@ -113,10 +113,10 @@
         </div>
         </div>
 
-        <div class="flex flex-col md:gap-2 lg:gap-6 flex-1 self-stretch justify-start flex-grow" id="disaster">
-        <div class="flex flex-col gap-2">
-          <p class="text-primary font-medium">{{ $area->name }}</p>
-          <p class="font-bold text-[24px] md:text-[32px]">{{ $area->short_description }}</p>
+        <div class="flex flex-col md:gap-2 lg:gap-4 flex-1 self-stretch justify-start flex-grow" id="disaster">
+        <div class="flex flex-col">
+          <p class="text-primary text-[20px] md:text-[28px] font-bold">{{ $area->name }}</p>
+          <p class="font-bold text-[16px] md:text-[20px]">{{ $area->short_description }}</p>
         </div>
         <p class="text-[12px] md:text-[14px] lg:text-[16px]">
           {{ $area->description }}
