@@ -8,11 +8,13 @@ use App\Notifications\NewDisasterNotification;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.dashboard')]
 #[Title('Create Disaster - DMC Ikatek-UH')]
 class DisasterCreate extends Component
 {
+    use WithFileUploads;
     public $name;
     public $description;
     public $latitude;
@@ -20,6 +22,9 @@ class DisasterCreate extends Component
     public $city_id;
     public $user_id;
     public $reporter_name;
+    public $time_of_disaster;
+    public $image;
+    public $image_galleries = [];
     public $selectedProvince = null;
     public $provinces = [];
     public $cities = [];
@@ -32,6 +37,9 @@ class DisasterCreate extends Component
         'city_id' => 'required|exists:indonesia_cities,id',
         'user_id' => 'nullable|exists:users,id',
         'reporter_name' => 'nullable|string|max:255',
+        'time_of_disaster' => 'nullable|date',
+        'image' => 'nullable|image|max:5120',
+        'image_galleries.*' => 'nullable|image|max:5120',
     ];
 
     public function mount()
@@ -51,6 +59,14 @@ class DisasterCreate extends Component
     {
         $this->validate();
 
+        $image_path = $this->image ? $this->image->store('images', 'public') : null;
+        $image_galleries_paths = [];
+        if ($this->image_galleries) {
+            foreach ($this->image_galleries as $image_gallery) {
+                $image_galleries_paths[] = $image_gallery->store('image_galleries', 'public');
+            }
+        }
+
         $disaster = Disaster::create([
             'name' => $this->name,
             'description' => $this->description,
@@ -60,6 +76,9 @@ class DisasterCreate extends Component
             'user_id' => $this->user_id,
             'reporter_name' => $this->reporter_name,
             'status' => 'active',
+            'time_of_disaster' => $this->time_of_disaster,
+            'image' => $image_path,
+            'image_galleries' => json_encode($image_galleries_paths),
         ]);
 
         $users = User::get();

@@ -26,7 +26,7 @@ class DisasterProgramCategoryCreate extends Component
   // Validation rules
   protected $rules = [
     'name' => 'required|string|max:255|unique:disaster_program_categories,name',
-    'description' => 'nullable|string|max:500',
+    'description' => 'nullable|string',
     'short_description' => 'nullable|string|max:255',
     'cover_image' => 'nullable|image|max:5120',
     'image' => 'nullable|image|max:5120',

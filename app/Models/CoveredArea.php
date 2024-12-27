@@ -14,6 +14,9 @@ class CoveredArea extends Model
     protected $fillable = [
         'city_id',
         'province_id',
+        'image',
+        'image_galleries',
+        'description',
     ];
     public function city()
     {

@@ -18,7 +18,7 @@ class NewsCategoryEdit extends Component
 
     protected $rules = [
         'name' => 'required|string|max:255|unique:news_categories,name',
-        'description' => 'nullable|string|max:500',
+        'description' => 'nullable|string',
     ];
 
     public function mount(NewsCategory $category)
@@ -32,7 +32,7 @@ class NewsCategoryEdit extends Component
     {
         $this->validate([
             'name' => 'required|string|max:255|unique:news_categories,name,' . $this->category->id,
-            'description' => 'nullable|string|max:500',
+            'description' => 'nullable|string',
         ]);
 
         $this->category->update([

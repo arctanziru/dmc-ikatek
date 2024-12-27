@@ -39,6 +39,7 @@ $statusOptions = [
                 <th>City</th>
                 <th>Reporter</th>
                 <th>Status</th>
+                <th>Time of Disaster</th>
                 <th>Actions</th>
             </x-slot>
             <tbody>
@@ -49,7 +50,7 @@ $statusOptions = [
                     <td>{{ $disaster->longitude }}</td>
                     <td>{{ $disaster->city->name }}</td>
                     <td>{{ $disaster->reporter_name ?? $disaster->user->name  ?? 'Anonym' }}</td>
-                    <td class="w-[120px]">
+                    <td class="w-[120px] whitespace-nowrap">
                         <select wire:change="updateStatus({{ $disaster->id }}, $event.target.value)"
                             class="border rounded-md w-full p-1">
                             @foreach($statusOptions as $value => $label)
@@ -58,6 +59,9 @@ $statusOptions = [
                             </option>
                             @endforeach
                         </select>
+                    </td>
+                    <td class="whitespace-nowrap">
+                        {{ $disaster->time_of_disaster }}
                     </td>
                     <td class="shrink-0">
                         <x-bladewind::button wire:click="redirectToEdit({{ $disaster->id }})" size="small"

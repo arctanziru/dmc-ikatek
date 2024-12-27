@@ -10,7 +10,7 @@ $perPageData = [
     <h2 class="text-2xl font-semibold mb-4">Covered Area Management</h2>
 
     <div class="flex items-center space-x-4">
-        <x-bladewind::input type="text" wire:model.live.debounce.500ms="search" placeholder="Search coveredAreas..."
+        <x-bladewind::input type="text" wire:model.live.debounce.500ms="search" placeholder="Search Covered Areas..."
             class="border h-full" />
 
         <select wire:model.live.debounce.150ms="perPage" class="border rounded-md bw-raw-select w-20 mb-4">
@@ -27,6 +27,7 @@ $perPageData = [
             <x-slot name="header" class="bg-gray-50">
                 <th>City</th>
                 <th>Province</th>
+                <th>Description</th>
                 <th>Actions</th>
             </x-slot>
             <tbody>
@@ -34,12 +35,13 @@ $perPageData = [
                 <tr>
                     <td>{{ $coveredArea->city->name }}</td>
                     <td>{{ $coveredArea->province->name }}</td>
+                    <td>{{ $coveredArea->description }}</td>
                     <td class="shrink-0">
                         <x-bladewind::button wire:click="redirectToEdit({{ $coveredArea->id }})" size="small"
                             color="primary" icon="pencil-square">
                             Edit
                         </x-bladewind::button>
-                        <x-bladewind::button wire:click="deleteCoveredArea({{ $coveredArea->id }})"
+                        <x-bladewind::button wire:click="delete({{ $coveredArea->id }})"
                             wire:confirm="Are you sure to delete this?" size="small" color="red" icon="trash">
                             Delete
                         </x-bladewind::button>

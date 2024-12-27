@@ -2,30 +2,43 @@
 
 namespace App\Livewire\Dashboard\CoveredArea;
 
+use App\Models\CoveredArea;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.dashboard')]
 #[Title('Edit Covererd Area - DMC Ikatek-UH')]
 class CoveredAreaEdit extends Component
 {
+    use WithFileUploads;
     public $coveredArea;
     public $city_id;
     public $province_id;
     public $provinces = [];
     public $cities = [];
+    public $description;
+    public $image;
+    public $image_galleries = [];
+    public $existing_image_galleries = [];
 
     protected $rules = [
         'city_id' => 'required|exists:indonesia_cities,id',
         'province_id' => 'required|exists:indonesia_provinces,id',
+        'description' => 'nullable|string',
+        'image' => 'nullable|image|max:5120',
+        'image_galleries.*' => 'nullable|image|max:5120',
     ];
 
-    public function mount($coveredArea)
+    public function mount(CoveredArea $coveredArea)
     {
         $this->coveredArea = $coveredArea;
         $this->city_id = $coveredArea->city_id;
         $this->province_id = $coveredArea->province_id;
+        $this->description = $coveredArea->description;
+        $this->existing_image_galleries = json_decode($coveredArea->image_galleries, true) ?? [];
+        $this->image = $coveredArea->image;
 
         $this->provinces = \Indonesia::allProvinces();
 
@@ -52,14 +65,21 @@ class CoveredAreaEdit extends Component
 
     public function update()
     {
-        $this->validate([
-            'city_id' => 'required|exists:indonesia_cities,id' . $this->city_id,
-            'province_id' => 'required|exists:indonesia_provinces,id' . $this->province_id,
-        ]);
+        $this->validate();
+
+        $image_path = $this->image ? $this->image->store('images', 'public') : $this->coveredArea->image;
+        $uploadedImagePaths = [];
+        foreach ($this->image_galleries as $image) {
+            $uploadedImagePaths[] = $image->store('image_galleries', 'public');
+        }
+        $image_galleries_paths = array_merge($this->existing_image_galleries, $uploadedImagePaths);
 
         $this->coveredArea->update([
             'city_id' => $this->city_id,
             'province_id' => $this->province_id,
+            'description' => $this->description,
+            'image' => $image_path,
+            'image_galleries' => json_encode($image_galleries_paths),
         ]);
 
         session()->flash('title', 'Covered area updated');

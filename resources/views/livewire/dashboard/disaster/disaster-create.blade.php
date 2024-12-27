@@ -8,12 +8,12 @@
 
         <div class="mb-4">
             <label for="description" class="block text-gray-700">Description</label>
-            <textarea id="description" wire:model="description" class="w-full border-gray-300 rounded"></textarea>
+            <textarea id="description" wire:model="description" class="w-full p-3 border-gray-300 rounded"></textarea>
             @error('description') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
 
         <div class="mb-4">
-            <label for="reporter_name" class="block text-gray-700">Reporter name (default your name)</label>
+            <label for="reporter_name" class="block text-gray-700">Reporter name</label>
             <input type="text" id="reporter_name" wire:model="reporter_name" class="w-full border-gray-300 rounded">
         </div>
 
@@ -42,6 +42,37 @@
 
         <div id="map" class="w-full h-64 mb-4" wire:ignore></div>
         @error('latitude') <span class="text-red-600">You need to select a point from the map</span> @enderror
+
+        <!-- time of disaster -->
+        <div class="mb-4">
+            <label for="time_of_disaster" class="block text-gray-700">Time of Disaster</label>
+            <input type="datetime-local" id="time_of_disaster" wire:model="time_of_disaster" class="w-full border-gray-300 rounded">
+            @error('time_of_disaster') <span class="text-red-600">{{ $message }}</span> @enderror
+        </div>
+
+        <!-- Image -->
+        <div class="mb-4">
+            <label for="image" class="block text-gray-700">Image (Optional)</label>
+            <input type="file" accept="image/*" id="image" wire:model="image" class="w-full">
+            @error('image') <span class="text-red-600">{{ $message }}</span> @enderror
+            @if ($image)
+            <img src="{{ $image->temporaryUrl() }}" class="mt-2" style="max-width: 200px;">
+            @endif
+        </div>
+
+        <!-- Image Galleries -->
+        <div class="mb-4">
+            <label for="image_galleries" class="block text-gray-700">Image Galleries (Optional)</label>
+            <input type="file" accept="image/*" id="image_galleries" wire:model="image_galleries" class="w-full" multiple>
+            @error('image_galleries.*') <span class="text-red-600">{{ $message }}</span> @enderror
+            @if ($image_galleries)
+            <div class="mt-2">
+                @foreach ($image_galleries as $image_gallery)
+                <img src="{{ $image_gallery->temporaryUrl() }}" class="inline-block mt-2" style="max-width: 160px;">
+                @endforeach
+            </div>
+            @endif
+        </div>
 
         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Create Disaster</button>
     </form>

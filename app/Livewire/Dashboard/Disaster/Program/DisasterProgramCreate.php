@@ -33,7 +33,7 @@ class DisasterProgramCreate extends Component
 
     protected $rules = [
         'name' => 'required|string|max:255',
-        'description' => 'nullable|string|max:500',
+        'description' => 'nullable|string',
         'category_id' => 'required|exists:disaster_program_categories,id',
         'disaster_id' => 'nullable|exists:disasters,id',
         'city_id' => 'nullable|exists:indonesia_cities,id',

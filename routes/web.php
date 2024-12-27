@@ -125,7 +125,7 @@ Route::prefix('dashboard')
       Route::group(['prefix' => 'category'], function () {
         Route::get('/', NewsCategoryManagement::class)->name('dashboard.news.category');
         Route::get('/create', NewsCategoryCreate::class)->name('dashboard.news.category.create');
-        Route::get('/{category}/edit', NewsCategoryEdit ::class)->name('dashboard.news.category.edit');
+        Route::get('/{category}/edit', NewsCategoryEdit::class)->name('dashboard.news.category.edit');
       });
     });
 

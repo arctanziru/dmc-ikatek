@@ -6,11 +6,14 @@ use App\Models\Disaster;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 #[Layout('components.layouts.dashboard')]
 #[Title('Edit Disaster - DMC Ikatek-UH')]
 class DisasterEdit extends Component
 {
+    use WithFileUploads;
+
     public $disaster;
     public $name;
     public $description;
@@ -18,6 +21,10 @@ class DisasterEdit extends Component
     public $longitude;
     public $city_id;
     public $reporter_name;
+    public $time_of_disaster;
+    public $image;
+    public $image_galleries = [];
+    public $existing_image_galleries = [];
     public $selectedProvince = null;
     public $provinces = [];
     public $cities = [];
@@ -29,6 +36,10 @@ class DisasterEdit extends Component
         'longitude' => 'required|numeric',
         'city_id' => 'required|exists:indonesia_cities,id',
         'reporter_name' => 'nullable|string|max:255',
+        'time_of_disaster' => 'nullable|date',
+        'image' => 'nullable|image|max:5120',
+        'image_galleries.*' => 'nullable|image|max:5120',
+
     ];
 
     public function mount(Disaster $disaster)
@@ -40,6 +51,9 @@ class DisasterEdit extends Component
         $this->longitude = $disaster->longitude;
         $this->city_id = $disaster->city_id;
         $this->reporter_name = $disaster->reporter_name;
+        $this->existing_image_galleries = json_decode($disaster->image_galleries, true) ?? [];
+        $this->time_of_disaster = $disaster->time_of_disaster;
+        $this->image = $disaster->image;
 
         $this->provinces = \Indonesia::allProvinces();
 
@@ -68,6 +82,13 @@ class DisasterEdit extends Component
     {
         $this->validate();
 
+        $image_path = $this->image ? $this->image->store('images', 'public') : $this->disaster->image;
+        $uploadedImagePaths = [];
+        foreach ($this->image_galleries as $image) {
+            $uploadedImagePaths[] = $image->store('image_galleries', 'public');
+        }
+        $image_galleries_paths = array_merge($this->existing_image_galleries, $uploadedImagePaths);
+
         $this->disaster->update([
             'name' => $this->name,
             'description' => $this->description,
@@ -75,6 +96,9 @@ class DisasterEdit extends Component
             'longitude' => $this->longitude,
             'city_id' => $this->city_id,
             'reporter_name' => $this->reporter_name,
+            'time_of_disaster' => $this->time_of_disaster,
+            'image' => $image_path,
+            'image_galleries' => json_encode($image_galleries_paths),
         ]);
 
         session()->flash('title', 'Disaster Updated');

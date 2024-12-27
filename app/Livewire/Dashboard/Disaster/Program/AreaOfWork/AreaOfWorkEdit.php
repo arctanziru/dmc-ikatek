@@ -23,7 +23,7 @@ class AreaOfWorkEdit extends Component
 
   protected $rules = [
     'name' => 'required|string|max:255|unique:area_of_works,name',
-    'description' => 'nullable|string|max:500',
+    'description' => 'nullable|string',
     'short_description' => 'nullable|string|max:255',
     'image' => 'nullable|image|max:5120',
     'cover_image' => 'nullable|image|max:5120',

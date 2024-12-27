@@ -7,7 +7,7 @@
         </div>
         <div class="mb-4">
             <label>Description</label>
-            <textarea wire:model="description" class="w-full border-gray-300 rounded"></textarea>
+            <textarea wire:model="description" class="w-full p-3 border-gray-300 rounded"></textarea>
             @error('description') <span class="text-red-600">{{ $message }}</span> @enderror
         </div>
         <x-button type="submit">Save</x-button>
