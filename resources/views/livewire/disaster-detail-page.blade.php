@@ -1,27 +1,66 @@
 @php
   $perPageData = [
-    ['value' => 5, 'label' => '5'],
-    ['value' => 10, 'label' => '10'],
-    ['value' => 15, 'label' => '15'],
-    ['value' => 20, 'label' => '20'],
-    ['value' => 50, 'label' => '50'],
+    ['label' => '5', 'value' => '5'],
+    ['label' => '10', 'value' => '10'],
+    ['label' => '15', 'value' => '15'],
+    ['label' => '20', 'value' => '20'],
   ];
 @endphp
 
-<main class="w-full flex flex-col bg-white-dark/10 justify-center items-center">
-  <main class="w-full max-h-[360px] md:max-h-[640px] h-[calc(100vh-80px)] relative">
-    <img src="{{ asset('storage/' . $programCategory->cover_image) }}" alt="Program Category Cover Image"
-      class="w-full object-cover absolute h-full -z-19" />
-    <div class="w-full justify-center h-full bg-black/70 flex z-10 absolute items-end p-4 md:p-8 lg:p-12">
-      <div class="flex flex-col text-white w-full max-w-[1440px]">
-        <p class="text-[24px] md:text-[36px] font-bold uppercase">{{ $programCategory->name }}</p>
-        <p class="text-[10px] md:text-[12px] max-w-[480px] font-poppins"> {{ $programCategory->description }}
+<main class="w-full flex flex-col items-center p-4 md:p-8 lg:p-12 bg-white-dark/10 justify-center">
+  <main class="max-w-[1440px] flex flex-col gap-4 md:gap-8 lg:gap-12 w-full">
+    <section class="w-full flex flex-col lg:flex-row gap-4 md:gap-8">
+
+      <img src="{{ asset('storage/' . $disaster->image) }}" loading="lazy"
+        class="md:h-[340px] lg:h-[300px] rounded-md w-full lg:w-[360px] object-cover"
+        onerror="this.onerror=null;this.src='{{ asset('images/placeholder.webp') }}';" />
+      <div class="flex flex-col gap-2">
+        <p class="font-bold text-[24px] md:text-[32px] text-dark ">
+          {{$disaster->name}}
+        </p>
+        <p class="text-[14px] md:text-[16px] uppercase font-bold text-primary">
+          {{$disaster->status}}
+        </p>
+        <div class="flex flex-col">
+
+          <div class="flex gap-2 items-center">
+            <x-bladewind::icon name="map-pin" class="!h-4 !w-4" />
+            <p class="text-[12px] md:text-[14px] capitalize font-normal text-dark ">
+              {{ ucwords(strtolower($disaster->city->name)) }},
+
+              {{ ucwords(strtolower($disaster->city->province->name)) }}
+            </p>
+          </div>
+          <div class="flex gap-2 items-center">
+            <x-bladewind::icon name="user" class="!h-4 !w-4" />
+            <p class="text-[12px] md:text-[14px] capitalize font-normal text-dark ">
+              {{ $disaster->reporter_name ? ($disaster->reporter_name) : 'N/A' }}
+            </p>
+          </div>
+          <div class="flex gap-2 items-center">
+            <x-bladewind::icon name="calendar-days" class="!h-4 !w-4" />
+            <p class="text-[12px] md:text-[14px] capitalize font-normal text-dark ">
+              {{ $disaster->time_of_disaster ? (new DateTime($disaster->time_of_disaster))->format('d M Y') : 'N/A' }}
+            </p>
+          </div>
+        </div>
+
+        <p class="text-[12px] md:text-[16px] font-normal">
+          {{$disaster->description}}
         </p>
       </div>
-    </div>
-  </main>
-
-  <main class=" p-4 md:p-8 lg:p-12 w-full flex flex-col gap-4 md:gap-8 lg:gap-12">
+    </section>
+    <section class="flex flex-col gap-3">
+      <p class="text-[16px] md:text-[24px] font-poppins">Gallery</p>
+      <div class="w-full overflow-x-auto flex gap-1 md:gap-4 md:py-4">
+        @foreach (json_decode($disaster->image_galleries, true) ?? [] as $imagePath)
+      <div class="flex-shrink-0">
+        <img src="{{ asset('storage/' . $imagePath) }}" alt="Gallery Image"
+        class="w-[180px] h-[120px] md:w-[240px] shadow-sm shadow-dark md:h-[160px] object-cover rounded-lg" />
+      </div>
+    @endforeach
+      </div>
+    </section>
     <section class="w-full max-w-[1440px] flex-col flex gap-2 md:gap-6">
 
       <p class="text-[16px] md:text-[24px] font-poppins">
@@ -62,7 +101,7 @@
           <div class="flex justify-center">
           <x-program-card name="{{ $program->name }}" image="{{ $program->image }}"
             desc="{{ $program->description }}" target="{{ (int) $program->target_donation }}"
-            totalDonation="{{ $program->total_verified_donations ?? 0 }}"
+            totalDonation="{{ $program->total_verified_donations ?? 0  }}"
             category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
             createdAt="{{ $program->created_at->format('d M Y') }}" fullwidth="true"
             status="{{ $program->status }}"
@@ -82,7 +121,7 @@
           <div class="flex justify-center">
           <x-program-card name="{{ $program->name }}" image="{{ $program->image }}"
             desc="{{ $program->description }}" target="{{ (int) $program->target_donation }}"
-            totalDonation="{{ $program->total_verified_donations ?? 0 }}"
+            totalDonation="{{ $program->donations->sum('amount') }}"
             category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
             createdAt="{{ $program->created_at->format('d M Y') }}" fullwidth="true"
             status="{{ $program->status }}"
@@ -102,7 +141,7 @@
           <div class="flex justify-center">
           <x-program-card name="{{ $program->name }}" image="{{ $program->image }}"
             desc="{{ $program->description }}" target="{{ (int) $program->target_donation }}"
-            totalDonation="{{ $program->total_verified_donations ?? 0 }}"
+            totalDonation="{{ $program->donations->sum('amount') }}"
             category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
             createdAt="{{ $program->created_at->format('d M Y') }}" fullwidth="true"
             status="{{ $program->status }}"
@@ -120,24 +159,6 @@
       <div class="mt-6">
         {{ $programs->links() }}
       </div>
-
-      <!-- Gallery Section with Horizontal Scroll -->
-      <div class="flex flex-col gap-3">
-        <p class="text-[16px] md:text-[24px] font-poppins">
-          Gallery
-        </p>
-
-        <!-- Horizontal Scrolling Gallery -->
-        <div class="w-full overflow-x-auto flex gap-1 md:gap-4 md:py-4">
-          @foreach ($programCategory->image_galleries as $imagePath)
-        <div class="flex-shrink-0">
-        <img src="{{ asset('storage/' . $imagePath) }}" alt="Gallery Image"
-          class="w-[180px] h-[120px] md:w-[240px] md:h-[160px] object-cover rounded-lg" />
-        </div>
-      @endforeach
-        </div>
-      </div>
-
     </section>
   </main>
 </main>

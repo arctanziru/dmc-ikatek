@@ -27,7 +27,7 @@ class ProgramCard extends Component
         string $image = "images/placeholder.webp",
         string $desc,
         int $target,
-        int $totalDonation,
+        ?int $totalDonation = 0, // Allow nullable values, default to 0
         string $category,
         int $id,
         string $createdAt,
@@ -39,7 +39,7 @@ class ProgramCard extends Component
         $this->image = $image;
         $this->desc = $desc;
         $this->target = $target;
-        $this->totalDonation = $totalDonation;
+        $this->totalDonation = $totalDonation ?? 0; // Ensure a fallback for null values
         $this->category = $category;
         $this->id = $id;
         $this->createdAt = $createdAt;
@@ -47,6 +47,7 @@ class ProgramCard extends Component
         $this->status = $status;
         $this->location = $location;
     }
+
 
     /**
      * Get the view / contents that represent the component.
