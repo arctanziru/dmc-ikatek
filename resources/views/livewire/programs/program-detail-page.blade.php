@@ -3,15 +3,11 @@
 
     function formatCurrency($amount)
     {
-        if ($amount >= 1_000_000_000_000) { // Trillion
-            return number_format($amount / 1_000_000_000_000, 3) . ' T+'; // Format to 3 decimal places and add +
-        } elseif ($amount >= 1_000_000_000) { // Billion
-            return number_format($amount / 1_000_000_000, 3) . ' B+'; // Format to 3 decimal places and add +
-        } elseif ($amount >= 1_000_000) { // Million
-            return number_format($amount / 1_000_000, 2) . ' M'; // Format to 2 decimal places
-        } else {
-            return number_format($amount, 2); // Default formatting
+        // Ensure the amount is numeric before formatting
+        if (is_numeric($amount)) {
+            return number_format((int) $amount, 0, '', '.');
         }
+        throw new InvalidArgumentException('Input must be a numeric value.');
     }
 @endphp
 
@@ -52,7 +48,7 @@
                             </p>
                             <p class="lg:text-[18px] md:text-[16px] text-[14px] font-medium">
                                 Target:
-                                {{ $program->target_donation > 0 ? 'Rp. ' . formatCurrency($program->target_donation) : 'N/A' }}
+                                {{ $program->target_donation > 0 ? 'Rp.' . formatCurrency($program->target_donation) : 'N/A' }}
                             </p>
                         </div>
                     </div>
@@ -102,7 +98,7 @@
                             </p>
                             <p class="text-[14px] capitalize font-light flex text-secondary items-center gap-2">
                                 <x-bladewind::icon name="calendar-days" class="!h-4 !w-4" />
-                                {{ $disaster->created_at ? $disaster->created_at->format('d M Y - H:i') : 'Date Not Available' }}
+                                {{ $disaster->time_of_disaster }}
                             </p>
                         </div>
                         <p class="text-[14px]">
@@ -110,6 +106,13 @@
                             {{ $disaster->description ?? 'Description Not Available' }}
                         </p>
                     </article>
+                    <a class="w-full" href="{{ route('disaster.detail', $disaster->id) }}">
+                        <x-button variant="outlined" class="w-full" color="dark">
+                            <p class="text-[12px]">
+                                View Detail
+                            </p>
+                        </x-button>
+                    </a>
                 </section>
             @endif
         </div>

@@ -301,7 +301,7 @@
                         <div class="flex justify-center">
                             <x-program-card name="{{ $program->name }}" image="{{ $program->image }}"
                                 desc="{{ $program->description }}" target="{{ (int) $program->target_donation }}"
-                                totalDonation="{{ $program->donations->sum('amount') }}"
+                                totalDonation="{{ $program->total_verified_donations ?? 0 }}"
                                 category="{{ $program->category->name ?? 'N/A' }}" id="{{ $program->id }}"
                                 createdAt="{{ $program->created_at->format('d M Y') }}" status="{{$program->status}}" />
                         </div>

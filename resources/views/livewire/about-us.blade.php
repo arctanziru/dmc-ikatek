@@ -84,8 +84,8 @@
 @endphp
 
 
-<main class="w-full flex bg-white-dark/10 justify-center">
-  <main class="max-w-[1440px] flex flex-col gap-4 md:gap-8 lg:gap-12 p-4 md:p-8 lg:p-12 ">
+<main class="w-full flex bg-white-dark/10 justify-center p-4 md:p-8 lg:p-12 ">
+  <main class="w-full max-w-[1440px] flex flex-col gap-4 md:gap-8 lg:gap-12 ">
     <section class="w-full flex flex-col gap-4">
 
       <section

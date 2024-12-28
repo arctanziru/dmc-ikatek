@@ -49,6 +49,7 @@ use App\Livewire\Programs\ProgramDetailPage;
 use App\Livewire\ProgramCategoryPage;
 use App\Livewire\Programs\CityPrograms;
 use Illuminate\Support\Facades\Artisan;
+use App\Livewire\DisasterDetailPage;
 
 /*
 |----------------------------------------------------------------------
@@ -77,6 +78,8 @@ Route::get('/news', NewsPage::class)->name('news');
 Route::get('/news/{id}', NewsDetailPage::class)->name('news.detail');
 Route::get('/our-works', OurWorksPage::class);
 Route::get('/our-reach', OurReachPage::class)->name('our-reach');
+Route::get('/our-reach/covered-area/{coveredAreaId}', CityPrograms::class)->name('city-programs');
+
 Route::get('/donate', DonatePage::class);
 Route::get('/about-us', AboutUsPage::class);
 Route::get('/program-category/{id}', ProgramCategoryPage::class);
@@ -87,8 +90,8 @@ Route::get('/program-category/{id}', ProgramCategoryPage::class);
 // Route::get('/accountability', AccountabilityPage::class);
 Route::get('/disaster', DisasterPage::class);
 Route::get('/disaster/report', ReportDisaster::class)->name('report.disaster');
+Route::get('/disaster/{disasterid}', DisasterDetailPage::class)->name('disaster.detail');
 Route::get('/programs', ProgramPage::class)->name('programs');
-Route::get('/programs/city/{city}', CityPrograms::class)->name('city-programs');
 Route::get('/programs/{id}', ProgramDetailPage::class)->name('programs.detail');
 
 

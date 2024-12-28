@@ -45,9 +45,9 @@ class DisasterPage extends Component
                         $query->where('name', 'like', '%' . $this->search . '%');
                     });
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('time_of_disaster', 'desc')
             ->paginate($this->perPage);
-
+            
         return view('livewire.disaster-page', ['disasters' => $disasters]);
     }
 

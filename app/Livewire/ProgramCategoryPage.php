@@ -47,8 +47,13 @@ class ProgramCategoryPage extends Component
         $programCategory = DisasterProgramCategory::findOrFail($this->categoryId);
         $programCategory->image_galleries = json_decode($programCategory->image_galleries, true);
 
-        // Fetch all programs, including the disaster's city, and paginate them
+        // Fetch all programs, including only verified donations
         $programs = DisasterProgram::with(['disaster.city']) // Eager load disaster and city
+            ->withSum([
+                'donations as total_verified_donations' => function ($query) {
+                    $query->where('status', 'verified');
+                }
+            ], 'amount')
             ->where('category_id', $this->categoryId)
             ->when($this->search !== '', function ($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')

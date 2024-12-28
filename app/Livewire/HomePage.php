@@ -24,6 +24,11 @@ class HomePage extends Component
   {
     // Fetch programs and other data
     $programs = DisasterProgram::with(['category', 'disaster', 'donations'])
+      ->withSum([
+        'donations as total_verified_donations' => function ($query) {
+          $query->where('status', 'verified'); // Only sum verified donations
+        }
+      ], 'amount')
       ->where('status', 'active')
       ->where(function ($query) {
         $query->where('name', 'like', '%' . $this->search . '%')

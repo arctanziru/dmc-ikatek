@@ -40,14 +40,13 @@ class ProgramDetailPage extends Component
 
     public function mount($id)
     {
-        // Retrieve the specific program with related data, including city and user of the disaster
         $this->program = DisasterProgram::with([
             'category',
             'disaster' => function ($query) {
-                $query->with(['city', 'user']); // Eager load city and user for the related disaster
+                $query->with(['city', 'user']);
             },
             'donations' => function ($query) {
-                $query->where('status', 'verified'); // Filter only verified donations
+                $query->where('status', 'verified');
             }
         ])->findOrFail($id);
 
