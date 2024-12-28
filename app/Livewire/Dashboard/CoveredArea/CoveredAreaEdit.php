@@ -38,7 +38,6 @@ class CoveredAreaEdit extends Component
         $this->province_id = $coveredArea->province_id;
         $this->description = $coveredArea->description;
         $this->existing_image_galleries = json_decode($coveredArea->image_galleries, true) ?? [];
-        $this->image = $coveredArea->image;
 
         $this->provinces = \Indonesia::allProvinces();
 

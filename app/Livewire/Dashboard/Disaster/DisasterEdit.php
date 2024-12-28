@@ -53,7 +53,6 @@ class DisasterEdit extends Component
         $this->reporter_name = $disaster->reporter_name;
         $this->existing_image_galleries = json_decode($disaster->image_galleries, true) ?? [];
         $this->time_of_disaster = $disaster->time_of_disaster;
-        $this->image = $disaster->image;
 
         $this->provinces = \Indonesia::allProvinces();
 
