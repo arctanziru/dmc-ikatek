@@ -13,15 +13,13 @@
         <img src="{{ asset('storage/' . $coveredArea->image) }}" alt="Cover Image"
             class="w-full object-cover absolute h-full -z-10"
             onerror="this.onerror=null;this.src='{{ asset('images/placeholder.webp') }}';" />
-        <div class="w-full justify-center h-full md:p-8 lg:p-12 bg-black/70 flex z-10 absolute items-end">
+        <div class="w-full justify-center h-full p-4 md:p-8 lg:p-12 bg-black/70 flex z-10 absolute items-end">
             <div class="text-white w-full max-w-[1440px]">
                 <div class="w-full flex flex-col">
                     <p class="text-[24px] md:text-[36px] font-bold uppercase">
                         {{ strtolower($coveredArea->city->province->name) }}, {{ strtolower($coveredArea->city->name) }}
                     </p>
-                    <p class="text-[12px] md:text-[14px] max-w-[640px] font-poppins">
-                        {{ $coveredArea->description }}
-                    </p>
+                  
                 </div>
             </div>
         </div>
@@ -32,10 +30,18 @@
     <section class="w-full p-4 md:p-8 lg:p-12 flex  items-center justify-center">
         <div class="w-full max-w-[1440px] flex  flex-col gap-4 md:gap-8 lg:gap-12">
 
+            <section class="flex flex-col ">
+                <p class="text-[16px] md:text-[24px] font-poppins">Description</p>
+                <div class="w-full overflow-x-auto flex md:gap-4 ">
+                <p class="text-[12px] md:text-[14px]  font-poppins">
+                        {{ $coveredArea->description }}
+                    </p>
+                </div>
+            </section>
             <!-- Gallery Section -->
             <section class="flex flex-col gap-3">
                 <p class="text-[16px] md:text-[24px] font-poppins">Gallery</p>
-                <div class="w-full overflow-x-auto flex gap-1 md:gap-4 md:py-4">
+                <div class="w-full overflow-x-auto flex gap-1 md:gap-4 ">
                     @foreach (json_decode($coveredArea->image_galleries, true) ?? [] as $imagePath)
                         <div class="flex-shrink-0">
                             <img src="{{ asset('storage/' . $imagePath) }}" alt="Gallery Image"

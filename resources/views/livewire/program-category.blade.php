@@ -15,7 +15,6 @@
     <div class="w-full justify-center h-full bg-black/70 flex z-10 absolute items-end p-4 md:p-8 lg:p-12">
       <div class="flex flex-col text-white w-full max-w-[1440px]">
         <p class="text-[24px] md:text-[36px] font-bold uppercase">{{ $programCategory->name }}</p>
-        <p class="text-[10px] md:text-[12px] max-w-[480px] font-poppins"> {{ $programCategory->description }}
         </p>
       </div>
     </div>
@@ -23,6 +22,15 @@
 
   <main class=" p-4 md:p-8 lg:p-12 w-full flex flex-col gap-4 md:gap-8 lg:gap-12">
     <section class="w-full max-w-[1440px] flex-col flex gap-2 md:gap-6">
+
+      <section class="flex flex-col ">
+        <p class="text-[16px] md:text-[24px] font-poppins">Description</p>
+        <div class="w-full overflow-x-auto flex md:gap-4 ">
+          <p class="text-[12px] md:text-[14px]  font-poppins">
+            {{ $programCategory->description }}
+          </p>
+        </div>
+      </section>
 
       <p class="text-[16px] md:text-[24px] font-poppins">
         Programs

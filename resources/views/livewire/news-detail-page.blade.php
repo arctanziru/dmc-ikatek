@@ -6,7 +6,7 @@
     <main class="w-full flex max-w-[1440px] gap-4 flex-col">
         <div class="w-full flex gap-4 md:gap-6 lg:gap-8 flex-col lg:flex-row ">
             <section class="w-full flex flex-col gap-4">
-                <div class="w-full relative h-[180px] rounded-md md:h-[360px] bg-secondary/30 flex overflow-hidden ">
+                <div class="w-full relative h-[200px] rounded-md sm:h-[240px] md:h-[360px] bg-secondary/30 flex overflow-hidden ">
                     <img src="{{ $news->image }}" class="w-full h-full object-cover" />
                     <div
                         class="absolute w-full flex-col h-full bg-transparent md:bg-dark/40 top-0 left-0 p-8 hidden md:flex justify-end items-start">
