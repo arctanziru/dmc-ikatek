@@ -105,7 +105,7 @@
 
       </section>
       <div class="overflow-hidden relative flex w-full bg-primary">
-        <img src="images/sample.JPG" class="w-full object-cover max-h-[320px] md:max-h-[4808px] lg:max-h-[720px]" />
+        <img src="images/dmc-aboutus.jpg" class="w-full object-cover max-h-[320px] md:max-h-[4808px] lg:max-h-[720px]" />
         <div class="absolute top-0 left-0 w-screen h-full bg-black/60 -z-5 p-4 flex items-end">
           <P class="text-white text-[36px] font-bold">
             DMC IKATEK-UH
