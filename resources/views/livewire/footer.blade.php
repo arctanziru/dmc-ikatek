@@ -44,7 +44,6 @@
                 'title' => 'Get Involved',
                 'links' => [
                     ['text' => 'Donate', 'url' => '/donate'],
-                    ['text' => 'Share The Meal App', 'url' => 'https://sharethemeal.org/'],
                 ],
             ],
         ],
