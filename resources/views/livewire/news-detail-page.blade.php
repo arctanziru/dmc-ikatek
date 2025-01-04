@@ -72,7 +72,7 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 w-full gap-1">
                         @foreach ($recentNews as $posts)
-                            <a
+                            <a  href="{{ route('news.detail', ['id' => $posts->id]) }}"
                                 class="hover:bg-dark/20 p-2 md:p-4 shadow-[0px_0px_1px_0px] lg:shadow-none shadow-dark/20 lg:p-2 cursor-pointer rounded-sm flex-col flex gap-2">
                                 <div class="w-full h-[160px] bg-dark/20 rounded-md overflow-hidden">
                                     <img src={{ asset($posts->image) }} class="w-full h-full object-cover" />

@@ -40,7 +40,7 @@ class HomePage extends Component
 
     $totalProgramCount = DisasterProgram::count();
     $uniqueDonorCount = Donation::distinct('donor_email')->count('donor_email');
-    $donationSum = Donation::sum('amount');
+    $donationSum = Donation::where('status', 'verified')->sum('amount');
     $news = News::orderBy('created_at', 'desc')->take(5)->get();
     $areaOfWorks = AreaOfWork::all();
 

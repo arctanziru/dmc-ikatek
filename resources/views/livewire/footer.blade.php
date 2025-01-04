@@ -104,8 +104,8 @@
                             <x-bladewind::icon name="chevron-right" class="!h-3 !w-3 " />
                         </div>
 
-                        <p class="text-[12px] ">Address: Jl. Boulevard-Ruko Ruby
-                            No.26 Makassar, Sulawesi Selatan 90231</p>
+                        <p class="text-[12px] ">Address: Jl. Andi Djemma No.38, Kec.Tamalate, Makassar, Sulawesi Selatan
+                            90222</p>
                 </nav>
                 <div class="hidden md:flex gap-4">
 
@@ -203,8 +203,8 @@
                 <div>
                     <x-bladewind::icon name="chevron-right" class="!h-3 !w-3 " />
                 </div>
-                <p class="text-[12px] ">Address: Jl. Boulevard-Ruko Ruby
-                    No.26 Makassar, Sulawesi Selatan 90231</p>
+                <p class="text-[12px] ">Address: Jl. Andi Djemma No.38, Kec.Tamalate, Makassar, Sulawesi Selatan 90222
+                </p>
             </div>
             <div class="flex gap-4">
                 @foreach ($links as $link)

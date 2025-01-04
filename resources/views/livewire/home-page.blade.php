@@ -32,6 +32,8 @@
             return number_format($amount / 1_000_000_000_000, 0) . ' T+'; // Format to 3 decimal places and add +
         } elseif ($amount >= 1_000_000_000) { // Billion
             return number_format($amount / 1_000_000_000, 0) . ' B+'; // Format to 3 decimal places and add +
+        } elseif ($amount >= 1_000_000) { // Billion
+            return number_format($amount / 1_000_000, 0) . ' M+'; // Format to 3 decimal places and add +
         } else {
             return number_format($amount, 2); // Default formatting
         }
@@ -366,17 +368,17 @@
                         <div
                             class="bg-white lg:bg-white/70 lg:h-max lg:mt-[60px] p-[12px_16px] md:p-[24px_32px] lg:p-[48px_64px] gap-2 justify-center flex flex-col relative items-center">
                             <img src="icons/sharethemeal.svg" />
-                            <p class="text-[16px] md:text-[22px] lg:text-[28px] text-dark font-semibold">Share The Meal
-                                App</p>
-                            <p class="text-[10px] md:text-[12px] lg:text-[14px] text-dark font-light text-center ">
-                                Provide food to those in need by using the Share The Meal app. Every meal helps save a
-                                life.
+                            <p class="text-[16px] md:text-[22px] lg:text-[28px] text-dark font-semibold">Report a
+                                Disaster
                             </p>
-                            <a href="https://sharethemeal.org"
-                                class="inline lg:absolute -bottom-[20.5px] left-auto right-auto">
+                            <p class="text-[10px] md:text-[12px] lg:text-[14px] text-dark font-light text-center ">
+                                Be the first to make a difference. Report disasters in your area to help us mobilize
+                                relief efforts swiftly
+                            </p>
+                            <a href="/disaster/report" class="inline lg:absolute -bottom-[20.5px] left-auto right-auto">
                                 <x-button rounded="none" size="medium" variant="fill" color="dark">
                                     <p class="text-[12px] lg:text-[14px] lg:p-1 font-light">
-                                        Download App
+                                        Report Now
                                     </p>
                                 </x-button>
                             </a>
@@ -387,19 +389,34 @@
                             <div class="p-8 flex w-full lg:w-fit  gap-6 flex-col items-center bg-secondary/30">
                                 <p class="text-center text-[16px] md:text-[28px]  text-white">Some Statistics of Our
                                     Platforms</p>
-                                <div class="grid w-full grid-cols-1 md:grid-cols-3 lg:grid-cols-2 gap-8">
-                                    <div class=" justify-center flex flex-col gap-2 items-center">
-                                        <img src="icons/Program.svg" class="h-12" />
+                                <div class="grid w-full grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8">
+                                    <section class="w-full grid grid-cols-2 gap-8">
+                                        <div class=" justify-center flex flex-col gap-2 items-center">
+                                            <img src="icons/Program.svg" class="h-12" />
 
-                                        <p class="text-[24px] md:text-[36px] lg:text-[48px] text-primary">
-                                            {{$totalProgramCount}}
-                                        </p>
-                                        <p
-                                            class="text-[12px] md:text-[18px] lg:text-[24px] font-poppins font-extralight text-white">
-                                            Programs
-                                        </p>
+                                            <p class="text-[24px] md:text-[36px] lg:text-[48px] text-primary">
+                                                {{$totalProgramCount}}
+                                            </p>
+                                            <p
+                                                class="text-[12px] md:text-[18px] lg:text-[24px] font-poppins font-extralight text-white">
+                                                Programs
+                                            </p>
 
-                                    </div>
+                                        </div>
+                                        <div class=" justify-center flex flex-col gap-2 items-center">
+                                            <img src="icons/Donator.svg" class="h-12" />
+
+                                            <p class="text-[24px] md:text-[36px] lg:text-[48px] text-primary">
+                                                {{$uniqueDonorCount}}
+                                            </p>
+                                            <p
+                                                class="text-[12px] md:text-[18px] lg:text-[24px] font-poppins font-extralight text-white">
+                                                Donator
+                                            </p>
+
+                                        </div>
+                                        
+                                    </section>
                                     <div class=" justify-center flex flex-col gap-2 items-center">
                                         <img src="icons/Donation.svg" class="h-12" />
 
@@ -409,18 +426,6 @@
                                         <p
                                             class="text-[12px] md:text-[18px] lg:text-[24px] font-poppins font-extralight text-white">
                                             Donations
-                                        </p>
-
-                                    </div>
-                                    <div class=" justify-center flex flex-col gap-2 items-center">
-                                        <img src="icons/Donator.svg" class="h-12" />
-
-                                        <p class="text-[24px] md:text-[36px] lg:text-[48px] text-primary">
-                                            {{$uniqueDonorCount}}
-                                        </p>
-                                        <p
-                                            class="text-[12px] md:text-[18px] lg:text-[24px] font-poppins font-extralight text-white">
-                                            Donator
                                         </p>
 
                                     </div>
@@ -513,8 +518,12 @@
                                     </p>
 
                                     </p>
-                                    <x-button href="/news" rounded="none" variant="outlined" color="dark">Read
-                                        More</x-button>
+                                    <a class="w-full flex flex-col"
+                                        href="{{ route('news.detail', ['id' => $news->first()->id]) }}">
+                                        <x-button rounded="none" variant="outlined" color="dark">
+                                            Read More
+                                        </x-button>
+                                    </a>
                                 </div>
                             </div>
 
