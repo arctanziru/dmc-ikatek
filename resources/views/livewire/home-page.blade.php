@@ -28,16 +28,9 @@
     ];
     function formatCurrency($amount)
     {
-        if ($amount >= 1_000_000_000_000) { // Trillion
-            return number_format($amount / 1_000_000_000_000, 0) . ' T+'; // Format to 3 decimal places and add +
-        } elseif ($amount >= 1_000_000_000) { // Billion
-            return number_format($amount / 1_000_000_000, 0) . ' B+'; // Format to 3 decimal places and add +
-        } elseif ($amount >= 1_000_000) { // Billion
-            return number_format($amount / 1_000_000, 0) . ' M+'; // Format to 3 decimal places and add +
-        } else {
-            return number_format($amount, 2); // Default formatting
-        }
+        return number_format($amount, 0); // Format the amount with thousands separator and no decimal places
     }
+
 
     $partners = [
         [
@@ -223,7 +216,7 @@
         <!-- Where We Works -->
         <section class="relative p-4 md:p-8 lg:p-12  w-full flex flex-col justify-center items-center overflow-hidden">
             <!-- Background image -->
-            <img src="/images/Our Reach.jpeg" class="absolute top-0 left-0 w-full h-full object-cover -z-10" />
+            <img src="/images/management.jpeg" class="absolute top-0 left-0 w-full h-full object-cover -z-10" />
             <!-- Semi-transparent overlay -->
             <div class="absolute top-0 left-0 w-full h-full bg-[rgba(11,20,47,0.8)] -z-5"></div>
             <div
@@ -340,9 +333,9 @@
             <section id="get-involved"
                 class="relative z-0 lg:p-[40px_0px] lg:-mt-16 w-full flex flex-col justify-center items-center overflow-hidden">
                 <!-- Background image -->
-                <img src="/images/Our Reach.jpeg" class="absolute top-0 left-0 w-full h-full object-cover -z-10" />
+                <img src="/images/History.JPG" class="absolute top-0 left-0 w-full h-full object-cover -z-10" />
                 <!-- Semi-transparent overlay -->
-                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-dark/70 to-dark/70 -z-5"></div>
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/70 to-black/70 -z-5"></div>
                 <!-- content -->
                 <div id="content"
                     class="flex flex-col justify-center md:gap-8 gap-4 lg:gap-12 items-center w-full z-10 ">
@@ -386,46 +379,48 @@
                     </section>
                     <section id="statistics" class="flex flex-col md:px -8 lg:flex-row gap-3 w-full">
                         <div class="flex-1 flex px-4  md:px-8 lg:px-0  lg:justify-end ">
-                            <div class="p-8 flex w-full lg:w-fit  gap-6 flex-col items-center bg-secondary/30">
+                            <div class="p-8 flex w-full lg:w-fit  gap-6 flex-col items-center h-max  bg-secondary/30">
                                 <p class="text-center text-[16px] md:text-[28px]  text-white">Some Statistics of Our
                                     Platforms</p>
-                                <div class="grid w-full grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8">
+                                <div class="grid w-full grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8 lg:gap-12">
                                     <section class="w-full grid grid-cols-2 gap-8">
                                         <div class=" justify-center flex flex-col gap-2 items-center">
-                                            <img src="icons/Program.svg" class="h-12" />
+                                            <img src="icons/Program.svg" class="h-6 md:h-10" />
 
                                             <p class="text-[24px] md:text-[36px] lg:text-[48px] text-primary">
                                                 {{$totalProgramCount}}
                                             </p>
                                             <p
-                                                class="text-[12px] md:text-[18px] lg:text-[24px] font-poppins font-extralight text-white">
+                                                class="text-[12px] md:text-[18px] lg:text-[24px] font-poppins font-normal text-white">
                                                 Programs
                                             </p>
 
                                         </div>
                                         <div class=" justify-center flex flex-col gap-2 items-center">
-                                            <img src="icons/Donator.svg" class="h-12" />
+                                            <img src="icons/Donator.svg" class="h-6 md:h-10" />
 
                                             <p class="text-[24px] md:text-[36px] lg:text-[48px] text-primary">
                                                 {{$uniqueDonorCount}}
                                             </p>
                                             <p
-                                                class="text-[12px] md:text-[18px] lg:text-[24px] font-poppins font-extralight text-white">
+                                                class="text-[12px] md:text-[18px] lg:text-[24px] font-poppins font-normal text-white">
                                                 Donator
                                             </p>
 
                                         </div>
-                                        
+
                                     </section>
                                     <div class=" justify-center flex flex-col gap-2 items-center">
-                                        <img src="icons/Donation.svg" class="h-12" />
+                                        <div class="flex gap-2 items-center">
+                                            <img src="icons/Donation.svg" class="h-6 md:h-10" />
 
-                                        <p class="text-[24px] md:text-[36px] lg:text-[48px] text-primary">
+                                            <p
+                                                class="text-[12px] md:text-[18px] lg:text-[24px] font-poppins font-normal text-white">
+                                                Total Donations
+                                            </p>
+                                        </div>
+                                        <p class="text-[16px] md:text-[32px] text-primary">
                                             Rp. {{formatCurrency($donationSum)}}
-                                        </p>
-                                        <p
-                                            class="text-[12px] md:text-[18px] lg:text-[24px] font-poppins font-extralight text-white">
-                                            Donations
                                         </p>
 
                                     </div>
