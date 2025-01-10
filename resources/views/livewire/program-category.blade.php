@@ -9,16 +9,9 @@
 @endphp
 
 <main class="w-full flex flex-col bg-white-dark/10 justify-center items-center">
-  <main class="w-full max-h-[360px] md:max-h-[640px] h-[calc(100vh-80px)] relative">
-    <img src="{{ asset('storage/' . $programCategory->cover_image) }}" alt="Program Category Cover Image"
-      class="w-full object-cover absolute h-full -z-19" />
-    <div class="w-full justify-center h-full bg-black/70 flex z-10 absolute items-end p-4 md:p-8 lg:p-12">
-      <div class="flex flex-col text-white w-full max-w-[1440px]">
-        <p class="text-[24px] md:text-[36px] font-bold uppercase">{{ $programCategory->name }}</p>
-        </p>
-      </div>
-    </div>
-  </main>
+  <x-cover-image src="{{ asset('storage/' . $programCategory->cover_image) }}" alt="Program Category Cover Image">
+    <p class="drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)] text-[24px] md:text-[36px] font-bold uppercase">{{ $programCategory->name }} </p>
+  </x-cover-image>
 
   <main class=" p-4 md:p-8 lg:p-12 w-full flex flex-col gap-4 md:gap-8 lg:gap-12">
     <section class="w-full max-w-[1440px] flex-col flex gap-2 md:gap-6">

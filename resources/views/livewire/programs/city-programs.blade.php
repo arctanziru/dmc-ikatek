@@ -9,21 +9,11 @@
 
 <main class="w-full flex flex-col items-center bg-white-dark/10 justify-center">
     <!-- Covered Area Detail -->
-    <div class="w-full max-h-[360px] md:max-h-[640px] h-[calc(100vh-80px)] relative">
-        <img src="{{ asset('storage/' . $coveredArea->image) }}" alt="Cover Image"
-            class="w-full object-cover absolute h-full -z-10"
-            onerror="this.onerror=null;this.src='{{ asset('images/placeholder.webp') }}';" />
-        <div class="w-full justify-center h-full p-4 md:p-8 lg:p-12 bg-black/70 flex z-10 absolute items-end">
-            <div class="text-white w-full max-w-[1440px]">
-                <div class="w-full flex flex-col">
-                    <p class="text-[24px] md:text-[36px] font-bold uppercase">
-                        {{ strtolower($coveredArea->city->province->name) }}, {{ strtolower($coveredArea->city->name) }}
-                    </p>
-                  
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-cover-image src="{{ asset('storage/' . $coveredArea->image) }}" alt="Cover Image">
+        <p class="text-[24px] md:text-[36px] font-bold uppercase drop-shadow-[0_10px_1000px_rgba(0,0,0,0.25)]">
+            {{ strtolower($coveredArea->city->province->name) }}, {{ strtolower($coveredArea->city->name) }}
+        </p>
+    </x-cover-image>
 
     <!-- Content Section -->
 
@@ -33,7 +23,7 @@
             <section class="flex flex-col ">
                 <p class="text-[16px] md:text-[24px] font-poppins">Description</p>
                 <div class="w-full overflow-x-auto flex md:gap-4 ">
-                <p class="text-[12px] md:text-[14px]  font-poppins">
+                    <p class="text-[12px] md:text-[14px]  font-poppins">
                         {{ $coveredArea->description }}
                     </p>
                 </div>
